@@ -1,0 +1,62 @@
+{
+  "id": "aftereffects_null_camera_scene_motion_001",
+  "name": "After Effects Null And 3D Camera Scene Motion",
+  "category": "motion",
+  "source_tutorial": "transcripts/edit high quality reel.txt",
+  "additional_sources": [],
+  "use_when": [
+    "A full-screen Reel animation needs spatial movement across icons, numbers, text boxes, or proof objects.",
+    "A flat scene feels static and needs controlled parallax or camera movement.",
+    "The animation needs multiple scene views within one spoken segment."
+  ],
+  "avoid_when": [
+    "Simple 2D position/opacity motion already communicates the idea.",
+    "The viewer needs to inspect evidence and camera motion would reduce readability.",
+    "The scene has too many text layers to stay readable during a camera move."
+  ],
+  "timeline_pattern": {
+    "pattern": "build_scene_layers -> parent_related_layers -> create_null_or_camera_orbit_null -> convert_needed_layers_to_3d -> keyframe_camera_or_null -> start_motion_before_scene -> trim_camera_to_scene -> preview_one_view",
+    "null_rule": "Use a null object to move grouped layers when direct background keyframes would conflict with earlier scene keyframes.",
+    "camera_rule": "Use a camera plus orbit null when the scene needs zoom, depth, or multiple spatial views.",
+    "motion_rule": "Start important camera/null motion slightly before the visible beat when the scene should already feel alive."
+  },
+  "motion": {
+    "rule": "Ease every camera/null move and refine the speed graph so movement carries the viewer between focal points instead of drifting randomly.",
+    "keyframe_values": {
+      "camera_range": "Trim each camera and orbit null to the exact scene range.",
+      "motion_overlap": "Let camera/null motion begin a few frames before the visual beat when static starts feel dead.",
+      "easing": "Use Easy Ease and speed graph shaping; avoid linear camera moves.",
+      "depth": "Convert only layers that need camera response to 3D; keep backgrounds 2D if camera movement reveals unwanted edges."
+    }
+  },
+  "sound": {
+    "rule": "SFX should mark scene transitions, icon entrances, or camera reveals only when they help the viewer feel the motion."
+  },
+  "captions": {
+    "rule": "Suppress or relocate captions during dense 3D camera scenes unless they are required for comprehension."
+  },
+  "color": {
+    "rule": "Use consistent background and icon colors so camera movement feels like one scene, not pasted assets."
+  },
+  "implementation": {
+    "ffmpeg": "Approximate grouped moves with overlay transforms and zoompan, but use AE/Remotion for true scene-camera behavior.",
+    "remotion": "Represent scene layers with parentId, transform, is3D, cameraFrames, and focalTarget fields; interpolate camera and layer transforms with easing.",
+    "blender": "Use camera, empties, and parented objects for true 3D motion when assets need depth.",
+    "capcut_equivalent": "Use keyframed groups/compound clips when available; otherwise simplify to 2D pan/zoom scene movement.",
+    "premiere_equivalent": "Send dense animated scenes to After Effects; use nulls, 3D layers, cameras, orbit nulls, and trimmed camera ranges."
+  },
+  "common_mistakes": [
+    "Converting every layer to 3D and revealing background edges during camera motion.",
+    "Starting camera movement exactly on the cut so the scene feels static first.",
+    "Using a null when direct layer keyframes would be simpler.",
+    "Leaving camera or orbit null layers longer than the scene they control.",
+    "Making camera movement impressive but not tied to the spoken concept."
+  ],
+  "qc": [
+    "Camera/null motion has a named focal target or transition job.",
+    "Only intended layers respond to the camera.",
+    "No background edges or empty areas are revealed.",
+    "Camera and orbit null layers are trimmed to the intended scene range.",
+    "Captions and key text remain readable through the move."
+  ]
+}

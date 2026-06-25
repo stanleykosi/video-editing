@@ -1,0 +1,78 @@
+{
+  "id": "captions_two_word_social_subtitles_001",
+  "name": "Two-Word Social Subtitles",
+  "category": "captions",
+  "source_tutorial": "transcripts/short-form editing.txt",
+  "additional_sources": [
+    "transcripts/davinci resolve short form editing.txt",
+    "transcripts/ultimate guide to shortform.txt",
+    "transcripts/typography.txt"
+  ],
+  "use_when": [
+    "A short-form edit needs fast, readable subtitles for silent autoplay or noisy environments.",
+    "The speaker is moving quickly and long subtitle lines would feel heavy.",
+    "Captions may be converted to graphic layers for style, animation, or emphasis.",
+    "Premiere auto captions need one-word or very short chunks for a high-energy Reel style.",
+    "DaVinci Resolve auto captions need simple styling before a postable reel is exported."
+  ],
+  "avoid_when": [
+    "The video is serious testimony or documentary where rapid pop captions would feel inappropriate.",
+    "The screen already uses text overlays to show the idea and subtitles would clutter the frame.",
+    "The platform or accessibility requirement needs fuller subtitle lines."
+  ],
+  "timeline_pattern": {
+    "pattern": "transcribe_sequence -> short_chunks -> style_one_caption -> apply_style -> remove_unneeded_captions -> convert_to_graphics_if_animating -> qc",
+    "chunk_rule": "Use one or two words per subtitle for high-energy social style when it improves readability.",
+    "duration_rule": "Keep each short caption onscreen long enough to read; do not exceed about 2 seconds for rapid social chunks unless speech slows.",
+    "cleanup_rule": "Remove captions where visual text already carries the meaning or where captions cover the subject.",
+    "premiere_one_word_rule": "For Premiere one-word social captions, start around 7 characters, 2 seconds max duration, and single-line captions, then manually correct chunks.",
+    "resolve_simple_rule": "For a simple Resolve short, generate captions from audio, limit line length, choose a clean font, and position captions in a safe central/lower area.",
+    "typography_rule": "Chunk by meaning and phrase structure; avoid isolating filler words as the visual emphasis."
+  },
+  "motion": {
+    "rule": "Caption animation should be short and should not compete with subject tracking, visual stacks, or transition objects."
+  },
+  "sound": {
+    "rule": "Caption timing follows audible speech; fix the mix if music or SFX makes captions do too much work."
+  },
+  "captions": {
+    "rule": "Use a consistent style preset, then manually review wording, breaks, emphasis, and placement.",
+    "keyframe_values": {
+      "words_per_caption": "1-2 words for fast social emphasis.",
+      "premiere_one_word_starting_point": "Around 7 characters, 2 seconds max duration, single line, and a phone-readable lower-third size.",
+      "max_chunk_duration": "About 2 seconds for rapid social subtitles, shorter when speech moves faster.",
+      "line_count": "Prefer single-line captions when the visual stack is dense.",
+      "line_breaks": "Use phrase-complete line breaks; do not trust automatic wrapping on emphasis captions."
+    }
+  },
+  "color": {
+    "rule": "Caption fill, stroke, shadow, or backing must remain readable over both bright and dark footage."
+  },
+  "implementation": {
+    "ffmpeg": "Generate subtitles from transcript timing, split lines into short chunks, burn after overlays, and inspect phone-size contact sheets for collisions.",
+    "remotion": "Represent captions as word chunks with maxWords, maxDurationFrames, styleId, safeRegion, and disabledWhenVisualTextDuplicates fields.",
+    "blender": "Use text objects only for custom animated subtitle moments; keep accessibility captions separate when needed.",
+    "capcut_equivalent": "Use auto-captions as a draft, set short chunks, apply style, then delete captions where visual text already explains the moment.",
+    "premiere_equivalent": "Use Text > Transcribe Sequence, Create Captions with short line settings, apply an Essential Graphics style, check lower-third placement and size, upgrade to graphics only when animation or styling requires it. In Resolve, use Timeline > AI Tools > Create Subtitles from Audio, set short characters per line, then style the caption track."
+  },
+  "common_mistakes": [
+    "Leaving auto-caption chunks too long for fast short-form pacing.",
+    "Leaving Resolve auto captions in the default style without checking font, position, and line length.",
+    "Captioning over visual text that already says the same thing.",
+    "Converting captions to graphics before timing and wording are correct.",
+    "Using rapid pop captions in a serious scene where stable subtitles would be more respectful.",
+    "Letting captions cover face, hands, proof, or the transition object.",
+    "Applying one-word caption settings without checking whether the phrase becomes too fragmented to understand.",
+    "Highlighting filler words because auto-caption chunking isolated them."
+  ],
+  "qc": [
+    "Are captions readable at phone size?",
+    "Do caption chunks follow the audible speech accurately?",
+    "Are one- or two-word chunks used only where they improve pace and readability?",
+    "Have unnecessary duplicate captions been removed?",
+    "Do captions avoid faces, proof, visual text, and key motion?",
+    "Are Resolve auto captions styled and positioned safely before export?",
+    "Were Premiere short caption settings reviewed manually instead of trusted as final?",
+    "Do line breaks and emphasis follow phrase meaning rather than raw auto-wrap?"
+  ]
+}

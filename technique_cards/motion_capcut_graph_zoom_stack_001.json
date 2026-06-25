@@ -1,0 +1,65 @@
+{
+  "id": "motion_capcut_graph_zoom_stack_001",
+  "name": "CapCut Graph Zoom Stack With Motion Blur",
+  "category": "motion",
+  "source_tutorial": "transcripts/keyframe graph tutorial.txt",
+  "use_when": [
+    "A high-energy short, anime edit, AMV, sports montage, or stylized social clip needs an intense graph-shaped zoom.",
+    "The source can survive heavy magnification without becoming too soft or noisy.",
+    "The edit needs a CapCut approximation of a polished After Effects-style zoom."
+  ],
+  "avoid_when": [
+    "The zoom would crop faces, captions, action, proof, UI, or product details.",
+    "The source footage is low-resolution, noisy, or already heavily cropped.",
+    "A single smooth keyframed zoom would communicate the beat more cleanly.",
+    "Repeated export/re-import passes would create unacceptable quality loss."
+  ],
+  "timeline_pattern": {
+    "pattern": "clip -> start_keyframe -> end_keyframe_scale_300_center_subject -> graph_curve -> export -> reimport -> split_clips -> second_zoom_scale_150_center_subject -> graph_curve -> export -> motion_blur",
+    "first_pass_rule": "The first pass creates the large zoom: add start/end keyframes, set the end scale around 300, and reposition so the subject stays centered.",
+    "graph_rule": "Shape the graph after setting scale and position so the zoom starts and lands with the intended speed.",
+    "second_pass_rule": "After export/re-import, split the rendered clip and add a second graph-shaped zoom pass, often with the end scale around 150.",
+    "blur_rule": "Apply motion blur only after both zoom passes are timed and rendered."
+  },
+  "motion": {
+    "rule": "Scale and position must be animated together so the subject remains centered through every pass.",
+    "keyframe_values": {
+      "first_zoom_scale": "Use end scale around 300 for the first stylized zoom pass only when source quality and crop are safe.",
+      "second_zoom_scale": "Use end scale around 150 on the re-imported pass for added push without losing the subject.",
+      "motion_blur": "CapCut Blur 10 and Blend 10 can be a starting point for a stylized zoom, then reduce if faces, captions, or action smear.",
+      "graph_shape": "Use a smooth custom graph or preset curve; avoid leaving the zoom as a constant-speed linear move.",
+      "subject_centering": "Reposition at each end keyframe so the focal subject remains centered or intentionally framed."
+    }
+  },
+  "sound": {
+    "rule": "A whoosh or hit can support the zoom peak only if it lands on the visible motion and does not overpower dialogue or music."
+  },
+  "captions": {
+    "rule": "Captions should be removed, moved, or kept outside the zoom path if the zoom or blur would make them unreadable."
+  },
+  "color": {
+    "rule": "Heavy zoom and blur should not enlarge noise, banding, compression artifacts, or unreadable dark/bright areas."
+  },
+  "implementation": {
+    "ffmpeg": "Approximate with chained scale/crop/translate expressions using easing curves, then apply motion blur or frame blending carefully; render tests to inspect softness.",
+    "remotion": "Compose multiple transform passes with separate easing curves, focus coordinates, and optional motion-blur simulation; store renderPassQuality notes.",
+    "blender": "Animate camera/plane scale with graph-editor easing, render an intermediate only when needed, and add motion blur after timing lock.",
+    "capcut_equivalent": "Add start/end keyframes, set the final scale around 300 and center the subject, apply a graph curve, export, re-import, split clips, repeat a second zoom around 150, export again, then add Motion Blur with Blur 10 and Blend 10 as a starting point.",
+    "premiere_equivalent": "Use nested sequences or Render and Replace for stacked scale passes, Bezier/eased Scale and Position keyframes, and Transform shutter angle or directional/motion blur after crop safety is confirmed."
+  },
+  "common_mistakes": [
+    "Scaling to 300% without checking source resolution and softness.",
+    "Changing scale without repositioning the subject at the final keyframe.",
+    "Adding motion blur before judging the actual graph timing.",
+    "Stacking export passes when one keyframed zoom would be cleaner.",
+    "Forgetting to split and retime the re-imported clip before the second pass.",
+    "Letting blur smear captions, faces, proof, UI, products, or action."
+  ],
+  "qc": [
+    "Does the first zoom pass keep the subject centered at the end scale?",
+    "Does the second pass add energy without making the source too soft?",
+    "Does the graph curve make the zoom feel intentional rather than linear?",
+    "Does motion blur preserve faces, captions, proof, UI, products, and action?",
+    "Is the export/re-import stack worth the quality cost compared with a single zoom?"
+  ]
+}

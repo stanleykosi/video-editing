@@ -1,0 +1,61 @@
+{
+  "id": "typography_ffmpeg_drawtext_timed_overlay_001",
+  "name": "FFmpeg Drawtext Timed Overlay",
+  "category": "typography",
+  "source_tutorial": "transcripts/brayden_ffmpeg_drawtext_animations_source_notes.md",
+  "use_when": [
+    "The agent needs simple programmatic titles, labels, debug text, or callouts directly in FFmpeg.",
+    "Text timing, position, font, size, color, shadow, border, or box styling are enough.",
+    "A lightweight overlay is safer than opening an NLE or rendering a Remotion pass."
+  ],
+  "avoid_when": [
+    "The typography needs rich inline styling, responsive layout, complex masks, or spring motion.",
+    "The filter graph would require many chained text nodes that are hard to debug.",
+    "The text renderer or font availability is not controlled."
+  ],
+  "timeline_pattern": {
+    "pattern": "input_video -> drawtext(fontfile/text/style/x/y) -> enable_window -> optional_shadow_border_box -> output_or_next_filter",
+    "timing_rule": "Use explicit start/end visibility windows rather than leaving transient labels on the full clip.",
+    "placement_rule": "Use video and text dimensions to center or offset text predictably.",
+    "font_rule": "Prefer explicit fontfile paths for reproducible agent renders."
+  },
+  "motion": {
+    "rule": "Keep drawtext motion simple; use position, alpha, or font size expressions only when they remain readable.",
+    "keyframe_values": {
+      "time_basis": "Use presentation time in seconds for enable windows and expressions.",
+      "center_formula": "Use text width/height variables to center text and preserve centering during font-size changes.",
+      "tolerance": "For 30fps exports, 2 frames is about 0.067 seconds; use frame-derived times when sync matters."
+    }
+  },
+  "sound": {
+    "rule": "No direct SFX rule; any text cue should follow the same frame-sync and dialogue-safety rules as other motion graphics."
+  },
+  "captions": {
+    "rule": "Use drawtext for short labels or generated caption tests; use ASS or Remotion for long subtitle systems requiring richer layout."
+  },
+  "color": {
+    "rule": "Use shadow, border, or a backing box only when needed for contrast; avoid heavy styling that makes letters muddy."
+  },
+  "implementation": {
+    "ffmpeg": "Create a drawtext filter with explicit text, fontfile, fontsize, fontcolor, x/y placement, and enable timing; chain labeled streams only while the graph stays debuggable.",
+    "remotion": "Represent the same overlay as a text component with startFrame/endFrame, safeRegion, and style tokens when richer animation is needed.",
+    "blender": "Use text objects for spatial labels, then render or composite over the timeline.",
+    "capcut_equivalent": "Trim a text layer to the intended range and set font, size, color, shadow, and position manually.",
+    "premiere_equivalent": "Use Essential Graphics text with explicit in/out trims and guides for safe placement."
+  },
+  "common_mistakes": [
+    "Relying on system font lookup when the render environment may not have that font.",
+    "Forgetting to escape text or expression punctuation in generated filter strings.",
+    "Leaving a text overlay enabled longer than the spoken concept.",
+    "Using heavy outline/box styling as decoration instead of contrast support.",
+    "Testing placement only on one frame while footage contrast changes."
+  ],
+  "qc": [
+    "Fontfile resolves in the render environment.",
+    "Text appears and clears within the intended time window.",
+    "Text is readable on representative bright, dark, and busy frames.",
+    "Generated filter graph is logged or reproducible from structured data.",
+    "Text avoids faces, proof, UI, products, maps, captions, and action."
+  ]
+}
+

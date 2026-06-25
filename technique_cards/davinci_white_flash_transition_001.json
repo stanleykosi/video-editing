@@ -1,0 +1,54 @@
+{
+  "id": "davinci_white_flash_transition_001",
+  "name": "DaVinci White Flash Transition",
+  "category": "transition",
+  "source_tutorial": "transcripts/davinci resolve short form editing.txt",
+  "use_when": [
+    "A short-form cut, B-roll insert, or energetic section change needs a quick flash transition.",
+    "The editor wants a simple Resolve-native transition that can be built manually or with the built-in brightness flash.",
+    "A visual beat needs more energy than a straight cut but less complexity than a full motion transition."
+  ],
+  "avoid_when": [
+    "The transition would distract from speech, face, proof, or emotional content.",
+    "Repeated flashes would become visually tiring or accessibility-hostile.",
+    "The built-in transition glitches and the manual version has not been checked."
+  ],
+  "timeline_pattern": {
+    "pattern": "clip_a -> 2_to_3_frame_opacity_ramp_to_white_at_cut -> 2_to_3_frame_fade_down -> clip_b",
+    "manual_rule": "A solid white generator or compound clip can be keyframed with opacity around the cut.",
+    "builtin_rule": "Resolve's white/brightness flash transition can work well, but check for bugs or unwanted fade behavior.",
+    "reuse_rule": "Save a checked flash as a preset or Power Bin item for consistent use."
+  },
+  "motion": {
+    "rule": "Flash should be brief and tied to a cut, beat, or B-roll entry."
+  },
+  "sound": {
+    "rule": "Add a soft hit or whoosh only when the flash needs a sound accent; keep dialogue clear."
+  },
+  "captions": {
+    "rule": "Avoid flashing over captions that must be read at that exact moment."
+  },
+  "color": {
+    "rule": "Use full white only briefly; do not wash out the next shot long enough to hide the subject."
+  },
+  "implementation": {
+    "ffmpeg": "Overlay a white color source with alpha keyframes around the cut or use a short xfade-style white flash segment.",
+    "remotion": "Add a white full-screen layer with opacity keyframes around the transition frame.",
+    "blender": "Use a white overlay plane or compositor color mix with keyframed factor around the cut.",
+    "capcut_equivalent": "Use a white flash transition or a white overlay with keyframed opacity.",
+    "premiere_equivalent": "Use Dip to White, an adjustment layer/white matte opacity flash, or a saved flash preset."
+  },
+  "common_mistakes": [
+    "Using flashes on every cut.",
+    "Letting the flash hide a caption or important face/action moment.",
+    "Trusting the built-in transition without checking for bugs or unwanted timing.",
+    "Making the flash too long for a fast short-form edit."
+  ],
+  "qc": [
+    "Does the flash land on an intentional cut or beat?",
+    "Is the flash short enough to avoid hiding the next shot?",
+    "Does it avoid covering captions that need to be read?",
+    "Is repeated flash use limited enough to avoid fatigue?",
+    "Does the manual or built-in version render cleanly?"
+  ]
+}

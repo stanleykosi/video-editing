@@ -1,0 +1,62 @@
+{
+  "id": "color_warm_nostalgic_hope_grade_001",
+  "name": "Warm Nostalgic Hope Grade",
+  "category": "color",
+  "source_tutorial": "transcripts/slow editing.txt",
+  "use_when": [
+    "A section is about hope, recovery, memory, gratitude, or emotional closure.",
+    "The source footage feels too digital or cold for the intended feeling.",
+    "The subject should feel warm and focused while the background remains readable."
+  ],
+  "avoid_when": [
+    "The scene needs neutral evidence, factual color, product accuracy, or serious restraint.",
+    "Warmth would make skin tones look orange or false.",
+    "Glow, blur, grain, or vignette would reduce caption, face, or proof readability."
+  ],
+  "timeline_pattern": {
+    "pattern": "base_correction -> warm_glow_or_gradient -> subject_focus -> subtle_grain_or_radial_blur -> vignette_check -> caption_readability_review",
+    "emotion_rule": "Choose the warm look because of the emotional meaning, not because every Reel needs a grade.",
+    "subject_rule": "Use warmth, highlights, blur, or vignette to guide attention to the subject without hiding the environment.",
+    "digital_rule": "The look should reduce harsh digital sharpness without becoming soft, muddy, or artificial."
+  },
+  "motion": {
+    "rule": "If paired with a slow zoom, the grade should stay stable and not flicker or pulse through the move."
+  },
+  "sound": {
+    "rule": "Warm nostalgic color often pairs with gentler ambience, reflective music, or softer SFX; avoid tonal mismatch."
+  },
+  "captions": {
+    "rule": "Caption fill, stroke, shadow, or backing must remain readable over warm glow and vignette.",
+    "avoid": "Do not let grain or blur dirty caption edges."
+  },
+  "color": {
+    "rule": "Warm the emotional section while preserving skin detail, highlight control, and readable background context.",
+    "keyframe_values": {
+      "vignette": "Use a restrained vignette that focuses the subject without obvious dark corners.",
+      "grain": "Use subtle grain/noise only after checking compression cleanliness.",
+      "radial_blur": "Use radial blur lightly as a focus/nostalgia texture, not enough to smear proof or faces.",
+      "highlight_control": "Keep highlights warm and present, but avoid clipping facial detail or white proof artifacts."
+    }
+  },
+  "implementation": {
+    "ffmpeg": "Approximate with eq/colorbalance/curves, overlayed warm gradient, vignette, light noise, and optional masked blur; render stills before final.",
+    "remotion": "Use separate correction and look tokens: baseCorrection, warmth, glowOpacity, grainOpacity, vignetteAmount, and captionContrastCheck.",
+    "blender": "Use compositor color balance, glare/glow, vignette masks, and subtle film grain while protecting skin values.",
+    "capcut_equivalent": "Apply a warm filter or manual temperature/tint adjustment lightly, add subtle vignette/grain, and preview captions at phone size.",
+    "premiere_equivalent": "Use Lumetri for correction/warmth, optional adjustment-layer glow/gradient/vignette/grain, and compare against an ungraded reference frame."
+  },
+  "common_mistakes": [
+    "Making a hopeful section look orange instead of warm.",
+    "Using glow, blur, or grain until captions and proof become muddy.",
+    "Applying the warm look to factual material that needs neutral color.",
+    "Crushing the background so the viewer loses context.",
+    "Changing the grade before the edit timing is stable."
+  ],
+  "qc": [
+    "Does the warm look support the emotional meaning of the section?",
+    "Do skin tones remain believable and detailed?",
+    "Are highlights controlled and proof artifacts still readable?",
+    "Do captions remain sharp and high-contrast over the grade?",
+    "Does grain, blur, glow, or vignette avoid compression dirt?"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "",
+  "name": "",
+  "category": "",
+  "source_tutorial": "",
+  "use_when": [],
+  "avoid_when": [],
+  "timeline_pattern": {},
+  "motion": {},
+  "sound": {},
+  "captions": {},
+  "color": {},
+  "implementation": {
+    "ffmpeg": "",
+    "remotion": "",
+    "blender": "",
+    "capcut_equivalent": "",
+    "premiere_equivalent": ""
+  },
+  "common_mistakes": [],
+  "qc": []
+}

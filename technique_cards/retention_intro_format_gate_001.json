@@ -1,0 +1,57 @@
+{
+  "id": "retention_intro_format_gate_001",
+  "name": "Intro Format Gate",
+  "category": "retention",
+  "source_tutorial": "transcripts/killer intros.txt",
+  "use_when": [
+    "The edit needs to decide whether a formal intro bumper should exist at all.",
+    "A podcast, show, course, creator page, or repeatable social series needs brand packaging.",
+    "The intro can build trust, authority, or series identity faster than immediate content alone."
+  ],
+  "avoid_when": [
+    "A normal 8-12 minute YouTube tutorial or essay should start delivering the title promise immediately.",
+    "The intro delays a feed-first short that already needs a hook inside the first seconds.",
+    "The bumper is only a legacy habit, logo vanity, or old channel template.",
+    "The audience is there for a specific answer and does not need brand context first."
+  ],
+  "timeline_pattern": {
+    "pattern": "format_check -> audience_expectation -> intro_or_no_intro -> duration_cap -> body_start",
+    "podcast_rule": "Long podcasts or shows can justify a short brand/proof/outcome intro because the viewer expects a program identity.",
+    "series_rule": "Repeatable Instagram/Reels/social series can use very short intros to identify the series and promise.",
+    "midlength_youtube_rule": "For ordinary mid-length YouTube videos, skip formal intros unless the brand proof materially increases trust.",
+    "duration_rule": "Use about 10-15 seconds maximum for long-form/show intros and about 3-5 seconds for social series intros."
+  },
+  "motion": {
+    "rule": "Use motion only if it communicates brand, authority, or outcome faster than static text."
+  },
+  "sound": {
+    "rule": "Intro music should signal premium identity quickly, then hand off cleanly to the main voice or content."
+  },
+  "captions": {
+    "rule": "Do not duplicate intro bumper text with ordinary captions unless accessibility requires it."
+  },
+  "color": {
+    "rule": "Intro color should match the show or creator identity without making the first value cue harder to read."
+  },
+  "implementation": {
+    "ffmpeg": "Represent the intro decision as metadata: introAllowed, format, maxDuration, introPurpose, and bodyStartTime. Concatenate a pre-rendered bumper only when the gate passes.",
+    "remotion": "Create an IntroGate object with format, maxDurationFrames, purpose, brandRequired, proofRequired, and skipReason fields.",
+    "blender": "Render a branded bumper only for show/series formats where a reusable opener is justified.",
+    "capcut_equivalent": "Use a short saved intro template only for podcast/show/social-series packaging; delete it from ordinary answer-first videos.",
+    "premiere_equivalent": "Nest the bumper and place markers for intro_start, intro_end, and body_start; keep the nest disabled when the intro gate fails."
+  },
+  "common_mistakes": [
+    "Adding a formal intro to every YouTube video because it feels professional.",
+    "Using a long logo bumper before the viewer knows the value.",
+    "Treating a social-series intro like a long YouTube intro.",
+    "Letting a reusable template age into an outdated channel habit."
+  ],
+  "qc": [
+    "Can the editor name why this format needs an intro bumper?",
+    "Would the target viewer prefer immediate content over this intro?",
+    "Is the intro within the correct duration cap for the platform?",
+    "Does the body start before the viewer feels delayed?",
+    "If the intro is removed, does the edit become clearer or weaker?"
+  ]
+}
+

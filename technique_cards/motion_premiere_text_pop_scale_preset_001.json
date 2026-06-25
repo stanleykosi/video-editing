@@ -1,0 +1,64 @@
+{
+  "id": "motion_premiere_text_pop_scale_preset_001",
+  "name": "Premiere Text Pop Scale Preset",
+  "category": "motion",
+  "source_tutorial": "transcripts/editing viral videos.txt",
+  "additional_sources": [
+    "transcripts/brayden_ffmpeg_drawtext_animations_source_notes.md",
+    "transcripts/remotion_lab_kinetic_typography_presets_source_notes.md"
+  ],
+  "use_when": [
+    "Center text or emphasis text needs a quick energetic entrance in Premiere.",
+    "A text phrase is more important than ordinary captions but does not need a full AE animation.",
+    "The editor wants a reusable Transform preset for repeated brand text."
+  ],
+  "avoid_when": [
+    "The text is a normal subtitle and pop motion would become irritating.",
+    "The project tone is serious and a bounce/pop would feel cheap.",
+    "The text would cover a face, proof, product, or key action."
+  ],
+  "timeline_pattern": {
+    "pattern": "text_layer -> brand_style -> transform_scale_70 -> 7_frames_scale_110 -> 5_frames_scale_100 -> optional_ease -> glow_or_glitch_if_style_fit -> save_preset",
+    "text_job_rule": "Use this for center/emphasis text or scene text, not every caption.",
+    "preset_rule": "Save the Transform animation as a named preset only after testing it on multiple text lengths.",
+    "brand_rule": "Font, color, glow, and glitch settings should match the channel style."
+  },
+  "motion": {
+    "rule": "Use a short overshoot pop that arrives quickly and settles before the viewer needs to read the phrase.",
+    "keyframe_values": {
+      "start_scale": "70%",
+      "overshoot_scale": "110% at about 7 frames",
+      "settle_scale": "100% about 5 frames after the overshoot",
+      "easing": "Smooth keyframes if it improves feel, but keep readability more important than bounce style."
+    }
+  },
+  "sound": {
+    "rule": "Use a small pop, click, or hit only when the text is a real emphasis beat; keep it below dialogue."
+  },
+  "captions": {
+    "rule": "Do not duplicate the same words as captions unless the text needs both accessibility and emphasis."
+  },
+  "color": {
+    "rule": "Glow, glitch, and accent colors should improve emphasis without harming readability."
+  },
+  "implementation": {
+    "ffmpeg": "Approximate with drawtext alpha and fontsize envelopes, such as a 70% start, optional 110% peak, and 100% settle, while keeping x/y centered from text dimensions.",
+    "remotion": "Create a Sequence-local TextPop component with start, overshoot, settle, spring/interpolate settings, safeRegion, and optional glow/glitch style.",
+    "blender": "Use text-object scale keyframes with overshoot interpolation for spatial text.",
+    "capcut_equivalent": "Use keyframes or a pop animation preset, then verify the phrase remains readable at phone size.",
+    "premiere_equivalent": "Apply Transform to the text layer, keyframe Scale at 70%, 110% after about 7 frames, and 100% after about 5 more frames; save as a preset after QC."
+  },
+  "common_mistakes": [
+    "Using pop text on every sentence until it becomes irritating.",
+    "Saving the preset before testing long and short phrases.",
+    "Letting the bounce finish after the spoken emphasis has passed.",
+    "Adding glow or glitch that makes the word harder to read."
+  ],
+  "qc": [
+    "Does the text pop finish before or as the phrase is spoken?",
+    "Is the phrase readable at delivery size?",
+    "Does it avoid faces, proof, products, and captions?",
+    "Is the SFX, if used, below dialogue?",
+    "Is the preset named by behavior and tested on different text lengths?"
+  ]
+}

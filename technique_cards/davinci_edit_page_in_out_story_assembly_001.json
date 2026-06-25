@@ -1,0 +1,60 @@
+{
+  "id": "davinci_edit_page_in_out_story_assembly_001",
+  "name": "DaVinci Edit Page In Out Story Assembly",
+  "category": "nle_workflow",
+  "source_tutorial": "transcripts/davinci resolve full tutorial.txt",
+  "use_when": [
+    "The editor needs a clean first assembly in Resolve's Edit page.",
+    "Only part of a source clip belongs in the story.",
+    "The timeline needs insert, overwrite, replace, place-on-top, or append decisions."
+  ],
+  "avoid_when": [
+    "The sequence is a fast rough selects string where Cut page Source Tape is better.",
+    "The media has not been organized enough to choose useful source clips.",
+    "The edit needs a complex Fusion effect before the basic story can be assembled."
+  ],
+  "timeline_pattern": {
+    "pattern": "media_pool -> source_viewer -> mark_in_out -> insert_or_overwrite -> trim_start_end -> ripple_remove_gaps -> review_story_question",
+    "source_rule": "Use source In/Out points to bring only the useful portion into the timeline.",
+    "edit_button_rule": "Choose insert, overwrite, replace, place-on-top, or append based on whether timeline timing should move.",
+    "gap_rule": "Remove leading black and accidental gaps early so they do not become invisible problems.",
+    "question_rule": "When a character looks, reacts, or moves toward something, insert the answer if it helps viewer orientation."
+  },
+  "motion": {
+    "rule": "Do not add keyframed polish until the source selection and timeline order work."
+  },
+  "sound": {
+    "rule": "Use waveforms to find speech starts and endings, but preserve meaningful pauses or breaths.",
+    "keyframe_values": {
+      "dead_air_rule": "For tight dialogue, remove accidental silence over 300 ms unless it has a story, joke, tension, or comprehension job.",
+      "audio_edge_rule": "Add short fades/crossfades when a tight trim clicks or exposes room-tone change."
+    }
+  },
+  "captions": {
+    "rule": "Delay caption generation until the dialogue assembly is stable enough to avoid churn."
+  },
+  "color": {
+    "rule": "Do not judge final color continuity from an unfinished story assembly."
+  },
+  "implementation": {
+    "ffmpeg": "Store source in/out timecodes and edit operations in an EDL before trimming/concatenating.",
+    "remotion": "Represent source ranges as clip objects with sourceStart, sourceEnd, timelineStart, and insertMode.",
+    "blender": "Use VSE strip start/end trims and markers for story questions before adding animation.",
+    "capcut_equivalent": "Preview source, trim to useful range, insert into timeline, then ripple remove gaps.",
+    "premiere_equivalent": "Use Source Monitor I/O, Insert/Overwrite, Replace, Overwrite on top tracks, ripple trim, and gap deletion."
+  },
+  "common_mistakes": [
+    "Dragging whole clips to the timeline and trimming later only after the edit is crowded.",
+    "Leaving black frames at the beginning or between clips.",
+    "Using overwrite when insert should preserve later timing, or insert when overwrite should keep timing locked.",
+    "Cutting out every waveform gap without watching whether the pause carries meaning."
+  ],
+  "qc": [
+    "Does every placed source range start and end on useful story material?",
+    "Are there no accidental gaps, black frames, or leading dead space?",
+    "Did insert/overwrite choices preserve the intended timeline timing?",
+    "Do reaction or look beats receive the needed answer shot?",
+    "Does the rough cut make sense before polish?"
+  ]
+}
+

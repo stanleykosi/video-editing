@@ -1,0 +1,60 @@
+{
+  "id": "captions_organic_low_focus_social_subtitles_001",
+  "name": "Organic Low-Focus Social Subtitles",
+  "category": "captions",
+  "source_tutorial": "transcripts/slow editing.txt",
+  "use_when": [
+    "A warm human short needs captions for comprehension without looking overly digital.",
+    "Faces, proof artifacts, or emotional reactions should remain the primary focus.",
+    "The edit uses slow human pacing where constant animated caption energy would feel wrong."
+  ],
+  "avoid_when": [
+    "Audio is hard to hear and stronger subtitles are required for accessibility.",
+    "The format intentionally uses loud kinetic captions as the main style.",
+    "Low-contrast caption styling would fail on bright or busy footage."
+  ],
+  "timeline_pattern": {
+    "pattern": "clean_dialogue_cut -> restrained_caption_chunk -> face_or_proof_safe_position -> subtle_fade_or_static_hold -> clear_before_visual_focus_change",
+    "focus_rule": "Captions should support the line while the face, proof, or human interaction remains dominant.",
+    "digital_rule": "Avoid styling that makes an organic reel feel like a template unless the brand asks for it.",
+    "safety_rule": "Subtle does not mean unreadable; accessibility remains the floor."
+  },
+  "motion": {
+    "rule": "Use static captions or very soft fades; avoid bounce, shake, or aggressive word pops unless a specific word needs emphasis.",
+    "keyframe_values": {
+      "fade": "Use 3-6 frame fades when hard caption pops feel distracting.",
+      "line_length": "Prefer short single-line or compact two-line captions that avoid faces and proof."
+    }
+  },
+  "sound": {
+    "rule": "Fix dialogue/music balance first; captions should not rescue a buried mix."
+  },
+  "captions": {
+    "rule": "Use readable font weight, stroke/shadow/backing as needed, and placement that avoids faces, hands, proof, and emotional reactions.",
+    "avoid": "Do not duplicate visual text or designed hook text unless accessibility requires it."
+  },
+  "color": {
+    "rule": "Caption color should feel native to the warm palette while preserving contrast on both bright and dark frames."
+  },
+  "implementation": {
+    "ffmpeg": "Burn subtitles with ASS styling using restrained font, shadow/stroke, safe margins, and short fades where supported.",
+    "remotion": "Create a subtitle style with lowFocus=true, safeRegion, softFadeFrames, and duplicateVisualText checks.",
+    "blender": "Use simple text objects with restrained opacity fades and safe-area guides.",
+    "capcut_equivalent": "Use auto captions as a draft, simplify style, lower animation intensity, and manually move captions away from faces/proof.",
+    "premiere_equivalent": "Create captions from transcript, correct chunks, apply a restrained track style, and use graphics/fades only where soft exits are needed."
+  },
+  "common_mistakes": [
+    "Making captions so subtle that phone viewers cannot read them.",
+    "Using kinetic caption presets that fight a warm human moment.",
+    "Leaving captions over the exact face or proof artifact the viewer should inspect.",
+    "Duplicating hook text, proof text, and subtitles without hierarchy.",
+    "Assuming organic style means skipping caption correction."
+  ],
+  "qc": [
+    "Are captions readable at phone size while remaining visually restrained?",
+    "Do captions avoid faces, proof artifacts, hands, and emotional reactions?",
+    "Does the mix remain intelligible without relying on captions as a rescue?",
+    "Are duplicate caption/visual-text layers removed or justified?",
+    "Does the caption style match the warm human tone of the edit?"
+  ]
+}

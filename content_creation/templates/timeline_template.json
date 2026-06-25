@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "project": {
+    "title": "",
+    "mode": "create_from_scratch",
+    "style_pack": "",
+    "creative_directive": "creative_directive.json",
+    "knowledge_contract": {
+      "no_basic_outputs": true,
+      "knowledge_must_compile_to_layers": true,
+      "minimum_layers_per_beat": 6,
+      "required_layer_types": [
+        "camera_motion",
+        "caption_kinetic",
+        "emphasis_text",
+        "visual_motion_overlay",
+        "color_grade",
+        "sound_cue"
+      ]
+    },
+    "resolution": {
+      "width": 1080,
+      "height": 1920
+    },
+    "fps": 30,
+    "target_duration_seconds": 60,
+    "audio_sample_rate": 48000
+  },
+  "tracks": {
+    "voiceover": [],
+    "music": [],
+    "sfx": [],
+    "background_video": [],
+    "broll": [],
+    "images": [],
+    "motion_graphics": [],
+    "captions": [],
+    "overlays": []
+  },
+  "beats": [
+    {
+      "beat_id": "B01",
+      "start": 0,
+      "end": 3,
+      "script_text": "",
+      "visual_job": "hook",
+      "primary_asset_id": "",
+      "layers": [
+        {
+          "type": "camera_motion",
+          "effect": "first_three_second_dynamic_zoom_hook",
+          "start": 0,
+          "end": 3,
+          "keyframes": []
+        },
+        {
+          "type": "caption_kinetic",
+          "style_id": "two_word_pop_highlight_glow",
+          "start": 0,
+          "end": 3,
+          "chunk_words": 2,
+          "emphasis_terms": []
+        },
+        {
+          "type": "emphasis_text",
+          "effect": "mask_highlight_glow",
+          "text": "",
+          "start": 0.35,
+          "end": 2.1
+        },
+        {
+          "type": "visual_motion_overlay",
+          "effect": "callout_label_pop",
+          "start": 0.1,
+          "end": 2.9
+        },
+        {
+          "type": "color_grade",
+          "effect": "clean educational contrast",
+          "start": 0,
+          "end": 3,
+          "filters": {}
+        },
+        {
+          "type": "sound_cue",
+          "effect": "soft_hit",
+          "start": 0,
+          "end": 0.45,
+          "level": "low_under_voice"
+        }
+      ],
+      "techniques_applied": [],
+      "caption": {
+        "text": "",
+        "style": "",
+        "safe_region": ""
+      },
+      "sound": {
+        "music_cue": "",
+        "sfx": []
+      },
+      "qc": []
+    }
+  ],
+  "render": {
+    "preview_path": "preview.mp4",
+    "final_path": "final.mp4",
+    "subtitles_last": true,
+    "asset_manifest": "asset_manifest.json"
+  }
+}

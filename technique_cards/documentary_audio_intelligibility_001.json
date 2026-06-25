@@ -1,0 +1,63 @@
+{
+  "id": "documentary_audio_intelligibility_001",
+  "name": "Documentary Audio Intelligibility",
+  "category": "sound_design",
+  "source_tutorial": "transcripts/what not to do in editing.txt",
+  "additional_sources": [
+    "transcripts/editing full course.txt"
+  ],
+  "use_when": [
+    "Dialogue, testimony, or location sound carries essential story information.",
+    "Train, street, crowd, wind, or camera audio is muffled or noisy.",
+    "Subtitles, dubbing, or narration repair may be needed to keep viewers from leaving.",
+    "Quiet words, clipped peaks, or uneven dialogue need volume keyframes before export."
+  ],
+  "avoid_when": [
+    "The line is not important and cutting it is cleaner than repairing it.",
+    "Dubbing would misrepresent the speaker or feel more artificial than subtitles.",
+    "The audio issue is part of an intentional realism moment and the meaning remains clear."
+  ],
+  "timeline_pattern": {
+    "pattern": "important_line -> audio_cleanup_or_subtitle -> reaction_or_context -> continue_story",
+    "priority_rule": "Story comprehension beats decorative labels or lower thirds.",
+    "consistency_rule": "If a B-roll sequence uses sync ambience, make ambience consistent across the sequence."
+  },
+  "motion": {
+    "rule": "Keep graphics stable while viewers are trying to read subtitles or understand poor audio."
+  },
+  "sound": {
+    "rule": "Bad sound is more damaging than bad visuals when the line carries story.",
+    "repair_order": "Try source selection, dialogue cleanup, volume automation, subtitles, then dubbing or paraphrase if ethically acceptable.",
+    "mix": "SFX and music must duck under critical dialogue.",
+    "leveling_rule": "Repair problem words with clip gain or volume keyframes instead of raising the whole track when only one moment needs help."
+  },
+  "captions": {
+    "rule": "Subtitle essential hard-to-hear lines even if that means removing a lower-third graphic.",
+    "avoid": "Prioritizing a character intro graphic over the words the audience needs to understand."
+  },
+  "color": {
+    "rule": "No direct color rule; keep visuals calm enough that subtitles can be read."
+  },
+  "implementation": {
+    "ffmpeg": "Use loudnorm, highpass/lowpass, afftdn/arnndn where appropriate, and waveform review. Use volume keyframes/envelopes for quiet words. Render subtitle repair for hard-to-hear lines. Check dialogue intelligibility after music/SFX mix.",
+    "remotion": "Add subtitle overlays for hard-to-hear dialogue and use audio gain envelopes around critical lines or quiet words.",
+    "blender": "Do not add busy animation under essential subtitles unless the audio is already clear.",
+    "capcut_equivalent": "Use noise reduction, manual volume keyframes, and burned captions for hard-to-hear lines.",
+    "premiere_equivalent": "Use Essential Sound dialogue cleanup, manual keyframes, and captions; consider ADR/dubbing only when it is transparent and ethical."
+  },
+  "common_mistakes": [
+    "Assuming subtitles fully solve terrible audio.",
+    "Leaving a critical line unintelligible because a lower third occupied the space.",
+    "Letting music or SFX overpower testimony.",
+    "Using inconsistent ambience across B-roll sequences.",
+    "Raising a full clip when only one quiet word needs local gain."
+  ],
+  "qc": [
+    "Can a first-time viewer understand every story-critical line?",
+    "Do subtitles appear for hard-to-hear speech?",
+    "Does music/SFX duck under important dialogue?",
+    "Is ambience consistent across related B-roll shots?",
+    "Would cutting the line be better than repairing it?",
+    "Are quiet story-critical words repaired without creating clipped peaks?"
+  ]
+}

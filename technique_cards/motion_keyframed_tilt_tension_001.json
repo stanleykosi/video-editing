@@ -1,0 +1,59 @@
+{
+  "id": "motion_keyframed_tilt_tension_001",
+  "name": "Keyframed Tilt Tension",
+  "category": "motion",
+  "source_tutorial": "transcripts/capcut keyframes.txt",
+  "use_when": [
+    "A scary, eerie, unstable, comedic, or disorienting moment needs a simple tilt or Dutch-angle motion.",
+    "A static shot needs subtle unease without a full transition.",
+    "The editor wants to rotate the frame while keeping the subject and captions readable."
+  ],
+  "avoid_when": [
+    "The tone is serious, factual, or trust-led and a tilt would feel gimmicky.",
+    "The rotation would reveal black corners or crop out important faces, captions, evidence, UI, or action.",
+    "The tension can be communicated more truthfully with a cut, hold, sound cue, or performance beat."
+  ],
+  "timeline_pattern": {
+    "pattern": "safe_zoom_keyframe -> rotate_keyframe -> hold_tension -> reset_or_cut",
+    "zoom_rule": "Zoom in before rotating so the frame does not expose black edges.",
+    "motivation_rule": "Use the tilt to signal unease, instability, comedy, or perspective change, not as random movement.",
+    "reset_rule": "Either cut away at the peak, hold the tilted state for a readable beat, or keyframe back to level intentionally."
+  },
+  "motion": {
+    "rule": "Animate scale and rotation together, then check all four corners and caption regions.",
+    "keyframe_values": {
+      "zoom_safety": "Increase scale enough to hide corners before rotation; the exact amount depends on delivery aspect and rotation angle.",
+      "rotation": "Use a small visible rotation first; increase only if the style supports a stronger jolt.",
+      "hold": "Hold the final tilt briefly if the viewer needs to feel the tension before the next cut."
+    }
+  },
+  "sound": {
+    "rule": "A low hit, riser, or tonal swell can support the tilt only when it fits the scene tone and stays below dialogue."
+  },
+  "captions": {
+    "rule": "Captions should remain level/readable unless the caption layer is intentionally part of the tilt treatment."
+  },
+  "color": {
+    "rule": "Do not combine tilt with darkening or color effects that hide the subject or proof."
+  },
+  "implementation": {
+    "ffmpeg": "Use scale plus rotate expressions, crop/pad safeguards, and render corner-safe contact sheets.",
+    "remotion": "Animate scale and rotate on the frame container with safe-area checks and optional reset keyframes.",
+    "blender": "Rotate the camera or image plane after scaling/framing to prevent edge reveals.",
+    "capcut_equivalent": "Add a starting keyframe, pinch-zoom in for safety, move ahead, rotate with two fingers, preview for black corners, then hold/reset/cut.",
+    "premiere_equivalent": "Use Motion Scale and Rotation keyframes; increase scale before rotation and check Program Monitor edges and captions."
+  },
+  "common_mistakes": [
+    "Rotating without zooming and revealing black corners.",
+    "Tilting a serious proof or documentary shot until it feels manipulative.",
+    "Cropping out captions, hands, UI, or evidence while hiding the corners.",
+    "Leaving the frame tilted with no story or tone reason."
+  ],
+  "qc": [
+    "Does the tilt have a named tension, comedy, or perspective job?",
+    "Are all corners covered through the rotation?",
+    "Do faces, captions, UI, proof, and action remain visible?",
+    "Does the move hold, reset, or cut intentionally?",
+    "Does any supporting sound stay below dialogue and match the tone?"
+  ]
+}

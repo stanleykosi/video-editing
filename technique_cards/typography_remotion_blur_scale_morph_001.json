@@ -1,0 +1,61 @@
+{
+  "id": "typography_remotion_blur_scale_morph_001",
+  "name": "Remotion Blur Scale Text Morph",
+  "category": "typography",
+  "source_tutorial": "transcripts/remotion_lab_kinetic_typography_presets_source_notes.md",
+  "use_when": [
+    "One short word or concept should transform into another with a soft premium feel.",
+    "A title transition needs more physical texture than a plain crossfade.",
+    "The outgoing and incoming words can share a controlled layout."
+  ],
+  "avoid_when": [
+    "Both words must remain readable throughout the transition.",
+    "The words have very different lengths and no design plan for the shared position.",
+    "The scene already has enough blur, glow, or motion competing with the text."
+  ],
+  "timeline_pattern": {
+    "pattern": "outgoing_word_layer -> incoming_word_layer_absolute -> shared_progress -> outgoing_blur_scale_opacity_out -> incoming_blur_scale_opacity_in -> readable_hold",
+    "layer_rule": "Both words share a container so the morph feels like one text event.",
+    "progress_rule": "Use one progress value to drive opposite opacity, blur, and scale states.",
+    "hold_rule": "Show each word clearly before and after the morph."
+  },
+  "motion": {
+    "rule": "Blur and scale should imply transformation without hiding the final message.",
+    "keyframe_values": {
+      "morph_duration": "Around 30 frames can work for a clear title morph at 30fps; shorten only when the words are very simple.",
+      "blur_limit": "Keep blur below the point where the text becomes a muddy block; values around the mid-20 px range are already strong.",
+      "scale_out": "Outgoing text can scale up slightly while fading/blurred; incoming text can start smaller and sharpen to normal size."
+    }
+  },
+  "sound": {
+    "rule": "Use a soft swell, shimmer, or no SFX; avoid hard impacts unless the morph is a beat accent."
+  },
+  "captions": {
+    "rule": "Do not use morphing text as the only caption for important spoken content."
+  },
+  "color": {
+    "rule": "Use consistent color roles across both words unless the concept shift intentionally changes tone."
+  },
+  "implementation": {
+    "ffmpeg": "Pre-render the morph from Remotion or use two drawtext layers with alpha and blur approximations for simple tests.",
+    "remotion": "Stack outgoing and incoming text in one relative container; drive filter blur, transform scale, and opacity from a shared interpolated progress.",
+    "blender": "Use two text objects with animated opacity, scale, and compositor blur.",
+    "capcut_equivalent": "Duplicate text layers and keyframe blur, opacity, and scale in opposite directions.",
+    "premiere_equivalent": "Nest two Essential Graphics layers and animate blur, scale, and opacity, or use AE/Remotion for cleaner timing."
+  },
+  "common_mistakes": [
+    "Letting the mid-transition blur cover faces, proof, UI, or captions.",
+    "Morphing long phrases that need plain readability.",
+    "Not holding the incoming word after it sharpens.",
+    "Using blur values that create compression dirt.",
+    "Changing font role or alignment accidentally between the two words."
+  ],
+  "qc": [
+    "Outgoing word is readable before the morph starts.",
+    "Incoming word is readable after the morph settles.",
+    "Mid-transition blur does not hide key visual information.",
+    "Font, alignment, and color choices feel intentional across both words.",
+    "The morph duration matches the scene pace."
+  ]
+}
+

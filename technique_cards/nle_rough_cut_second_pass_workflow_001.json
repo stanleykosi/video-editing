@@ -1,0 +1,83 @@
+{
+  "id": "nle_rough_cut_second_pass_workflow_001",
+  "name": "Rough Cut To Second Pass Workflow",
+  "category": "nle_workflow",
+  "source_tutorial": "transcripts/editing full course.txt",
+  "additional_sources": [
+    "transcripts/davinci resolve short form editing.txt",
+    "transcripts/edit high quality reel.txt",
+    "transcripts/editing viral videos.txt",
+    "transcripts/slow editing.txt",
+    "transcripts/davinci resolve full tutorial.txt"
+  ],
+  "use_when": [
+    "A talking-head, tutorial, commentary, or YouTube video needs to move from raw footage to a polished edit.",
+    "The editor is tempted to add effects before the story and pacing are working.",
+    "A long timeline needs a repeatable pass structure for cutting, B-roll, audio, and export.",
+    "A DaVinci Resolve short should move from simple postable edit to Fusion polish to reusable presets.",
+    "A Premiere plus After Effects Reel needs a stable prepared cut before animation.",
+    "A scripted viral-style YouTube video needs voiceover, music, assets, animations, SFX, and color organized into repeatable passes.",
+    "A short-form story needs original, shorter, and balanced timeline versions compared before final polish.",
+    "A Resolve project needs a full page-based pass order from Media to Deliver."
+  ],
+  "avoid_when": [
+    "The user asks for a single tiny trim or technical conversion.",
+    "The source footage is already locked and only finishing work is needed.",
+    "The project is experimental and the user explicitly wants discovery through visual treatment first."
+  ],
+  "timeline_pattern": {
+    "pattern": "project_setup -> import -> rough_cut -> remove_dead_time -> add_motivated_visuals -> second_pass_polish -> color_pass -> audio_pass -> export_qc",
+    "rough_cut_rule": "The first pass should make the edit watchable and understandable before effects are added.",
+    "second_pass_rule": "The second pass should tighten, hide rough cuts, add proof visuals, improve focus, and repair audio.",
+    "save_rule": "Save before risky timeline operations and keep duplicate sequences for major versions.",
+    "phase_rule": "For Resolve shorts, phase one is clean vertical A-roll/B-roll/captions, phase two is Fusion polish, and phase three is Power Bin/preset efficiency.",
+    "ae_roundtrip_rule": "For Premiere plus After Effects reels, organize assets, sync/prep footage, trim and correct the prepared cut, ideate segments, animate in AE, render back to Premiere, then finish SFX/music/captions/export.",
+    "script_asset_rule": "For scripted YouTube edits, tag the script into visual asset categories and gather media before the heavy timeline pass.",
+    "review_rule": "After the first rough assembly, rewatch cold, add missing support, remove boring lines, and rewrite only when it improves the main goal.",
+    "versioning_rule": "Use named duplicate or stacked timelines to compare original, shorter, and balanced pacing before committing polish.",
+    "resolve_full_rule": "For full Resolve projects, organize Media first, assemble in Edit/Cut, then move through Fusion, Color, Fairlight, and Deliver after story timing is stable."
+  },
+  "motion": {
+    "rule": "Delay decorative motion until the cut order, spoken logic, and visual motivation are clear."
+  },
+  "sound": {
+    "rule": "Do a dedicated audio pass after the rough cut so dialogue, music, and SFX can be balanced in context. If music is added early for vibe, re-check the final full mix after SFX."
+  },
+  "captions": {
+    "rule": "Add or refine captions after the spoken sequence is locked enough that caption timing will not be churned."
+  },
+  "color": {
+    "rule": "Correct obvious mismatches during polish, but save full look work until picture timing is stable."
+  },
+  "implementation": {
+    "ffmpeg": "Represent the rough cut as an EDL or concat list, then render short review exports before adding overlay, caption, and audio filters.",
+    "remotion": "Create named sequences for rough_cut, visual_support, polish, audio_mix, and export_qc so each pass is inspectable.",
+    "blender": "Only build animated inserts once the surrounding timeline duration and narration beat are stable.",
+    "capcut_equivalent": "Create a rough duplicate, trim dead time, then add overlays, captions, music, and SFX in later passes.",
+    "premiere_equivalent": "Use duplicate sequences, bins, labels, markers, and manual saves; keep rough, polish, prepared, animation, finish, and export versions separate. For scripted viral videos, import VO, trim by script, optionally add licensed/platform-safe music for vibe, layer assets from script tags, then do animation, SFX, color, and export passes. In Resolve, use Media organization, Edit/Cut assembly, Fusion polish, Color matching/look, Fairlight mix, and Deliver settings in that order."
+  },
+  "common_mistakes": [
+    "Polishing a section before knowing whether it belongs.",
+    "Opening Fusion before the simple short is clean, vertical, captioned, and motivated.",
+    "Adding effects to hide a weak idea or unclear spoken logic.",
+    "Skipping the audio pass because the timeline looks visually finished.",
+    "Exporting from a messy working sequence without checking version, in/out range, and settings.",
+    "Choosing the shortest version even when it removes the human connection or proof that made the story work.",
+    "Starting After Effects work before the prepared cut and segment plan are stable.",
+    "Opening the timeline without a script asset map and hunting for every visual mid-edit.",
+    "Adding music early and never rechecking whether it still fits after the edit changes.",
+    "Doing Color, Fairlight, or Deliver work before the selected story timeline is clear."
+  ],
+  "qc": [
+    "Can the rough cut be understood without decorative effects?",
+    "Are all B-roll, overlays, and captions attached to a spoken or story purpose?",
+    "Was an audio pass completed after major trims?",
+    "Is the export taken from the intended locked sequence and range?",
+    "For Resolve shorts, did the edit pass through simple cut, Fusion polish, and preset/QC review in that order?",
+    "For Premiere plus After Effects reels, was a prepared render reviewed before animation began?",
+    "Does each scripted beat have an asset/visual decision before heavy timeline work?",
+    "Was the rough cut rewatched for add, remove, and rewrite decisions before final polish?",
+    "Were major duration versions compared and clearly named before the final version was polished?",
+    "For Resolve projects, did Media, Edit/Cut, Fusion, Color, Fairlight, and Deliver each receive the appropriate pass?"
+  ]
+}

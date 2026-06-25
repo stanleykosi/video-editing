@@ -1,0 +1,65 @@
+{
+  "id": "eyes_decision_reaction_cut",
+  "name": "Eyes Decision Reaction Cut",
+  "category": "story_pacing",
+  "source_tutorial": "transcripts/how an editor think.txt",
+  "additional_sources": [
+    "transcripts/Editing-That-Makes-Your-Story-10x.txt"
+  ],
+  "use_when": [
+    "A character's thought, decision, withheld line, or emotional shift is visible in the eyes or face.",
+    "The edit needs to imply what someone is thinking without adding narration or explanation.",
+    "A reaction shot can make the following object, person, or event feel motivated.",
+    "The edit needs the viewer to understand what new information means to the protagonist."
+  ],
+  "avoid_when": [
+    "The face does not show a readable change.",
+    "The viewer needs factual context more than emotional inference.",
+    "A caption, overlay, or crop would cover the eyes or facial reaction.",
+    "The protagonist reaction is generic and does not change the meaning of the surrounding shots."
+  ],
+  "timeline_pattern": {
+    "pattern": "face_or_eyes_hold -> object_or_target -> reaction_or_consequence",
+    "pre_cut_hold": "Hold long enough to register the eye or facial change before cutting away.",
+    "cut_point": "Cut after the visible decision, glance, breath, or withheld speech beat.",
+    "post_cut_hold": "Hold the target or consequence long enough for the viewer to connect it to the look.",
+    "perspective_rule": "Use the reaction shot to answer: what does this circumstance mean to the protagonist?"
+  },
+  "motion": {
+    "rule": "Keep motion minimal; do not distract from eye movement or facial micro-reaction.",
+    "allowed": "Subtle push-in only if it clarifies the decision point.",
+    "avoid": "Shake, flash, large zoom, or animated overlay during the eye beat."
+  },
+  "sound": {
+    "rule": "Preserve breaths, room tone, or quiet pauses that support the reaction.",
+    "avoid": "Loud hits or whooshes over subtle facial decisions."
+  },
+  "captions": {
+    "rule": "Keep captions away from eyes and mouth during the decision beat.",
+    "avoid": "Word-by-word animation that steals attention from the face."
+  },
+  "color": {
+    "rule": "Preserve eye detail, facial contrast, and skin tone.",
+    "avoid": "Over-darkening, heavy bloom, or high saturation that hides the reaction."
+  },
+  "implementation": {
+    "ffmpeg": "Render A/B timing tests around the eye beat with trim/concat. Generate contact sheets around the cut to verify the eye change is visible.",
+    "remotion": "Mark the source frame where the eye or facial change lands. Use explicit frame durations for face hold, target shot, and reaction.",
+    "blender": "Use only subtle camera framing or push-in if the face needs emphasis; avoid effects over the eyes.",
+    "capcut_equivalent": "Manually split after the look or decision beat, then cut to what the person is looking at. Avoid default flashy transitions.",
+    "premiere_equivalent": "Use markers on the decision frame and target reveal. Test alternate trim points with duplicate sequence versions."
+  },
+  "common_mistakes": [
+    "Cutting away before the viewer sees the decision.",
+    "Holding the target shot without first motivating it through the face.",
+    "Covering the eyes with captions or graphics.",
+    "Using an effect when a clean reaction cut is stronger."
+  ],
+  "qc": [
+    "Can the viewer infer the thought or decision from the face-to-target relationship?",
+    "Are the eyes visible and readable at delivery size?",
+    "Does the cut feel motivated rather than random?",
+    "Does the reaction reveal the protagonist's perspective on the information?",
+    "Do captions, overlays, and grade preserve the face?"
+  ]
+}

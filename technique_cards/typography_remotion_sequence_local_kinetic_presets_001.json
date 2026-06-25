@@ -1,0 +1,64 @@
+{
+  "id": "typography_remotion_sequence_local_kinetic_presets_001",
+  "name": "Remotion Sequence-Local Kinetic Typography Presets",
+  "category": "typography",
+  "source_tutorial": "transcripts/remotion_lab_kinetic_typography_presets_source_notes.md",
+  "additional_sources": [
+    "transcripts/remotion_transparent_videos_source_notes.md",
+    "transcripts/remotion_creating_overlays_source_notes.md"
+  ],
+  "use_when": [
+    "The agent needs reusable text animation components that can be placed anywhere in a Remotion timeline.",
+    "A title, caption-emphasis, or visual text preset should align to narration, beats, or sections.",
+    "Multiple typography presets need to be tested without global-frame coupling."
+  ],
+  "avoid_when": [
+    "A one-off edit can be completed more safely with static text or simple NLE keyframes.",
+    "The text effect depends on footage tracking or masks that are not yet prepared.",
+    "The component would animate global timeline assumptions into a reusable preset."
+  ],
+  "timeline_pattern": {
+    "pattern": "parent_timeline_metadata -> Sequence(from, durationInFrames) -> local_frame_0 -> progress_or_spring -> transform/opacity/mask -> hold -> clear",
+    "local_frame_rule": "Inside each preset, treat useCurrentFrame as local time for that Sequence.",
+    "placement_rule": "The parent timeline decides from/duration based on beat frames, phrase starts, or visual emphasis points.",
+    "reuse_rule": "Keep text, style, timing, safe region, and caption suppression as props or metadata."
+  },
+  "motion": {
+    "rule": "Use interpolate for exact timed reveals and spring for physical entrances or overshoot.",
+    "keyframe_values": {
+      "preset_duration": "A 45-frame window at 30fps is a useful demo length; real edit duration should be based on word length and narration pace.",
+      "word_delay": "Use delayed local frames such as frame - index * delayFrames for staggered words.",
+      "settle_hold": "Reserve hold frames after the animated entrance so the viewer can read the final state."
+    }
+  },
+  "sound": {
+    "rule": "Store optional SFX cue frames separately from the component so text timing can be adjusted without losing audio sync."
+  },
+  "captions": {
+    "rule": "Store duplicateVisualText or captionSuppression flags when the component carries the spoken words."
+  },
+  "color": {
+    "rule": "Keep color roles as props so the same motion can be tested on bright and dark footage without rewriting the component."
+  },
+  "implementation": {
+    "ffmpeg": "Use the component output as a transparent ProRes/PNG overlay render when the effect is too complex for drawtext; composite later with overlay after alpha verification.",
+    "remotion": "Wrap each text preset in Sequence, call useCurrentFrame inside the preset, calculate local progress from that frame rather than a global timeline frame, and export alpha overlays with PNG frames plus ProRes 4444 when the component is handed to another compositor.",
+    "blender": "Use scene strips or action clips with local frame offsets for reusable text object animation.",
+    "capcut_equivalent": "Compound the text/effect group so wrapper timing can be moved without rebuilding internal keyframes.",
+    "premiere_equivalent": "Nest or subsequence reusable text graphics so they can be placed on different timeline beats."
+  },
+  "common_mistakes": [
+    "Hard-coding global start frames inside a reusable Remotion text component.",
+    "Animating text before assigning its safe region and caption policy.",
+    "Using spring motion for a reveal that must land on an exact mask frame.",
+    "Failing to hold the final readable state after the entrance."
+  ],
+  "qc": [
+    "The same component starts correctly when placed at different Sequence from values.",
+    "The local first frame behaves as frame 0.",
+    "The final text state holds long enough to read.",
+    "Caption suppression metadata is set when designed text duplicates spoken words.",
+    "A phone-size render proves the component is readable in its actual placement.",
+    "If exported as a transparent overlay, the file has verified alpha and no opaque background."
+  ]
+}

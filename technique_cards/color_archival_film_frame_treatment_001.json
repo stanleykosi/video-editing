@@ -1,0 +1,61 @@
+{
+  "id": "color_archival_film_frame_treatment_001",
+  "name": "Archival Film Frame Treatment",
+  "category": "color",
+  "source_tutorial": "transcripts/documentary edits.txt",
+  "use_when": [
+    "A photo or clip should read as archival, historical, memory-like, old media, or found footage.",
+    "Modern-looking footage needs a visual boundary so viewers do not confuse it with current neutral evidence.",
+    "A documentary sequence needs tasteful aging without leaving CapCut or a simple NLE."
+  ],
+  "avoid_when": [
+    "The footage is current proof and aging it would reduce trust or factual clarity.",
+    "The subject is sensitive and the treatment would aestheticize harm or make evidence harder to inspect.",
+    "Important captions, source text, faces, or details would be hidden by frame overlays, particles, fade, or contrast."
+  ],
+  "timeline_pattern": {
+    "pattern": "source_photo_or_clip -> film_frame_overlay_or_effect -> saturation_reduction -> contrast_lift -> particles_noise -> fade_matte -> readability_qc -> source_label_if_needed",
+    "source_type_rule": "Use the treatment as source grammar: old, archival, reconstructed, memory, or illustrative.",
+    "frame_rule": "The frame should signal old media without covering useful evidence.",
+    "label_rule": "If the material is generated, illustrative, or reconstructed, label it rather than relying on the aged look."
+  },
+  "motion": {
+    "rule": "Keep motion minimal unless pan/zoom helps inspect the archival subject; do not shake old footage just to make it feel vintage."
+  },
+  "sound": {
+    "rule": "Pair with restrained ambience, room tone, projector texture, or archival bed only when it supports the story and stays below narration."
+  },
+  "captions": {
+    "rule": "Captions and source labels must stay readable over lower saturation, higher contrast, particles, and frame borders."
+  },
+  "color": {
+    "rule": "Desaturate and add texture only enough to create age; preserve faces, source context, and evidence.",
+    "keyframe_values": {
+      "capcut_particles": "Particles around 50 can be a starting point for old-media texture; reduce if compression or text readability suffers.",
+      "capcut_fade": "Fade around 50 can soften modern crispness; reduce if detail or captions become muddy.",
+      "saturation": "Pull saturation down moderately rather than removing all color by default.",
+      "contrast": "Raise contrast only enough to sell the frame; avoid crushed historical detail."
+    }
+  },
+  "implementation": {
+    "ffmpeg": "Use overlay for film frame/border, eq for saturation and contrast, noise/grain, vignette or fade-like matte, and contact sheets for source-text readability.",
+    "remotion": "Create an ArchivalFilmFrame component with frameAsset, saturation, contrast, particles/noise amount, fade/vignette amount, sourceTypeLabel, and readabilityCheckFrames.",
+    "blender": "Composite film border, grain/noise, vignette, and color balance over the footage while preserving source detail.",
+    "capcut_equivalent": "Apply a Film Frame style effect, lower saturation, increase contrast lightly, then use Particles and Fade around 50 as starting values before reducing for readability.",
+    "premiere_equivalent": "Use a film frame overlay or effect, Lumetri saturation/contrast, grain/noise, vignette/fade, and source labels on a separate editable graphics layer."
+  },
+  "common_mistakes": [
+    "Making current proof look old and accidentally confusing the source type.",
+    "Adding film frame effects because they look documentary rather than because the material is archival or reconstructed.",
+    "Crushing shadows or adding particles until faces, source text, or captions are unreadable.",
+    "Using aged treatment to make AI-generated imagery look like real historical evidence.",
+    "Covering attribution, dates, or source labels with the frame border."
+  ],
+  "qc": [
+    "Is the archival treatment truthful for the source type?",
+    "Are faces, source text, dates, and evidence still readable?",
+    "Do captions and source labels avoid the film frame border?",
+    "If the image is generated or illustrative, is that status clear?",
+    "Does grain/particles/fade avoid compression dirt in the final export?"
+  ]
+}

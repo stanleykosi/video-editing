@@ -1,0 +1,88 @@
+{
+  "id": "sound_music_audition_story_fit_001",
+  "name": "Music Audition For Story Fit",
+  "category": "sound_design",
+  "source_tutorial": "transcripts/Saving-Bad-Videos-With-Only-Music_Media.txt",
+  "additional_sources": [
+    "transcripts/editing full course.txt",
+    "transcripts/ultimate guide to shortform.txt",
+    "transcripts/edit high quality reel.txt",
+    "transcripts/editing viral videos.txt",
+    "transcripts/vox style documentary.txt"
+  ],
+  "use_when": [
+    "A scene has good footage or concept but feels generic, cheap, flat, or tonally wrong.",
+    "Music is expected to carry genre, intimacy, premium feel, humor, style, retention, or emotional contrast.",
+    "A short-form Reel needs a platform-native track that fits the speaker, pace, and emotion.",
+    "A final AE-animated Reel needs music aligned to the finished animation and dialogue.",
+    "The project has access to licensed or platform-safe track options.",
+    "A voiceover-led edit benefits from adding music early to clarify vibe and possible beat cuts.",
+    "An editorial documentary graphic sequence needs a restrained piano, classical, or neutral explainer bed."
+  ],
+  "avoid_when": [
+    "The scene has structural story problems that music cannot solve.",
+    "Dialogue, testimony, or source sound must remain dominant and music would distract.",
+    "The tracks cannot be licensed for the intended platform.",
+    "The editor is choosing a famous track for novelty rather than story fit.",
+    "The editor is trying to use upbeat music to hide slow pacing or weak structure.",
+    "The only available trendy track is unsafe or unclear for the intended platform.",
+    "The voiceover cut is not yet understandable without music."
+  ],
+  "timeline_pattern": {
+    "pattern": "define_story_tone -> audition_3_to_5_tracks -> align_best_cue -> render_short_tests -> choose_or_reject -> document_license",
+    "tone_rule": "Write the intended feeling before selecting tracks.",
+    "audition_rule": "Test multiple plausible tracks against the same cut so the choice is comparative, not accidental.",
+    "rejection_rule": "If a track is exciting but pushes the scene into the wrong tone, reject it and record why.",
+    "license_rule": "Treat license status as part of the edit decision before the version is locked.",
+    "early_music_rule": "Adding music right after voiceover can help define vibe and beat cuts, but the track remains provisional until final mix and license checks pass."
+  },
+  "motion": {
+    "rule": "Do not add extra motion just because the music has energy; only sync motion accents when they support the chosen tone."
+  },
+  "sound": {
+    "rule": "Choose music by story function, cue quality, dialogue compatibility, and license safety.",
+    "mix": "Use short A/B renders to compare track tone, dialogue masking, and perceived production value.",
+    "pace_rule": "Music should match the video's voice, pace, and tone; if the edit feels slow, repair pacing before asking music to carry it.",
+    "short_form_rule": "For social edits, audition several tracks directly under the finished short and reject tracks that change the emotion in the wrong direction.",
+    "section_volume_rule": "Split the track and lower volume under dialogue-heavy or delicate sections instead of forcing one music level through the entire Reel.",
+    "voiceover_rule": "The music should sit under the voiceover and make the edit more fun or coherent without becoming the reason the cut works.",
+    "editorial_graphics_rule": "For documentary infographic sequences, choose music that supports clarity and pacing without making data or evidence feel overdramatic."
+  },
+  "captions": {
+    "rule": "Captions can support dialogue under music, but should not be used to justify a bad mix."
+  },
+  "color": {
+    "rule": "A track may justify a more stylized look, but color should not drift away from the scene's story or evidence needs."
+  },
+  "implementation": {
+    "ffmpeg": "Create short test exports for each candidate. Normalize rough levels with loudnorm and use volume automation to test dialogue ducking before committing.",
+    "remotion": "Store candidates with fields for intendedTone, trackId, licenseStatus, cuePoint, dropFrame, notes, and rejectReason.",
+    "blender": "Use music markers only after the winning track is chosen; avoid animating to a temp track that may be rejected.",
+    "capcut_equivalent": "Duplicate the sequence for each track candidate, align the strongest cue, trim to a natural phrase ending, add a crossfade, and compare versions at delivery volume.",
+    "premiere_equivalent": "Use duplicate audition sequences and markers for cue, drop, duck, exit, and license status. For voiceover-led edits, place a low licensed/platform-safe music bed after the VO trim if it helps establish vibe, then revisit the mix after visuals and SFX. Test likely social tracks under the finished edit, align the strongest musical phrase to a meaningful animated/story beat, and split/duck the music where speech needs space."
+  },
+  "common_mistakes": [
+    "Choosing a track because it is recognizable rather than because it improves the scene.",
+    "Auditioning only one track and assuming the first emotional reaction is correct.",
+    "Ignoring license status until final export.",
+    "Letting music compensate for weak story structure.",
+    "Failing to document why a tempting track was rejected.",
+    "Using energetic music as a bandage for an edit that should be cut tighter.",
+    "Using a trendy song without confirming license or platform safety.",
+    "Leaving one music level across the whole Reel when dialogue-heavy sections need a lower bed.",
+    "Cutting a documentary explainer music bed abruptly instead of trimming to a natural phrase or crossfading.",
+    "Letting early music disguise a voiceover cut that still needs tightening."
+  ],
+  "qc": [
+    "Is the intended story tone written before track selection?",
+    "Were at least three plausible tracks tested for an important music-led section?",
+    "Is the selected track licensed or platform-safe?",
+    "Does the track improve the scene without burying dialogue?",
+    "Is there a reject note for any track that was interesting but wrong for the story?",
+    "Would the scene still feel acceptably paced with the music lowered or removed?",
+    "Does the selected short-form track fit the actual emotion instead of merely sounding trendy?",
+    "Are music sections split, ducked, or lowered where dialogue clarity requires it?",
+    "If music was added early, was the final full mix rechecked after visuals and SFX?",
+    "For infographic explainers, does the music bed support narration without overdramatizing maps, charts, or source documents?"
+  ]
+}

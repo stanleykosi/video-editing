@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "scriptwriting": {
+      "source": "gtmagents/gtm-agents",
+      "sourceType": "github",
+      "skillPath": "plugins/video-marketing/skills/scriptwriting/SKILL.md",
+      "computedHash": "116f696be2e9d1e9a258f777b521f9c42849b480917e14b57e85fa76d8ad4af9"
+    }
+  }
+}

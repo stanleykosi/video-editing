@@ -1,0 +1,74 @@
+{
+  "id": "captions_premiere_one_word_pop_fade_001",
+  "name": "Premiere One-Word Pop-Fade Captions",
+  "category": "captions",
+  "source_tutorial": "transcripts/ultimate guide to shortform.txt",
+  "additional_sources": [
+    "transcripts/edit high quality reel.txt",
+    "transcripts/typography.txt"
+  ],
+  "use_when": [
+    "A Reel, Short, or TikTok-style edit needs fast one-word subtitle energy.",
+    "Premiere auto captions are useful as a timing draft but need custom style and motion.",
+    "Captions should feel clean, modern, and energetic without becoming a separate visual stack.",
+    "A finished AE animation render needs captions only in the sections where visual text does not already carry the line."
+  ],
+  "avoid_when": [
+    "The project needs accessibility-first full subtitle lines.",
+    "The subject is serious testimony where fast pop captions would cheapen the tone.",
+    "The frame already has hook text, proof cards, or B-roll text carrying the idea."
+  ],
+  "timeline_pattern": {
+    "pattern": "transcribe_sequence -> create_short_captions -> style_one_caption -> apply_style -> correct_timing -> upgrade_to_graphics -> add_transform_pop_fade -> save_preset -> apply_to_selected_text",
+    "draft_rule": "Treat Premiere generated captions as a draft until wording, timing, chunking, and placement are checked.",
+    "conversion_rule": "Upgrade captions to graphics only after the caption content and placement are correct.",
+    "placement_rule": "Use a lower-third position that avoids faces, hands, products, proof, and platform UI.",
+    "suppression_rule": "After upgrading to graphics, disable or fade captions during animation-heavy sections that already communicate the words.",
+    "impact_rule": "If styling individual words, emphasize the impact word rather than the word auto-captioning happens to isolate."
+  },
+  "motion": {
+    "rule": "Use a short position-and-opacity pop so the word arrives quickly and settles before it needs to be read.",
+    "keyframe_values": {
+      "caption_chunking": "Start with about 7 characters for one-word social style or 10-15 characters for slightly fuller high-quality Reel captions; keep single-line chunks when the frame has animation text.",
+      "text_size": "Around 60 in a 1080x1920 Premiere vertical sequence is a usable starting point; adjust for font and safe area.",
+      "position_opacity": "End keyframe at final position and 100% opacity; start keyframe slightly lower with 0% opacity.",
+      "easing": "Ease so the caption starts fast and slows into the final position.",
+      "fade_out": "Use opacity keyframes to fade captions out before dense animation rather than cutting them off harshly.",
+      "tracking": "Avoid aggressive tracking changes on small one-word captions; test any tightened style at phone size."
+    }
+  },
+  "sound": {
+    "rule": "Caption timing follows audible speech; music and SFX must not make captions carry normal intelligibility."
+  },
+  "captions": {
+    "rule": "Use clean sans styling, consistent size, and phone-safe placement; remove duplicate captions when another text layer carries the idea. Track styles can save brand caption styling after one caption is designed."
+  },
+  "color": {
+    "rule": "Use high contrast fill, stroke, shadow, or backing so captions stay readable over bright and dark footage."
+  },
+  "implementation": {
+    "ffmpeg": "Split transcript into short chunks, burn captions after overlays, and inspect phone-size contact sheets for collisions.",
+    "remotion": "Store word chunks with maxChars, maxDurationFrames, lowerThirdSafeRegion, styleId, and popFade keyframes.",
+    "blender": "Use text objects for selected animated caption moments only; keep accessibility subtitles separate when needed.",
+    "capcut_equivalent": "Generate auto captions, shorten chunks manually, apply a clean style, then use a subtle pop/fade animation only where readable.",
+    "premiere_equivalent": "Use Window > Text > Captions and Create Captions from Transcript, set short single-line captions, correct transcript and punctuation, style one caption, create a track style, upgrade to graphics if needed, then disable or opacity-fade captions over dense animation sections."
+  },
+  "common_mistakes": [
+    "Converting captions to graphics before correcting transcript errors.",
+    "Using one-word chunks where longer subtitle lines would be clearer.",
+    "Letting pop animation finish after the spoken word has already passed.",
+    "Placing lower-third captions over hands, faces, products, or proof.",
+    "Applying a caption preset to every layer without checking collisions.",
+    "Leaving captions active over a full-screen animation that already says the same words.",
+    "Using the same pop emphasis on filler words and impact words."
+  ],
+  "qc": [
+    "Caption wording and timing were corrected before graphic conversion.",
+    "One-word chunks are readable at phone size.",
+    "Pop-fade motion finishes before the word needs to be read.",
+    "Captions do not cover faces, hands, products, proof, or platform UI.",
+    "Duplicate caption text is removed when hook text or B-roll text already carries the idea.",
+    "Caption graphics are disabled or faded over dense animation sections.",
+    "Any word-level styling lands on the word that changes meaning."
+  ]
+}

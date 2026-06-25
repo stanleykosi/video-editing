@@ -1,0 +1,75 @@
+{
+  "id": "motivated_broll_story_sequence_001",
+  "name": "Motivated B-Roll Story Sequence",
+  "category": "story_pacing",
+  "source_tutorial": "transcripts/what not to do in editing.txt",
+  "additional_sources": [
+    "transcripts/editing full course.txt",
+    "transcripts/davinci resolve short form editing.txt",
+    "transcripts/ultimate guide to shortform.txt"
+  ],
+  "use_when": [
+    "A documentary or vlog section has abundant B-roll but weak story motivation.",
+    "Shots are being inserted only to cover dialogue or avoid talking-head duration.",
+    "Narration or interview lines mention places, stakes, scale, details, or consequences that can be visualized.",
+    "A slide, screenshot, proof frame, or B-roll shot can show exactly what the speaker is referencing.",
+    "A simple short-form talking-head edit needs a few B-roll shots placed on key lines.",
+    "B-roll text sequences can show an experience, emotion, or contrast while text names the beat."
+  ],
+  "avoid_when": [
+    "The B-roll is intentionally abstract or atmospheric and the user wants ambiguity.",
+    "The shot would imply something untrue or unsupported.",
+    "The visual is attractive but unrelated to the current beat."
+  ],
+  "timeline_pattern": {
+    "pattern": "line_or_idea -> motivated_visual_evidence -> detail_or_contrast -> return_to_speaker_or_next_idea",
+    "wide_close_rule": "Use wide-to-close pairs when the story needs epic scale and human detail.",
+    "pattern_rule": "Set up, confirm, and reaffirm visual patterns unless breaking the pattern is a deliberate comedy or surprise beat.",
+    "map_rule": "Hold maps and route graphics until the stated distance or destination is understandable.",
+    "spoken_reference_rule": "When the speaker names an object, person, result, UI, or proof point, the supporting visual should appear close enough to that line to feel motivated.",
+    "broll_text_rule": "When text sits over B-roll, choose the shot for the story beat first, then add readability treatment only as needed.",
+    "short_form_amount_rule": "For simple short-form edits, gather roughly 3-4 usable B-roll shots and place them where the message changes or needs proof."
+  },
+  "motion": {
+    "rule": "Use one strong establishing/drone shot plus one or two smooth focal-point shots rather than many quick, weak shots. For B-roll text sequences, darken or desaturate footage only enough for the overlay text to read.",
+    "avoid": "Rapid B-roll strings with no scan time or focal point."
+  },
+  "sound": {
+    "rule": "If one B-roll shot has sync sound, build a consistent ambience rule for the sequence.",
+    "short_form_rule": "Mute or delete B-roll source audio when it competes with talking-head A-roll.",
+    "avoid": "Silent filler B-roll beside isolated random sync sounds."
+  },
+  "captions": {
+    "rule": "Captions should support the story beat and not replace the need for motivated visuals."
+  },
+  "color": {
+    "rule": "Match B-roll color enough that the sequence feels intentional, especially when mixing stock and original footage."
+  },
+  "implementation": {
+    "ffmpeg": "Use contact sheets to identify repeated shots and weak focal points. Build EDL rows with beat labels and visual motivation notes.",
+    "remotion": "Represent B-roll beats as data with fields for narration cue, visual evidence, duration, ambience, and focal point.",
+    "blender": "Use map or scale graphics only when they clarify geography or contrast.",
+    "capcut_equivalent": "Replace filler B-roll with shots that directly answer the current line; hold map/route graphics long enough to read.",
+    "premiere_equivalent": "Create bins for scale, detail, normal life, danger, testimony, and contrast; assemble by beat rather than source order. Use Source Monitor I/O points, drag video-only when needed, and place readability adjustment layers between text and B-roll."
+  },
+  "common_mistakes": [
+    "Cutting B-roll just because the talking head has been on screen too long.",
+    "Repeating the same shot because the edit schedule is rushed.",
+    "Using wide-to-wide-to-wide when the viewer needs human detail.",
+    "Showing a map or route too briefly for the viewer to understand it.",
+    "Breaking a visual pattern accidentally.",
+    "Using B-roll only to avoid a talking head while the visual does not match the spoken idea.",
+    "Leaving B-roll source audio under the speaker by accident.",
+    "Darkening or desaturating B-roll so much that the viewer loses the proof or action."
+  ],
+  "qc": [
+    "Can every B-roll shot be tied to a story point?",
+    "Are repeated shots intentional and rare?",
+    "Does the sequence include both scale and detail when needed?",
+    "Can the viewer understand maps, routes, and graphics before they disappear?",
+    "Does the sequence avoid filler shots with unclear focal points?",
+    "Does each visual arrive close enough to the spoken reference it supports?",
+    "Is unwanted B-roll source audio removed or intentionally mixed?",
+    "If text is over B-roll, does the readability treatment preserve the story detail underneath?"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "emotional_hold_time",
+  "name": "Emotional Hold Time",
+  "category": "story_pacing",
+  "source_tutorial": "transcripts/how an editor think.txt",
+  "additional_sources": [
+    "transcripts/what not to do in editing.txt",
+    "transcripts/slow editing.txt"
+  ],
+  "use_when": [
+    "The scene asks the viewer to believe a feeling, realization, failure, or hesitation.",
+    "A face or reaction carries more meaning than the spoken line.",
+    "The first cut feels technically clean but emotionally thin.",
+    "A sensitive documentary moment needs empathy, grief, shock, or aftermath to register.",
+    "The viewer is already committed to a long-form piece and the scene needs observation more than speed.",
+    "A short-form human moment needs enough time to feel warm, imperfect, or connective before the story resumes."
+  ],
+  "avoid_when": [
+    "The hold adds no new feeling, information, or tension.",
+    "The pacing target demands compression and the emotional beat is not central.",
+    "The held shot contains distracting mistakes, dead air, or irrelevant action.",
+    "The edit is short-form feed content where the emotional beat is not central and the user requested maximum compression.",
+    "The hold is only unshaped dead air rather than a readable human reaction."
+  ],
+  "timeline_pattern": {
+    "pattern": "pre_emotion_hold -> speech_or_action -> post_emotion_hold",
+    "pre_hold": "Give the viewer time to connect to the face before the line or action.",
+    "post_hold": "Hold after the line or action so the consequence can land.",
+    "ab_test": "Create at least two timing versions when the emotional belief is uncertain.",
+    "sensitive_subject_hold": "For grief, survivor guilt, danger, or destruction, test a 2-5 second reaction hold before cutting away.",
+    "short_form_human_hold": "For fast-scroll human moments, hold only until the connection beat lands, then reset before momentum dies."
+  },
+  "motion": {
+    "rule": "Avoid unnecessary motion during the hold.",
+    "allowed": "Very slow push-in if it increases attention without announcing itself.",
+    "avoid": "Fast zooms, wipes, or kinetic graphics during a moment whose power is stillness."
+  },
+  "sound": {
+    "rule": "Keep natural pauses, breaths, and room tone smooth.",
+    "mix": "Music should support the feeling without pushing the viewer faster than the performance.",
+    "quiet_rule": "Silence or low room tone can be stronger than dialogue when the viewer needs to study the image."
+  },
+  "captions": {
+    "rule": "Let captions disappear or settle during quiet reactions when text is no longer needed.",
+    "avoid": "Late caption animation over a silent emotional face."
+  },
+  "color": {
+    "rule": "Maintain facial readability and emotional tone consistency across the hold."
+  },
+  "implementation": {
+    "ffmpeg": "Test alternate holds by changing segment in/out points and rendering short review clips. Use waveforms to ensure room tone and breath transitions stay smooth.",
+    "remotion": "Represent pre-hold and post-hold as frame counts that can be tuned independently.",
+    "blender": "If adding camera movement, use subtle interpolation and avoid drawing attention away from the performance.",
+    "capcut_equivalent": "Extend the clip before or after the spoken moment; remove auto effects and keep the reaction visible.",
+    "premiere_equivalent": "Use rolling edits and duplicate sequence versions to compare emotional timing."
+  },
+  "common_mistakes": [
+    "Treating silence as filler.",
+    "Trimming a major emotion until it becomes unbelievable.",
+    "Holding long without a readable change.",
+    "Cutting away from a sad or shaken subject before the viewer can feel the emotion.",
+    "Assuming long-form documentary always needs dialogue or a cut every few seconds.",
+    "Cutting a warm human interruption before the viewer can feel the connection.",
+    "Letting music, captions, or graphics rush the emotional beat."
+  ],
+  "qc": [
+    "Does the viewer have time to feel the emotion before moving on?",
+    "Does the hold reveal a change rather than just add duration?",
+    "Does the scene still feel intentional when watched cold?",
+    "Are audio room tone and ambience smooth through the hold?",
+    "For sensitive scenes, did the edit allow the viewer to study the face, object, or destruction?",
+    "Was a slower version tested before choosing a fast cut?",
+    "In short-form, does the hold create connection without becoming dead air?"
+  ]
+}

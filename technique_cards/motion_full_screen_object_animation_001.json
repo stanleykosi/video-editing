@@ -1,0 +1,80 @@
+{
+  "id": "motion_full_screen_object_animation_001",
+  "name": "Full-Screen Object Animation",
+  "category": "motion",
+  "source_tutorial": "transcripts/ultimate guide to shortform.txt",
+  "additional_sources": [
+    "transcripts/edit high quality reel.txt",
+    "transcripts/vox style documentary.txt",
+    "transcripts/capcut keyframes.txt"
+  ],
+  "use_when": [
+    "A short-form body section needs a high-value visual explanation or brand/tool moment.",
+    "The spoken idea is abstract and can be represented by an object, icon, screenshot, or PNG.",
+    "The edit needs a premium pattern break after simpler captions, B-roll, or filler cards.",
+    "A segment needs multiple icons, counters, paths, or camera moves to explain a system or result.",
+    "A documentary explainer needs a layered cutout collage with title text and editorial background.",
+    "A CapCut edit needs a simple cutout, PNG, sticker, or character overlay animated with position/scale keyframes."
+  ],
+  "avoid_when": [
+    "The line is low-value filler and does not justify a time-consuming animation.",
+    "A real proof clip or B-roll shot would be more truthful.",
+    "The object animation would distract from a face, emotional beat, or important demonstration."
+  ],
+  "timeline_pattern": {
+    "pattern": "background -> main_object -> supporting_shapes -> hierarchy_text -> scale_rotation_entrance -> hold -> clear_to_next_beat",
+    "build_rule": "Use four layers: background, main object, design elements, and text.",
+    "hierarchy_rule": "The main object should read first, the key text second, and supporting shapes last.",
+    "style_rule": "Use a consistent palette, font system, and icon style so the scene feels branded rather than random.",
+    "cutout_rule": "Cutout assets should be cleared, clean-edged, and used without implying false endorsement.",
+    "effort_rule": "Reserve full-screen animations for lines that carry the concept, transition, or payoff.",
+    "capcut_cutout_rule": "CapCut auto cutout or custom erasing can create usable character/object layers, but rough edges must match the project tone."
+  },
+  "motion": {
+    "rule": "Animate the object with scale and rotation, then animate support shapes from scale 0 or opacity 0 to add depth.",
+    "keyframe_values": {
+      "object_scale": "Use final scale based on asset size, often around 60-70% for a centered PNG in a vertical frame.",
+      "object_rotation": "A 25-35 degree starting rotation into 0 degrees can create a quick premium entrance when it remains readable.",
+      "shape_scale": "Support circles or design elements can start at scale 0 and ease into final size.",
+      "easing": "Start fast and slow into the final position so the scene settles for reading.",
+      "camera_motion": "For AE scenes, a camera plus orbit null can add depth when the foreground hierarchy remains readable.",
+      "editorial_rotation": "A slight 1-3 degree scene rotation can add handmade editorial texture when labels stay readable."
+    }
+  },
+  "sound": {
+    "rule": "Add one subtle impact or pop for the main object entrance if speech remains clear; avoid SFX on every support shape."
+  },
+  "captions": {
+    "rule": "Remove normal captions during the full-screen animation if hierarchy text already communicates the spoken line."
+  },
+  "color": {
+    "rule": "Choose background, object, and support-shape colors with enough contrast for both object recognition and text readability."
+  },
+  "implementation": {
+    "ffmpeg": "Composite background, PNG/object, shape assets, and drawtext with scale/rotate/fade approximations; render a short preview for readability.",
+    "remotion": "Create a FullScreenObjectBeat component with background, objectAsset, objectTransform, supportShapes, textLayers, and sfxFrame fields.",
+    "blender": "Use planes or 3D text for the object and support shapes when the animation needs depth or camera movement.",
+    "capcut_equivalent": "Use a background, imported cutout/PNG, chroma key or auto removal, shape stickers, text layers, compound clips, and keyframes for scale, position, and rotation. For playful character movement, use small position steps rather than one long slide.",
+    "premiere_equivalent": "Use a color matte or generated background, imported PNG, Essential Graphics shapes/text, Transform scale/rotation keyframes, and eased keyframe curves. In After Effects, use solids, icons, text layers, nulls, 3D cameras, paths, counters, and reusable presets for complex scenes."
+  },
+  "common_mistakes": [
+    "Spending full-screen animation effort on a throwaway line.",
+    "Using a low-quality PNG or icon that becomes fuzzy at vertical delivery size.",
+    "Adding support shapes that compete with the main object.",
+    "Leaving captions on top of hierarchy text.",
+    "Animating so long that the spoken beat passes before the object is readable.",
+    "Using mismatched icon styles or random colors inside one full-screen scene.",
+    "Using official or institutional cutouts in a way that implies endorsement without approval.",
+    "Trusting CapCut auto cutout edges without phone-size review."
+  ],
+  "qc": [
+    "The animation is tied to a high-value concept or transition.",
+    "The main object reads first at phone size.",
+    "Support shapes do not compete with object or text.",
+    "The entrance settles before the viewer needs to understand the line.",
+    "No duplicate captions clutter the full-screen design.",
+    "Icons, backgrounds, and text follow one style system.",
+    "Cutout edges are clean and asset rights/attribution are documented when used in a project.",
+    "If the object or character is keyframed in CapCut, does the path avoid captions, faces, proof, products, and UI?"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "id": "typography_capcut_font_shift_loop_001",
+  "name": "CapCut Font Shift Loop",
+  "category": "typography",
+  "source_tutorial": "transcripts/viral text effects.txt",
+  "use_when": [
+    "A word or phrase should feel unstable, trendy, stylish, or rapidly expressive.",
+    "A hook or beat benefits from a brief font-change accent.",
+    "The edit can return to a stable base font before the viewer needs normal reading."
+  ],
+  "avoid_when": [
+    "Continuous captions or accessibility subtitles need stable type.",
+    "The subject tone is serious or the changing fonts would feel gimmicky.",
+    "The loop would continue across multiple ideas and make hierarchy unclear."
+  ],
+  "timeline_pattern": {
+    "pattern": "base_text_layer -> blade_at_shift_start -> animation_loop_font_change -> optional_second_blade_new_font_loop -> final_blade_deselect_loop -> stable_font_hold",
+    "scope_rule": "Blade only the section that should shift fonts; the rest of the text should keep the base style.",
+    "return_rule": "Deselect the loop when the word should return to the original font lane.",
+    "sound_rule": "Optional ticking SFX should end with the final font-change frame."
+  },
+  "motion": {
+    "rule": "Font changes should be short bursts, not the default state of a readable caption system.",
+    "keyframe_values": {
+      "duration": "Use the shortest loop duration that lets the viewer understand the word.",
+      "segments": "Use separate blade cuts for different font-change loops only when each segment has a reason.",
+      "stable_hold": "Hold the final readable font after the loop so the word resolves."
+    }
+  },
+  "sound": {
+    "rule": "Ticking SFX can sell font changes only when synced and kept below dialogue."
+  },
+  "captions": {
+    "rule": "Do not use font-shift loops on ordinary subtitles; use them on designed emphasis text or title words."
+  },
+  "color": {
+    "rule": "Keep color stable during the font loop unless the color change also has a meaning job."
+  },
+  "implementation": {
+    "ffmpeg": "Approximate with rapid cuts between rendered text layers using different font files; keep final stable text onscreen.",
+    "remotion": "Cycle fontFamily values across a short frame range, then lock to the final base or accent font with explicit finalHoldFrames.",
+    "blender": "Swap text object font data or cut between text objects with different fonts, then hold the final object.",
+    "capcut_equivalent": "Blade the text where the shift begins, use Animation > Loop font-change presets on that segment, blade again for another loop if needed, then blade and deselect Loop to return to the original font.",
+    "premiere_equivalent": "Cut the text layer into short segments with different fonts or use a MOGRT/AE preset, then hold a final stable font."
+  },
+  "common_mistakes": [
+    "Leaving the font loop active after the emphasis beat ends.",
+    "Using too many font styles until the word loses identity.",
+    "Adding ticking SFX that continues after the visual shift.",
+    "Using font shift on small or dense captions.",
+    "Changing fonts without a tone, emphasis, or beat reason."
+  ],
+  "qc": [
+    "Is the shifting word still readable through the loop?",
+    "Does the loop stop and resolve to a stable font?",
+    "Does any tick SFX end with the visual shift and stay below speech?",
+    "Does the font change support a real emphasis or tone shift?",
+    "Are ordinary captions suppressed or kept separate so they do not compete?"
+  ]
+}

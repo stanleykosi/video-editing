@@ -1,0 +1,71 @@
+{
+  "id": "typography_capcut_perspective_freeze_text_001",
+  "name": "CapCut Perspective Freeze Text Stack",
+  "category": "typography",
+  "source_tutorial": "transcripts/viral text effects.txt",
+  "additional_sources": [
+    "transcripts/premium capcut text effect.txt"
+  ],
+  "use_when": [
+    "Words should appear angled, dimensional, or fitted into a scene environment.",
+    "A short title or thumbnail-style composition needs staggered perspective words.",
+    "The editor wants text to fit between objects, ropes, architecture, slopes, or diagonal negative space.",
+    "B-cam footage or landscapes have clear planes where words can feel placed inside the scene."
+  ],
+  "avoid_when": [
+    "The phrase is long or needs plain caption readability.",
+    "The chosen perspective frame makes the word harder to read.",
+    "The blend mode makes text disappear into the background.",
+    "The shot has no clear geometry or negative space for the perspective angle."
+  ],
+  "timeline_pattern": {
+    "pattern": "text_layer -> compound -> apply_perspective_animation -> choose_frame -> compound_again -> freeze_frame -> delete_unused_animation_tail -> repeat_words -> stagger_freezes -> group_reposition_scale -> optional_blend_mode",
+    "freeze_rule": "Freeze only the perspective frame that reads best, then delete the pre-freeze animation tail if the final composition should be static.",
+    "template_rule": "Keep one reusable compound text layer aside for future words.",
+    "size_rule": "If the perspective animation shrinks the text, reopen the compound and resize the internal text layer instead of scaling a low-quality result.",
+    "environment_rule": "Fit the angled words into real scene geometry or negative space rather than placing them randomly.",
+    "landscape_rule": "For slopes, walls, or distant planes, rotate and scale each frozen word to match the plane direction and apparent distance."
+  },
+  "motion": {
+    "rule": "The finished stack can be static or staggered; stagger only if the reading order remains clear.",
+    "keyframe_values": {
+      "perspective_source": "CapCut Combo animation Flip 6 can be used to find several angled text frames.",
+      "font_spacing_start": "Clean bold sans text with slight tightening, such as Character -1 on large words, can help the perspective word feel premium when readability holds.",
+      "stagger": "Offset frozen words slightly so each one appears in reading order.",
+      "group_transform": "After freezing words, select and resize/reposition the group together to preserve spacing.",
+      "distance_scaling": "Reduce word size when placing text on farther scene planes so the perspective feels motivated."
+    }
+  },
+  "sound": {
+    "rule": "Use subtle ticks or pops only on staggered word entrances and keep them below speech."
+  },
+  "captions": {
+    "rule": "Suppress ordinary captions if they duplicate the perspective words and clutter the same region."
+  },
+  "color": {
+    "rule": "Blend modes such as Overlay can integrate text into footage only when letter edges remain readable."
+  },
+  "implementation": {
+    "ffmpeg": "Pre-render perspective text images or use perspective transform filters, then overlay staggered PNG/text layers and optionally apply blend modes.",
+    "remotion": "Model each word as a transformed layer with rotate/skew/perspective tokens, staggered start frames, blendMode, and group transform metadata.",
+    "blender": "Use 3D text or planes with camera perspective, freeze by using still frames or static keyframes, and composite into the scene.",
+    "capcut_equivalent": "Create a text layer, compound it, apply Combo > Flip 6 or another perspective animation, choose the best angled frame, reopen the compound if internal text size needs adjustment, compound again, freeze frame, delete unused animation before/after the freeze, repeat for other words, stagger the freeze frames, then group reposition/scale or rotate to match scene planes. Use Overlay blend only if readability holds.",
+    "premiere_equivalent": "Use Essential Graphics or nested text with Basic 3D/corner pin/perspective transforms, export stills or freeze frames, stagger layers, and use blend modes carefully."
+  },
+  "common_mistakes": [
+    "Choosing a cool perspective frame where the word is too skewed to read.",
+    "Forgetting to remove unused animated compound sections before the freeze frame.",
+    "Leaving no reusable source compound for future word changes.",
+    "Using Overlay blend until the text edge disappears.",
+    "Stacking perspective words without a clear reading order.",
+    "Using the same scale and rotation on foreground and distant scene planes."
+  ],
+  "qc": [
+    "Can every frozen word be read at phone size?",
+    "Do the words fit scene geometry or intentional negative space?",
+    "Are unused animation tails removed before delivery?",
+    "Does any blend mode preserve edge contrast?",
+    "Is there one clear reading order through the staggered stack?",
+    "Do scene-attached words match the angle, scale, and distance of the plane they sit on?"
+  ]
+}

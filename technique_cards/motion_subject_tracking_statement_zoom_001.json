@@ -1,0 +1,75 @@
+{
+  "id": "motion_subject_tracking_statement_zoom_001",
+  "name": "Subject Tracking And Statement Zoom",
+  "category": "motion",
+  "source_tutorial": "transcripts/short-form editing.txt",
+  "additional_sources": [
+    "transcripts/capcut keyframes.txt",
+    "transcripts/make pro media.txt"
+  ],
+  "use_when": [
+    "A short-form talking-head clip needs more energy while keeping the speaker centered.",
+    "The speaker moves and the crop needs manual tracking.",
+    "Important statements need visual emphasis through zoom-ins or zoom-outs.",
+    "A moving subject or background action needs manual CapCut-style keyframes to stay centered.",
+    "CapCut automatic face/body/hand tracking can keep a subject framed when the tracked feature remains visible."
+  ],
+  "avoid_when": [
+    "The speaker is already stable and centered.",
+    "The crop would cut off hands, body language, captions, or important props.",
+    "The statement is not important enough to deserve motion emphasis.",
+    "The subject turns away, leaves frame, or becomes occluded enough that automatic tracking will drift."
+  ],
+  "timeline_pattern": {
+    "pattern": "body_room_frame -> center_guides -> position_keyframe -> re_center_during_movement -> statement_zoom -> hold_or_cut",
+    "framing_rule": "Leave room around the body during filming or crop selection so zooms and tracking have space.",
+    "tracking_rule": "Use center guides and position keyframes to keep the subject aligned through movement.",
+    "manual_tracking_rule": "For manual tracking, add new position keyframes at movement turns or every few frames while the subject changes direction or speed.",
+    "auto_tracking_rule": "Use built-in face/body/hand tracking only when the target stays visible; shorten the range or fall back to manual keyframes when the tracker loses the feature.",
+    "zoom_rule": "Use zooms to highlight important statements; use tracking to follow movement."
+  },
+  "motion": {
+    "rule": "Animate scale and position together so the subject remains centered and readable.",
+    "keyframe_values": {
+      "statement_zoom_scale": "Start around 108-125% for social emphasis; go larger only when the crop still preserves face, hands, and captions.",
+      "tracking_keyframe_spacing": "Add position keyframes every 4-12 frames during visible movement, or only at movement turns when the motion is slow.",
+      "center_tolerance": "Keep the speaker's face or chest near the vertical center guide unless composition intentionally favors text or proof.",
+      "hold_after_zoom": "Hold 8-18 frames after the zoom lands so the emphasis registers.",
+      "auto_tracking_target": "Choose face, body, or hand based on which feature remains visible through the full tracking range."
+    }
+  },
+  "sound": {
+    "rule": "Use a subtle whoosh or hit only when the zoom is meant to be felt; keep speech clear."
+  },
+  "captions": {
+    "rule": "Caption safe area must be checked after every crop or tracking move."
+  },
+  "color": {
+    "rule": "No direct color rule; avoid zooming into noisy or poorly lit areas that make the speaker look worse."
+  },
+  "implementation": {
+    "ffmpeg": "Use crop/scale expressions or zoompan from tracked x/y points. Render a phone-size preview to check body crop and caption safety.",
+    "remotion": "Store subjectCenter keyframes and statementBeat frames, then interpolate translate/scale with a hold after emphasis.",
+    "blender": "Use camera tracking or an empty target for animated talking-head composites.",
+    "capcut_equivalent": "Use manual keyframes or Camera Tracking on supported devices. Choose face/body/hand target, zoom only as much as needed, keep the chosen subject centered with repeated position adjustments or generated tracking, and preview the vertical crop before export.",
+    "premiere_equivalent": "Enable rulers/guides, keyframe Position and Scale in Effect Controls, and verify Program Monitor safe margins."
+  },
+  "common_mistakes": [
+    "Cropping so tightly that later zooms cut off the head, hands, or subtitles.",
+    "Adding zooms to unimportant filler lines.",
+    "Letting the subject drift away from center during movement.",
+    "Tracking the face while covering the statement with captions.",
+    "Adding too few keyframes so the subject drifts between tracking points.",
+    "Adding so many keyframes that the crop jitters instead of following smoothly.",
+    "Trusting automatic tracking after the face or target turns out of frame."
+  ],
+  "qc": [
+    "Does the speaker stay centered during movement?",
+    "Do statement zooms happen only on important lines?",
+    "Do zooms preserve face, hands, captions, and proof visuals?",
+    "Does the zoom hold long enough to register?",
+    "Is the final crop safe at phone size?",
+    "Are manual tracking keyframes dense enough to prevent drift but not so dense that they create jitter?",
+    "If automatic tracking was used, does the target stay visible and stable through the full range?"
+  ]
+}

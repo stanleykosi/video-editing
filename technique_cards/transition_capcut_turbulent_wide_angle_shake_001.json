@@ -1,0 +1,66 @@
+{
+  "id": "transition_capcut_turbulent_wide_angle_shake_001",
+  "name": "CapCut Turbulent Wide Angle Shake Transition",
+  "category": "transition",
+  "source_tutorial": "transcripts/editing tricks.txt",
+  "additional_sources": [
+    "transcripts/powerful capcut edits.txt",
+    "transcripts/capcut text effects.txt"
+  ],
+  "use_when": [
+    "A high-energy AMV, action montage, sports edit, or social transition needs aggressive motion while staying connected to the beat.",
+    "The cut already has beat-matched clip timing and now needs a dedicated transition pass.",
+    "Wide-angle distortion, turbulence, and shake can make zooms feel more physical instead of flat."
+  ],
+  "avoid_when": [
+    "The transition hides the action geography, face, caption, product, or proof.",
+    "The project tone is mature, calm, documentary, or brand-safe and aggressive shake would feel cheap.",
+    "Initial clip design is not locked enough to judge the transition flow."
+  ],
+  "timeline_pattern": {
+    "pattern": "locked_speed_matched_clips -> careful_splits -> turbulent_effect -> wide_angle_zoom_or_distortion -> transition_shake_pass -> impact_sfx -> readability_review",
+    "order_rule": "Add transition shakes after turbulent and wide-angle effects are visible, because shake intensity depends on final transition flow.",
+    "movement_pass_rule": "If a pendulum or similar movement pass is added before the transition, judge the combined swing, turbulence, wide angle, and shake together.",
+    "split_rule": "Split carefully around the cut so the effect starts and resolves on intentional frames.",
+    "wide_angle_rule": "Use wide-angle distortion to make zoom transitions feel more natural, but lower it if it bends the subject or captions too much."
+  },
+  "motion": {
+    "rule": "Shake should peak around the cut, impact, or beat and then settle quickly enough for the next clip to read.",
+    "keyframe_values": {
+      "sync_tolerance": "Peak shake or impact within 1-2 frames of the cut or beat in high-energy edits.",
+      "settle": "Resolve the strongest shake before the next action pose needs to be read.",
+      "intensity_review": "Judge shake intensity only after the turbulent and wide-angle layers are applied."
+    }
+  },
+  "sound": {
+    "rule": "Use a hit, whoosh, or impact only on the transition's real motion peak, and vary repeated cues."
+  },
+  "captions": {
+    "rule": "Do not keep captions over the most distorted frames unless they remain readable and do not cover the action."
+  },
+  "color": {
+    "rule": "Any flash, glow, or distortion tint must preserve the subject silhouette and avoid compression ugliness."
+  },
+  "implementation": {
+    "ffmpeg": "Approximate with scale/crop/rotate keyframes, lens distortion where available, noise/displace overlays, and short motion blur; inspect cut frames.",
+    "remotion": "Drive scale, translate, rotate, lens distortion, turbulence texture, and shake amplitude from transition frame metadata.",
+    "blender": "Use camera shake, lens distortion/compositor displacement, and motion blur around the cut.",
+    "capcut_equivalent": "After splitting locked clips, add turbulent effect, wide angle effect, then reapply or tune shake specifically over the transition range.",
+    "premiere_equivalent": "Use Adjustment Layers with Transform shake, Turbulent Displace, Lens Distortion or Optics Compensation, motion blur, and markers at the cut/beat."
+  },
+  "common_mistakes": [
+    "Adding transition shake before seeing how the turbulent and wide-angle effects flow.",
+    "Making the distortion so strong that the subject bends or the viewer loses the action.",
+    "Leaving captions on top of the most chaotic frames.",
+    "Using the same shake intensity on every transition.",
+    "Stacking pendulum movement, turbulence, wide angle, and shake without rechecking the next readable pose.",
+    "Adding SFX near the transition instead of on the real motion peak."
+  ],
+  "qc": [
+    "Does the transition peak land within the intended beat/cut tolerance?",
+    "Is action readable immediately after the shake settles?",
+    "Do turbulent and wide-angle effects avoid bending faces, captions, products, or proof beyond recognition?",
+    "Are captions suppressed, moved, or still readable during the transition?",
+    "Does the SFX land on the actual transition peak and stay below dialogue if dialogue is present?"
+  ]
+}

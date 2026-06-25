@@ -1,0 +1,60 @@
+{
+  "id": "retention_invitation_intro_question_loops_001",
+  "name": "Invitation Intro Question Loops",
+  "category": "retention",
+  "source_tutorial": "transcripts/The-5-Second-Intro-Is-Dead-Here-s-Why_Media.txt",
+  "use_when": [
+    "The video is a long-form documentary, essay, travel film, or high-trust creator piece where world, tone, and curiosity are part of the value.",
+    "The opening can raise specific visual questions and answer at least one early enough to earn viewer trust.",
+    "The explicit promise would feel weaker if delivered before the viewer feels the world and conflict."
+  ],
+  "avoid_when": [
+    "The deliverable is a short-form feed video, direct-response ad, or simple tutorial where the viewer needs the payoff immediately.",
+    "The opening is merely confusing and does not create clear questions.",
+    "The edit cannot close or reframe the questions it opens.",
+    "The creator has not earned enough trust for a slow invitation."
+  ],
+  "timeline_pattern": {
+    "pattern": "curious_first_frame -> multiple_question_loops -> early_loop_closure -> expanded_questions -> worldbuilding -> conflict_or_proof -> call_to_adventure -> explicit_promise",
+    "first_frame_rule": "The first frame must give the viewer something useful: a question, tension, location clue, strange action, or sensory contradiction.",
+    "trust_rule": "Close at least one loop early so the audience believes later loops will also be answered.",
+    "promise_rule": "Delay the full promise only while the edit is actively building curiosity, world, conflict, or trust.",
+    "scope_rule": "This is a long-form invitation pattern, not a replacement for feed-first hook clarity."
+  },
+  "motion": {
+    "rule": "Use movement, framing, and visual distortion to raise questions only when they connect to the world or conflict.",
+    "avoid": "Random glitch, shake, or speed effects that create confusion without a story question."
+  },
+  "sound": {
+    "rule": "Use distorted sound, tonal swells, ambience, or selective silence to make the opening feel like an invitation into a world.",
+    "timing": "Answer one loop before the sound bed becomes exhausting or opaque."
+  },
+  "captions": {
+    "rule": "Captions may clarify location or key words, but should not explain away the mystery before the loop has value.",
+    "avoid": "Covering the opening image, map, proof shot, or facial/body-language clue."
+  },
+  "color": {
+    "rule": "Use color or treatment to support the world's tone while preserving important clues and evidence."
+  },
+  "implementation": {
+    "ffmpeg": "Create a first-minute contact sheet and mark each shot as question, answer, world, conflict, proof, or promise. Check whether at least one answer appears before the sequence asks too much.",
+    "remotion": "Represent open loops as objects with id, question, openedAt, closedAt, closureType, and trustValue. Render a debug overlay during review, then disable it for export.",
+    "blender": "Use camera moves, environmental scale, or restrained distortion to create curiosity; avoid abstract motion with no loop to close.",
+    "capcut_equivalent": "Build the intro from question shots and early answer shots instead of starting with a loud promise montage.",
+    "premiere_equivalent": "Use markers named open_loop, early_closure, worldbuilding, conflict, proof, call_to_adventure, and promise_delivery."
+  },
+  "common_mistakes": [
+    "Mistaking confusion for curiosity.",
+    "Opening several loops without closing one early.",
+    "Delaying the promise while adding filler instead of worldbuilding.",
+    "Using this pattern for short-form videos that need immediate premise clarity.",
+    "Hiding the subject so completely that the viewer cannot tell what kind of video they are watching."
+  ],
+  "qc": [
+    "Does the first frame create a specific question or tension?",
+    "Is at least one early loop closed before more questions stack up?",
+    "Can the editor name every open loop in the intro?",
+    "Does the delayed promise feel earned by world, conflict, proof, or trust?",
+    "Would the same intro still work if watched without prior knowledge of the creator?"
+  ]
+}

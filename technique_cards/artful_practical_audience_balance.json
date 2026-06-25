@@ -1,0 +1,70 @@
+{
+  "id": "artful_practical_audience_balance",
+  "name": "Artful Practical Audience Balance",
+  "category": "retention",
+  "source_tutorial": "transcripts/editing secrets.txt",
+  "additional_sources": [
+    "transcripts/what not to do in editing.txt",
+    "transcripts/editing full course.txt"
+  ],
+  "use_when": [
+    "An edit must balance personal style with broad audience clarity.",
+    "A creator or client wants creative expression but also needs retention, accessibility, or business performance.",
+    "A beautiful idea delays the premise, payoff, or comprehension.",
+    "A creator is applying short-form retention habits to a long-form or sensitive documentary.",
+    "An edit has many effects but the viewer value, idea, or promise is still weak."
+  ],
+  "avoid_when": [
+    "The user explicitly wants an experimental piece for a niche audience.",
+    "The project is art-first and not optimized for reach.",
+    "Removing the artful choice would destroy the core identity of the video.",
+    "The artful or slow choice is necessary for empathy, realism, or subject respect."
+  ],
+  "timeline_pattern": {
+    "pattern": "clear_promise -> accessible_progression -> selective_artful_moments -> practical_payoff",
+    "broad_audience_rule": "Clarity and premise should arrive before extended artful texture.",
+    "niche_audience_rule": "Artful pacing can lead if the target audience values that experience.",
+    "balance_rule": "Sneak artful expression into moments that do not block understanding.",
+    "value_rule": "Editing effort should supplement core value, not replace the idea, promise, or story.",
+    "sensitive_subject_rule": "For grief, danger, war, crisis, or testimony, prefer truthful tone and empathy over hooky retention tricks.",
+    "long_form_rule": "After a long-form viewer has committed, pacing can slow so the audience can observe and study images."
+  },
+  "motion": {
+    "rule": "Use stylized motion as a controlled accent, not as a barrier to clarity.",
+    "avoid": "Long abstract openings when the audience needs immediate orientation, and trendy effects over sensitive testimony."
+  },
+  "sound": {
+    "rule": "Sound design can preserve artistry while the visual structure stays practical.",
+    "avoid": "Sound choices that obscure the hook, premise, or subject tone."
+  },
+  "captions": {
+    "rule": "Use captions to keep broad-audience comprehension high when visuals become stylized, but do not let retention graphics cheapen sensitive tone."
+  },
+  "color": {
+    "rule": "Stylized grade is acceptable when it does not hide the subject, proof, product, or emotional information; serious documentary tone should avoid travel-vlog gloss unless the contrast is intentional."
+  },
+  "implementation": {
+    "ffmpeg": "Render A/B openings or critical sections: artful version versus practical version. Compare clarity, pacing, retention-risk notes, and subject-tone fit.",
+    "remotion": "Keep artful flourishes as optional sequences or variants so they can be trimmed without rewriting the whole composition.",
+    "blender": "Use abstract animation sparingly around clear story anchors for broad-audience edits.",
+    "capcut_equivalent": "Keep the hook clear before adding stylized effects; trim or move artful sections if they delay comprehension.",
+    "premiere_equivalent": "Maintain duplicate sequences for artful and practical cuts; use markers for clarity beats that cannot be delayed."
+  },
+  "common_mistakes": [
+    "Mistaking effort for viewer value.",
+    "Opening with an artful flourish that hides the premise from a broad audience.",
+    "Using hook tactics that make sensitive material feel manipulative.",
+    "Applying short-form insecurity to an audience that is already committed to a long-form video.",
+    "Removing all personality until the edit feels generic.",
+    "Failing to define whether the audience is broad or niche before judging the cut.",
+    "Using effects, music, or captions to avoid fixing a weak premise or slow section."
+  ],
+  "qc": [
+    "Is the target audience broad, niche, or art-first?",
+    "Does the viewer understand the premise quickly enough for that audience?",
+    "Do artful choices improve the intended experience?",
+    "Has the edit kept enough personality to avoid feeling purely optimized?",
+    "Does the pacing match the audience commitment level and subject sensitivity?",
+    "Would the edit still offer clear value if the decorative effects were disabled?"
+  ]
+}

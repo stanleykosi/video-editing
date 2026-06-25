@@ -1,0 +1,60 @@
+{
+  "id": "sound_realistic_foley_cutaway_001",
+  "name": "Realistic Foley For Human Cutaways",
+  "category": "sound_design",
+  "source_tutorial": "transcripts/slow editing.txt",
+  "use_when": [
+    "A cutaway, walk, hand movement, object touch, or camera pan needs believable physical texture.",
+    "The original source sound is missing, noisy, or not usable.",
+    "A social edit should feel organic and embodied rather than silent and flat."
+  ],
+  "avoid_when": [
+    "The foley would misrepresent documentary evidence or imply an action that did not happen.",
+    "The sound draws attention away from dialogue or the human moment.",
+    "The tone is formal and the added sound feels artificially cinematic."
+  ],
+  "timeline_pattern": {
+    "pattern": "visible_physical_cue -> subtle_foley_sync -> short_tail_or_room_tone -> return_to_dialogue",
+    "cue_rule": "Only add foley for a visible or strongly implied physical action.",
+    "belief_rule": "The viewer should believe the scene more without consciously noticing the added sound.",
+    "track_rule": "Keep foley on a separate editable track or layer."
+  },
+  "motion": {
+    "rule": "Foley should follow the visible step, pan, touch, or object movement instead of creating its own rhythm."
+  },
+  "sound": {
+    "rule": "Choose material-specific sounds such as footsteps, cloth, handling, surface taps, or room texture that match the shot.",
+    "keyframe_values": {
+      "sync_tolerance": "Land obvious steps, taps, or object sounds within 1-2 frames of the visible cue when possible.",
+      "starting_level": "Start 12-18 dB below dialogue, then raise only until the texture is felt.",
+      "fade_edges": "Use very short fades on foley clips to avoid clicks and hard edges."
+    }
+  },
+  "captions": {
+    "rule": "Do not caption subtle foley unless accessibility requires a meaningful non-speech cue."
+  },
+  "color": {
+    "rule": "No direct color rule; the sound should match the visual material and setting."
+  },
+  "implementation": {
+    "ffmpeg": "Align foley clips with atrim/delay, mix with volume filters, and use afade on edges before loudness review.",
+    "remotion": "Trigger foley Audio components from visible cue frames with gain and fade props stored in the scene data.",
+    "blender": "Place audio markers on footsteps, hand contacts, or camera pans and align foley in the video sequencer.",
+    "capcut_equivalent": "Add foley on a separate audio track, lower the level under speech, and trim/fade tails manually.",
+    "premiere_equivalent": "Use separate foley tracks, markers on visible cues, clip gain, EQ if needed, and short fades before full-mix review."
+  },
+  "common_mistakes": [
+    "Adding footsteps or object sounds that do not match the visible movement.",
+    "Making foley louder than the dialogue or emotional performance.",
+    "Using one generic footstep for every surface.",
+    "Leaving hard audio edges on tiny sounds.",
+    "Adding foley that changes the truth of a documentary moment."
+  ],
+  "qc": [
+    "Does each foley cue match a visible or strongly implied physical action?",
+    "Are foley peaks below dialogue and story-critical source sound?",
+    "Do footsteps or object sounds match the material and movement?",
+    "Are clip edges faded so there are no clicks?",
+    "Would removing the foley make the scene feel flatter without changing the truth?"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "motion_vox_paper_grid_background_001",
+  "name": "Warm Paper Grid Documentary Background",
+  "category": "motion",
+  "source_tutorial": "transcripts/vox style documentary.txt",
+  "use_when": [
+    "A documentary explainer needs an editorial graphic background behind maps, charts, documents, or title text.",
+    "A flat color background feels too digital and the section needs analog paper texture.",
+    "A sequence needs consistent style across several infographic scenes."
+  ],
+  "avoid_when": [
+    "Live footage, source documents, or map detail should fill the frame without extra texture.",
+    "The paper or grid texture reduces foreground text, chart, map, or caption readability.",
+    "The style would imply a copied publisher identity rather than a project-specific editorial look."
+  ],
+  "timeline_pattern": {
+    "pattern": "paper_background -> warm_adjustment -> grid_overlay_chroma_or_blend -> low_opacity_edges_or_doodle_texture -> compound_or_style_preset",
+    "canvas_rule": "Set the canvas to the intended delivery aspect before scaling the paper background.",
+    "texture_rule": "Texture should give depth, not become the subject.",
+    "palette_rule": "Use warm off-white, charcoal/gray, yellow, red, and muted accents only when they preserve contrast."
+  },
+  "motion": {
+    "rule": "Background motion should be minimal; let foreground maps, charts, and text carry the movement.",
+    "keyframe_values": {
+      "paper_scale_start": "Scale paper slightly above frame bounds; 115-120% is a useful starting range for 16:9 if edges show.",
+      "grid_opacity": "Start around 10-20% opacity so grid structure is visible but subordinate.",
+      "paper_edge_opacity": "Start around 15-25% opacity for edge/doodle texture.",
+      "texture_effect": "Use subtle hand-drawn or paper-edge motion only after readability is checked."
+    }
+  },
+  "sound": {
+    "rule": "Background texture alone needs no SFX; save sounds for foreground reveals, highlights, and transitions."
+  },
+  "captions": {
+    "rule": "Captions or labels must stay readable over the paper and grid at delivery size."
+  },
+  "color": {
+    "rule": "Warm the background slightly without turning it orange or lowering contrast for foreground text.",
+    "avoid": "Avoid saturated paper colors that fight data, maps, or callouts."
+  },
+  "implementation": {
+    "ffmpeg": "Use a paper image/video as the base, scale/crop to canvas, apply mild color temperature adjustment, overlay a grid with alpha, and render stills to check text contrast.",
+    "remotion": "Create a PaperGridBackground component with paperAsset, scale, warmth, gridOpacity, edgeTextureOpacity, and palette props.",
+    "blender": "Use textured planes or compositor overlays for paper and grid, keeping foreground text/material contrast high.",
+    "capcut_equivalent": "Set ratio, place paper background, scale to cover, warm via Adjustment/Basic temperature, chroma-key or blend the grid layer, and lower opacity around 15%.",
+    "premiere_equivalent": "Use a paper texture layer, Lumetri temperature, grid overlay with blend/opacity, and a nested sequence or Essential Graphics background preset."
+  },
+  "common_mistakes": [
+    "Letting grid lines compete with chart bars, map lines, or small text.",
+    "Using a paper texture so strong it looks dirty after compression.",
+    "Changing background warmth between scenes without a style reason.",
+    "Adding motion texture before checking the foreground layout.",
+    "Copying another publisher's exact background identity rather than making a project-specific variant."
+  ],
+  "qc": [
+    "Does foreground text, chart data, and map detail remain readable over the background?",
+    "Is the grid opacity low enough to feel structural rather than distracting?",
+    "Does the warm paper look fit the project tone without becoming orange or muddy?",
+    "Are paper edges or doodle textures subordinate and compression-clean?",
+    "Is the background legally sourced or generated with manifest/source notes when used in a project?"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "id": "documentary_sensitive_tone_alignment_001",
+  "name": "Documentary Sensitive Tone Alignment",
+  "category": "genre_workflow",
+  "source_tutorial": "transcripts/what not to do in editing.txt",
+  "additional_sources": [
+    "transcripts/Saving-Bad-Videos-With-Only-Music_Media.txt"
+  ],
+  "use_when": [
+    "The subject involves war, grief, danger, crisis, trauma, displacement, or testimony.",
+    "A creator's usual travel, vlog, or retention style risks making serious material feel inauthentic.",
+    "The edit needs empathy for the subject more than speed or flashy personality.",
+    "A stylized or beautiful music choice might create haunting contrast with serious imagery and needs ethical review."
+  ],
+  "avoid_when": [
+    "The project is intentionally comic, satirical, or openly stylized and the user has approved that tone.",
+    "The source subject is light and the audience expects energetic entertainment.",
+    "A serious tone would misrepresent the actual mood of the event.",
+    "The contrast music makes harm, destruction, or crisis feel glamorous, triumphant, or entertaining."
+  ],
+  "timeline_pattern": {
+    "pattern": "subject_first_hook -> evidence_or_testimony -> creator_perspective -> story_promise -> title_or_transition",
+    "opening_rule": "Lead with the place, people, stakes, or evidence before making the creator the focus.",
+    "tone_rule": "Use slower, confident pacing and motivated shots to signal maturity.",
+    "palate_cleanser_rule": "Use brief comedy only as a relief beat after heavy context, not as tonal avoidance.",
+    "contrast_rule": "Beautiful or nostalgic music over horrific imagery is allowed only when it creates discomfort, grief, critique, or irony rather than celebration."
+  },
+  "motion": {
+    "rule": "Avoid goofy graphics, random screen wipes, and travel-vlog transitions over serious material.",
+    "allowed": "Simple maps, restrained titles, slow pushes, and soft transitions that preserve gravity."
+  },
+  "sound": {
+    "rule": "Use restrained music, real ambience, testimony, and quiet when the subject needs respect.",
+    "allowed": "A controlled beauty-over-horror contrast can be more haunting than grim scoring if the story owner approves it and context remains clear.",
+    "avoid": "Cliche upbeat stock tracks over war, grief, destruction, or testimony."
+  },
+  "captions": {
+    "rule": "Prioritize subtitles for important testimony over decorative lower thirds or branding.",
+    "avoid": "Caption styles that make serious testimony feel like a social skit."
+  },
+  "color": {
+    "rule": "Use mature, consistent color that preserves faces, damage, and evidence.",
+    "avoid": "Glossy travel-vlog looks that reduce the seriousness of the subject."
+  },
+  "implementation": {
+    "ffmpeg": "Render an opening A/B: creator-first versus subject-first. Generate contact sheets for the first 30-60 seconds to check whether tone and shot holds feel mature. For stylized music contrast, render a restrained version beside the contrast version.",
+    "remotion": "Build title, map, and lower-third components with restrained motion presets for serious documentary contexts. Store sensitive music choices with intendedEmotion, ethicalRisk, approvalStatus, and rejectReason.",
+    "blender": "Use simple map or spatial context animation; avoid exaggerated transitions unless the tone supports them.",
+    "capcut_equivalent": "Disable trendy wipes/effects; use clean cuts, soft dissolves, subtitles, and restrained titles.",
+    "premiere_equivalent": "Use markers for subject-first evidence, creator perspective, title-card moment, any intentional relief beat, and sensitive music review."
+  },
+  "common_mistakes": [
+    "Opening on the creator's performance when the subject should lead.",
+    "Using travel-vlog pacing for war or crisis footage.",
+    "Adding goofy graphics because they are part of an old channel style.",
+    "Confusing respect with dullness instead of using confident restraint.",
+    "Keeping a fascinating music experiment after it feels ethically too far for the subject."
+  ],
+  "qc": [
+    "Does the first minute make the subject feel respected?",
+    "Does the creator perspective arrive after the subject stakes are clear?",
+    "Are graphics and transitions mature enough for the subject?",
+    "Does any humor function as relief rather than tonal escape?",
+    "If beautiful or nostalgic music is used over harm, does it create critique or grief rather than glamour?",
+    "Was a restrained version tested before approving a stylized music contrast?"
+  ]
+}

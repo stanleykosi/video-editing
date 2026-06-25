@@ -1,0 +1,56 @@
+{
+  "id": "nle_fourk_to_1080_reel_prep_001",
+  "name": "4K To 1080 Vertical Reel Prep",
+  "category": "nle_workflow",
+  "source_tutorial": "transcripts/edit high quality reel.txt",
+  "additional_sources": [],
+  "use_when": [
+    "Source footage is 4K but the target short-form delivery is 1080x1920 vertical.",
+    "External microphone audio must be synchronized before trimming and animation.",
+    "A prepared render is needed before After Effects animation begins."
+  ],
+  "avoid_when": [
+    "The target platform or user explicitly requires 4K delivery.",
+    "The 4K source needs reframing/cropping flexibility throughout the entire edit.",
+    "The source is already 1080x1920 with synced audio and stable color."
+  ],
+  "timeline_pattern": {
+    "pattern": "import_4k_source -> sync_external_audio -> delete_camera_audio -> export_1080x1920_master -> reimport_1080 -> rough_cut -> subtle_color_adjustment_layer -> prepared_render_for_animation",
+    "sync_rule": "Verify mouth movement against the external mic before deleting camera audio.",
+    "target_rule": "Use 1080x1920 for vertical social delivery when the platform does not benefit from a 4K export.",
+    "prepared_rule": "Export a clean prepared version before After Effects so animation work starts from a stable trimmed picture."
+  },
+  "motion": {
+    "rule": "Do not lock animation until the prepared 1080 cut is trimmed and stable."
+  },
+  "sound": {
+    "rule": "Synchronize external mic audio first, then keep the intended dialogue track unmuted through every prep export."
+  },
+  "captions": {
+    "rule": "Caption creation belongs after the edit is close to locked; otherwise caption timing will churn."
+  },
+  "color": {
+    "rule": "Use a subtle Lumetri adjustment layer for exposure, contrast, highlights, shadows, whites, and vignette; avoid over-correction."
+  },
+  "implementation": {
+    "ffmpeg": "Use ffprobe to verify source streams, then scale/crop/pad to 1080x1920 only after confirming aspect and synced audio. Use loudness checks before prepared export.",
+    "remotion": "Use the 4K source as sourceMedia, but render a prepared 1080x1920 intermediate or composition if downstream animation expects HD vertical.",
+    "blender": "Use 1080x1920 scene settings for social animation renders unless the final target requires higher resolution.",
+    "capcut_equivalent": "Sync external audio, trim the vertical cut, export a 1080 preview/intermediate if moving to another tool.",
+    "premiere_equivalent": "Create a 4K sequence for sync/prep, export a 1080x1920 version with maximum depth/quality when needed, reimport it, trim to the reel length, color-correct with an adjustment layer, then export a prepared render for After Effects."
+  },
+  "common_mistakes": [
+    "Editing the entire Reel in a 4K timeline when the target and AE comp are 1080 vertical.",
+    "Deleting camera audio before verifying external mic sync.",
+    "Exporting a muted dialogue track during the prepared render.",
+    "Over-correcting color before animation and making the source look artificial.",
+    "Starting captions before the trimmed prepared cut is stable."
+  ],
+  "qc": [
+    "External mic audio is synchronized to mouth movement before camera audio is removed.",
+    "Prepared render is 1080x1920 when the target is vertical HD social delivery.",
+    "Dialogue is audible in the prepared render.",
+    "Subtle color correction preserves skin detail and avoids clipped highlights or crushed shadows.",
+    "Prepared render duration matches the intended rough cut before After Effects animation begins."
+  ]
+}

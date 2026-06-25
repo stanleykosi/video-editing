@@ -1,0 +1,67 @@
+{
+  "id": "beat_sync_capcut_speed_match_twixtor_001",
+  "name": "CapCut Speed Match To Beat",
+  "category": "beat_sync",
+  "source_tutorial": "transcripts/editing tricks.txt",
+  "additional_sources": [
+    "transcripts/powerful capcut edits.txt",
+    "transcripts/capcut text effects.txt"
+  ],
+  "use_when": [
+    "A short-form, AMV, sports, or montage clip needs an action pose, impact, transformation, or reveal to land on a music beat.",
+    "A time-remapped or slowed source clip can be sped up without losing the action's readability.",
+    "A slowed alignment window is needed for a character detail, eye overlay, or power effect to match the visible beat.",
+    "Transitions will be added later and the clip duration needs to line up with the music first."
+  ],
+  "avoid_when": [
+    "The speed change makes the action unreadable, jittery, or emotionally wrong.",
+    "Dialogue, lip sync, or source audio timing must remain natural.",
+    "The editor has not marked the target beat or action frame."
+  ],
+  "timeline_pattern": {
+    "pattern": "choose_action_clip -> mark_song_beat -> identify_action_peak -> adjust_speed -> preview_on_beat -> repeat_for_sequence -> transition_pass",
+    "beat_marker_rule": "Add beat markers before repeating the workflow across clips so speed decisions are made against visible cue points.",
+    "speed_rule": "There is no universal speed value; adjust per clip until the action peak reaches the beat.",
+    "alignment_window_rule": "If an overlay must track a small detail such as an eye, slow or speed-adjust the source before the overlay pass, then recheck that the transformed moment still lands on the beat.",
+    "sequence_rule": "Preview adjacent clips after speed changes so the beat grid feels intentional across the whole run."
+  },
+  "motion": {
+    "rule": "Speed changes should make the action feel sharper while preserving the important pose, impact, or direction.",
+    "keyframe_values": {
+      "sync_tolerance": "For high-energy AMV-style edits, the action peak should land within 1-2 frames of the intended beat when practical.",
+      "preview_range": "Review at least the outgoing clip, the synced clip, and the next cut before locking the speed.",
+      "transition_handles": "Keep enough clip duration or handles for transition effects after speed matching."
+    }
+  },
+  "sound": {
+    "rule": "Use the song beat as the primary timing reference, then add SFX only after the visual hit is locked."
+  },
+  "captions": {
+    "rule": "Avoid speed changes that push action under captions or make caption timing feel disconnected from the beat."
+  },
+  "color": {
+    "rule": "No required color rule; preserve action readability during any later flashes, glow, or color effects."
+  },
+  "implementation": {
+    "ffmpeg": "Use trim plus setpts expressions such as setpts=PTS/speed for visual-only clips, then align the rendered segment against beat-frame metadata.",
+    "remotion": "Store sourceInFrame, actionPeakFrame, targetBeatFrame, and playbackRate; compute the clip start or playbackRate so the peak lands on the beat.",
+    "blender": "Use speed control strips or time remapping in the VSE, then add markers for beat and action peak.",
+    "capcut_equivalent": "Select the clip, use Speed, move the speed slider forward or backward, and preview until the action peak lands on the song beat.",
+    "premiere_equivalent": "Use Speed/Duration or Time Remapping with sequence markers on the beat and action peak; ripple or slip the clip until the hit lands."
+  },
+  "common_mistakes": [
+    "Using the same speed value on every clip instead of matching each action beat.",
+    "Applying a Twixtor-style slow effect directly and building overlays before checking whether the result still matches the beat.",
+    "Forgetting beat markers and judging sync by memory.",
+    "Speeding up a clip so much that the viewer cannot read the action.",
+    "Locking speed before checking whether transitions still have usable handles.",
+    "Adding SFX before the visual hit is locked."
+  ],
+  "qc": [
+    "Does the action peak land within the intended beat tolerance?",
+    "Are beat markers present before multiple clips are speed-matched?",
+    "Can the action still be read at delivery size after the speed change?",
+    "Do adjacent clips feel musically connected rather than individually guessed?",
+    "Are enough handles left for transition effects?"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "id": "programmatic_remotion_prores4444_alpha_overlay_export_001",
+  "name": "Remotion ProRes 4444 Alpha Overlay Export",
+  "category": "typography",
+  "source_tutorial": "transcripts/remotion_transparent_videos_source_notes.md",
+  "additional_sources": [
+    "transcripts/remotion_creating_overlays_source_notes.md",
+    "transcripts/curio_ffmpeg_alpha_masking_source_notes.md"
+  ],
+  "use_when": [
+    "A Remotion text, title, lower-third, glow, mask wipe, or transition element needs to be imported into an editor or composited later.",
+    "The overlay has soft edges, blur, glow, antialiasing, or semi-transparent pixels.",
+    "The agent needs a reusable alpha asset rather than a final social MP4."
+  ],
+  "avoid_when": [
+    "The user only needs an opaque final export.",
+    "The receiving tool cannot handle ProRes alpha.",
+    "A tiny browser-playback file matters more than editor compatibility.",
+    "The Remotion composition has an opaque background that has not been fixed."
+  ],
+  "timeline_pattern": {
+    "pattern": "Remotion_component -> checkerboard_transparency_preflight -> png_frame_render -> prores_4444_yuva444p10le -> import_or_ffmpeg_overlay -> alpha_edge_qc",
+    "background_rule": "Root composition and wrappers must not paint a background when exporting alpha.",
+    "handoff_rule": "Name reusable overlay files with effect, resolution, fps, duration, and alpha status."
+  },
+  "motion": {
+    "rule": "Export duration and fps must match the intended timeline window exactly so overlay timing does not drift.",
+    "keyframe_values": {
+      "short_text_reveal": "6-15 frames at 30 fps for fast short-form text wipes.",
+      "lower_third_or_title": "12-24 frames at 30 fps for calmer editor overlays.",
+      "hold": "Add enough readable hold after reveal before the overlay clears."
+    }
+  },
+  "sound": {
+    "rule": "No sound is embedded unless the overlay is explicitly a sound-synced bumper; SFX should usually stay in the main edit for mix control."
+  },
+  "captions": {
+    "rule": "If the overlay carries spoken words, mark ordinary captions for suppression or repositioning in the receiving timeline."
+  },
+  "color": {
+    "rule": "Check alpha edges over bright and dark backgrounds so glow or antialiasing is not contaminated by black or white fringes."
+  },
+  "implementation": {
+    "ffmpeg": "After export, validate with ffprobe and composite with overlay=format=auto or an alpha-preserving path; if converting from image sequences, use prores_ks with yuva444p10le for alpha.",
+    "remotion": "Render with --image-format=png --codec=prores --prores-profile=4444 --pixel-format=yuva444p10le and keep the composition background transparent.",
+    "blender": "Render RGBA image sequences or ProRes 4444 with transparent film enabled, then inspect alpha edges before handoff.",
+    "capcut_equivalent": "Import the transparent ProRes overlay above footage if supported; otherwise composite externally before bringing in the final opaque render.",
+    "premiere_equivalent": "Import the ProRes 4444 .mov above footage and do not chroma key it; if it appears black, inspect alpha interpretation and codec settings."
+  },
+  "common_mistakes": [
+    "Exporting transparent Remotion graphics as ordinary MP4.",
+    "Leaving an invisible-looking but opaque root background in the composition.",
+    "Using WebM alpha as an editor handoff without testing editor support.",
+    "Assuming a black background means alpha is working.",
+    "Letting overlay duration differ from the intended edit window."
+  ],
+  "qc": [
+    "Checkerboard is visible in empty Remotion canvas areas before render.",
+    "ffprobe or equivalent confirms an alpha-capable output.",
+    "A sampled empty pixel outside the graphic is transparent, not black.",
+    "Overlay imports above footage without chroma keying.",
+    "Glow and antialiased edges remain clean over bright and dark backgrounds."
+  ]
+}

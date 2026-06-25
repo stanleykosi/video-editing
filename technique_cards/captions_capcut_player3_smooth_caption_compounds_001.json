@@ -1,0 +1,65 @@
+{
+  "id": "captions_capcut_player3_smooth_caption_compounds_001",
+  "name": "CapCut Player 3 Smooth Caption Compounds",
+  "category": "captions",
+  "source_tutorial": "transcripts/premium capcut text effect.txt",
+  "additional_sources": [
+    "transcripts/remotion_lab_kinetic_typography_presets_source_notes.md",
+    "transcripts/brayden_ffmpeg_drawtext_animations_source_notes.md"
+  ],
+  "use_when": [
+    "A social edit needs smooth animated captions that feel more polished than default auto captions.",
+    "The captions can be split into short phrase groups and compounded before styling.",
+    "The text effect is meant to support a premium social look without becoming the main visual focus."
+  ],
+  "avoid_when": [
+    "Auto-caption wording, timing, line breaks, or placement have not been corrected.",
+    "The captions are accessibility-critical and need stable plain subtitles.",
+    "The background is too busy or bright for the Player 3 effect to preserve readable text edges.",
+    "Faces, product UI, proof, or other designed text already occupy the caption region."
+  ],
+  "timeline_pattern": {
+    "pattern": "auto_captions -> correct_text_and_line_splits -> compound_each_caption_group -> align_compounds -> apply_player_3_effect -> set_texture_to_0 -> paste_attributes_to_remaining_compounds -> phone_size_qc",
+    "line_split_rule": "Split captions into phrase-readable groups before compounding; small stacks such as 3 words, then 2 words, then 2 words can work when the meaning remains clear.",
+    "compound_rule": "Compound each caption group so the video effect can be applied consistently to the group instead of to loose caption fragments.",
+    "attribute_rule": "Paste attributes to the remaining caption compounds only after the first compound passes readability, timing, and contrast review."
+  },
+  "motion": {
+    "rule": "The effect should feel smooth and integrated while settling before the spoken phrase needs to be read.",
+    "keyframe_values": {
+      "texture": "Set Player 3 Texture to 0 as a clean starting point, then adjust only if readability improves.",
+      "clip_length": "Trim each compound to the spoken phrase; do not let the effect linger into the next caption.",
+      "paste_attributes": "Apply the same effect to matching caption groups, then review each phrase because the same effect can fail on a different background."
+    }
+  },
+  "sound": {
+    "rule": "No SFX is required; speech clarity and caption readability are more important than decorating continuous captions."
+  },
+  "captions": {
+    "rule": "Treat auto captions as draft text until spelling, timing, phrase splits, safe placement, and duplicate visual-text conflicts are fixed."
+  },
+  "color": {
+    "rule": "The caption effect must remain readable on the actual footage, including bright, dark, busy, and face-heavy frames."
+  },
+  "implementation": {
+    "ffmpeg": "Approximate with ASS subtitles or short drawtext groups plus subtle alpha/fontsize/blur envelopes only when readable; use contact sheets for every caption region.",
+    "remotion": "Represent each caption group as a Sequence-local component with phraseLines, effectType: player3_smooth, texture: 0, safeRegion, startFrame, endFrame, spring or fade settings, and contrastQcStatus.",
+    "blender": "Use text objects or compositor text groups with restrained material/opacity motion only for controlled renders; keep accessibility subtitles separate.",
+    "capcut_equivalent": "Generate auto captions, correct and split lines, compound each caption group, place compounds cleanly on the timeline, apply Effects > Player 3 to one compound, set Texture to 0, paste attributes to matching compounds, then inspect every phrase at phone size.",
+    "premiere_equivalent": "Correct captions first, upgrade selected groups to graphics or nests, apply a subtle tested text animation/blur preset, then review collisions and contrast against the final footage."
+  },
+  "common_mistakes": [
+    "Compounding captions before correcting the auto-caption text.",
+    "Pasting Player 3 attributes across all captions without checking each background.",
+    "Using the effect on long subtitles that need stable accessibility-first reading.",
+    "Leaving caption groups scattered across tracks so timing and cleanup become messy.",
+    "Letting the animation run under the next phrase or another designed text layer."
+  ],
+  "qc": [
+    "Are auto-caption words, timing, phrase splits, and placement corrected before compounding?",
+    "Does every Player 3 caption group remain readable at phone size?",
+    "Does the effect settle before the phrase needs to be read?",
+    "Do captions avoid faces, proof, product UI, and designed text?",
+    "Were pasted attributes reviewed on every affected caption group?"
+  ]
+}

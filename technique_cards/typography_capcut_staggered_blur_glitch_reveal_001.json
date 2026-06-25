@@ -1,0 +1,67 @@
+{
+  "id": "typography_capcut_staggered_blur_glitch_reveal_001",
+  "name": "CapCut Staggered Blur Glitch Text Reveal",
+  "category": "typography",
+  "source_tutorial": "transcripts/premium capcut text effect.txt",
+  "additional_sources": [
+    "transcripts/remotion_lab_kinetic_typography_presets_source_notes.md",
+    "transcripts/brayden_ffmpeg_drawtext_animations_source_notes.md"
+  ],
+  "use_when": [
+    "A short title or phrase needs a stylized social reveal with separate words landing in sequence.",
+    "The subject looks or moves into the text area and the reveal can be timed to that action.",
+    "The edit can use a brief glitch cue without making speech or tone feel cheap."
+  ],
+  "avoid_when": [
+    "The line is a continuous subtitle or accessibility caption.",
+    "The words are too long to stagger without losing reading order.",
+    "A glitch sound would fight the tone, dialogue, or music.",
+    "The blur makes the final word slower to read than plain text."
+  ],
+  "timeline_pattern": {
+    "pattern": "separate_word_layers -> position_as_phrase -> move_2_frames_in -> blade_all_layers -> recolor_pre_reveal_segments -> stagger_word_starts -> compound_each_word -> add_blur_effect_segments -> align_trimmed_glitch_sfx -> qc",
+    "stagger_rule": "Offset each word slightly to the right on the timeline so the phrase reveals in a readable order.",
+    "pre_reveal_rule": "A brief alternate-color pre-reveal segment can create style, but it should last only a few frames.",
+    "compound_rule": "Compound each word before adding blur so the blur follows that word's reveal timing cleanly.",
+    "sound_rule": "Trim the glitch cue to end exactly when the staggered reveal finishes."
+  },
+  "motion": {
+    "rule": "The reveal should feel quick and intentional, then resolve into stable readable text.",
+    "keyframe_values": {
+      "initial_blade": "Move about 2 frames from the start before blading all word layers for a fast pre-reveal color flash.",
+      "blur_high": "A blur value around 25 can work for the heavier pre-reveal or transition segment.",
+      "blur_low": "A blur value around 4 can work as the cleaner resolving segment before the word becomes stable.",
+      "stagger": "Stagger each word only far enough to create rhythm; stop before the phrase becomes hard to assemble."
+    }
+  },
+  "sound": {
+    "rule": "Use one short glitch or tick family cue aligned to the first word reveal and cut at the final word reveal; keep it below speech."
+  },
+  "captions": {
+    "rule": "Suppress duplicate captions while the designed staggered phrase carries the same words; restore captions after the reveal clears."
+  },
+  "color": {
+    "rule": "The pre-reveal color should contrast with the final color without becoming a random accent that changes the meaning."
+  },
+  "implementation": {
+    "ffmpeg": "Render separate drawtext layers with staggered enable times, brief color changes, optional blur/fade expressions, and a trimmed glitch SFX mixed below dialogue; move longer sequences to Remotion or ASS.",
+    "remotion": "Represent each word as a layer with startFrame, delayFrames, preRevealFrames, preColor, finalColor, blurFrom, blurTo, seeded glitch jitter if needed, and shared glitchSfxRange.",
+    "blender": "Use separate text objects with staggered visibility/material changes and compositor blur; place the glitch cue in the edit timeline.",
+    "capcut_equivalent": "Create separate text layers, position the phrase, blade all words around 2 frames in, recolor the first small segments, stagger the word clips, compound each word, add a blur effect with stronger blur near the reveal and lower blur as it resolves, then add and trim a glitch SFX to the reveal span.",
+    "premiere_equivalent": "Use Essential Graphics word layers or nests, stagger starts, animate color/blur or use a tested blur preset, and trim a glitch SFX to the reveal duration."
+  },
+  "common_mistakes": [
+    "Staggering words so far apart that the viewer cannot read the phrase as one idea.",
+    "Leaving the red or alternate-color pre-reveal onscreen too long.",
+    "Using blur values that make the final text muddy.",
+    "Letting the glitch SFX tail continue after the reveal is complete.",
+    "Applying the effect to many lines until no title moment feels special."
+  ],
+  "qc": [
+    "Is the final phrase readable at phone size after the stagger resolves?",
+    "Does the staggered order match the intended reading order?",
+    "Does blur clear before the viewer needs the words?",
+    "Does the glitch SFX end with the final visible reveal and stay below speech?",
+    "Do captions, faces, proof, UI, products, and action remain safe?"
+  ]
+}

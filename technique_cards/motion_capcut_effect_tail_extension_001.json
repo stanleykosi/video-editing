@@ -1,0 +1,60 @@
+{
+  "id": "motion_capcut_effect_tail_extension_001",
+  "name": "CapCut Effect Tail Extension",
+  "category": "motion",
+  "source_tutorial": "transcripts/editing tricks.txt",
+  "use_when": [
+    "A visual effect fades or ends before the main clip, character, or transition beat has finished.",
+    "A stylized edit needs a longer effect tail without rebuilding the effect from scratch.",
+    "Fast background slices behind a subject can keep energy moving during a held character moment."
+  ],
+  "avoid_when": [
+    "The effect tail is only covering weak timing or an unclear cut.",
+    "Duplicated effect layers make the frame muddy, noisy, or unreadable.",
+    "A clean shorter effect would better preserve the subject, caption, or action."
+  ],
+  "timeline_pattern": {
+    "pattern": "effect_fades_too_early -> add_black_matte_or_backing -> duplicate_effect_layer_as_needed -> add_fast_background_slices -> color_match -> trim_tail",
+    "extension_rule": "Use a black matte/backing or duplicated effect layers only long enough to keep the intended effect visible.",
+    "background_slice_rule": "When adding clips behind a cutout subject, speed them up and keep slices short so they read as energy texture rather than new story beats.",
+    "cleanup_rule": "Trim the extension before it competes with the next main clip or transition."
+  },
+  "motion": {
+    "rule": "The extension should support a held character or transition beat, not become a second unrelated edit.",
+    "keyframe_values": {
+      "background_slice_duration": "Short background slices around 0.8 seconds can create energetic backing texture; adjust to song tempo and readability.",
+      "duplicate_count": "Duplicate only enough effect layers to preserve the tail; reduce count or opacity if the frame becomes muddy.",
+      "tail_trim": "End the extension before the next action beat needs clean focus."
+    }
+  },
+  "sound": {
+    "rule": "Do not add extra SFX just because the visual tail is extended; add sound only if the extension has a new impact or reveal."
+  },
+  "captions": {
+    "rule": "Suppress or move captions if the effect tail is bright, chaotic, or positioned behind text."
+  },
+  "color": {
+    "rule": "Color-correct background slices so they support the palette and do not pull focus from the subject."
+  },
+  "implementation": {
+    "ffmpeg": "Extend a pre-rendered effect with looped or duplicated overlay ranges, black backing layers, short background cuts, and opacity fades; inspect for compression noise.",
+    "remotion": "Model the effect as repeatable layers with tailStartFrame, tailEndFrame, backgroundSliceDuration, opacity, and palette correction metadata.",
+    "blender": "Use VSE strips or compositor layers for duplicated effect tails, backing mattes, and fast background inserts.",
+    "capcut_equivalent": "Add a black screen/backing layer, duplicate the effect layer only as needed, place fast clips behind the subject, adjust speed/duration, and color-correct the backing clips.",
+    "premiere_equivalent": "Use duplicated effect overlays or nested pre-renders with black matte/backing layers, short speed-adjusted background clips, and Lumetri color matching."
+  },
+  "common_mistakes": [
+    "Extending an effect because it looks intense even though the main beat already ended.",
+    "Duplicating so many layers that the subject silhouette becomes muddy.",
+    "Letting background slices read as unrelated story shots.",
+    "Forgetting to color-match or trim the extension.",
+    "Adding loud SFX to a tail that has no new visual impact."
+  ],
+  "qc": [
+    "Can the editor name why the effect tail needs to last longer?",
+    "Does the subject or action remain readable through the extended tail?",
+    "Are background slices short enough to feel like texture rather than confusing story cuts?",
+    "Does the extension clear before the next main beat?",
+    "Do color correction and opacity avoid banding, mud, or compression dirt?"
+  ]
+}

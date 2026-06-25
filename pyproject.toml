@@ -1,0 +1,65 @@
+[project]
+name = "video-editing-workstation"
+version = "0.1.0"
+description = "Local AI video-editing workstation dependencies for agent-driven editing."
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "requests",
+    "librosa",
+    "matplotlib",
+    "pillow",
+    "numpy>=1.26,<2.0",
+    "python-dotenv",
+    "pyyaml",
+    "pydantic",
+    "rich",
+    "tqdm",
+    "opencv-python",
+    "scenedetect",
+    "imageio",
+    "imageio-ffmpeg",
+    "moviepy",
+    "ffmpeg-python",
+    "decord",
+    "soundfile",
+    "scipy",
+    "pyloudnorm",
+    "pydub",
+    "noisereduce",
+    "pedalboard",
+    "pysubs2",
+    "srt",
+    "webvtt-py",
+    "elevenlabs",
+    "faster-whisper",
+    "manim",
+    "pytest",
+    "black",
+    "ruff",
+    "pytesseract>=0.3.13",
+    "yt-dlp>=2026.6.9",
+]
+
+[project.optional-dependencies]
+ml-heavy = [
+    "demucs",
+    "whisperx",
+    "torch",
+    "torchvision",
+    "torchaudio",
+    "ultralytics",
+    "supervision",
+    "mediapipe",
+    "lapx",
+    "norfair",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
+torchaudio = { index = "pytorch-cpu" }

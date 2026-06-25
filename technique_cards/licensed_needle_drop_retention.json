@@ -1,0 +1,89 @@
+{
+  "id": "licensed_needle_drop_retention",
+  "name": "Licensed Needle Drop Retention",
+  "category": "sound_design",
+  "source_tutorial": "transcripts/editing secrets.txt",
+  "additional_sources": [
+    "transcripts/what not to do in editing.txt",
+    "transcripts/The-5-Second-Intro-Is-Dead-Here-s-Why_Media.txt",
+    "transcripts/Saving-Bad-Videos-With-Only-Music_Media.txt",
+    "transcripts/editing full course.txt",
+    "transcripts/make pro media.txt"
+  ],
+  "use_when": [
+    "A recognizable or especially fitting track would strengthen retention, emotion, or identity.",
+    "A section needs an energy lift, tonal reset, or memorable moment.",
+    "The platform and project allow licensed music use.",
+    "A stock track makes a serious or premium documentary sequence feel generic.",
+    "The creator wants the edit to feel premium, human-curated, and anti-filler.",
+    "The editor can audition multiple licensed tracks and time the strongest cue to a meaningful visual beat.",
+    "A CapCut/mobile edit needs music or SFX but the in-app library, screen-recorded asset, or downloaded cue has unclear rights."
+  ],
+  "avoid_when": [
+    "Music rights are unclear or unsafe for the delivery platform.",
+    "The track distracts from speech, story, or brand tone.",
+    "The edit relies on the song to compensate for weak structure.",
+    "The track makes sensitive subject matter feel cheerful, cliched, or tonally disrespectful.",
+    "The song is high quality but does not describe the specific world, character, or story phase.",
+    "The music is famous or exciting but pushes the scene into the wrong ethical or emotional tone.",
+    "The track is being used to disguise slow pacing instead of enhancing a cut that already works.",
+    "The cue is available inside an app or online but its rights are not documented for the intended platform."
+  ],
+  "timeline_pattern": {
+    "pattern": "setup -> auditioned_music_cue_or_drop -> visual_payoff -> controlled_duck_or_exit",
+    "cue_rule": "The recognizable cue should land on a story shift, reveal, emotional hit, or retention-critical section.",
+    "audition_rule": "For important sections, test multiple licensed tracks against the same cut before locking the cue.",
+    "exit_rule": "Plan the exit or ducking point before the track overwhelms the next story beat.",
+    "library_rule": "Do not assume an in-app audio library, downloaded sound, or screen-recorded effect is cleared; record license/platform status before delivery."
+  },
+  "motion": {
+    "rule": "Sync visual emphasis, cuts, or motion accents to the track only where it supports the story.",
+    "avoid": "Letting the song force every cut to become a music video."
+  },
+  "sound": {
+    "rule": "Use licensed or platform-safe tracks and keep speech intelligible.",
+    "mix": "Duck music under dialogue and restore energy during visual-only or montage beats.",
+    "rights": "Confirm licensing before treating mainstream music, in-app library tracks, downloaded SFX, or screen-recorded effects as deliverable.",
+    "tone": "For war, grief, crisis, or other sensitive documentary material, prefer restraint and maturity over upbeat travel-vlog energy.",
+    "quality": "Premium documentary music should feel selected for taste and story identity, not dropped in as generic filler.",
+    "cue_timing": "Place the strongest cue, drop, or escalation on a meaningful visual turn rather than the nearest convenient cut.",
+    "pace_fit": "Match music energy to the speaker's pace, video rhythm, and scene tone before judging whether it improves retention."
+  },
+  "captions": {
+    "rule": "If speech continues under music, captions should support intelligibility without fighting the track's visual moment."
+  },
+  "color": {
+    "rule": "A music-driven section may support a stronger look, but the look should still match the surrounding edit and subject tone."
+  },
+  "implementation": {
+    "ffmpeg": "Use sidechain compression or volume automation filters for dialogue ducking. Keep a rights note in project metadata or the lesson log. Use loudness checks after music changes so emotional quiet does not turn into inaudibility. Render short A/B tests for candidate tracks.",
+    "remotion": "Represent the music cue as a timed audio sequence with beat, license, audition, and section markers for visual sync.",
+    "blender": "Use audio markers to time motion accents if rendering animated sections.",
+    "capcut_equivalent": "Use licensed music/SFX from an approved source, duplicate sections for track auditions, and manually keyframe volume under speech. Treat CapCut library audio as needing license/platform status review before final delivery.",
+    "premiere_equivalent": "Use duplicate audition sequences, Essential Sound ducking or manual audio keyframes, and keep licensing notes with the project."
+  },
+  "common_mistakes": [
+    "Using copyrighted or mainstream music without rights.",
+    "Letting the needle drop bury dialogue.",
+    "Choosing a cool song that does not match the video promise.",
+    "Using cheerful or cliched stock music over serious documentary material.",
+    "Failing to plan the exit from a high-energy music moment.",
+    "Treating music quality as separate from story meaning.",
+    "Using a famous licensed track without testing whether a less obvious track fits the story better.",
+    "Locking a music-heavy edit before confirming licensing.",
+    "Choosing an upbeat track because the edit feels slow instead of tightening the timeline.",
+    "Assuming app-library music or downloaded SFX are safe because they were easy to import."
+  ],
+  "qc": [
+    "Is the track licensed or platform-safe?",
+    "Does the music cue land on a meaningful moment?",
+    "Is speech still intelligible?",
+    "Does the track improve retention or emotion rather than distract?",
+    "Does the music tone respect the subject matter?",
+    "Does the track feel intentionally selected for this world, character, or story phase?",
+    "Were serious music-led sections auditioned against at least one alternate track?",
+    "Does the strongest cue land on a meaningful visual or story beat?",
+    "Does the track fit the voice and pace of the scene rather than fighting it?",
+    "Is any in-app, downloaded, or screen-recorded audio documented as licensed, platform-safe, or temp-only?"
+  ]
+}

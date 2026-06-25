@@ -1,0 +1,64 @@
+{
+  "id": "sound_sensory_world_characterization_001",
+  "name": "Sensory World Sound Characterization",
+  "category": "sound_design",
+  "source_tutorial": "transcripts/The-5-Second-Intro-Is-Dead-Here-s-Why_Media.txt",
+  "additional_sources": [
+    "transcripts/slow editing.txt"
+  ],
+  "use_when": [
+    "A place, material, fantasy world, machine, or destructive force needs to feel alive before it is explained.",
+    "The edit needs a pause beat where image and sound carry story without VO.",
+    "The sequence contrasts calm, natural, grounded reality with artificial, destructive, or unreal imagery.",
+    "A human cutaway needs tiny believable sound details so the physical scene feels present."
+  ],
+  "avoid_when": [
+    "The SFX would make serious documentary evidence feel fake or manipulative.",
+    "Dialogue, testimony, or source sound is more important than sonic worldbuilding.",
+    "The sound cue is generic and does not describe the specific material or story force."
+  ],
+  "timeline_pattern": {
+    "pattern": "visual_setup -> material_or_world_sfx -> pause_or_reveal -> contrast_sfx -> grounded_reset",
+    "pause_rule": "Use a short pause beat when the viewer needs to feel the image rather than receive more VO.",
+    "contrast_rule": "Pair different sonic identities to make conflict legible, such as delicate ambience against destructive impacts.",
+    "reset_rule": "After a ramped or unreal sequence, cut to silence or natural sound to return the viewer to grounded reality.",
+    "human_foley_rule": "Small realistic sounds such as footsteps, cloth, room texture, or object handling can ground an otherwise polished social edit."
+  },
+  "motion": {
+    "rule": "Sound should justify or intensify visual movement changes, especially when breaking movement continuity."
+  },
+  "sound": {
+    "rule": "Design sounds that characterize the world: low tonal beds for scale, textured rumbles for materials, impact layers for destruction, and strange SFX for unreal spaces.",
+    "timing": "A 1-2 second sound-image pause can replace explanatory VO when the meaning is visually clear.",
+    "mix": "Keep VO and dialogue clean when they return; sensory SFX should not mask story-critical words."
+  },
+  "captions": {
+    "rule": "Avoid captions during purely sensory pause beats unless accessibility requires describing important non-speech sound."
+  },
+  "color": {
+    "rule": "No direct color requirement; maintain enough visual clarity for the sound-image association to read."
+  },
+  "implementation": {
+    "ffmpeg": "Use audio fades, volume envelopes, and silence sections to build pause beats. Review waveform peaks so SFX do not overpower VO re-entry.",
+    "remotion": "Store sound cues with semantic labels like material_life, destructive_force, fantasy_world, pause_beat, and grounded_reset.",
+    "blender": "Place audio markers on visual reveals, movement breaks, and camera-direction changes that need sonic justification.",
+    "capcut_equivalent": "Layer ambience, tonal beds, impacts, and abrupt music/SFX drops manually instead of relying on default whooshes.",
+    "premiere_equivalent": "Use sequence markers for pause beats, ramp peaks, abrupt silence, and natural-sound resets; keyframe music and SFX around VO."
+  },
+  "common_mistakes": [
+    "Adding cinematic sounds that do not describe the actual story world.",
+    "Letting SFX bury VO or footsteps that should ground the scene.",
+    "Filling pause beats with extra narration out of insecurity.",
+    "Using abrupt silence without a preceding ramp or a grounded sound to receive it.",
+    "Using cheap stock SFX that undercut a premium documentary tone.",
+    "Adding human-scene foley so loud that the viewer notices the trick instead of feeling the place."
+  ],
+  "qc": [
+    "Can the editor name what each sound cue says about the world or conflict?",
+    "Do pause beats carry meaning without feeling like dead air?",
+    "Do SFX peaks stay below story-critical dialogue?",
+    "Does an abrupt silence reset land on a clear grounded image or natural sound?",
+    "Are generic whooshes removed when they do not match the documentary tone?",
+    "Do tiny human-scene sounds ground the moment without masking speech or feeling fake?"
+  ]
+}

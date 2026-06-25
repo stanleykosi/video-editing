@@ -1,0 +1,66 @@
+{
+  "id": "davinci_fairlight_dialogue_ambience_bus_mix_001",
+  "name": "DaVinci Fairlight Dialogue Ambience And Bus Mix",
+  "category": "sound_design",
+  "source_tutorial": "transcripts/davinci resolve full tutorial.txt",
+  "use_when": [
+    "A Resolve scene needs professional-feeling dialogue, ambience, music, SFX, and mix control.",
+    "Audio needs more detail than the Edit page can comfortably provide.",
+    "Related SFX or dialogue tracks should be controlled together through buses."
+  ],
+  "avoid_when": [
+    "The edit is silent or audio is already mixed by a dedicated sound engineer.",
+    "The project only needs a tiny volume trim and no track/bus organization.",
+    "The agent cannot check the full mix after soloing tracks."
+  ],
+  "timeline_pattern": {
+    "pattern": "dialogue_channel_map -> unlink_or_trim -> range_gain_or_delete -> ambience_bed -> music_fit -> obvious_sfx_pass -> tracks_groups_buses -> EQ_dynamics -> full_mix_qc",
+    "track_rule": "Use separate tracks for dialogue, ambience, music, and SFX families.",
+    "range_rule": "Use Range or Focus mode for partial clip edits without unnecessary splits.",
+    "ambience_rule": "Add room tone or ambience under gaps so dialogue scenes do not fall into dead air.",
+    "sfx_pass_rule": "Add obvious expected story sounds first, then layer secondary texture.",
+    "bus_rule": "Route related tracks to buses for shared volume, EQ, reverb, or dynamics, and route buses to the main output."
+  },
+  "motion": {
+    "rule": "SFX should land on visible action, impacts, object movement, or story reveals."
+  },
+  "sound": {
+    "rule": "Mix by clips, tracks, and buses; speech remains clear unless the section is intentionally music-led.",
+    "keyframe_values": {
+      "ambience_level": "Lower ambience until it is barely noticed but prevents empty silence.",
+      "music_splice": "Shorten music on beats, phrase endings, or visually similar waveform peaks; crossfade when the splice is exposed.",
+      "eq_distance": "Reduce high frequencies to make off-screen, outside-room, or behind-door sounds feel farther away.",
+      "compression": "Use gentle dialogue compression with only modest gain reduction, then add makeup gain for intelligibility."
+    }
+  },
+  "captions": {
+    "rule": "Captions can support hard-to-hear lines, but the mix should not bury normal dialogue."
+  },
+  "color": {
+    "rule": "No direct color rule."
+  },
+  "implementation": {
+    "ffmpeg": "Use channelmap/pan, volume envelopes, afade/acrossfade, equalizer/lowpass, compand/dynaudnorm where appropriate, and loudness checks.",
+    "remotion": "Represent tracks and buses as grouped audio components with gain envelopes, EQ/filter metadata, and routing to a main mix.",
+    "blender": "Use VSE audio strips on separate tracks with volume keyframes and export loudness checks.",
+    "capcut_equivalent": "Separate dialogue, ambience, music, and SFX tracks; use fades, keyframes, EQ/noise tools, and grouped exports if available.",
+    "premiere_equivalent": "Use track names, Audio Track Mixer/Submixes, Essential Sound, EQ, compression, clip gain, markers, and full-mix review."
+  },
+  "common_mistakes": [
+    "Leaving production WAV channels mapped so dialogue plays only on one speaker.",
+    "Mixing while soloed and never checking the full scene.",
+    "Adding SFX randomly instead of in story/action passes.",
+    "Routing tracks to a bus that does not reach the main output.",
+    "Overcompressing dialogue until it sounds crushed or noisy.",
+    "Leaving dead air where room tone or ambience should support the scene."
+  ],
+  "qc": [
+    "Is dialogue mapped correctly and audible in the intended speakers?",
+    "Are dialogue, ambience, music, and SFX controllable on separate tracks or buses?",
+    "Does ambience prevent empty-feeling dead air without drawing attention?",
+    "Do SFX land on visible story actions and remain balanced in the full mix?",
+    "Do buses route to the main output and avoid clipping?",
+    "Does dialogue compression improve clarity without sounding artificial?"
+  ]
+}
+

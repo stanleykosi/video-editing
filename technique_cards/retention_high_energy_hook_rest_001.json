@@ -1,0 +1,67 @@
+{
+  "id": "retention_high_energy_hook_rest_001",
+  "name": "High-Energy Hook Then Rest Beat",
+  "category": "retention",
+  "source_tutorial": "transcripts/short-form editing.txt",
+  "additional_sources": [
+    "transcripts/ultimate guide to shortform.txt",
+    "transcripts/slow editing.txt"
+  ],
+  "use_when": [
+    "A short starts with dense motion, text, overlays, SFX, or fast cuts.",
+    "The hook uses a designed text sequence that needs a cleaner body structure afterward.",
+    "The editor needs high energy without exhausting the viewer.",
+    "The hook is visually intense but the rest of the explanation needs comprehension.",
+    "The short uses a simple dynamic zoom/proof hook, then needs a slower human body without losing momentum."
+  ],
+  "avoid_when": [
+    "The format is a calm talking-head clip where intensity would feel fake.",
+    "The target style intentionally stays maximalist from start to finish.",
+    "The rest beat would create dead air instead of comprehension."
+  ],
+  "timeline_pattern": {
+    "pattern": "high_energy_hook -> visualized_intro -> short_rest_beat_or_body_visual -> important_statement_accent -> payoff",
+    "energy_rule": "Put maximum energy into the hook, then reduce visual density briefly so the viewer can process the point.",
+    "rest_rule": "A rest beat can be a clean talking-head shot, simple tracking shot, or quieter B-roll as long as it keeps momentum.",
+    "body_rule": "After the hook, rotate through the lightest useful body support: simple talking head, filler card, B-roll text, or full-screen animation.",
+    "return_rule": "Re-introduce zooms, overlays, or SFX on important statements, not on every sentence.",
+    "slow_human_rule": "After the hook, slower human moments can work when they create connection, proof, or emotional clarity rather than empty space."
+  },
+  "motion": {
+    "rule": "Use less motion after the hook until the next claim, proof, or transition needs emphasis.",
+    "dynamic_zoom_note": "A long simple dynamic zoom can be enough for an emotional body section if the face/story already carries attention."
+  },
+  "sound": {
+    "rule": "Reduce SFX density after the hook so speech stays clear; bring back hits or whooshes on meaningful movement."
+  },
+  "captions": {
+    "rule": "Keep captions readable during the rest beat and avoid stacking them with extra title text."
+  },
+  "color": {
+    "rule": "High-energy color or overlay effects should not make the rest beat feel like an accidental style break."
+  },
+  "implementation": {
+    "ffmpeg": "Render hook and post-hook sections separately to compare visual density. Use contact sheets to check whether the rest beat still has a clear focal point.",
+    "remotion": "Tag sections as hookIntensity, restBeat, accentBeat, or payoff; reduce overlay and SFX components during restBeat sections.",
+    "blender": "Reserve heavier animated elements for hook and accent beats, then use simpler camera or text movement for rest sections.",
+    "capcut_equivalent": "After a dense hook, use a clean clip with light tracking before adding the next preset-heavy motion sequence.",
+    "premiere_equivalent": "Use markers for hook, rest, body visual, accent, and payoff; toggle adjustment layers and SFX groups to compare density."
+  },
+  "common_mistakes": [
+    "Keeping hook-level intensity for the whole short until the viewer cannot process the point.",
+    "Adding a rest beat that becomes empty dead air.",
+    "Cutting out a human imperfection that would have made the post-hook section feel warmer.",
+    "Using effects on every sentence instead of the important statements.",
+    "Treating filler cards, B-roll text, and full-screen animations as equal-weight effects instead of choosing by line importance.",
+    "Dropping energy so hard after the hook that the short feels unfinished."
+  ],
+  "qc": [
+    "Does the hook feel energetic without making the claim unclear?",
+    "Does the post-hook rest beat preserve momentum?",
+    "Does any slower post-hook section have a named connection, proof, emotion, or comprehension purpose?",
+    "Are effects reintroduced on important statements rather than every sentence?",
+    "Can the viewer understand the explanation after the dense hook?",
+    "Does SFX density drop enough for speech to stay clear?",
+    "Are body visuals chosen by line importance rather than applied on a fixed schedule?"
+  ]
+}

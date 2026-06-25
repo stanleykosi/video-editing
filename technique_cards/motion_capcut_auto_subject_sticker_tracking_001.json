@@ -1,0 +1,63 @@
+{
+  "id": "motion_capcut_auto_subject_sticker_tracking_001",
+  "name": "CapCut Auto Subject And Sticker Tracking",
+  "category": "motion",
+  "source_tutorial": "transcripts/make pro media.txt",
+  "use_when": [
+    "A speaker's face, body, or hand needs to stay framed using CapCut's built-in tracking.",
+    "A sticker, arrow, label, or graphic should follow a person or object for a short emphasis beat.",
+    "The tracked target remains visible and distinct across the affected range."
+  ],
+  "avoid_when": [
+    "The subject turns away, leaves frame, is heavily occluded, or blends into the background.",
+    "Tracking drift would cover captions, faces, proof, UI, products, or action.",
+    "The app/platform lacks the needed tracking feature for the current device.",
+    "Manual keyframes would be more reliable for a short or simple move."
+  ],
+  "timeline_pattern": {
+    "pattern": "choose_clip_or_sticker -> place_initial_position -> choose_face_body_hand_or_object_target -> start_tracking -> preview_drift -> adjust_or_keyframe_fix -> caption_safe_review",
+    "target_rule": "Choose the most stable visible feature: face when it stays front-facing, body when full-body motion matters, hand only when the hand remains clear.",
+    "sticker_rule": "Place the sticker in its desired final relation to the subject before starting tracking.",
+    "device_rule": "If tracking is unavailable on one device, use another supported device or manual keyframes.",
+    "reject_rule": "Reject or shorten the tracking section when the tracker loses the target."
+  },
+  "motion": {
+    "rule": "Tracking should guide attention without turning the crop or sticker into the main distraction.",
+    "keyframe_values": {
+      "target_visibility": "Keep the tracked feature visible through the whole tracking range.",
+      "sticker_offset": "Set the sticker offset before tracking, such as above the head or pointing to the product.",
+      "review_range": "Scrub the full tracked section after generation and fix drift with manual keyframes or shorter ranges.",
+      "safe_crop": "If tracking reframes the clip, preserve face, hands, captions, proof, and action."
+    }
+  },
+  "sound": {
+    "rule": "Add a small pop or tick only if the sticker/arrow entrance is a real emphasis beat."
+  },
+  "captions": {
+    "rule": "Tracked stickers and reframed crops must not enter caption safe areas unless captions are intentionally moved or suppressed."
+  },
+  "color": {
+    "rule": "Sticker or arrow colors should contrast with the background without feeling unrelated to the style pack."
+  },
+  "implementation": {
+    "ffmpeg": "Use external tracking data if available; otherwise approximate with manually keyframed overlay x/y positions and crop transforms.",
+    "remotion": "Store trackingTarget, targetType, stickerOffset, generatedTrackPoints, driftFixFrames, and safeRegions.",
+    "blender": "Use motion tracking or object tracking for attached graphics, then review occlusion and drift across the full range.",
+    "capcut_equivalent": "On supported mobile devices, use Camera Tracking for face/body/hand or Tracking on a sticker/overlay, place the tracking circle on the target, start tracking, then preview and shorten/fix drift.",
+    "premiere_equivalent": "Use mask tracking, position keyframes, or send to After Effects for point tracking/rotoscoping when the graphic must follow a moving feature."
+  },
+  "common_mistakes": [
+    "Tracking a face that turns out of frame and expecting the app to recover.",
+    "Placing a sticker before deciding its final relationship to the subject.",
+    "Accepting drift because the first frame looked correct.",
+    "Letting a tracked sticker cover captions or the subject's expression.",
+    "Assuming every CapCut device version exposes the same tracking controls."
+  ],
+  "qc": [
+    "Does the tracked target stay visible through the full range?",
+    "Does the crop or sticker drift, jitter, or jump?",
+    "Does the sticker point to a real feature and clear before it becomes clutter?",
+    "Do captions, faces, proof, UI, products, and action remain safe?",
+    "Is manual keyframing better for this shot?"
+  ]
+}

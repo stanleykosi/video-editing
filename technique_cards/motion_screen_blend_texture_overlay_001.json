@@ -1,0 +1,77 @@
+{
+  "id": "motion_screen_blend_texture_overlay_001",
+  "name": "Screen Blend Texture Overlay",
+  "category": "motion",
+  "source_tutorial": "transcripts/editing viral videos.txt",
+  "additional_sources": [
+    "transcripts/editing tricks.txt",
+    "transcripts/still image to media.txt",
+    "transcripts/documentary edits.txt"
+  ],
+  "use_when": [
+    "A transition, highlight, or scene needs texture such as light leaks, dust, electricity, sparks, or subtle atmosphere.",
+    "The overlay has a black background that can become transparent with Screen/Add-style blending.",
+    "The edit needs a small premium texture without rebuilding the scene.",
+    "A stylized effect fades too early and needs a short black-backed or duplicated tail to preserve the intended visual beat.",
+    "A still-image composite needs black-background fire, glow, sparks, or atmosphere to become a believable moving element."
+    ,
+    "A screen recording should feel like it was filmed through glass or by a camera rather than captured as a flat digital screen."
+  ],
+  "avoid_when": [
+    "The overlay is only decoration and has no emphasis, transition, or mood job.",
+    "The texture hides faces, captions, UI, products, or proof.",
+    "The project tone is restrained and texture would feel fake or cheap."
+  ],
+  "timeline_pattern": {
+    "pattern": "visual_beat -> choose_texture_overlay -> screen_blend -> trim_to_beat -> adjust_opacity_color -> check_readability -> add_sfx_if_needed",
+    "blend_rule": "Use Screen/Add-style blending for black-background texture overlays and verify that black disappears cleanly.",
+    "placement_rule": "When the overlay represents a real scene element such as fire, resize and position it against the source object before judging opacity or grade.",
+    "job_rule": "Use overlays as highlighters, transition covers, mood texture, or impact accents, not constant noise.",
+    "range_rule": "Trim overlays to the specific beat so they do not linger over the next idea.",
+    "tail_rule": "If extending an effect tail, duplicate only enough layers or backing duration to finish the beat, then clear before the next focus."
+    ,
+    "filmed_screen_rule": "For documentary screen recordings, use glass, glare, dust, or monitor texture as a realism layer and lower opacity until UI and source text remain readable."
+  },
+  "motion": {
+    "rule": "Texture overlay motion should support the underlying beat and should not become the primary focus unless it is the intended transition.",
+    "keyframe_values": {
+      "filmed_screen_opacity": "For a glass texture over a screen recording, opacity around 35-40% can be a starting point; reduce if UI, cursor, captions, or source text suffer.",
+      "screen_texture_blend": "Color Burn can create a camera-filmed screen feel on some textures; Screen, Overlay, Soft Light, or lower opacity may be better depending on the plate."
+    }
+  },
+  "sound": {
+    "rule": "Add SFX only when the texture marks a real transition or impact; avoid sound on every decorative overlay."
+  },
+  "captions": {
+    "rule": "Captions and important text must remain readable through the overlay's brightest frames."
+  },
+  "color": {
+    "rule": "Tint or reduce opacity so the texture fits the palette and does not create compression ugliness."
+  },
+  "implementation": {
+    "ffmpeg": "Use blend modes such as screen/lighten approximations or alpha-preprocessed overlays; inspect bright frames for text collisions.",
+    "remotion": "Model overlays with assetRef, blendMode, opacity, tint, startFrame, endFrame, and readabilityCheckFrames.",
+    "blender": "Composite texture overlays with screen/add blending and keyframed opacity when building rendered inserts.",
+    "capcut_equivalent": "Place overlay above footage or a still image, set blend mode to Screen or similar, resize it to the motivated source area, trim to beat, and lower opacity. For filmed-screen texture, place a glass or monitor texture above the screen recording, try Color Burn or another blend mode, and start around 35-40% opacity before readability QC. For short effect tails, add a black backing/matte or duplicate the effect layer only until the intended beat finishes.",
+    "premiere_equivalent": "Place black-background or glass texture on a higher track, set blend mode to Screen/Overlay/Soft Light/Color Burn as appropriate, resize it to the motivated source area, trim it to the transition/highlight, adjust opacity or Lumetri/tint, and check captions. For effect tails, duplicate or loop the overlay inside a nest and fade it out before the next focus."
+  },
+  "common_mistakes": [
+    "Leaving texture overlays running over unrelated beats.",
+    "Using bright light leaks over captions or faces.",
+    "Adding overlays because they look fancy rather than because they highlight or transition.",
+    "Letting overlays create banding, noise, or compression dirt.",
+    "Extending an effect tail until it becomes visual clutter instead of emphasis.",
+    "Using a fire, glow, or atmosphere overlay that does not line up with a plausible source in the base image.",
+    "Making a screen recording look cinematic while hiding the UI detail or source text the viewer needs."
+  ],
+  "qc": [
+    "Can the overlay's job be named?",
+    "Does the blend remove the black background cleanly?",
+    "Does the overlay start and end on the intended beat?",
+    "Are captions, faces, UI, products, and proof readable through the overlay?",
+    "Does the overlay fit the project's color and tone?",
+    "If the effect tail is extended, does it clear before the next beat and avoid muddy duplicate layers?",
+    "If the overlay represents a real source like fire, does it align with the object or region creating that light?",
+    "For filmed-screen texture, can the viewer still read UI, cursor motion, source text, and captions?"
+  ]
+}

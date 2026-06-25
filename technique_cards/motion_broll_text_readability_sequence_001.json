@@ -1,0 +1,67 @@
+{
+  "id": "motion_broll_text_readability_sequence_001",
+  "name": "B-Roll Text Readability Sequence",
+  "category": "motion",
+  "source_tutorial": "transcripts/ultimate guide to shortform.txt",
+  "additional_sources": [
+    "transcripts/typography.txt"
+  ],
+  "use_when": [
+    "A body section can be shown through B-roll while text names the emotional or story beat.",
+    "The B-roll is visually useful but too busy for text without treatment.",
+    "A short needs stronger story support than talking head plus captions."
+  ],
+  "avoid_when": [
+    "The B-roll does not match the spoken idea.",
+    "The background treatment would hide important proof or action.",
+    "Centered text would block the subject's face, product, UI, or key action."
+  ],
+  "timeline_pattern": {
+    "pattern": "spoken_story_beat -> select_matching_broll -> trim_in_out -> place_text_above -> add_adjustment_layer_between -> darken_or_desaturate_broll -> extend_over_sequence",
+    "selection_rule": "Choose B-roll by story beat, emotion, proof, or contrast rather than by whatever shot is available.",
+    "readability_rule": "Darken, desaturate, dim, or blur only enough for the text to read.",
+    "source_monitor_rule": "Mark in/out points before dropping B-roll so the selected moment matches the spoken beat.",
+    "whitespace_rule": "Place text in the B-roll's usable negative space before dimming or covering the subject."
+  },
+  "motion": {
+    "rule": "Keep B-roll motion subordinate to the text and spoken point; avoid busy camera movement behind small text.",
+    "keyframe_values": {
+      "background_brightness": "Lower brightness only as much as needed for text contrast; start with a mild reduction and check proof visibility.",
+      "saturation": "Reduce saturation when color competes with text, but preserve story-critical color information.",
+      "text_position": "Center text only when it does not hide the B-roll subject or action.",
+      "line_breaks": "Break text into readable phrases; do not let auto-wrap isolate filler words."
+    }
+  },
+  "sound": {
+    "rule": "Mute or intentionally mix B-roll source audio under A-roll; do not leave accidental B-roll sound under speech."
+  },
+  "captions": {
+    "rule": "Disable ordinary captions if the B-roll text carries the same phrase and would otherwise collide."
+  },
+  "color": {
+    "rule": "Adjustment layers should improve text readability without making the B-roll look like an accidental grade mismatch."
+  },
+  "implementation": {
+    "ffmpeg": "Trim B-roll with in/out metadata, apply eq/saturation filters for readability, overlay text, and preview at phone size.",
+    "remotion": "Represent each B-roll text beat with sourceIn, sourceOut, text, adjustmentStyle, captionSuppression, and focalPoint fields.",
+    "blender": "Use video planes with darkened material or overlay plane and text objects for stylized body sequences.",
+    "capcut_equivalent": "Trim the B-roll to the spoken beat, place text above it, add canvas/dim/adjust filters, and remove source audio if it fights dialogue.",
+    "premiere_equivalent": "Use Source Monitor I/O points, drag video-only when needed, place Essential Graphics text above B-roll, add an adjustment layer between text and B-roll, then reduce brightness and saturation with effects such as Brightness/Contrast and Lumetri."
+  },
+  "common_mistakes": [
+    "Using B-roll because the talking head has been onscreen too long rather than because the line needs it.",
+    "Darkening footage until the story detail is lost.",
+    "Leaving B-roll source audio under speech by accident.",
+    "Centering text over the exact subject the viewer should inspect.",
+    "Letting captions, B-roll text, and hook text compete at once.",
+    "Using text treatment to fix bad placement instead of moving the text into cleaner space."
+  ],
+  "qc": [
+    "Each B-roll shot matches the spoken story beat.",
+    "Text remains readable at phone size.",
+    "Background treatment preserves necessary proof, action, and color detail.",
+    "Unwanted B-roll source audio is muted or intentionally mixed.",
+    "Captions and B-roll text do not duplicate or collide.",
+    "Text sits in negative space or a deliberate safe area rather than on top of the proof."
+  ]
+}

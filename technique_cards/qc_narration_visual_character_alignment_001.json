@@ -1,0 +1,60 @@
+{
+  "id": "qc_narration_visual_character_alignment_001",
+  "name": "Narration Visual Character Alignment",
+  "category": "qc",
+  "source_tutorial": "project lesson: Bleach women recap correction, 2026-06-23",
+  "use_when": [
+    "A recap, commentary, explainer, or documentary narration names a person, character, place, object, product, UI element, proof point, or scene event.",
+    "The edit uses source footage while the original source audio is muted or replaced by narration.",
+    "A character-specific section could accidentally inherit a shot from the previous or next character.",
+    "The viewer may judge timing by rounded playback timestamps such as 0:42 rather than the exact EDL boundary."
+  ],
+  "avoid_when": [
+    "The visual mismatch is intentional irony, foreshadowing, or contrast and the user has approved it.",
+    "The narration is intentionally abstract and does not require literal visual correspondence."
+  ],
+  "timeline_pattern": {
+    "pattern": "spoken_name_or_reference -> early_visual_handoff -> matching_character_or_object_hold -> next_reference_handoff",
+    "early_handoff_rule": "For named entities, the supporting visual should arrive slightly before the viewer-facing timestamp. Do not rely on an exact sub-second EDL boundary if the user or platform player will show the rounded second.",
+    "spot_check_window_rule": "When checking a reported timestamp, inspect at least 0.5s before through 1.0s after the complaint window, plus the full named-entity section.",
+    "source_identity_rule": "Verify the source range by looking at frames, not by assuming that a nearby source section contains the right character or subject.",
+    "rendered_output_rule": "The final proof must come from the rendered preview or promoted final, not only from the EDL or source contact sheet."
+  },
+  "motion": {
+    "rule": "Reframes, zooms, effects, or speed changes must preserve the named character, object, or proof point throughout the narrated reference.",
+    "avoid": "Using a stronger-looking shot that belongs to a different character or topic during a named narration beat."
+  },
+  "sound": {
+    "rule": "When original source audio is muted and narration drives meaning, visual timing follows the narration track, not the source scene order.",
+    "avoid": "Letting music or source rhythm justify a visual mismatch with the spoken name."
+  },
+  "captions": {
+    "rule": "If captions are present, caption timing and visual timing should agree on the same named entity unless the mismatch is approved.",
+    "avoid": "Captioning one character or topic while the picture still shows another."
+  },
+  "color": {
+    "rule": "Grade continuity is secondary to subject correctness. A visually pretty shot fails if it shows the wrong entity."
+  },
+  "implementation": {
+    "ffmpeg": "After rendering preview/final, extract timestamped contact sheets around each named handoff, for example with fps=1, drawtext timestamp labels, and tile. Review the cells that correspond to the actual viewer-facing seconds.",
+    "remotion": "Represent narration cues with entity labels and require each visual segment to declare the matching entity, expected output window, and reviewed frame samples.",
+    "blender": "Use only for planned illustrative transitions; rendered frames still need entity-match review against the narration cue.",
+    "capcut_equivalent": "Place markers at each spoken name, start the matching shot a fraction early when needed, and watch the exported file at those timestamps.",
+    "premiere_equivalent": "Use sequence markers for spoken names and export frame/contact sheets around each handoff before final delivery."
+  },
+  "common_mistakes": [
+    "Trusting that an EDL boundary like 42.765s is enough when the viewer sees the player at 0:42.",
+    "Checking only the source range or the timeline and not the rendered output.",
+    "Using a visually exciting shot from the wrong character because it feels close in mood or color.",
+    "Fixing one section while accidentally leaving a one-second carryover from the previous section.",
+    "Looking only at the exact complaint timestamp instead of the surrounding playback second."
+  ],
+  "qc": [
+    "For every named character, person, place, object, product, UI element, or proof point, is the matching visual already visible at the viewer-facing timestamp?",
+    "Does the visual handoff happen early enough that rounded player times do not show the previous subject?",
+    "Have source ranges been verified visually before assignment?",
+    "Have timestamped contact sheets been generated from the rendered preview or final around each sensitive handoff?",
+    "If the user reports a timestamp, was at least 0.5s before through 1.0s after that window inspected?",
+    "Does the promoted final file, not just the preview, pass the same spot check?"
+  ]
+}

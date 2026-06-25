@@ -1,0 +1,81 @@
+{
+  "id": "documentary_explainer",
+  "name": "Documentary Explainer",
+  "version": 1,
+  "best_for": [
+    "evidence-led explainers",
+    "historical or social topics",
+    "systems stories",
+    "YouTube documentary segments"
+  ],
+  "default_platform": {
+    "aspect_ratio": "16:9",
+    "resolution": "1920x1080",
+    "fps": 30,
+    "target_duration_seconds": 300
+  },
+  "story_structure": [
+    "cold open with human detail or contradiction",
+    "promise and framing",
+    "evidence block",
+    "system explanation",
+    "complication or counterpoint",
+    "synthesis and takeaway"
+  ],
+  "voiceover": {
+    "tone": "measured, precise, human, restrained",
+    "wpm_range": [115, 145],
+    "delivery_notes": [
+      "let evidence breathe",
+      "avoid hype language",
+      "mark uncertainty and source limits"
+    ]
+  },
+  "visual_language": {
+    "primary_visuals": [
+      "archival footage",
+      "public-domain images",
+      "documents",
+      "maps",
+      "charts",
+      "lower thirds",
+      "editorial title cards"
+    ],
+    "motion": "restrained; evidence readability wins over animation",
+    "typography": "editorial serif or clean sans with source labels",
+    "captions": "stable, accessible, avoid meme styling",
+    "color": "natural, archival, warm paper, or neutral documentary palette"
+  },
+  "asset_strategy": {
+    "preferred_sources": [
+      "Library of Congress",
+      "National Archives",
+      "Wikimedia Commons",
+      "NASA",
+      "Internet Archive",
+      "Natural Earth",
+      "source documents and public datasets"
+    ],
+    "must_manifest": true,
+    "generated_visual_policy": "Only for illustrative reconstructions or abstract concepts; label internally and never present as evidence."
+  },
+  "sound": {
+    "music": "restrained documentary bed or sparse pulse",
+    "sfx": "subtle paper, projector, map, data, and transition cues",
+    "mix_rule": "testimony and narration stay intelligible"
+  },
+  "knowledge_files": [
+    "skills/documentary_explainer.md",
+    "skills/vox_style_documentary_graphics.md",
+    "skills/editing_taste_story_pacing.md",
+    "skills/motion_graphics.md",
+    "skills/editor_qc.md"
+  ],
+  "qc": [
+    "every factual claim has a source",
+    "source context is not misleading",
+    "maps/charts/documents are readable after style treatment",
+    "asset rights and attribution are manifest-ready",
+    "generated or illustrative visuals are not treated as archival proof"
+  ]
+}

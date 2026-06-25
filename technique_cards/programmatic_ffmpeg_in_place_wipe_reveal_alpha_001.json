@@ -1,0 +1,64 @@
+{
+  "id": "programmatic_ffmpeg_in_place_wipe_reveal_alpha_001",
+  "name": "FFmpeg In-Place Wipe Reveal With Alpha Mask",
+  "category": "motion",
+  "source_tutorial": "transcripts/ffmpeg_wipe_reveal_alpha_mask_source_notes.md",
+  "additional_sources": [
+    "transcripts/ffmpeg_filters_alpha_masking_official_source_notes.md",
+    "transcripts/hhsprings_ffmpeg_alphamerge_alphaextract_source_notes.md"
+  ],
+  "use_when": [
+    "A foreground text, glow, graphic, or video layer should reveal in place without sliding across the screen.",
+    "A normal transition would move the top layer but the design calls for a wipe mask.",
+    "Direct xfade behavior causes black areas where transparent foreground should remain empty."
+  ],
+  "avoid_when": [
+    "A simple full-screen transition between two opaque clips is the real goal.",
+    "A Remotion CSS mask is already available and easier to control.",
+    "The mask inputs cannot be matched for resolution, fps, duration, pixel format, and timebase.",
+    "The foreground does not need transparency or in-place reveal behavior."
+  ],
+  "timeline_pattern": {
+    "pattern": "black_source + white_source -> xfade_wipe_mask -> foreground_prepared_in_place -> alphamerge -> overlay_over_background",
+    "position_rule": "Foreground stays at its final position; the mask moves, not the foreground.",
+    "transparency_rule": "If foreground has existing alpha, verify whether the reveal mask replaces or should multiply that alpha."
+  },
+  "motion": {
+    "rule": "The wipe should complete before the viewer needs the full foreground readable.",
+    "keyframe_values": {
+      "short_form_text": "6-15 frames at 30 fps for fast in-place text reveals.",
+      "lower_third_or_title": "12-24 frames at 30 fps for calmer reveals.",
+      "tolerance": "Reveal should land within the intended beat/phrase tolerance and hold after it completes."
+    }
+  },
+  "sound": {
+    "rule": "Place any whoosh or shimmer on the visible reveal edge, not merely at the start of the generated mask."
+  },
+  "captions": {
+    "rule": "Do not let the wipe reveal cover or duplicate ordinary captions unless the foreground text is replacing them."
+  },
+  "color": {
+    "rule": "Check transparent foreground edges for black contamination after the wipe mask is attached."
+  },
+  "implementation": {
+    "ffmpeg": "Generate a black-to-white xfade wipe mask, attach it with alphamerge to a foreground already positioned in place, then overlay the result over the background.",
+    "remotion": "Equivalent behavior is a frame-driven CSS mask or clip-path on the foreground layer; export transparent if compositing later.",
+    "blender": "Animate a wipe matte across a foreground layer in compositor while the foreground transform stays fixed.",
+    "capcut_equivalent": "Use a Split mask keyframed across a compounded foreground layer rather than moving the layer itself.",
+    "premiere_equivalent": "Use Linear Wipe or a track matte on the foreground layer while keeping Position fixed."
+  },
+  "common_mistakes": [
+    "Animating the foreground position instead of the mask.",
+    "Using xfade directly on transparent foreground and accepting black transparency failures.",
+    "Using a wipe mask with mismatched properties.",
+    "Reversing mask polarity.",
+    "Finishing to a non-alpha format when the output is meant to remain a reusable overlay."
+  ],
+  "qc": [
+    "Foreground stays in place through the reveal.",
+    "Mask preview shows the intended wipe direction.",
+    "Existing transparent areas remain transparent after reveal.",
+    "Mask and foreground dimensions, fps, duration, pixel format, and timebase match.",
+    "No black rectangle appears behind transparent foreground areas."
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "id": "story_repetition_scale_accumulation_001",
+  "name": "Repetition For Scale Accumulation",
+  "category": "story_pacing",
+  "source_tutorial": "transcripts/Editing-That-Makes-Your-Story-10x.txt",
+  "use_when": [
+    "A story point becomes stronger when the viewer sees multiple instances rather than one example.",
+    "The edit needs to show effort, research, repetition, scale, attempts, or abundance quickly.",
+    "A single clip undersells the amount of work or evidence."
+  ],
+  "avoid_when": [
+    "Repeating examples does not add new meaning.",
+    "The sequence is already clear and repetition would slow it down.",
+    "The repeated instances are too similar and feel like padding."
+  ],
+  "timeline_pattern": {
+    "pattern": "instance_1 -> instance_2 -> instance_3 -> conclusion_or_result",
+    "count_rule": "Three instances often reads as a pattern without becoming long.",
+    "escalation_rule": "Each instance should add scale, specificity, or rhythm."
+  },
+  "motion": {
+    "rule": "Use consistent framing or quick rhythmic placement when accumulating instances.",
+    "avoid": "Random movement that hides the repetition pattern."
+  },
+  "sound": {
+    "rule": "Use small rhythmic sounds or cadence only if they clarify the accumulation."
+  },
+  "captions": {
+    "rule": "Caption or number instances only when the scale might otherwise be missed."
+  },
+  "color": {
+    "rule": "Keep repeated instances visually coherent enough to read as a pattern."
+  },
+  "implementation": {
+    "ffmpeg": "Create a short concat of 2-4 related examples and compare whether the pattern reads faster than narration alone.",
+    "remotion": "Use a repeated component/grid/list when examples are screenshots, clips, or objects.",
+    "blender": "Use simple duplication or accumulation animation for abstract scale.",
+    "capcut_equivalent": "Stack quick examples in rhythmic order before the result beat.",
+    "premiere_equivalent": "Build a micro-stringout of repeated examples and trim until the pattern reads without drag."
+  },
+  "common_mistakes": [
+    "Using repetition as filler rather than proof.",
+    "Showing too many examples after the point is clear.",
+    "Repeating shots that do not vary or escalate.",
+    "Making the pattern hard to read through inconsistent framing."
+  ],
+  "qc": [
+    "Does each repeated instance add scale or proof?",
+    "Does the pattern read quickly?",
+    "Would one example communicate the point just as well?",
+    "Does the sequence avoid feeling padded?"
+  ]
+}

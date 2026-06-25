@@ -1,0 +1,63 @@
+{
+  "id": "programmatic_remotion_webm_alpha_overlay_export_001",
+  "name": "Remotion WebM Alpha Overlay Export",
+  "category": "typography",
+  "source_tutorial": "transcripts/remotion_transparent_videos_source_notes.md",
+  "additional_sources": [
+    "transcripts/curio_ffmpeg_alpha_masking_source_notes.md"
+  ],
+  "use_when": [
+    "A transparent Remotion animation is intended for supported browser playback.",
+    "The delivery target accepts WebM alpha and smaller files matter.",
+    "The overlay is a web asset rather than an editor interchange file."
+  ],
+  "avoid_when": [
+    "The transparent file will be handed to Premiere, Resolve, Final Cut, CapCut, or an unknown editor.",
+    "The browser or platform alpha support is uncertain.",
+    "The overlay has critical brand colors or soft edges that need editor-grade interchange.",
+    "An opaque final MP4 is the only delivery needed."
+  ],
+  "timeline_pattern": {
+    "pattern": "transparent_Remotion_component -> png_frames -> vp8_or_vp9_yuva420p -> browser_support_check -> fallback_opaque_render",
+    "fallback_rule": "Render an opaque fallback with identical duration, fps, and timing when browser support is not guaranteed.",
+    "support_rule": "Document the intended browser/platform instead of treating WebM alpha as universal."
+  },
+  "motion": {
+    "rule": "Match fps and duration to the web player or parent page timing so the transparent animation does not drift.",
+    "keyframe_values": {
+      "frame_format": "Use PNG frames before encoding.",
+      "pixel_format": "Use yuva420p for WebM alpha.",
+      "codec": "Use VP8 or VP9 depending on project support."
+    }
+  },
+  "sound": {
+    "rule": "Keep sound outside the transparent WebM unless the web component explicitly requires synchronized audio."
+  },
+  "captions": {
+    "rule": "Do not use stylized WebM alpha text as the only accessibility caption layer for important speech."
+  },
+  "color": {
+    "rule": "Check compression and edge color over the actual page/background colors before approving."
+  },
+  "implementation": {
+    "ffmpeg": "Encode PNG frames with libvpx-vp9 and pix_fmt yuva420p for a browser-targeted transparent WebM; test playback in the target browser.",
+    "remotion": "Render with --image-format=png --codec=vp9 or vp8 and --pixel-format=yuva420p; create a separate opaque fallback when needed.",
+    "blender": "Use WebM/VP9 alpha only for web delivery after browser tests; otherwise prefer RGBA frames or ProRes 4444.",
+    "capcut_equivalent": "Do not assume CapCut will import WebM alpha correctly; use ProRes/PNG sequence or pre-composite if needed.",
+    "premiere_equivalent": "Avoid WebM alpha as the primary Premiere handoff; prefer ProRes 4444."
+  },
+  "common_mistakes": [
+    "Using WebM alpha for editor interchange because it previews in a browser.",
+    "Skipping the opaque fallback for unsupported playback environments.",
+    "Forgetting PNG frame format before alpha encoding.",
+    "Testing over only one background color.",
+    "Treating browser support as stable without a target-platform check."
+  ],
+  "qc": [
+    "Target browser plays the alpha file correctly.",
+    "Opaque fallback has identical timing and content.",
+    "Edges stay clean over actual page/background colors.",
+    "File is not used as the primary editor handoff unless support was proven.",
+    "No important caption/accessibility content exists only in the decorative alpha layer."
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "id": "natural_rhythm_cut",
+  "name": "Natural Rhythm Cut",
+  "category": "story_pacing",
+  "source_tutorial": "transcripts/how an editor think.txt",
+  "additional_sources": [
+    "transcripts/slow editing.txt"
+  ],
+  "use_when": [
+    "The goal is invisible editing or natural flow.",
+    "A shot contains physical action, walking, dialogue rhythm, or environmental cycles.",
+    "The current cut feels technically correct but rhythmically early or late.",
+    "Waveform-based trimming has made a human story feel disrupted or too mechanical."
+  ],
+  "avoid_when": [
+    "The desired emotion is discomfort, shock, agitation, or interruption.",
+    "The edit needs a deliberate pattern break.",
+    "Following the rhythm would hide an important story point."
+  ],
+  "timeline_pattern": {
+    "pattern": "observe_motion_or_breath -> cut_on_natural_completion_or_impulse",
+    "cut_cues": [
+      "completed gesture",
+      "eye movement",
+      "breath",
+      "step",
+      "line ending",
+      "environmental movement cycle"
+    ],
+    "review": "Loop the shot until the cut point feels apparent, then watch cold to verify.",
+    "waveform_warning": "Use waveforms to find candidates, but choose the final cut by visual rhythm, breath, face, and story."
+  },
+  "motion": {
+    "rule": "Match added motion to the source rhythm instead of fighting it."
+  },
+  "sound": {
+    "rule": "Use speech cadence, footsteps, impacts, and ambience to locate natural cut points.",
+    "avoid": "Audio pops or abrupt ambience changes that make invisible cuts visible."
+  },
+  "captions": {
+    "rule": "Caption changes should respect speech rhythm and not lag behind the cut."
+  },
+  "color": {
+    "rule": "Shot matching should support invisibility; avoid grade jumps at rhythm cuts."
+  },
+  "implementation": {
+    "ffmpeg": "Use timeline contact sheets and waveforms around candidate cut points. Add short audio fades at cuts to preserve natural rhythm.",
+    "remotion": "Use frame markers for action completion, breath, or line ending; align sequence boundaries to those frames.",
+    "blender": "Match camera or graphic motion to the cadence of the source footage.",
+    "capcut_equivalent": "Split on action completion, breath, or line cadence; use simple cuts unless the rhythm asks for a transition.",
+    "premiere_equivalent": "Use trim mode and loop playback around the edit point to feel whether the cut lands naturally."
+  },
+  "common_mistakes": [
+    "Cutting only by transcript text and ignoring visual rhythm.",
+    "Cutting everything by waveform so the edit loses human continuity.",
+    "Cutting before a gesture or breath resolves.",
+    "Adding transitions that break an otherwise invisible cut.",
+    "Ignoring ambience changes at the edit point."
+  ],
+  "qc": [
+    "Does the cut disappear when watched at normal speed?",
+    "Does the motion or speech cadence feel complete enough before the cut?",
+    "Is the audio bed smooth across the boundary?",
+    "Would a viewer notice the cut for the wrong reason?",
+    "Did waveform trimming preserve the human rhythm of the line or interaction?"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "id": "motion_capcut_slide_on_photo_stack_001",
+  "name": "CapCut Slide-On Photo Stack",
+  "category": "motion",
+  "source_tutorial": "transcripts/make pro media.txt",
+  "use_when": [
+    "A talking-head video needs supporting photos, real estate images, travel images, or proof visuals beside the speaker.",
+    "The footage was framed with negative space or rule-of-thirds placement to leave room for overlays.",
+    "A simple slide-in/out animation communicates more professionally than static images popping on."
+  ],
+  "avoid_when": [
+    "The speaker was centered and photos would cover the face, hands, product, captions, or proof.",
+    "The images do not support the spoken point or make the screen feel cluttered.",
+    "The photo rights are unclear for the intended release.",
+    "A single full-screen image or B-roll clip would communicate more clearly."
+  ],
+  "timeline_pattern": {
+    "pattern": "speaker_framed_to_side -> photo_1_overlay -> resize_to_negative_space -> slide_in -> hold -> photo_2_offset_entry -> optional_slide_out -> clear_before_next_point",
+    "shooting_rule": "Plan the speaker position while recording when photo overlays are expected later.",
+    "stagger_rule": "Offset multiple photos so each entrance is readable instead of arriving in the same frame.",
+    "animation_rule": "Use simple professional in/out animations, such as slide in from the side and slide back out.",
+    "hierarchy_rule": "The speaker and first photo should not compete equally unless the segment intentionally becomes an image explanation."
+  },
+  "motion": {
+    "rule": "Slide motion should be clean, consistent, and short enough that the photo is readable while the spoken point is active.",
+    "keyframe_values": {
+      "slide_duration": "Around 1.0-1.4 seconds can work for calm professional slide-ins; shorten for fast shorts after readability review.",
+      "stagger_gap": "Leave a visible gap between photo entrances so the viewer registers each image.",
+      "size": "Resize by composition, preserving face/caption space and avoiding tiny unreadable photos.",
+      "exit": "Use a matching slide-out or fade before the next visual stack competes."
+    }
+  },
+  "sound": {
+    "rule": "Use no SFX or very light slide cues; photo stacks usually support speech rather than becoming impact transitions."
+  },
+  "captions": {
+    "rule": "Photo overlays must be planned with caption placement; move or simplify captions if they collide with the photo stack."
+  },
+  "color": {
+    "rule": "Photos should look consistent enough with the project palette; avoid clashing stock imagery that breaks the style lane."
+  },
+  "implementation": {
+    "ffmpeg": "Overlay each image with timed x/y slide expressions, optional fade, and collision review contact sheets.",
+    "remotion": "Model PhotoStack overlays with imageRefs, negativeSpaceRegion, inAnimation, startFrame, duration, outAnimation, and captionCollision metadata.",
+    "blender": "Use image planes with 2D camera framing for branded photo boards or more dimensional slide-ins.",
+    "capcut_equivalent": "Add each photo as an overlay, pinch-resize into planned negative space, add a simple Slide Right/Left in animation, offset later photos, and add matching out animations when the segment clears.",
+    "premiere_equivalent": "Use image layers with Position keyframes or Essential Graphics animation presets; use guides/rulers to keep speaker and captions safe."
+  },
+  "common_mistakes": [
+    "Trying to add photos after filming without leaving screen space.",
+    "Covering the speaker's face, product, hands, or captions.",
+    "Making every photo enter at once so the viewer cannot parse them.",
+    "Using random stock photos that do not support the spoken point.",
+    "Leaving photos onscreen after the spoken reference has passed."
+  ],
+  "qc": [
+    "Was the speaker framed with enough negative space for the photo stack?",
+    "Does each photo support the spoken point?",
+    "Do slide-ins and slide-outs finish before the viewer needs to inspect the image?",
+    "Do photos avoid faces, hands, captions, products, proof, and UI?",
+    "Are photo sources/license notes ready for publishable delivery?"
+  ]
+}

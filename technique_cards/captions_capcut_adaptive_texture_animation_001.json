@@ -1,0 +1,59 @@
+{
+  "id": "captions_capcut_adaptive_texture_animation_001",
+  "name": "CapCut Adaptive Texture Caption Animation",
+  "category": "captions",
+  "source_tutorial": "transcripts/viral text effects.txt",
+  "use_when": [
+    "A social edit needs captions that feel integrated with the footage rather than plain static subtitles.",
+    "The background has enough contrast and texture for CapCut's caption animation to create a readable color/texture change.",
+    "The creator wants a quick stylized auto-caption treatment that can still be manually checked."
+  ],
+  "avoid_when": [
+    "The footage is too busy, low contrast, or flickery for animated caption color/texture to stay readable.",
+    "The captions carry story-critical accessibility information and should remain stable.",
+    "Designed text, product UI, proof cards, or faces already compete for the caption region."
+  ],
+  "timeline_pattern": {
+    "pattern": "auto_captions -> apply_style_to_all -> choose_clean_font -> slight_character_tightening -> caption_animation_preset -> reposition -> phone_size_qc",
+    "preset_rule": "CapCut caption animations such as Single Line, Negative Grow, Multi Line, and Multi Line 3 can create background-reactive color/texture looks; test each against the actual footage.",
+    "font_rule": "Use a readable sans font before applying the animation; expressive fonts make the preset harder to QC.",
+    "manual_review_rule": "Auto captions remain drafts until wording, timing, line breaks, and safe placement are corrected."
+  },
+  "motion": {
+    "rule": "Caption animation must finish before the viewer needs to read the word and should not compete with other motion.",
+    "keyframe_values": {
+      "tracking": "A small CapCut Character value around -1 can tighten large captions when it does not cause collisions or shimmer.",
+      "preset_choice": "Single Line is a clean starting point; compare alternate presets only if the hierarchy remains readable."
+    }
+  },
+  "sound": {
+    "rule": "No SFX is required for continuous caption texture; speech clarity is the priority."
+  },
+  "captions": {
+    "rule": "Apply to all only after testing the style on bright, dark, busy, and face-heavy frames."
+  },
+  "color": {
+    "rule": "The background-reactive color/texture must preserve caption edge contrast on the actual footage."
+  },
+  "implementation": {
+    "ffmpeg": "Use ASS subtitles or drawtext with styled foreground/background changes only if the exact treatment is specified; otherwise approximate with readable static captions and contact-sheet QC.",
+    "remotion": "Represent captionStyle with font, letterSpacing, animationPreset, safeRegion, and per-frame contrast checks against the video background.",
+    "blender": "Use text objects or composited captions with animated materials only for controlled renders; inspect against the final footage.",
+    "capcut_equivalent": "Generate auto captions, select Apply To All, choose a readable font, optionally set Character around -1, apply a caption animation such as Single Line, Negative Grow, Multi Line, or Multi Line 3, then reposition and review every caption.",
+    "premiere_equivalent": "Create captions, upgrade selected captions to graphics only after correction, then apply a tested text animation or style preset while preserving contrast."
+  },
+  "common_mistakes": [
+    "Applying the preset to all captions before correcting the transcript.",
+    "Letting the animated caption texture disappear on bright or busy backgrounds.",
+    "Using tight character spacing on small subtitles until letters collide.",
+    "Keeping stylized captions over faces, product UI, proof, or other designed text.",
+    "Using the effect for serious or accessibility-first sections where stable subtitles are better."
+  ],
+  "qc": [
+    "Are auto-caption words, timing, and line breaks corrected?",
+    "Does every caption remain readable on bright, dark, and busy frames?",
+    "Does caption animation finish before the word needs to be read?",
+    "Do captions avoid faces, product UI, proof, and designed text?",
+    "Does the style still work when previewed at phone size?"
+  ]
+}

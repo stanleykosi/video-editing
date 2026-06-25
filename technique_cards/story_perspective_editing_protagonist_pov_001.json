@@ -1,0 +1,63 @@
+{
+  "id": "story_perspective_editing_protagonist_pov_001",
+  "name": "Perspective Editing Through Protagonist POV",
+  "category": "story_pacing",
+  "source_tutorial": "transcripts/Editing-That-Makes-Your-Story-10x.txt",
+  "additional_sources": [
+    "transcripts/The-5-Second-Intro-Is-Dead-Here-s-Why_Media.txt"
+  ],
+  "use_when": [
+    "A story has impressive visuals but lacks a human point of view.",
+    "The viewer needs to feel how an event, place, obstacle, or success affects the protagonist.",
+    "A sequence feels like generic coverage instead of a character-driven story.",
+    "Promotional, archival, CGI, or abstract world footage needs to be connected to the real person, institution, or belief behind it."
+  ],
+  "avoid_when": [
+    "The story is intentionally observational and protagonist interpretation would narrow the meaning.",
+    "The protagonist reaction footage does not exist and adding it would feel false.",
+    "The scene needs objective evidence more than subjective experience."
+  ],
+  "timeline_pattern": {
+    "pattern": "world_or_information -> protagonist_reaction -> consequence_or_next_action",
+    "reaction_rule": "Cut back to the protagonist when new information changes stakes, confidence, emotion, or decision-making.",
+    "kuleshov_rule": "Use adjacency between reaction and object/event to imply the protagonist's interpretation.",
+    "visual_connection_rule": "Connect fantasy or promotional worlds to real people through matched action, body language, or cause-and-effect adjacency.",
+    "body_language_rule": "Choose shots where posture, discomfort, confidence, or entourage mise-en-scene tells the story before adding explanation.",
+    "macro_rule": "Each perspective cut should serve the larger story arc, not only make the moment prettier."
+  },
+  "motion": {
+    "rule": "Keep reaction and POV shots visually readable; avoid motion that distracts from the protagonist's interpretation.",
+    "allowed": "Subtle push-in or framing adjustment when it intensifies the protagonist's realization."
+  },
+  "sound": {
+    "rule": "Use music, ambience, and pauses to color what the protagonist feels about the information.",
+    "avoid": "Generic music that gives no character perspective."
+  },
+  "captions": {
+    "rule": "Captions should not cover the reaction that defines the point of view."
+  },
+  "color": {
+    "rule": "Preserve facial readability and the visual evidence the protagonist is reacting to."
+  },
+  "implementation": {
+    "ffmpeg": "Build EDL beats as event/reaction/consequence triples. Render contact sheets around each reaction insertion to verify the meaning is readable.",
+    "remotion": "Represent beats with fields for event, world_shot, protagonist_reaction, body_language, emotional_state, and next_action. Use sequences to interleave reaction and world shots.",
+    "blender": "Use POV diagrams or camera moves only when they clarify what the protagonist sees or understands.",
+    "capcut_equivalent": "Insert reaction shots between landscape/action shots instead of making a pure visual montage.",
+    "premiere_equivalent": "Create selects bins for protagonist reactions, POV/object shots, and consequences; assemble by character perspective."
+  },
+  "common_mistakes": [
+    "Showing grand visuals without showing what they mean to the person in the story.",
+    "Using reaction shots randomly instead of at moments of changed stakes.",
+    "Relying on narration to explain feelings the edit could show.",
+    "Cutting away from the protagonist before their reaction registers.",
+    "Using generic B-roll of a person instead of selecting body language that supports the story claim."
+  ],
+  "qc": [
+    "Can the viewer identify whose perspective drives the sequence?",
+    "Does each reaction shot change or clarify the meaning of surrounding shots?",
+    "Does the cut answer what the information means to the protagonist?",
+    "Would the sequence become generic if the reaction shots were removed?",
+    "Do matched actions or adjacent shots create the intended connection without implying a false relationship?"
+  ]
+}

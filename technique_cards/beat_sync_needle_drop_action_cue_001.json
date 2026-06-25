@@ -1,0 +1,80 @@
+{
+  "id": "beat_sync_needle_drop_action_cue_001",
+  "name": "Needle Drop Action Cue Timing",
+  "category": "beat_sync",
+  "source_tutorial": "transcripts/Saving-Bad-Videos-With-Only-Music_Media.txt",
+  "additional_sources": [
+    "transcripts/editing viral videos.txt",
+    "transcripts/davinci resolve full tutorial.txt",
+    "transcripts/editing tricks.txt"
+  ],
+  "use_when": [
+    "A music cue or drop can make a visual action, reveal, chase, product-placement beat, or section shift feel more stylish.",
+    "The track has a recognizable intro, pickup, downbeat, or escalation point.",
+    "The scene has a clear wide shot, impact, braking point, reveal, or action change to receive the cue.",
+    "A voiceover-led YouTube edit adds music early so some visual cuts can be shaped by beat.",
+    "A music cue needs shortening while preserving phrase, beat, or waveform continuity.",
+    "A speed-adjusted action clip needs its peak pose or impact aligned to a beat before transitions are added."
+  ],
+  "avoid_when": [
+    "The strongest beat lands on a meaningless visual moment.",
+    "The scene needs realism, restraint, or quiet more than stylized energy.",
+    "Dialogue timing cannot survive the cue without being masked.",
+    "The edit starts cutting to every beat and loses story clarity."
+  ],
+  "timeline_pattern": {
+    "pattern": "setup -> pre_cue -> drop_on_visual_turn -> escalate_on_action_change -> duck_or_exit",
+    "cue_rule": "Place the song's most satisfying cue on a meaningful story or action turn.",
+    "escalation_rule": "When the visual action intensifies, the music should either escalate, drop out deliberately, or be replaced.",
+    "exit_rule": "Plan the next dialogue or story beat before the music overwhelms it.",
+    "voiceover_rule": "Use beat cuts only after the voiceover flow is understandable; music should support the edit's vibe, not force random cuts.",
+    "manual_splice_rule": "When shortening music manually, cut on beats or similar waveform shapes and use a crossfade if the join is exposed.",
+    "clip_speed_rule": "For AMV or action clips, adjust clip speed against beat markers until the action peak reaches the cue; do not rely on one universal speed value."
+  },
+  "motion": {
+    "rule": "Use cuts, speed ramps, zooms, and wide-shot reveals only where they land with the cue and clarify the action.",
+    "keyframe_values": {
+      "sync_tolerance": "Aim for the action cut or motion accent to land within 1-2 frames of the intended beat for high-energy edits.",
+      "pre_cue_length": "Use enough intro or pickup for anticipation; trim if the pre-cue delays the visual payoff.",
+      "escalation_marker": "Mark the exact action change, brake, impact, or reveal that should receive the next musical lift.",
+      "manual_crossfade": "A short crossfade can hide a phrase splice when matching waveform peaks are close but not seamless.",
+      "speed_match_sync": "When speed-matching clips, preview at least the outgoing clip, synced clip, and next cut so the run feels musical."
+    }
+  },
+  "sound": {
+    "rule": "Use beat markers, cue markers, and volume ducking so the drop feels intentional and dialogue remains clear."
+  },
+  "captions": {
+    "rule": "Do not place captions over the key visual moment receiving the drop unless dialogue comprehension requires it."
+  },
+  "color": {
+    "rule": "No required color rule; preserve action readability during music-led energy changes."
+  },
+  "implementation": {
+    "ffmpeg": "Use waveform inspection and short exports around the cue. Trim audio start times and clip cuts so the drop aligns with the visual turn.",
+    "remotion": "Represent beats as frame numbers and drive cuts or motion accents from cueFrame, dropFrame, escalationFrame, and exitFrame.",
+    "blender": "Use audio markers for camera or object motion accents when the animation is tied to a track cue.",
+    "capcut_equivalent": "Use beat markers, duplicate the section, and manually align the action cut or speed-adjusted action peak to the strongest cue rather than relying on auto-beat cuts.",
+    "premiere_equivalent": "Add markers on song cue, downbeat, action turn, escalation, duck, and exit; for voiceover-first edits, add early music markers after the VO trim and use them for selected asset cuts only."
+  },
+  "common_mistakes": [
+    "Dropping the strongest cue on a random shot.",
+    "Forcing every cut to the beat after the main cue lands.",
+    "Letting the track tempo fight the action pacing.",
+    "Forgetting to duck or exit before dialogue returns.",
+    "Using a cue that is fun but tonally wrong for the scene.",
+    "Forcing script-driven visuals onto beats where the spoken idea needs a different timing.",
+    "Using AI music retiming or a manual splice without listening for a musical bump.",
+    "Changing clip speed before marking the beat or choosing the exact action peak."
+  ],
+  "qc": [
+    "Does the main cue land within 1-2 frames of the intended visual turn?",
+    "Can the editor name the story reason for the drop?",
+    "Does music escalation match the action escalation?",
+    "Is dialogue clear immediately after the cue?",
+    "Does the section avoid unnecessary beat-cutting after the payoff?",
+    "Do music-based cuts preserve voiceover comprehension and script logic?",
+    "If the track was shortened, does the splice land on a beat, phrase, or matching waveform shape without a distracting bump?",
+    "If clip speed was changed, does the action peak still read clearly while landing on the intended beat?"
+  ]
+}

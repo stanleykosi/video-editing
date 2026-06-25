@@ -1,0 +1,60 @@
+{
+  "id": "davinci_color_management_primary_look_001",
+  "name": "DaVinci Color Management Primary Look",
+  "category": "color",
+  "source_tutorial": "transcripts/davinci resolve full tutorial.txt",
+  "use_when": [
+    "Log, flat, or wide-gamut footage needs a correct viewing base.",
+    "A Resolve grade needs primary exposure, contrast, white balance, saturation, and curve shaping.",
+    "The agent must separate technical correction from a creative timeline look."
+  ],
+  "avoid_when": [
+    "The clip already has a locked client LUT or color pipeline.",
+    "The edit timing is still unstable and heavy look work would churn.",
+    "A stylized look would hide faces, proof, captions, or product color."
+  ],
+  "timeline_pattern": {
+    "pattern": "color_management_or_transform -> primary_balance -> scope_check -> subtle_curve_or_saturation -> optional_timeline_look",
+    "management_rule": "Use color management or explicit transforms before judging log/wide-gamut footage.",
+    "scope_rule": "Use parade/vectorscope because eyes adapt quickly to color and saturation.",
+    "node_rule": "Use clip nodes for shot-specific correction and timeline nodes for global looks.",
+    "look_rule": "A creative look should enhance the footage's existing tone unless the brief asks for strong stylization."
+  },
+  "motion": {
+    "rule": "No direct motion rule; grade after timing and major motion/crop decisions are stable."
+  },
+  "sound": {
+    "rule": "No direct sound rule."
+  },
+  "captions": {
+    "rule": "Caption and overlay readability must be rechecked after the grade and timeline look."
+  },
+  "color": {
+    "rule": "Use exposure, contrast, temperature/tint, saturation, curves, and scopes to create a clean base before secondary or heavy look work.",
+    "keyframe_values": {
+      "saturation_rule": "Use vectorscope distance from center to judge saturation; avoid pushing colors to target boxes unless intentionally stylized.",
+      "look_strength": "Prefer subtle S-curve and restrained saturation shifts unless the story calls for an extreme look."
+    }
+  },
+  "implementation": {
+    "ffmpeg": "Use colorspace/zscale/LUTs where appropriate, then eq/curves/histogram checks and contact sheets for representative frames.",
+    "remotion": "Store colorTransform, primaryCorrection, and creativeLook separately so technical and style passes stay editable.",
+    "blender": "Use color management, view transform settings, and compositor color nodes before final render.",
+    "capcut_equivalent": "Apply basic adjustment or LUT first, then refine exposure, temperature, contrast, and saturation lightly.",
+    "premiere_equivalent": "Use Lumetri input LUT/color management, Basic Correction, Curves, Scopes, and adjustment layers for global look."
+  },
+  "common_mistakes": [
+    "Grading log footage before setting a correct color-managed base.",
+    "Trusting eyes after staring at the same shot too long.",
+    "Building a heavy look that fights the footage or client tone.",
+    "Using timeline look nodes to hide mismatched shots instead of matching the clips."
+  ],
+  "qc": [
+    "Is log/wide-gamut footage transformed or color managed correctly?",
+    "Do scopes confirm balanced exposure and no accidental channel cast?",
+    "Are faces, proof, captions, and product colors protected?",
+    "Are clip-level corrections separate from timeline-level look decisions?",
+    "Does the look support the story instead of showing off the grade?"
+  ]
+}
+

@@ -1,0 +1,63 @@
+# Local environments
+.env
+.venv/
+
+# Never commit anything under source video: footage, scripts, renders, notes, or project files
+/source video/
+
+# Keep transcripts out of this repo
+/transcripts/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.whisper-models/
+
+# Node caches
+node_modules/
+.npm/
+.asset-cache/
+
+# Generated video workspaces
+edit/
+raw/
+audio/
+references/
+*.mp4
+*.mov
+*.mkv
+*.wav
+*.mp3
+*.aac
+*.flac
+
+# Render/cache artifacts
+*.log
+*.tmp
+*.cache
+frames/
+clips/
+renders/
+previews/
+finals/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+
+# Keep the vendored video-use engine commit-eligible in this repo.
+# This stays last so broad workspace rules like references/ do not hide tool source files.
+!/tools/
+!/tools/video-use/
+!/tools/video-use/**
+/tools/video-use/.git/
+/tools/video-use/.venv/
+/tools/video-use/.env
+/tools/video-use/.whisper-models/
+/tools/video-use/video_use.egg-info/
+/tools/video-use/**/*.egg-info/
+/tools/video-use/**/__pycache__/
+/tools/video-use/**/*.py[cod]

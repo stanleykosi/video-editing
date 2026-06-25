@@ -1,0 +1,57 @@
+{
+  "id": "podcast_ai_shorts_review_refine_001",
+  "name": "AI Shorts Review And Refine",
+  "category": "genre_workflow",
+  "source_tutorial": "transcripts/editing full course.txt",
+  "use_when": [
+    "A long-form podcast, interview, livestream, or talking-head video needs short-form repurposing.",
+    "An AI clipping tool has generated candidate shorts, reframes, captions, or layouts.",
+    "The agent needs to accelerate selection without trusting automatic output blindly."
+  ],
+  "avoid_when": [
+    "The original footage has sensitive context that could be misleading when clipped.",
+    "The short cannot make sense without setup that would exceed the platform duration.",
+    "The user requires manual editorial judgment for every beat and does not want automated candidates."
+  ],
+  "timeline_pattern": {
+    "pattern": "generate_candidates -> watch_candidates -> select_self_contained_clip -> trim_start_end -> choose_layout -> fix_captions -> context_text -> export_or_schedule",
+    "selection_rule": "Only keep clips with a clear premise, tension, useful point, and payoff when viewed independently.",
+    "trim_rule": "Adjust AI start and end points so the clip does not begin mid-thought or end before the payoff.",
+    "layout_rule": "Choose fill, fit, split, or multi-speaker layouts based on who is speaking and what visual context matters."
+  },
+  "motion": {
+    "rule": "Auto-reframing must keep the active speaker, reactions, and proof visuals visible; reject layouts that overwhelm the frame."
+  },
+  "sound": {
+    "rule": "Do not cut audio so tightly that the speech sounds chopped; preserve tiny natural lead-in/out when needed."
+  },
+  "captions": {
+    "rule": "Review every caption. Remove filler-word captions or bad emphasis without cutting meaningful audio.",
+    "layout_rule": "Captions should not cover faces, titles, cards, or the visual reason the clip was chosen."
+  },
+  "color": {
+    "rule": "Maintain a consistent look between long-form source and short-form crop; avoid auto-templates that hide faces or products."
+  },
+  "implementation": {
+    "ffmpeg": "Use crop/scale/pad for 9:16 versions, burn corrected captions after layout review, and render short candidate previews before final batching.",
+    "remotion": "Represent AI candidates as data with sourceStart, sourceEnd, score, layout, captionEdits, contextText, and approved fields.",
+    "blender": "Use only for custom animated context cards or branded interstitials when needed.",
+    "capcut_equivalent": "Use auto-captions and templates as a first pass, then manually trim, reframe, edit captions, and remove weak layouts.",
+    "premiere_equivalent": "Use sequence auto-reframe and captions as drafts, then manually adjust crop, speaker framing, caption breaks, and exports."
+  },
+  "common_mistakes": [
+    "Publishing AI-selected clips without checking whether the clip works alone.",
+    "Accepting an auto-start that cuts off the premise.",
+    "Leaving captions on filler words that make the short feel messy.",
+    "Using a multi-person layout that shrinks the actual speaker or proof too much.",
+    "Creating a misleading claim by removing surrounding context."
+  ],
+  "qc": [
+    "Does the clip make sense without the original long-form video?",
+    "Does the first second contain a clear premise, tension, or useful point?",
+    "Are start and end trims natural and complete?",
+    "Are captions accurate, readable, and free of distracting filler emphasis?",
+    "Does the layout keep speaker faces, reactions, and proof visible?",
+    "Could the clip misrepresent the original context?"
+  ]
+}

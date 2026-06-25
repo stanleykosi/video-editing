@@ -1,0 +1,60 @@
+{
+  "id": "typography_live_action_whitespace_integration_001",
+  "name": "Live-Action Whitespace Text Integration",
+  "category": "typography",
+  "source_tutorial": "transcripts/typography.txt",
+  "use_when": [
+    "Text needs to appear inside live-action footage without feeling pasted on.",
+    "A cinematic, ad, documentary, or social shot has negative space that can hold a label or title.",
+    "Scene text should support emotion, time, location, or proof while preserving the shot."
+  ],
+  "avoid_when": [
+    "There is no clean negative space and text would cover the subject or proof.",
+    "The font theme clashes with the scene tone.",
+    "The edit would perform better with simple captions or a separate card instead of integrated scene text."
+  ],
+  "timeline_pattern": {
+    "pattern": "scan_frame -> identify_subject_and_negative_space -> choose_theme_matched_font -> match_temperature_and_contrast -> optional_track_or_anchor -> read_hold -> clear",
+    "negative_space_rule": "Place text in unused frame space, not over the emotional focal point, product, lamp, face, hands, UI, or evidence.",
+    "temperature_rule": "Use text color that belongs to the frame's warm/cool temperature unless deliberate contrast is the point.",
+    "theme_rule": "A spooky, luxury, tech, handmade, or documentary scene needs matching type tone.",
+    "tracking_rule": "Track or anchor text only when it should belong to the shot's space."
+  },
+  "motion": {
+    "rule": "Integrated text can stay still, softly fade, or track with the scene; avoid loud motion that breaks emotion.",
+    "keyframe_values": {
+      "soft_fade": "Use a short opacity fade when hard text cuts distract from the scene.",
+      "tracking_check": "Review tracked text at full speed and delivery size to catch drift or jitter."
+    }
+  },
+  "sound": {
+    "rule": "Use no SFX for subtle cinematic text unless the text is a story beat or transition."
+  },
+  "captions": {
+    "rule": "Keep captions away from scene-attached text; if both are needed, assign separate safe regions and hierarchy."
+  },
+  "color": {
+    "rule": "Match color temperature and contrast to the frame while preserving readability; do not blend text so much that viewers miss it."
+  },
+  "implementation": {
+    "ffmpeg": "Use drawtext with explicit x/y safe regions, optional shadow/box, and precomputed tracking data for simple locked-off shots.",
+    "remotion": "Model sceneText with anchorRegion, temperatureMatch, zIndex, trackData, safeRegion, and captionCollision fields.",
+    "blender": "Use camera tracking or 3D text planes for scene-attached typography that should live in the shot.",
+    "capcut_equivalent": "Place text in negative space, match font/theme/color, use tracking or keyframes only when needed, and preview for subject collisions.",
+    "premiere_equivalent": "Use Essential Graphics, guides, masks, and manual keyframes; use After Effects tracking when the text must attach to a moving plane or camera."
+  },
+  "common_mistakes": [
+    "Putting text over the exact subject detail the shot is built around.",
+    "Using a cute or meme font on a serious cinematic scene.",
+    "Blending text into the background so far that it becomes unreadable.",
+    "Tracking text into the scene when a simple static placement would preserve emotion.",
+    "Letting captions collide with scene-attached labels."
+  ],
+  "qc": [
+    "Is the text placed in real negative space?",
+    "Does the type style match the scene's theme and emotion?",
+    "Does color temperature feel integrated while staying readable?",
+    "Does tracked text stay stable without jitter?",
+    "Do captions and scene text avoid collisions?"
+  ]
+}

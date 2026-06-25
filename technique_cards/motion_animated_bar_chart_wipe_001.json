@@ -1,0 +1,61 @@
+{
+  "id": "motion_animated_bar_chart_wipe_001",
+  "name": "Animated Bar Chart Wipe",
+  "category": "motion",
+  "source_tutorial": "transcripts/vox style documentary.txt",
+  "use_when": [
+    "A documentary explainer needs a simple statistic, comparison, trend, or rank visualized quickly.",
+    "The data can be understood as a small bar chart without requiring a full data-viz system.",
+    "The chart should share the same editorial paper/serif style as the rest of the sequence."
+  ],
+  "avoid_when": [
+    "The data source is unknown, unverified, or too complex for a simple chart.",
+    "The chart lacks labels or scale context needed to avoid misleading viewers.",
+    "The animation would make bars feel more precise than the source data supports."
+  ],
+  "timeline_pattern": {
+    "pattern": "chart_background -> x_axis_y_axis -> axis_labels -> bar_shapes_or_text_underscores -> directional_wipe_in -> stagger_bars -> compound_clip -> slide_or_fade_out",
+    "data_rule": "Know the value each bar represents before animating.",
+    "axis_rule": "Axis labels must be readable or intentionally omitted only when context already makes the chart clear.",
+    "stagger_rule": "Bars can stagger to guide comparison order, but should not distort data meaning."
+  },
+  "motion": {
+    "rule": "Bars should grow in the value direction and settle before the viewer needs to compare them.",
+    "keyframe_values": {
+      "bar_wipe_duration": "Start around 1 second for each bar reveal; shorten or stagger based on narration speed.",
+      "bar_opacity": "If using text/shape hacks, start around 60% opacity only when the chart remains readable.",
+      "stagger": "Offset bars by a few frames to create order, but keep total chart read time long enough for comparison.",
+      "out_transition": "Use a slide or fade out that does not erase data before the line is understood."
+    }
+  },
+  "sound": {
+    "rule": "Use light ticks or whooshes for major chart entries only; avoid a sound on every tiny bar unless the style is intentionally rhythmic."
+  },
+  "captions": {
+    "rule": "Captions should not cover axis labels or bars; suppress captions if chart text already carries the spoken data."
+  },
+  "color": {
+    "rule": "Use bar colors with enough contrast against the background and each other; preserve accessible separation in grayscale where possible."
+  },
+  "implementation": {
+    "ffmpeg": "Use drawbox/drawtext overlays with animated crop or enable expressions for bar growth; render chart stills to verify labels and proportions.",
+    "remotion": "Create a BarChartWipe component with values, labels, colors, staggerFrames, wipeDurationFrames, and sourceCitation fields.",
+    "blender": "Use rectangle planes or mesh bars with scale keyframes and text labels in an orthographic camera.",
+    "capcut_equivalent": "Create axes with masked/shape layers, use text underscore layers or shapes as bars, rotate/scale as needed, apply Wipe Right/up-style animation, stagger layers, and compound the chart.",
+    "premiere_equivalent": "Use Essential Graphics shapes/text, Linear Wipe or Crop effects for bar growth, nest the chart, and use markers for narration/data beats."
+  },
+  "common_mistakes": [
+    "Animating bars without documenting the source values.",
+    "Leaving axis labels too small or hidden by captions.",
+    "Using bar lengths that do not match the data relationship.",
+    "Staggering bars so slowly that the viewer forgets the comparison.",
+    "Letting low-FPS texture make the chart hard to read."
+  ],
+  "qc": [
+    "Are the data source and values known before the chart is built?",
+    "Do bar lengths accurately represent the intended comparison?",
+    "Are axis labels, category labels, and units readable or intentionally unnecessary?",
+    "Do captions avoid covering chart information?",
+    "Does animation settle long enough for the viewer to compare bars?"
+  ]
+}

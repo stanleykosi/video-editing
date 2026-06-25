@@ -1,0 +1,62 @@
+{
+  "id": "story_reel_segment_ideation_board_001",
+  "name": "Reel Segment Ideation Board",
+  "category": "story_pacing",
+  "source_tutorial": "transcripts/edit high quality reel.txt",
+  "additional_sources": [
+    "transcripts/editing viral videos.txt"
+  ],
+  "use_when": [
+    "A short-form edit needs polished motion graphics but the agent must decide what each segment should show first.",
+    "The rough cut has clear spoken segments created by trims or sentence beats.",
+    "The editor needs to batch multiple reels efficiently for a creator or client.",
+    "A scripted video needs sentence-level planning for screen recordings, images, videos, text, overlays, and animations."
+  ],
+  "avoid_when": [
+    "The source is a simple clip that only needs captions and minor trimming.",
+    "The user explicitly wants improvisational visual exploration before a plan.",
+    "The segment plan would over-explain a hook that should stay simple."
+  ],
+  "timeline_pattern": {
+    "pattern": "prepared_cut -> segment_boundaries -> visual_support_choice -> rough_sketch_or_note -> asset_list -> animation_pass",
+    "support_options": "For each segment choose: captions only, speaker plus text, on-screen animation, full-screen animation, B-roll/image, icon/proof, or no added visual.",
+    "batch_rule": "When multiple reels are coming, batch similar work: prepare all cuts, ideate all segments, gather assets, then animate.",
+    "message_rule": "Every segment visual must make the message easier to understand, not just make the timeline busier.",
+    "script_color_rule": "For scripted work, color-code or tag each sentence by visual category before gathering assets."
+  },
+  "motion": {
+    "rule": "Choose animation complexity by message value: simple text for small beats, full-screen/camera scenes for major explanations."
+  },
+  "sound": {
+    "rule": "Leave SFX/music decisions until the segment visuals and motion beats are known."
+  },
+  "captions": {
+    "rule": "Flag segments where captions should be suppressed because visual text already carries the idea."
+  },
+  "color": {
+    "rule": "Use ideation to preserve one style system across segment backgrounds, icons, and text."
+  },
+  "implementation": {
+    "ffmpeg": "Use segment metadata with start/end times, spoken text summary, visualSupport, assetsNeeded, and captionSuppression flags.",
+    "remotion": "Store segment plans as data objects that choose components such as CaptionOnly, SpeakerText, FullscreenScene, IconPath, ScreenRecord, ImageBeat, or CTA.",
+    "blender": "Storyboard camera-heavy or 3D segments before building scenes.",
+    "capcut_equivalent": "Mark segment beats, write a quick visual plan, gather assets, then build templates only for the segments that need them.",
+    "premiere_equivalent": "Use markers or sequence notes for each trimmed segment before sending a prepared render to After Effects; for scripted YouTube edits, mirror the script color tags in bins and timeline markers."
+  },
+  "common_mistakes": [
+    "Opening After Effects before knowing what each spoken segment should communicate.",
+    "Adding assets to the screen because they look premium rather than because they explain the segment.",
+    "Using the same complexity level for every line.",
+    "Forgetting to list required icons, images, or proof assets before animation.",
+    "Animating captions and visual text that say the same thing.",
+    "Color-coding the script but failing to gather the matching assets before editing."
+  ],
+  "qc": [
+    "Does each segment have a visual support decision before animation begins?",
+    "Can every visual be tied to a spoken concept or proof need?",
+    "Are required assets listed before the animation pass starts?",
+    "Are caption-suppressed segments marked?",
+    "Does the segment plan preserve one coherent style system?",
+    "Do script color tags match the assets and timeline layers?"
+  ]
+}

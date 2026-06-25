@@ -1,0 +1,60 @@
+{
+  "id": "motion_capcut_character_mask_shadow_glow_001",
+  "name": "CapCut Character Mask Shadow Glow",
+  "category": "motion",
+  "source_tutorial": "transcripts/editing tricks.txt",
+  "use_when": [
+    "A character, object, eye, hair edge, weapon, or body part needs isolated glow, shadow, flicker, or emphasis.",
+    "The edit style is high-energy, anime-inspired, music-led, or intentionally stylized.",
+    "A whole-frame effect would distract from the subject or reduce action clarity."
+  ],
+  "avoid_when": [
+    "The cutout or mask edge is too rough for the project tone.",
+    "The effect hides the action pose, face, expression, or impact frame.",
+    "The source asset, character footage, or cutout rights are not usable for the intended release."
+  ],
+  "timeline_pattern": {
+    "pattern": "base_clip -> duplicate_clip_or_screenshot_cutout -> remove_background_or_mask_subject -> shadow_or_glow_layer -> flicker_graph -> preview_edges",
+    "cutout_rule": "Use a clean screenshot cutout, duplicate layer, background removal, or quick brush before adding style effects.",
+    "mask_rule": "Apply the effect only to the subject or body part that needs emphasis.",
+    "edge_rule": "Review the full affected range because rough masks become obvious during motion and flicker."
+  },
+  "motion": {
+    "rule": "Flicker and glow should pulse with the edit rhythm while the subject remains readable.",
+    "keyframe_values": {
+      "flicker_burst": "Use short opacity or intensity bursts around the impact frame; avoid constant flicker across the whole clip.",
+      "shadow_offset": "Keep shadow offset subtle enough to read as depth rather than a second distracting subject.",
+      "hold": "Hold the clean hero pose long enough after the glow lands for the viewer to register the subject."
+    }
+  },
+  "sound": {
+    "rule": "Pair glow, flicker, or shadow reveals with a small hit, zap, or texture only if it supports the visible effect and stays below music/dialogue."
+  },
+  "captions": {
+    "rule": "Do not place captions over the isolated glow or shadow if that body part is the focus of the beat."
+  },
+  "color": {
+    "rule": "Glow color should support the character or scene palette and should not crush edge detail or create compression dirt."
+  },
+  "implementation": {
+    "ffmpeg": "Use alpha mattes or prepared PNG cutouts, overlay duplicated layers, apply glow/blur/color filters to the isolated layer, and render edge-check stills.",
+    "remotion": "Layer the base clip, a masked subject asset, shadow/glow styles, and opacity/intensity keyframes; store maskReviewFrames and captionCollision zones.",
+    "blender": "Use masked planes or compositor mattes with glow, color, and shadow layers for stylized 2D character effects.",
+    "capcut_equivalent": "Duplicate the clip or import a prepared cutout, use Mask or Remove Background/quick brush, add shadow/glow/flicker effects, and preview mask edges at full speed.",
+    "premiere_equivalent": "Duplicate the clip, use opacity masks or a prepared alpha cutout, add VR Glow/blur/drop shadow or equivalent effects, and keyframe opacity/intensity for flicker."
+  },
+  "common_mistakes": [
+    "Applying glow to the whole frame when only the character detail needs emphasis.",
+    "Leaving rough cutout edges visible during motion.",
+    "Making flicker constant instead of tied to a beat or impact.",
+    "Letting glow cover captions, action, or facial detail.",
+    "Using unlicensed or unclear source footage in a publishable edit."
+  ],
+  "qc": [
+    "Are the mask edges clean across the full affected range?",
+    "Does the glow or shadow emphasize the intended subject part only?",
+    "Can the viewer still read the action pose after the effect?",
+    "Do captions avoid the emphasized body part or character edge?",
+    "Are source rights and attribution ready for any real project?"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "id": "color_keyframed_saturation_shift_001",
+  "name": "Keyframed Saturation Shift",
+  "category": "color",
+  "source_tutorial": "transcripts/capcut keyframes.txt",
+  "additional_sources": [
+    "transcripts/keyframe pro edits.txt"
+  ],
+  "use_when": [
+    "A clip needs a visible mood shift from color to desaturated or black-and-white.",
+    "A memory, flashback, failure, reveal, emotional drop, or before/after beat benefits from a gradual color change.",
+    "The editor wants a simple mobile-friendly color transition without a full grade pass."
+  ],
+  "avoid_when": [
+    "The color shift has no story, mood, or information job.",
+    "Skin, product colors, brand colors, captions, or evidence become harder to read.",
+    "A hard cut to a graded shot would communicate the change more clearly."
+  ],
+  "timeline_pattern": {
+    "pattern": "normal_color_keyframe -> desaturation_keyframe -> hold_or_restore",
+    "motivation_rule": "Name the emotional or informational reason for the shift before applying it.",
+    "spacing_rule": "Farther keyframes create a gradual mood shift; closer keyframes create a sudden impact.",
+    "property_rule": "Only saturation should move when the beat is a black-and-white shift; do not keyframe hue, brightness, exposure, or filter values unless they also serve the beat.",
+    "restore_rule": "If the story returns to normal, keyframe saturation back deliberately instead of leaving a hidden drift."
+  },
+  "motion": {
+    "rule": "No direct motion rule; avoid pairing the color shift with extra motion unless both support the same beat."
+  },
+  "sound": {
+    "rule": "A music dip, hit, or ambience change can support the shift only when it does not bury speech."
+  },
+  "captions": {
+    "rule": "Caption contrast must be checked during both the color and desaturated states."
+  },
+  "color": {
+    "rule": "Preserve readable faces, proof, captions, and product/brand information through the entire transition.",
+    "keyframe_values": {
+      "capcut_example": "A strong black-and-white shift can keyframe saturation down to about -50 in CapCut, then adjust by eye for skin/proof readability.",
+      "fast_bw_hit": "A fast CapCut black-and-white hit can happen over roughly 6-10 frames, including a 9-frame style spacing, when the shift is meant to feel sudden.",
+      "subtle_shift": "Use a smaller saturation reduction when the scene needs mood change without looking like a filter gag."
+    }
+  },
+  "implementation": {
+    "ffmpeg": "Animate saturation with eq=saturation expressions or split sections with xfade/curves; render before/after stills for readability.",
+    "remotion": "Interpolate filter saturation or CSS/filter values across frame ranges and store restore frames explicitly.",
+    "blender": "Keyframe saturation or color-management values in the compositor when a rendered scene needs the effect.",
+    "capcut_equivalent": "Add a starting keyframe with current adjustment values, move ahead, lower saturation, preview speed, and adjust spacing or restore keyframes.",
+    "premiere_equivalent": "Keyframe Lumetri saturation or use an adjustment layer with opacity/keyframed effect strength; check scopes and captions."
+  },
+  "common_mistakes": [
+    "Using desaturation as a random style change without story motivation.",
+    "Changing saturation so quickly that the viewer reads it as a glitch.",
+    "Accidentally changing hue, brightness, or exposure when the intended move is only a saturation drop.",
+    "Leaving skin, products, maps, or evidence muddy after the shift.",
+    "Forgetting to restore color when the story returns to normal.",
+    "Letting captions lose contrast in the desaturated state."
+  ],
+  "qc": [
+    "Can the editor name why the color shift happens at this beat?",
+    "Does the transition speed match the intended mood or impact?",
+    "Do faces, products, proof, and captions remain readable during the whole shift?",
+    "Is the saturation restored or held intentionally?",
+    "Does the effect avoid banding, flicker, or compression ugliness?"
+  ]
+}

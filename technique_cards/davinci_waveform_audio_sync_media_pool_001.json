@@ -1,0 +1,59 @@
+{
+  "id": "davinci_waveform_audio_sync_media_pool_001",
+  "name": "DaVinci Waveform Audio Sync In Media Pool",
+  "category": "sound_design",
+  "source_tutorial": "transcripts/davinci resolve full tutorial.txt",
+  "use_when": [
+    "Camera footage has scratch audio and separate higher-quality production audio.",
+    "Video and audio share enough waveform detail for automatic sync.",
+    "A batch of interview, tutorial, or dialogue clips needs synced audio before editing."
+  ],
+  "avoid_when": [
+    "Camera audio is missing or too noisy for waveform matching.",
+    "The external audio is from a different take or has drift that needs manual repair.",
+    "The camera audio is already final-quality and no replacement is needed."
+  ],
+  "timeline_pattern": {
+    "pattern": "select_video_and_external_audio -> auto_sync_by_waveform -> verify_synced_audio_column -> playback_check -> edit_with_synced_clip",
+    "batch_rule": "Batch sync only when all selected clips have matching scratch/reference audio.",
+    "failure_rule": "Mark failed syncs for manual sync instead of assuming silence or non-dialogue clips are safe.",
+    "replacement_rule": "Confirm the good external audio replaced or linked correctly before muting scratch audio."
+  },
+  "motion": {
+    "rule": "No direct motion rule; synced audio improves cut timing and action matching."
+  },
+  "sound": {
+    "rule": "Use waveform sync as a starting point, then listen for one-sided channels, drift, bad replacement, or missing dialogue.",
+    "keyframe_values": {
+      "sync_tolerance": "For dialogue edits, audible lip-sync should be within a frame or two; manually repair obvious flams.",
+      "channel_check": "If a WAV imports as left-only or multi-channel, split or map channels before judging the sync."
+    }
+  },
+  "captions": {
+    "rule": "Generate captions from the synced dialogue track, not from scratch camera audio when the external track is cleaner."
+  },
+  "color": {
+    "rule": "No direct color rule."
+  },
+  "implementation": {
+    "ffmpeg": "Use waveform correlation or manual clap/timecode offsets, then store offsetSeconds per clip before muxing or timeline assembly.",
+    "remotion": "Store externalAudioOffsetFrames and channelMap metadata for each clip.",
+    "blender": "Align audio and video strips by waveform or clap marker, then lock or group them.",
+    "capcut_equivalent": "Use auto sync or manually align waveform peaks, then mute/delete scratch audio only after playback review.",
+    "premiere_equivalent": "Synchronize clips by audio waveform, create merged/multicam clips where appropriate, and verify channel mapping."
+  },
+  "common_mistakes": [
+    "Batch syncing and never checking failed clips.",
+    "Deleting scratch audio before confirming the replacement track is correct.",
+    "Ignoring one-sided or multi-channel WAV import problems.",
+    "Generating captions from poor scratch audio after syncing better external audio."
+  ],
+  "qc": [
+    "Did every intended clip show a successful sync or get marked for manual repair?",
+    "Does playback confirm lip sync and no doubled echo/flam?",
+    "Is dialogue centered or intentionally panned after channel mapping?",
+    "Were failed or non-dialogue sync attempts reviewed manually?",
+    "Are captions/transcripts based on the clean synced audio?"
+  ]
+}
+

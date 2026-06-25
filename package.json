@@ -1,0 +1,22 @@
+{
+  "name": "video-editing-workstation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local motion-graphics packages for agent-driven video editing.",
+  "scripts": {
+    "remotion": "remotion",
+    "remotion:version": "remotion --version",
+    "hyperframes:version": "npx --yes hyperframes --version"
+  },
+  "dependencies": {
+    "@remotion/captions": "latest",
+    "@remotion/cli": "latest",
+    "@remotion/media-utils": "latest",
+    "@remotion/shapes": "latest",
+    "@remotion/transitions": "latest",
+    "gsap": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "remotion": "latest"
+  }
+}

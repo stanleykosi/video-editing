@@ -1,0 +1,68 @@
+{
+  "id": "sound_infographic_motion_sfx_sync_001",
+  "name": "Infographic Motion SFX Sync",
+  "category": "sound_design",
+  "source_tutorial": "transcripts/vox style documentary.txt",
+  "additional_sources": [
+    "transcripts/documentary edits.txt"
+  ],
+  "use_when": [
+    "An explainer sequence has animated words, arrows, route traces, highlights, chart bars, screenshot swaps, or cutout entrances.",
+    "The graphic feels visually polished but sonically flat.",
+    "Small SFX can clarify hierarchy without turning the documentary into a loud social edit.",
+    "An on-screen research or process timelapse needs restrained anticipation without masking narration."
+  ],
+  "avoid_when": [
+    "The subject is serious and SFX would make the explanation feel cheap or glib.",
+    "Voiceover, testimony, or source audio needs full attention.",
+    "The animation already has enough rhythm from narration and music."
+  ],
+  "timeline_pattern": {
+    "pattern": "lock_graphic_motion -> mark_major_entrances -> add_whoosh_tick_shutter_highlight_cues -> set_low_levels -> restore_music_vo -> full_mix_check",
+    "hierarchy_rule": "Only the important graphic entrances or evidence highlights need SFX.",
+    "sync_rule": "Cues should land on the visible start, reveal, swap, or arrival frame.",
+    "mix_rule": "SFX should make motion feel intentional while staying clearly below narration."
+  },
+  "motion": {
+    "rule": "Place cues after the animation timing is locked and after any low-FPS/posterize texture is applied."
+  },
+  "sound": {
+    "rule": "Use soft whooshes for entrances/routes, ticks or marker sounds for highlights, and camera/shutter-like cues for screenshot swaps when tone allows.",
+    "keyframe_values": {
+      "sync_tolerance": "Aim for cues within 1-2 frames of important reveals or swaps.",
+      "starting_level": "Start infographic SFX around -12 dB below voiceover and lower if the sequence feels busy.",
+      "music_exit": "Cut music at a natural phrase ending when possible and add a short crossfade instead of a hard stop.",
+      "cue_density": "Avoid SFX on every layer; prioritize title entrance, route reveal, key highlight, chart entry, and final transition.",
+      "research_riser": "Use one restrained riser across a research/process timelapse only when it builds to a clear discovery or claim."
+    }
+  },
+  "captions": {
+    "rule": "Do not let SFX-heavy graphic moments justify buried narration; captions are support, not a mix fix."
+  },
+  "color": {
+    "rule": "No direct color rule; SFX should support the visual palette and documentary tone rather than shift it toward comedy by accident."
+  },
+  "implementation": {
+    "ffmpeg": "Use adelay/atrim/amix/volume/afade to place SFX at reveal frames and maintain VO/music levels.",
+    "remotion": "Store sfxEvents with frame, type, gain, fade, linkedElementId, and afterFpsTextureReview fields.",
+    "blender": "Use timeline markers for title, route, highlight, chart, and screenshot events before placing SFX.",
+    "capcut_equivalent": "Place SFX on separate audio tracks, align them to visible graphic events, adjust Basic volume, and crossfade music exits. For research overlays, add one restrained riser under the speed-up and fade before the next spoken claim.",
+    "premiere_equivalent": "Use markers, separate SFX tracks, clip gain, short fades, and a full-mix review after music/VO are restored."
+  },
+  "common_mistakes": [
+    "Adding a whoosh or tick to every tiny graphic layer.",
+    "Placing SFX before the animation is locked and leaving cues off by several frames.",
+    "Letting highlight/shutter sounds compete with voiceover.",
+    "Using comedic or social-media SFX over a serious documentary explanation.",
+    "Cutting music abruptly instead of finding a natural phrase ending or crossfade.",
+    "Using a trailer-style riser under ordinary research footage that has no real discovery beat."
+  ],
+  "qc": [
+    "Does each SFX cue map to a visible graphic event?",
+    "Do important cues land within 1-2 frames of the reveal, swap, or arrival?",
+    "Do SFX stay below narration and story-critical audio?",
+    "Is cue density low enough that the documentary tone remains credible?",
+    "Does music exit or crossfade cleanly around the final graphic sequence?",
+    "If a research riser is used, does it resolve into a visible discovery or claim without masking narration?"
+  ]
+}
