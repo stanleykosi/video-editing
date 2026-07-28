@@ -8,10 +8,12 @@
     "remotion:version": "remotion versions",
     "remotion:bundle": "remotion bundle src/video_engine/graphics/remotion/entry.tsx",
     "remotion:browser": "remotion browser ensure",
+    "hyperframes:version": "node -e \"console.log(require('./node_modules/@hyperframes/producer/package.json').version)\"",
     "graphics:typecheck": "tsc --project tsconfig.graphics.json"
   },
   "dependencies": {
     "@fontsource/inter": "5.3.0",
+    "@hyperframes/producer": "0.7.77",
     "@remotion/bundler": "4.0.481",
     "@remotion/captions": "4.0.481",
     "@remotion/cli": "4.0.481",

@@ -14,7 +14,10 @@ from video_engine.config import EngineConfig
 from video_engine.core.schema import JsonValue, Project
 from video_engine.errors import EngineError, ErrorCode
 from video_engine.qc.approval import QCApproval, QCApprovalService
+from video_engine.render.backends.blender import BlenderBackend
 from video_engine.render.backends.ffmpeg import FFmpegBackend
+from video_engine.render.backends.hyperframes import HyperFramesBackend
+from video_engine.render.backends.manim import ManimBackend
 from video_engine.render.backends.registry import BackendPlan, BackendRegistry
 from video_engine.render.backends.remotion import RemotionBackend
 from video_engine.render.cache import RenderCache, sha256_file
@@ -59,6 +62,12 @@ class RenderService:
             self.registry.register(FFmpegBackend(self.config))
         if "remotion" not in self.registry.names:
             self.registry.register(RemotionBackend(self.config, self.project_root))
+        if "hyperframes" not in self.registry.names:
+            self.registry.register(HyperFramesBackend(self.config, self.project_root))
+        if "manim" not in self.registry.names:
+            self.registry.register(ManimBackend(self.config, self.project_root))
+        if "blender" not in self.registry.names:
+            self.registry.register(BlenderBackend(self.config, self.project_root))
 
     def compile(self, request: RenderRequest) -> CompiledRender:
         return RenderCompiler(self.project, self.project_root, self.config).compile(request)

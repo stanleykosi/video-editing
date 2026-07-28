@@ -37,7 +37,10 @@ from video_engine.graphics.models import GraphicBoundsPolicy
 from video_engine.media.models import MediaProbe, MediaStreamProbe
 from video_engine.media.probe import probe_media
 from video_engine.process import CommandRunner
+from video_engine.render.backends.blender import BlenderBackend
 from video_engine.render.backends.ffmpeg import FFmpegBackend
+from video_engine.render.backends.hyperframes import HyperFramesBackend
+from video_engine.render.backends.manim import ManimBackend
 from video_engine.render.backends.registry import BackendRegistry
 from video_engine.render.backends.remotion import RemotionBackend
 from video_engine.render.cache import sha256_file
@@ -949,6 +952,9 @@ class TechnicalQCAnalyzers:
             registry = BackendRegistry()
             registry.register(FFmpegBackend(self.context.config))
             registry.register(RemotionBackend(self.context.config, self.context.project_root))
+            registry.register(HyperFramesBackend(self.context.config, self.context.project_root))
+            registry.register(ManimBackend(self.context.config, self.context.project_root))
+            registry.register(BlenderBackend(self.context.config, self.context.project_root))
             registry.plan(compiled.graph.pruned(), "ffmpeg")
         except EngineError as exc:
             finding = _finding(

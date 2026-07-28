@@ -27,8 +27,9 @@ backend/tool versions, and delivery settings.
 ## D005: FFmpeg Is The Required Baseline Backend
 
 FFmpeg handles decode, conform, transforms, audio, captions, encode, and mux for
-the baseline engine. Remotion is the required designed-graphics bridge. Blender,
-Manim, OpenTimelineIO, and ML trackers remain optional plugins.
+the baseline engine. Remotion and HyperFrames are installed designed-graphics
+bridges. Blender and Manim are executable-isolated optional renderers;
+OpenTimelineIO and ML trackers remain optional plugins.
 
 ## D006: Legacy Defects Are Evidence, Not Desired Parity
 
@@ -380,3 +381,13 @@ normalization defects, so its comparisons use an explicit caller-owned 18 dB
 RMS tolerance and report the canonical level correction as an improvement.
 New faceless migration uses a 3 dB tolerance. Neither threshold is a creative
 target; delivery loudness remains owned by the selected delivery profile.
+
+## D053: External Graphics Share One Canonical Clip Contract
+
+Remotion, HyperFrames, Manim, and Blender are renderer implementations, not
+parallel timelines. Each consumes a registered strict `GeneratorClip`, declared
+content-addressed assets, an exact timeline range, and a renderer tag compiled
+into the DAG. Outputs normalize to ProRes 4444 alpha and then use the ordinary
+FFmpeg composite, cache, delivery, and QC path. Manim 0.20.1 is locked in an
+isolated uv project because its NumPy 2.1+ requirement conflicts with the core
+media stack's NumPy 1.26.4 contract.

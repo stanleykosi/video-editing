@@ -11,15 +11,19 @@ from pydantic import BaseModel
 from video_engine.core.schema import JsonValue
 from video_engine.errors import EngineError, ErrorCode
 from video_engine.graphics.models import (
+    BlenderSceneProps,
     CallToActionProps,
     ComparisonProps,
     CountdownProps,
     DiagramOverlayProps,
     EmphasisTextProps,
     GraphicBoundsPolicy,
+    GraphicRenderer,
+    HyperFramesCompositionProps,
     KineticCaptionProps,
     LogoRevealProps,
     LowerThirdProps,
+    ManimSceneProps,
     MediaFrameProps,
     PictureInPictureProps,
     ProductFeatureProps,
@@ -37,6 +41,7 @@ class ComponentDefinition:
     version: str
     props_model: type[BaseModel]
     source_digest: str
+    renderer: GraphicRenderer = GraphicRenderer.REMOTION
     bounds_policy: GraphicBoundsPolicy = GraphicBoundsPolicy.SAFE_AREA
 
 
@@ -111,6 +116,8 @@ class GraphicsRegistry:
         def visit(value: JsonValue, key: str = "") -> None:
             if key.endswith("asset_id") and isinstance(value, str):
                 required.add(value)
+            elif key == "asset_bindings" and isinstance(value, dict):
+                required.update(child for child in value.values() if isinstance(child, str))
             elif isinstance(value, dict):
                 for child_key, child in value.items():
                     visit(child, child_key)
@@ -214,6 +221,24 @@ def builtin_graphics_registry() -> GraphicsRegistry:
                 props_model=props_model,
                 source_digest=digest,
                 bounds_policy=bounds_policy,
+            )
+        )
+    external_digest = hashlib.sha256(
+        (Path(__file__).resolve().parent / "external.py").read_bytes()
+    ).hexdigest()
+    for component_id, props_model, renderer in (
+        ("hyperframes_composition", HyperFramesCompositionProps, GraphicRenderer.HYPERFRAMES),
+        ("manim_scene", ManimSceneProps, GraphicRenderer.MANIM),
+        ("blender_scene", BlenderSceneProps, GraphicRenderer.BLENDER),
+    ):
+        registry.register(
+            ComponentDefinition(
+                id=component_id,
+                version="1.0.0",
+                props_model=props_model,
+                source_digest=external_digest,
+                renderer=renderer,
+                bounds_policy=GraphicBoundsPolicy.FULL_FRAME,
             )
         )
     return registry

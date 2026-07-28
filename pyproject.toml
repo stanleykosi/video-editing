@@ -33,7 +33,6 @@ legacy = [
     "imageio==2.37.3",
     "imageio-ffmpeg==0.6.0",
     "librosa==0.11.0",
-    "manim==0.18.1",
     "matplotlib==3.10.9",
     "moviepy==2.2.1",
     "noisereduce==3.0.3",
@@ -89,6 +88,7 @@ video_engine = [
     "graphics/remotion/*.mjs",
     "graphics/remotion/*.ts",
     "graphics/remotion/*.tsx",
+    "graphics/hyperframes/*.mjs",
 ]
 
 [[tool.uv.index]]

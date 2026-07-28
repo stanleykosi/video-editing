@@ -37,9 +37,10 @@ Status: complete for the required baseline engine.
 - Implement multitrack audio/buses and sample-accurate processing. Complete.
 - Implement native captions, ASS/sidecar output, layout safety, and typography.
   Complete.
-- Implement structured Remotion components and optional Blender/Manim adapters.
-  Required Remotion bridge and optional backend contract complete; concrete
-  Blender/Manim plugins remain optional follow-up work.
+- Implement structured Remotion, HyperFrames, Manim, and Blender components and
+  adapters. Complete: all four are registered render backends; HyperFrames and
+  Manim have real range/alpha render evidence. Blender real-render verification
+  remains blocked by the local Blender process failing to reach render execution.
 - Implement visual transforms/tracking/reframing, color pipeline, nested
   sequences, long-form resumption, inspection, and technical QC.
 

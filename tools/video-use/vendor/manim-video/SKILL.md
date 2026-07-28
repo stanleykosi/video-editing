@@ -24,7 +24,11 @@ This is educational cinema. Every frame teaches. Every animation reveals structu
 
 ## Prerequisites
 
-Run `scripts/setup.sh` to verify all dependencies. Requires: Python 3.10+, Manim Community Edition v0.20+ (`pip install manim`), LaTeX (`texlive-full` on Linux, `mactex` on macOS), and ffmpeg. Reference docs tested against Manim CE v0.20.1.
+Use the isolated, exactly locked toolchain described in this directory's
+`README.md`. Requires Python 3.11, Manim Community Edition v0.20.1, LaTeX, and
+FFmpeg. For engine projects, prepare a `manim_scene` generator clip through
+`VideoEngine.graphics()` or `video-engine graphics prepare manim`; the engine
+owns range conformance, alpha output, caching, compositing, and QC.
 
 ## Modes
 

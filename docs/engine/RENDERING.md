@@ -55,6 +55,17 @@ headless-shell. Inter is exact-pinned and bundled at the used weights. A
 Remotion-specific semaphore prevents the general graph worker count from
 launching unbounded browsers.
 
+HyperFrames, Manim, and Blender use renderer-specific `MotionGraphicNode`
+sources selected by the same backend registry. Their typed properties are the
+canonical representation; raw CLI flags or renderer scripts are not effects.
+HyperFrames invokes the exact `@hyperframes/producer` API behind a lint gate,
+blocks remote assets, and uses the configured local headless browser. Manim
+invokes one named scene in its isolated 0.20.1 executable environment. Blender
+opens one content-addressed `.blend`, applies only typed scene/camera/engine/
+frame settings, and renders a bounded RGBA frame sequence. All outputs are
+FFprobed and conformed to exact dimensions, rational frame rate, frame count,
+codec, and alpha requirements before entering the shared graph cache.
+
 Browser setup and render calls use the bounded
 `EngineConfig.remotion_browser_timeout_seconds` value (environment variable
 `VIDEO_ENGINE_REMOTION_BROWSER_TIMEOUT`, default 120 seconds). The bridge passes

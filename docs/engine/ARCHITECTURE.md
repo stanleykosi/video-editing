@@ -9,9 +9,9 @@
 3. Timeline mutations are transactional, invariant-preserving, auditable, and
    undoable where an inverse is well-defined.
 4. Rendering compiles a timeline into a validated DAG. Capability planning
-   selects a backend per node, allowing one graph to mix Remotion source nodes
-   with FFmpeg processing and delivery while retaining backend-specific cache
-   identity and execution records.
+   selects a backend per node, allowing one graph to mix Remotion, HyperFrames,
+   Manim, or Blender source nodes with FFmpeg processing and delivery while
+   retaining backend-specific cache identity and execution records.
 5. Media identity derives from source SHA-256. A persistent stat-keyed identity
    store avoids rereading unchanged bytes while still rejecting in-place source
    mutation. Derived assets include source identity, tool capabilities, and
@@ -31,10 +31,10 @@ src/video_engine/
   operations/   transactional timeline commands and JSON patches
   media/        registry, probing, derivatives, relinking
   render/       DAG, compiler, scheduler, manifests, cache contracts
-  render/backends/ typed FFmpeg/Remotion backends and per-node registry
+  render/backends/ typed FFmpeg/Remotion/HyperFrames/Manim/Blender backends
   audio/        public audio type re-exports and deterministic SFX synthesis
   captions/     cue import/export, ASS layout and responsive checks
-  graphics/     versioned component registry, Remotion bridge, optional-tool contracts
+  graphics/     component registry, preparation service and renderer bridges
   visual/       transforms, masks, compositing, reframing, tracking
   color/        interpretation, normalization, grade, output transform
   qc/           ingest/timeline/video/audio/delivery checks and reports
@@ -126,6 +126,19 @@ render manifest. Encoded-output QC uses that evidence to distinguish intentional
 full-bleed accents from blank or persistently cropped safe-area components.
 
 ## Stable Seams For Future Systems
+
+External graphics use the same `GeneratorClip` authority as built-in Remotion
+components. `GraphicsService` hashes the authored source and declared assets,
+creates confined bindings, and returns a strict clip/reference bundle. The
+compiler lowers it to a renderer-tagged `MotionGraphicNode`; backend planning
+selects HyperFrames, Manim, or Blender without exposing command lines to the
+caller. Each backend normalizes output to exact-frame ProRes 4444 alpha before
+ordinary FFmpeg composition, caching, delivery, and QC.
+
+Manim runs in an isolated exact toolchain because Manim 0.20.1 requires NumPy
+2.1+ while the canonical media environment is pinned to NumPy 1.26.4. Blender
+is executable-isolated. HyperFrames is an exact root Node dependency because
+its producer API shares the existing browser graphics runtime.
 
 The future Editorial Brain will produce canonical projects, operation requests,
 or JSON patches. The future Editorial Critic will consume inspection artifacts,

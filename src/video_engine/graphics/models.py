@@ -22,18 +22,25 @@ class GraphicBoundsPolicy(StrEnum):
     FULL_FRAME = "full_frame"
 
 
+class GraphicRenderer(StrEnum):
+    REMOTION = "remotion"
+    HYPERFRAMES = "hyperframes"
+    MANIM = "manim"
+    BLENDER = "blender"
+
+
 class GraphicAsset(GraphicModel):
     id: str = Field(min_length=1, pattern=r"^[A-Za-z0-9_.-]+$")
     source_path: Path
     sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
-    media_type: Literal["image", "video"]
+    media_type: Literal["image", "video", "data"]
     staged_name: str = Field(min_length=1, pattern=r"^[A-Za-z0-9_.-]+$")
 
 
 class GraphicStagedAsset(GraphicModel):
     id: str = Field(min_length=1, pattern=r"^[A-Za-z0-9_.-]+$")
     sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
-    media_type: Literal["image", "video"]
+    media_type: Literal["image", "video", "data"]
     staged_name: str = Field(min_length=1, pattern=r"^[A-Za-z0-9_.-]+$")
 
 
@@ -198,6 +205,51 @@ class KineticCaptionProps(CommonProps):
     secondary_accent: Color = Field(default="#FACC15", pattern=r"^#[0-9A-Fa-f]{6}$")
 
 
+def _valid_relative_asset_path(value: str) -> str:
+    path = Path(value)
+    if path.is_absolute() or not path.parts or any(part in {"", ".", ".."} for part in path.parts):
+        raise ValueError("graphic asset binding must be a confined relative path")
+    return path.as_posix()
+
+
+class ExternalCompositionProps(GraphicModel):
+    source_asset_id: str = Field(pattern=r"^[A-Za-z0-9_.-]+$")
+    asset_bindings: dict[str, str] = Field(default_factory=dict)
+
+    @model_validator(mode="after")
+    def valid_asset_bindings(self) -> ExternalCompositionProps:
+        normalized: dict[str, str] = {}
+        for relative_path, asset_id in self.asset_bindings.items():
+            normalized[_valid_relative_asset_path(relative_path)] = asset_id
+        if len(normalized) != len(self.asset_bindings):
+            raise ValueError("graphic asset bindings must have unique normalized paths")
+        object.__setattr__(self, "asset_bindings", normalized)
+        return self
+
+
+class HyperFramesCompositionProps(ExternalCompositionProps):
+    quality: Literal["draft", "standard", "high"] = "high"
+    strictness: Literal["strict", "best-effort"] = "strict"
+    variables: dict[str, JsonValue] = Field(default_factory=dict)
+    workers: int = Field(default=1, ge=1, le=8)
+
+
+class ManimSceneProps(ExternalCompositionProps):
+    scene_name: str = Field(pattern=r"^[A-Za-z_][A-Za-z0-9_]*$")
+    renderer: Literal["cairo", "opengl"] = "cairo"
+    seed: int = 0
+
+
+class BlenderSceneProps(ExternalCompositionProps):
+    scene_name: str | None = Field(default=None, min_length=1, max_length=128)
+    camera_name: str | None = Field(default=None, min_length=1, max_length=128)
+    render_engine: Literal["BLENDER_EEVEE_NEXT", "BLENDER_WORKBENCH", "CYCLES"] = (
+        "BLENDER_EEVEE_NEXT"
+    )
+    source_start_frame: int = Field(default=1, ge=0)
+    samples: int = Field(default=64, ge=1, le=4096)
+
+
 PropsModel = (
     TextCardProps
     | LowerThirdProps
@@ -215,4 +267,7 @@ PropsModel = (
     | DiagramOverlayProps
     | EmphasisTextProps
     | KineticCaptionProps
+    | HyperFramesCompositionProps
+    | ManimSceneProps
+    | BlenderSceneProps
 )

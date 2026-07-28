@@ -96,7 +96,66 @@ def build_parser() -> argparse.ArgumentParser:
 
     doctor = subparsers.add_parser("doctor", help="Validate external tools and fonts.")
     doctor.add_argument("--project-root", type=Path, default=Path.cwd())
+    doctor.add_argument(
+        "--require-extended-graphics",
+        action="store_true",
+        help="Treat Blender, Manim, and LaTeX as required release dependencies.",
+    )
     _add_machine_flag(doctor)
+
+    graphics = subparsers.add_parser(
+        "graphics", help="Prepare typed external graphics for canonical timelines."
+    )
+    graphics_subparsers = graphics.add_subparsers(dest="graphics_command", required=True)
+    graphics_prepare = graphics_subparsers.add_parser(
+        "prepare", help="Create a strict generator clip and media-reference bundle."
+    )
+    graphics_renderers = graphics_prepare.add_subparsers(dest="graphics_renderer", required=True)
+
+    def add_graphics_common(command: argparse.ArgumentParser) -> None:
+        command.add_argument("source", type=Path)
+        command.add_argument("--clip-id", required=True)
+        command.add_argument("--start", type=_parse_rational_time, required=True)
+        command.add_argument("--duration", type=_parse_rational_time, required=True)
+        command.add_argument(
+            "--asset",
+            type=_parse_mapping,
+            action="append",
+            default=[],
+            metavar="RELATIVE_PATH=SOURCE",
+        )
+        command.add_argument("--output", type=Path)
+        command.add_argument("--opaque", action="store_true")
+        _add_machine_flag(command)
+
+    hyperframes = graphics_renderers.add_parser(
+        "hyperframes", help="Prepare a confined HyperFrames HTML composition."
+    )
+    add_graphics_common(hyperframes)
+    hyperframes.add_argument("--variables", type=Path, help="JSON object passed as variables.")
+    hyperframes.add_argument("--quality", choices=["draft", "standard", "high"], default="high")
+    hyperframes.add_argument("--strictness", choices=["strict", "best-effort"], default="strict")
+    hyperframes.add_argument("--workers", type=int, default=1)
+
+    manim = graphics_renderers.add_parser("manim", help="Prepare a confined Manim Python scene.")
+    add_graphics_common(manim)
+    manim.add_argument("--scene", required=True)
+    manim.add_argument("--renderer", choices=["cairo", "opengl"], default="cairo")
+    manim.add_argument("--seed", type=int, default=0)
+
+    blender = graphics_renderers.add_parser(
+        "blender", help="Prepare a confined Blender project scene."
+    )
+    add_graphics_common(blender)
+    blender.add_argument("--scene")
+    blender.add_argument("--camera")
+    blender.add_argument(
+        "--render-engine",
+        choices=["BLENDER_EEVEE_NEXT", "BLENDER_WORKBENCH", "CYCLES"],
+        default="BLENDER_EEVEE_NEXT",
+    )
+    blender.add_argument("--source-start-frame", type=int, default=1)
+    blender.add_argument("--samples", type=int, default=64)
 
     media = subparsers.add_parser("media", help="Content-addressed media commands.")
     media_subparsers = media.add_subparsers(dest="media_command", required=True)
@@ -360,12 +419,86 @@ def _run(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
         }, 0
 
     if args.command == "doctor":
-        doctor_report = VideoEngine(args.project_root, config).doctor()
+        doctor_report = VideoEngine(args.project_root, config).doctor(
+            require_extended_graphics=args.require_extended_graphics
+        )
         return {
             "ok": doctor_report.healthy,
             "summary": doctor_report.summary(),
             "checks": doctor_report.model_dump(mode="json")["checks"],
         }, (0 if doctor_report.healthy else 2)
+
+    if args.command == "graphics" and args.graphics_command == "prepare":
+        source = args.source.resolve()
+        assets = {relative: Path(path).resolve() for relative, path in args.asset}
+        graphic_range = TimeRange(start=args.start, duration=args.duration)
+        engine = VideoEngine(source.parent, config)
+        graphics = engine.graphics()
+        if args.graphics_renderer == "hyperframes":
+            variables: dict[str, Any] = {}
+            if args.variables is not None:
+                try:
+                    loaded_variables = json.loads(args.variables.read_text(encoding="utf-8"))
+                except (OSError, ValueError) as exc:
+                    raise EngineError(
+                        ErrorCode.STORAGE,
+                        "failed to load HyperFrames variables",
+                        context={"path": str(args.variables), "detail": str(exc)},
+                    ) from exc
+                if not isinstance(loaded_variables, dict):
+                    raise EngineError(
+                        ErrorCode.CONFIGURATION,
+                        "HyperFrames variables must be a JSON object",
+                        context={"path": str(args.variables)},
+                    )
+                variables = loaded_variables
+            prepared = graphics.prepare_hyperframes(
+                clip_id=args.clip_id,
+                timeline_range=graphic_range,
+                entry_path=source,
+                asset_bindings=assets,
+                variables=variables,
+                quality=args.quality,
+                strictness=args.strictness,
+                workers=args.workers,
+                transparent=not args.opaque,
+            )
+        elif args.graphics_renderer == "manim":
+            prepared = graphics.prepare_manim(
+                clip_id=args.clip_id,
+                timeline_range=graphic_range,
+                script_path=source,
+                scene_name=args.scene,
+                asset_bindings=assets,
+                renderer=args.renderer,
+                seed=args.seed,
+                transparent=not args.opaque,
+            )
+        else:
+            prepared = graphics.prepare_blender(
+                clip_id=args.clip_id,
+                timeline_range=graphic_range,
+                blend_path=source,
+                asset_bindings=assets,
+                scene_name=args.scene,
+                camera_name=args.camera,
+                render_engine=args.render_engine,
+                source_start_frame=args.source_start_frame,
+                samples=args.samples,
+                transparent=not args.opaque,
+            )
+        payload = prepared.model_dump(mode="json")
+        if args.output is not None:
+            destination = args.output.resolve()
+            atomic_write_text(destination, json.dumps(payload, indent=2) + "\n")
+        else:
+            destination = None
+        return {
+            "ok": True,
+            "renderer": args.graphics_renderer,
+            "output": str(destination) if destination is not None else None,
+            "prepared_graphic": payload,
+        }, 0
 
     if args.command == "media":
         engine = VideoEngine(args.project_root, config)
@@ -790,13 +923,16 @@ def main(argv: list[str] | None = None) -> int:
     except EngineError as exc:
         payload, return_code = exc.to_dict(), 2
     except ValidationError as exc:
-        payload, return_code = {
-            "error": {
-                "code": ErrorCode.INVALID_PROJECT.value,
-                "message": "schema validation failed",
-                "context": {"errors": exc.errors()},
-            }
-        }, 2
+        payload, return_code = (
+            {
+                "error": {
+                    "code": ErrorCode.INVALID_PROJECT.value,
+                    "message": "schema validation failed",
+                    "context": {"errors": exc.errors()},
+                }
+            },
+            2,
+        )
     _emit(payload, machine=machine)
     return return_code
 

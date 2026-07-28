@@ -1104,11 +1104,15 @@ class RenderCompiler:
                 media = self._media_reference(reference.media_reference_id)
                 path = self._resolve_media(media)
                 checksum = media.sha256 or sha256_file(path)
-                media_type: Literal["image", "video"] = (
+                media_type: Literal["image", "video", "data"] = (
                     "image"
                     if path.suffix.lower()
                     in {".avif", ".bmp", ".gif", ".jpeg", ".jpg", ".png", ".tif", ".tiff", ".webp"}
-                    else "video"
+                    else (
+                        "video"
+                        if path.suffix.lower() in {".m4v", ".mkv", ".mov", ".mp4", ".webm"}
+                        else "data"
+                    )
                 )
                 staged_base = re.sub(r"[^A-Za-z0-9_.-]+", "-", path.name).strip(".-")
                 staged_name = f"{checksum[:16]}-{reference.id}-{staged_base or 'asset'}"
@@ -1137,6 +1141,7 @@ class RenderCompiler:
                 component_id=item.generator_id,
                 component_version=item.generator_version,
                 component_digest=definition.source_digest,
+                renderer=definition.renderer,
                 bounds_policy=definition.bounds_policy,
                 props=props,
                 assets=tuple(graphic_assets),

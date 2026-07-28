@@ -122,12 +122,16 @@ First-time install lives in `install.md` (clone, deps, ffmpeg, skill registratio
 - Node.js + npm available if the session needs HyperFrames or Remotion slots. HyperFrames currently requires Node.js 22+.
 - `tesseract-ocr` on PATH for OCR-assisted visual QC; Python deps include `pytesseract`.
 - `yt-dlp` for source ingestion. Prefer the root env package via `uv run yt-dlp` or `.venv/bin/yt-dlp` when the system CLI is older.
-- HyperFrames, Remotion, Manim installed only on first use.
+- HyperFrames and Remotion are exact root Node dependencies. Manim 0.20.1 uses
+  the isolated locked environment under `vendor/manim-video/`; Blender is a
+  configured external executable.
 - Canonical Remotion graphics use the repository's exact `package-lock.json`,
   registered components, and `video-engine` bridge. Optional external animation
   tools must use an explicit recorded version; never invoke an unversioned `npx`
   package or scaffold a second Remotion project.
-- Before designing title cards or polished motion graphics, verify HyperFrames and/or Remotion are available. If they are missing, install or request installation instead of falling back to Pillow/PIL for final design.
+- Before designing title cards or polished motion graphics, run
+  `video-engine doctor --require-extended-graphics --json` for the tools the
+  project needs. Do not fall back to Pillow/PIL for final design.
 - This skill vendors `vendor/manim-video/`. Read its SKILL.md when building a Manim slot.
 
 Preparation helpers (`helpers/transcribe_deepgram.py`,
@@ -149,7 +153,9 @@ command is not on PATH.
 - **`visual_qc.py --edl <edit>/edl.json --source-preflight`** — scan proposed EDL source ranges, generate contact sheets/OCR flags, run lightweight OpenCV face/safe-area checks, and write `source_visual_qc_report.md/json` plus `source_blocked_ranges.json` when source overlays, banners, caption-zone face collisions, or crop-edge risks are detected.
 - **`visual_qc.py --video <edit>/preview.mp4 --edl <edit>/edl.json`** — pre-final visual QC gate for rendered previews. The contact sheets draw a caption safe zone and detected face boxes. The agent/LLM must view every contact sheet, then mark the report with `--mark-reviewed <edit>/visual_qc/visual_qc_report.json --status pass|needs_reclip|needs_reframe|needs_mask|blocked`.
 - **`video-engine migrate legacy-edl <edl.json> --output <project.json>`** — import an existing-footage range EDL into the strict canonical timeline while preserving source extraction, crop/focus/fit, overlays, SFX, captions, grade, and delivery settings.
-- **`video-engine render draft|preview|range|final <project.json> <out>`** — compile the canonical timeline to an optimized render DAG and execute it with FFmpeg/Remotion. Captions composite last; final mode requires a reviewed QC approval artifact.
+- **`video-engine graphics prepare hyperframes|manim|blender ... --json`** —
+  prepare a content-addressed external generator clip/reference bundle.
+- **`video-engine render draft|preview|range|final <project.json> <out>`** — compile the canonical timeline to an optimized render DAG and execute it with FFmpeg plus the selected graphics backend. Captions composite last; final mode requires a reviewed QC approval artifact.
 - **`video-engine` typed color effects** — use `VideoEngine.color()` for measured
   correction or authored interpretation/normalization/grade/LUT stages.
   `grade.py` is a non-rendering compatibility utility that reports measured
@@ -330,8 +336,8 @@ Do not call a from-scratch project complete unless these exist:
 
 `edit_decision_list.json` is the legacy creation-timeline interchange artifact.
 Import it once with `video-engine migrate faceless`; the resulting canonical
-project is the sole executable timeline. Backends derive Remotion jobs, FFmpeg
-graphs, and optional Manim/HyperFrames assets from typed project state. The
+project is the sole executable timeline. Backends derive Remotion, HyperFrames,
+Manim, Blender, and FFmpeg jobs from typed project state. The
 legacy artifact must include:
 
 - Project settings: resolution, fps, duration, aspect ratio.

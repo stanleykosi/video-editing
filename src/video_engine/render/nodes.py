@@ -25,7 +25,7 @@ from video_engine.core.time import (
     RoundingMode,
     TimeRange,
 )
-from video_engine.graphics.models import GraphicAsset, GraphicBoundsPolicy
+from video_engine.graphics.models import GraphicAsset, GraphicBoundsPolicy, GraphicRenderer
 
 
 class NodeKind(StrEnum):
@@ -632,6 +632,7 @@ class MotionGraphicNode(RenderNodeBase):
     component_id: str = Field(min_length=1)
     component_version: str = Field(pattern=r"^\d+\.\d+\.\d+$")
     component_digest: str = Field(pattern=r"^[0-9a-f]{64}$")
+    renderer: GraphicRenderer = GraphicRenderer.REMOTION
     bounds_policy: GraphicBoundsPolicy = GraphicBoundsPolicy.SAFE_AREA
     props: dict[str, JsonValue] = Field(default_factory=dict)
     assets: tuple[GraphicAsset, ...] = ()

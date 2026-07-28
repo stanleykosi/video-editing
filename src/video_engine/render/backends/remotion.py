@@ -18,6 +18,7 @@ from video_engine.graphics.models import (
     GraphicCanvas,
     GraphicComponentRef,
     GraphicFrameRange,
+    GraphicRenderer,
     GraphicRenderRequest,
     GraphicStagedAsset,
 )
@@ -44,8 +45,11 @@ class RemotionBackend(RenderBackend):
         self.runner = runner or CommandRunner()
         self.bridge_root = Path(__file__).resolve().parents[2] / "graphics" / "remotion"
         self.runner_path = self.bridge_root / "runner.mjs"
-        self.tool_root = self._tool_root()
         self._render_slots = BoundedSemaphore(self.config.remotion_max_workers)
+
+    @cached_property
+    def tool_root(self) -> Path:
+        return self._tool_root()
 
     def _tool_root(self) -> Path:
         if self.config.remotion_root is not None:
@@ -127,7 +131,7 @@ class RemotionBackend(RenderBackend):
         )
 
     def can_execute(self, node: RenderNode) -> bool:
-        return isinstance(node, MotionGraphicNode)
+        return isinstance(node, MotionGraphicNode) and node.renderer is GraphicRenderer.REMOTION
 
     def output_suffix(self, node: RenderNode) -> str:
         if not isinstance(node, MotionGraphicNode):
@@ -356,10 +360,7 @@ class RemotionBackend(RenderBackend):
                 "-select_streams",
                 "v:0",
                 "-show_entries",
-                (
-                    "stream=codec_name,width,height,pix_fmt,avg_frame_rate,"
-                    "nb_read_frames,duration"
-                ),
+                ("stream=codec_name,width,height,pix_fmt,avg_frame_rate,nb_read_frames,duration"),
                 "-of",
                 "json",
                 str(output_path),

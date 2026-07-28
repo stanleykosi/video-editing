@@ -23,6 +23,7 @@ from video_engine.api import (
     QCResult,
     InspectionRequest,
     MigrationResult,
+    PreparedGraphic,
 )
 ```
 
@@ -66,6 +67,7 @@ Implemented methods:
 - `VideoEngine.exporter() -> ExportService`
 - `VideoEngine.captions() -> CaptionService`
 - `VideoEngine.color() -> ColorService`
+- `VideoEngine.graphics() -> GraphicsService`
 - `VideoEngine.editor(project) -> TimelineEditor`
 - `VideoEngine.renderer(project) -> RenderService`
 - `VideoEngine.qc(project) -> QCService`
@@ -90,6 +92,21 @@ currently exposes `title_card`, `hook_card`, `chapter_card`, `lower_third`,
 `diagram_overlay`, `emphasis_text`, and `kinetic_caption`, all at version
 `1.0.0`. Unknown props, component versions, or asset references fail before a
 browser starts.
+
+External authored graphics use `hyperframes_composition`, `manim_scene`, and
+`blender_scene`. Call `engine.graphics().prepare_hyperframes(...)`,
+`prepare_manim(...)`, or `prepare_blender(...)` to receive a `PreparedGraphic`
+containing a strict `GeneratorClip` and deduplicated content-addressed
+`MediaReference` objects. Renderer commands and staging remain backend-private.
+
+```bash
+video-engine graphics prepare hyperframes composition.html \
+  --clip-id hook --start 0 --duration 3 --asset assets/logo.png=logo.png --json
+video-engine graphics prepare manim scene.py \
+  --clip-id diagram --start 3 --duration 4 --scene Architecture --json
+video-engine graphics prepare blender product.blend \
+  --clip-id product-spin --start 7 --duration 5 --camera Camera --json
+```
 
 `MediaService` implements content-addressed import/inspect/relink plus cached
 proxy, thumbnail, waveform, and conformed-media generation. `TimelineEditor`

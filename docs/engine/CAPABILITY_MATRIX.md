@@ -31,7 +31,9 @@ Legend: `legacy` exists in a current helper, `building` is under migration,
 | Render DAG | no | no | verified | Strict nodes, graph validation, optimizer, scheduler |
 | Incremental cache | partial/staging | unsafe mtime cache | verified | Section roots, public partial execution, corruption rebuild, checksums and locks |
 | Remotion bridge | no | no | verified | 21 strict components; real alpha/range, alias and cache renders |
-| Blender/Manim adapters | helper/manual | helper/manual | verified optional | Stable optional backend contract; neither tool is required for baseline editing |
+| HyperFrames bridge | docs/manual | docs/manual | verified | Exact 0.7.77 producer, lint gate, confined assets, typed variables and real 24-frame alpha/range render |
+| Manim adapter | helper/manual | helper/manual | verified optional | Exact isolated 0.20.1 toolchain; typed scene/renderer/seed controls and real 24-frame alpha/range render |
+| Blender adapter | helper/manual | helper/manual | implemented, runtime blocked | Typed scene/camera/engine/range controls, confined assets and deterministic lowering; official 4.5.12 process did not reach render execution locally |
 | Keyframed visual transforms | partial helper logic | raster legacy | verified | Rational range-aware motion/opacity pixel renders |
 | Freeze frames | no | descriptive only | verified | Exact item-local frame selection through retime/reverse; full, section and range decoded parity |
 | Tracking/reframing | focus hints | no | verified | Six patch-based drivers, constant/reverse/ramp frame mapping, evidence, caption collision regions and executable split fallback |

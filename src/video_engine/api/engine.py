@@ -22,6 +22,7 @@ from video_engine.core.time import FrameRate
 from video_engine.core.validation import ValidationReport, validate_project
 from video_engine.doctor import DoctorReport, run_doctor
 from video_engine.errors import InvalidProjectError
+from video_engine.graphics.service import GraphicsService
 from video_engine.inspection.service import InspectionService
 from video_engine.media.service import MediaService
 from video_engine.operations.editor import TimelineEditor
@@ -109,8 +110,12 @@ class VideoEngine:
             )
         return report
 
-    def doctor(self) -> DoctorReport:
-        return run_doctor(self.config, self.project_root)
+    def doctor(self, *, require_extended_graphics: bool = False) -> DoctorReport:
+        return run_doctor(
+            self.config,
+            self.project_root,
+            require_extended_graphics=require_extended_graphics,
+        )
 
     def media(self) -> MediaService:
         return MediaService(self.project_root, self.config)
@@ -129,6 +134,9 @@ class VideoEngine:
 
     def color(self) -> ColorService:
         return ColorService(self.project_root, self.config)
+
+    def graphics(self) -> GraphicsService:
+        return GraphicsService()
 
     def editor(self, project: Project) -> TimelineEditor:
         return TimelineEditor(project)

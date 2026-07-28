@@ -25,6 +25,14 @@ class EngineConfig(BaseModel):
     remotion_timeout_seconds: float = Field(default=600, gt=0, le=3600)
     remotion_browser_timeout_seconds: int = Field(default=120, ge=7, le=300)
     remotion_max_workers: int = Field(default=1, ge=1, le=8)
+    hyperframes_root: Path | None = None
+    hyperframes_browser_path: Path | None = None
+    hyperframes_timeout_seconds: float = Field(default=900, gt=0, le=7200)
+    hyperframes_max_workers: int = Field(default=1, ge=1, le=8)
+    manim_path: str = "manim"
+    manim_timeout_seconds: float = Field(default=900, gt=0, le=7200)
+    blender_path: str = "blender"
+    blender_timeout_seconds: float = Field(default=1800, gt=0, le=14_400)
     cache_dir: Path = Field(default_factory=lambda: Path(".video-engine/cache"))
     temp_dir: Path | None = None
     max_workers: int = Field(default=max(1, min(8, os.cpu_count() or 1)), ge=1, le=64)
@@ -72,6 +80,14 @@ class EngineConfig(BaseModel):
                 int,
             ),
             "VIDEO_ENGINE_REMOTION_MAX_WORKERS": ("remotion_max_workers", int),
+            "VIDEO_ENGINE_HYPERFRAMES_ROOT": ("hyperframes_root", Path),
+            "VIDEO_ENGINE_HYPERFRAMES_BROWSER": ("hyperframes_browser_path", Path),
+            "VIDEO_ENGINE_HYPERFRAMES_TIMEOUT": ("hyperframes_timeout_seconds", float),
+            "VIDEO_ENGINE_HYPERFRAMES_MAX_WORKERS": ("hyperframes_max_workers", int),
+            "VIDEO_ENGINE_MANIM": ("manim_path", str),
+            "VIDEO_ENGINE_MANIM_TIMEOUT": ("manim_timeout_seconds", float),
+            "VIDEO_ENGINE_BLENDER": ("blender_path", str),
+            "VIDEO_ENGINE_BLENDER_TIMEOUT": ("blender_timeout_seconds", float),
             "VIDEO_ENGINE_MAX_WORKERS": ("max_workers", int),
             "VIDEO_ENGINE_RENDER_SECTION_SECONDS": (
                 "render_section_duration_seconds",
@@ -109,4 +125,14 @@ class EngineConfig(BaseModel):
         remotion_root = values.get("remotion_root")
         if remotion_root is not None and not Path(remotion_root).is_absolute():
             values["remotion_root"] = project_root / Path(remotion_root)
+        hyperframes_root = values.get("hyperframes_root")
+        if hyperframes_root is not None and not Path(hyperframes_root).is_absolute():
+            values["hyperframes_root"] = project_root / Path(hyperframes_root)
+        hyperframes_browser = values.get("hyperframes_browser_path")
+        if hyperframes_browser is not None and not Path(hyperframes_browser).is_absolute():
+            values["hyperframes_browser_path"] = project_root / Path(hyperframes_browser)
+        for field in ("manim_path", "blender_path"):
+            executable = Path(str(values[field]))
+            if not executable.is_absolute() and executable.parent != Path("."):
+                values[field] = str((project_root / executable).resolve())
         return EngineConfig.model_validate(values)

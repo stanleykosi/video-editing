@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import platform
 import shutil
 import sys
@@ -13,6 +14,7 @@ from pathlib import Path
 from pydantic import BaseModel, ConfigDict
 
 from video_engine.config import EngineConfig
+from video_engine.errors import EngineError
 from video_engine.process import CommandRunner
 
 
@@ -230,6 +232,80 @@ def _remotion_browser_check(config: EngineConfig, project_root: Path) -> DoctorC
     )
 
 
+def _hyperframes_check(
+    config: EngineConfig, project_root: Path, runner: CommandRunner
+) -> DoctorCheck:
+    root = (config.hyperframes_root or project_root).resolve()
+    package = root / "node_modules" / "@hyperframes" / "producer" / "package.json"
+    if not package.is_file():
+        return DoctorCheck(
+            name="HyperFrames producer",
+            status=CheckStatus.FAIL,
+            required=True,
+            detail="@hyperframes/producer is not installed",
+            action="Run npm ci from the engine root.",
+        )
+    try:
+        version = str(json.loads(package.read_text(encoding="utf-8"))["version"])
+        runner.run(
+            [
+                config.node_path,
+                "--input-type=module",
+                "-e",
+                "import('@hyperframes/producer').then(m=>{if(!m.executeRenderJob)process.exit(2)})",
+            ],
+            cwd=root,
+        )
+    except (OSError, KeyError, TypeError, json.JSONDecodeError, EngineError) as exc:
+        return DoctorCheck(
+            name="HyperFrames producer",
+            status=CheckStatus.FAIL,
+            required=True,
+            detail=str(exc),
+            action="Reinstall the exact Node lock with npm ci --ignore-scripts.",
+        )
+    return DoctorCheck(
+        name="HyperFrames producer",
+        status=CheckStatus.PASS,
+        required=True,
+        version=version,
+        detail=str(package),
+    )
+
+
+def _hyperframes_browser_check(config: EngineConfig, project_root: Path) -> DoctorCheck:
+    candidates: list[Path] = []
+    for configured in (config.hyperframes_browser_path, config.remotion_browser_path):
+        if configured is not None:
+            candidates.append(configured)
+    roots = (
+        Path.home() / ".cache" / "ms-playwright",
+        project_root / "node_modules" / ".remotion",
+        Path.home() / ".cache" / "puppeteer",
+        Path.home() / ".cache" / "hyperframes",
+    )
+    for root in roots:
+        if root.is_dir():
+            candidates.extend(root.glob("**/chrome-headless-shell"))
+            candidates.extend(root.glob("**/headless_shell"))
+    for candidate in candidates:
+        resolved = candidate.resolve()
+        if resolved.is_file() and os.access(resolved, os.X_OK):
+            return DoctorCheck(
+                name="HyperFrames browser",
+                status=CheckStatus.PASS,
+                required=True,
+                detail=str(resolved),
+            )
+    return DoctorCheck(
+        name="HyperFrames browser",
+        status=CheckStatus.FAIL,
+        required=True,
+        detail="no executable Chrome headless-shell was found",
+        action=("Set VIDEO_ENGINE_HYPERFRAMES_BROWSER or install the exact Remotion browser."),
+    )
+
+
 def _fonts_check(runner: CommandRunner) -> DoctorCheck:
     try:
         result = runner.run(["fc-list", ":", "family"], timeout=10)
@@ -249,7 +325,12 @@ def _fonts_check(runner: CommandRunner) -> DoctorCheck:
     )
 
 
-def run_doctor(config: EngineConfig, project_root: Path) -> DoctorReport:
+def run_doctor(
+    config: EngineConfig,
+    project_root: Path,
+    *,
+    require_extended_graphics: bool = False,
+) -> DoctorReport:
     runner = CommandRunner(default_timeout=15)
     python_ok = sys.version_info[:2] == (3, 11)
     checks = [
@@ -270,22 +351,32 @@ def run_doctor(config: EngineConfig, project_root: Path) -> DoctorReport:
         _executable_check("npm", config.npm_path, ["--version"], required=True, runner=runner),
         _remotion_check(config, project_root, runner),
         _remotion_browser_check(config, project_root),
+        _hyperframes_check(config, project_root, runner),
+        _hyperframes_browser_check(config, project_root),
         _fonts_check(runner),
         _executable_check("Tesseract", "tesseract", ["--version"], required=False, runner=runner),
-        _executable_check("Blender", "blender", ["--version"], required=False, runner=runner),
-        _executable_check("Manim", "manim", ["--version"], required=False, runner=runner),
-        _executable_check("LaTeX", "latex", ["--version"], required=False, runner=runner),
-    ]
-    hyperframes = project_root / "node_modules" / ".bin" / "hyperframes"
-    checks.append(
         _executable_check(
-            "HyperFrames",
-            str(hyperframes) if hyperframes.exists() else "hyperframes",
+            "Blender",
+            config.blender_path,
             ["--version"],
-            required=False,
+            required=require_extended_graphics,
             runner=runner,
-        )
-    )
+        ),
+        _executable_check(
+            "Manim",
+            config.manim_path,
+            ["--version"],
+            required=require_extended_graphics,
+            runner=runner,
+        ),
+        _executable_check(
+            "LaTeX",
+            "latex",
+            ["--version"],
+            required=require_extended_graphics,
+            runner=runner,
+        ),
+    ]
     checks.append(
         DoctorCheck(
             name="Pydantic",

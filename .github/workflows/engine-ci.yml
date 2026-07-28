@@ -93,9 +93,43 @@ jobs:
       - name: Execute mixed-backend alpha range render
         env:
           VIDEO_ENGINE_RUN_REMOTION_INTEGRATION: "1"
+          VIDEO_ENGINE_RUN_HYPERFRAMES_INTEGRATION: "1"
         run: |
           uv run pytest -q tests/integration/test_remotion_graphics.py
+          uv run pytest -q tests/integration/test_hyperframes_graphics.py
           uv run pytest -q tests/golden/test_legacy_parity.py::test_faceless_legacy_fixture_has_canonical_render_and_qc_parity
           uv run pytest -q \
             tests/golden/test_canonical_projects.py::test_canonical_golden_project[product_ad] \
             tests/golden/test_canonical_projects.py::test_canonical_golden_project[motion_graphics_video]
+
+  extended-graphics:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install external graphics system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes \
+            blender dvisvgm ffmpeg fontconfig libcairo2-dev libpango1.0-dev \
+            pkg-config texlive-fonts-recommended texlive-latex-base texlive-latex-extra
+      - name: Install locked engine and isolated Manim environments
+        run: |
+          python -m pip install uv==0.10.9
+          uv sync --frozen --group dev
+          uv sync --project tools/video-use/vendor/manim-video --frozen
+      - name: Materialize review-collapsed test suite
+        run: uv run python scripts/materialize_tests.py
+      - name: Execute Manim and Blender alpha range renders
+        env:
+          VIDEO_ENGINE_MANIM: tools/video-use/vendor/manim-video/.venv/bin/manim
+          VIDEO_ENGINE_RUN_MANIM_INTEGRATION: "1"
+          VIDEO_ENGINE_RUN_MANIM_LATEX_INTEGRATION: "1"
+          VIDEO_ENGINE_BLENDER: blender
+          VIDEO_ENGINE_RUN_BLENDER_INTEGRATION: "1"
+        run: |
+          uv run pytest -q tests/integration/test_manim_graphics.py
+          uv run pytest -q tests/integration/test_blender_graphics.py

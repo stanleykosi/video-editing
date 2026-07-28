@@ -6,8 +6,8 @@
   compiler lowering, cache keys, caption layout, audio math, and QC rules.
 - Property: timeline operations preserve ordering, nonnegative duration, source
   bounds, and undo/redo round trips.
-- Integration: FFprobe registry, derivatives, FFmpeg graphs, ASS burn, Remotion
-  bridge, inspection, adapters, and reports.
+- Integration: FFprobe registry, derivatives, FFmpeg graphs, ASS burn, Remotion,
+  HyperFrames and Manim bridges, inspection, adapters, and reports.
 - End to end: required golden projects across formats and production profiles.
 - Performance/recovery: thousands of items, range rendering, cache invalidation,
   resumption, worker failure, and memory-conscious compilation.
@@ -46,10 +46,11 @@ signal comparisons remain authoritative across compatible toolchain builds.
 
 CI installs locked environments, runs Ruff, Black, MyPy, branch coverage,
 package build, Node typecheck/bundle, the complete non-browser integration lane,
-all twelve golden declarations, immutable baseline validation, and a separate
-real Remotion/Chromium lane. Wall-clock performance tests run in their own step
-without coverage instrumentation so their timing ceilings measure compiler work
-rather than tracing overhead.
+all twelve golden declarations, immutable baseline validation, and separate
+browser and extended-graphics lanes. The browser lane executes Remotion and
+HyperFrames; the extended lane installs the isolated Manim lock and Blender,
+then runs both real alpha/range adapters. Wall-clock performance tests run in
+their own step without coverage instrumentation.
 
 Static gates cover the canonical package, tests, release scripts, and
 `tools/video-use/compat`. The remaining `tools/video-use/helpers` files are
@@ -113,6 +114,26 @@ uv run pytest -q tests/integration/test_qc.py
 uv run pytest -q tests/integration/test_inspection.py
 uv run pytest -q tests/performance/test_long_form.py
 ```
+
+External graphics have focused opt-in real-render gates:
+
+```bash
+VIDEO_ENGINE_RUN_HYPERFRAMES_INTEGRATION=1 uv run pytest -q \
+  tests/integration/test_hyperframes_graphics.py
+VIDEO_ENGINE_RUN_MANIM_INTEGRATION=1 uv run pytest -q \
+  tests/integration/test_manim_graphics.py
+```
+
+Both assert exact 24-frame, 320x180, 24 fps ProRes alpha output. Blender's
+lowering and capability selection are unit-tested. Its opt-in real-render gate
+was attempted with checksum-verified Blender 4.5.12 inside and outside the
+sandbox; the process did not reach test execution and the unrestricted run was
+interrupted after 13 minutes.
+
+The local standard doctor passes 15 checks with the isolated Manim executable
+configured; only optional Blender warns. The real Manim `MathTex` smoke render
+passes with the installed pdfTeX/dvisvgm toolchain. Hosted CI repeats that gate
+and owns the real distro-Blender lane.
 
 The final post-hardening consolidated Python run passes 320 tests with six
 expected optional/browser skips and 81.37% branch-aware coverage in 483.53

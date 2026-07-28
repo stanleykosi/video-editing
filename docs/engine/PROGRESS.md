@@ -21,11 +21,27 @@ Measured legacy auto-grade migration, exact freeze lowering, horizontal/
 vertical/square delivery evidence, section-local caption invalidation, and
 toolchain-portable golden schema v3 are complete. The remaining compatibility
 renderers have been retired behind a recursive live-tree guard. Package metadata
-has been regenerated. Every repository-owned implementation, migration, render,
-browser, evidence, and release gate is green locally. A hosted GitHub Actions
-result remains external to this uncommitted workspace.
+has been regenerated. The external-graphics expansion is in final verification:
+HyperFrames and Manim are implemented with real alpha/range renders, while the
+Blender adapter cannot receive real-render evidence because the official
+portable process does not reach execution locally. A hosted GitHub Actions result remains external to this
+uncommitted workspace.
 
 ## Completed Work
+
+- Added strict registered HyperFrames, Manim, and Blender generator components,
+  renderer-tagged DAG nodes, backend capability planning, confined asset
+  staging, tool fingerprints, exact range conformance, output validation, and
+  manifest metadata.
+- Added `GraphicsService` and machine-readable `video-engine graphics prepare`
+  commands for content-addressed HyperFrames HTML, Manim scene, and Blender
+  project bundles. Future agents do not need renderer CLI knowledge.
+- Exact-pinned `@hyperframes/producer==0.7.77`. Locked and installed Manim
+  0.20.1 in an isolated uv project so its NumPy 2.4 runtime cannot alter the
+  engine media environment's NumPy 1.26 contract.
+- Extended GitHub Actions now executes real HyperFrames in the browser lane and
+  isolated Manim, Manim `MathTex`, and distro Blender in a dedicated graphics
+  lane with LaTeX/dvisvgm.
 
 - Consolidated the formerly scattered root knowledge folders into the single
   `knowledge/` namespace, with clear workflow, playbook, research, technique,
@@ -337,6 +353,22 @@ result remains external to this uncommitted workspace.
 
 ## Tests Run
 
+- Real Manim backend integration: 1 passed in 9.45 s; exact 24-frame 320x180,
+  24 fps ProRes alpha output.
+- Real HyperFrames producer/browser integration: 1 passed in 54.47 s; linted
+  exact 24-frame 320x180, 24 fps ProRes alpha output.
+- External-graphics focused unit suite: strict registry/bindings, public
+  preparation service, CLI JSON bundle, backend selection, Blender fractional
+  frame-rate lowering, and content-addressed asset handling.
+- Consolidated focused gate: 63 passed, 3 opt-in integrations skipped, 5
+  deselected in 14.65 s. Ruff passed, strict MyPy passed across 89 source files,
+  `uv lock --check` passed, and the deterministic test archive was repacked.
+- Local no-isolation sdist/wheel build passed and includes the HyperFrames
+  runner package data. Standard doctor now passes 15 checks with only optional
+  Blender warning when the isolated Manim path is configured.
+- Real Manim geometry/alpha and `MathTex`/LaTeX integrations both pass: 2 tests
+  in 35.61 s with Manim 0.20.1, pdfTeX 1.40.25, and dvisvgm 3.2.1.
+
 - `uv run pytest -q`: exit 5, no tests collected. The command created the root
   environment and installed the lockfile environment before collection.
 - Independent system collection check: exit 5, no tests collected.
@@ -585,6 +617,16 @@ result remains external to this uncommitted workspace.
 
 ## Failures
 
+- Blender real-render verification is externally blocked. System installation
+  requires an unavailable sudo password. The official portable 4.5.12 LTS
+  archive passed its published SHA-256 and version probe, but did not reach test
+  execution under sandboxed or unrestricted runs; the latter was interrupted
+  after 13 minutes. No Blender parity claim is made.
+- Root `uv lock` refresh reached the PyTorch macOS wheel index and timed out.
+  The only root dependency change was removal of legacy Manim; lock metadata was
+  updated consistently, the independent Manim 0.20.1 lock resolves, and the
+  final `uv lock --check` passes.
+
 - No repository-owned test suite or fixtures existed at baseline.
 - `ruff check tools/video-use/helpers`: 10 existing errors.
 - `ruff format --check tools/video-use/helpers`: all 30 files would reformat.
@@ -689,9 +731,10 @@ result remains external to this uncommitted workspace.
 
 ## Remaining Tasks
 
+- Execute the Blender real alpha/range integration gate on a host where the
+  official process starts normally; this is the only external-graphics runtime
+  proof still blocked.
 - Commit/push the completed tree and observe the configured GitHub Actions jobs.
-  This is the only unexecuted definition-of-done gate and requires a hosted run;
-  no local implementation task remains.
 - Decide the intended licensing boundary before any public distribution: the
   root package declares `LicenseRef-Proprietary`, while the historical
   `tools/video-use/LICENSE` contains an MIT grant. No legal text was changed by
@@ -703,6 +746,10 @@ result remains external to this uncommitted workspace.
   convert it once into rational canonical time.
 - Remotion/Chromium graphics goldens are materially slower than FFmpeg-only
   tests and require an execution environment that admits a local browser.
+- HyperFrames browser rendering is likewise slower than FFmpeg-only work.
+  HyperFrames' producer dependency currently carries three upstream moderate
+  `@hono/node-server` advisories; the high-severity npm audit gate passes and
+  engine jobs accept only confined local trusted compositions.
 - Operation undo/redo is process-local; durable CLI history is represented by
   emitted inverse patches until a persistent project audit store is added.
 - ASS has no portable literal brace/backslash escape. Canonical ASS export uses a

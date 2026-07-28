@@ -1,6 +1,6 @@
 # Current Engine State
 
-Last updated: 2026-07-27
+Last updated: 2026-07-28
 
 ## Summary
 
@@ -74,3 +74,14 @@ non-rendering measured-analysis and typed-preset translation shim.
 These problems describe the state captured by the immutable baseline, not the
 current canonical engine. Ongoing status belongs in `PROGRESS.md`; shipped
 contracts belong in `PUBLIC_API.md`.
+
+## Current Graphics Runtime
+
+The canonical renderer registry now executes five typed backends: FFmpeg,
+Remotion, HyperFrames, Manim, and Blender. HyperFrames 0.7.77 and Manim 0.20.1
+have real alpha/range render evidence. Blender has complete typed lowering,
+registration, cache identity, confinement, and deterministic tests. An official
+portable 4.5.12 LTS binary passed its published SHA-256 and version probe, but
+did not reach render execution in this environment; no Blender render parity
+claim is made. The default extended doctor reports Blender absent unless that
+portable path is explicitly configured.
