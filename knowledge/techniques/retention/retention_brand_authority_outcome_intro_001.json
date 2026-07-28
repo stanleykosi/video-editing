@@ -1,0 +1,58 @@
+{
+  "id": "retention_brand_authority_outcome_intro_001",
+  "name": "Brand Authority Outcome Intro",
+  "category": "retention",
+  "source_tutorial": "knowledge/research/transcripts/killer intros.txt",
+  "use_when": [
+    "An intro needs to make a creator, show, course, or community feel premium quickly.",
+    "The edit has real social proof, community proof, authority proof, or a strong third-party quote.",
+    "The viewer must understand who this is, why to trust it, and what outcome they can expect."
+  ],
+  "avoid_when": [
+    "There is no truthful authority, proof, or outcome to show.",
+    "The intro would become self-praise instead of viewer value.",
+    "The content promise is already urgent and brand packaging would slow it down.",
+    "The proof source is irrelevant, unknown to the target niche, or misleading."
+  ],
+  "timeline_pattern": {
+    "pattern": "clear_brand -> social_proof_or_authority -> perceived_value_outcome -> body_start",
+    "branding_rule": "Show the brand, show name, creator identity, or series label clearly before visual complexity takes over.",
+    "authority_rule": "Use third-party proof, recognized niche figures, community reaction, or client/audience evidence instead of direct self-praise.",
+    "outcome_rule": "End the intro with the value the viewer expects to gain, not only a creator flex.",
+    "compression_rule": "The three beats should fit the platform duration cap; remove the weakest beat rather than making the intro drag."
+  },
+  "motion": {
+    "rule": "Motion should guide the viewer from brand to proof to outcome with one primary focus at a time."
+  },
+  "sound": {
+    "rule": "Use music and SFX to raise perceived quality, but do not bury the proof quote or outcome line."
+  },
+  "captions": {
+    "rule": "Use designed text for brand, proof, and outcome. Suppress ordinary captions when they duplicate the designed words."
+  },
+  "color": {
+    "rule": "Use brand-consistent color and contrast; proof clips or quotes should remain readable and credible."
+  },
+  "implementation": {
+    "ffmpeg": "Build timed sections for logo/show text, proof clip or quote text, and outcome phrase. Use drawtext/overlay/fades and render a short proof-of-readability preview.",
+    "remotion": "Create IntroBeat data with type values brand, proof, outcome, startFrame, endFrame, text, sourceClipId, authorityLevel, and safeRegion.",
+    "blender": "Use simple branded text and 3D/logo movement only when it clarifies the premium identity.",
+    "capcut_equivalent": "Use a short logo/title card, proof clip or quote, and outcome text; compound the intro and trim to 3-5 seconds for social.",
+    "premiere_equivalent": "Use a nested intro sequence with markers for brand, proof, and outcome; add Essential Graphics text and SFX markers for each beat."
+  },
+  "common_mistakes": [
+    "Opening with only a logo and no viewer value.",
+    "Having the creator claim authority instead of showing proof from someone else.",
+    "Using irrelevant celebrity or client proof that the target audience does not trust.",
+    "Ending the intro without making the viewer's expected outcome clear.",
+    "Making all three beats visually loud so none of them reads."
+  ],
+  "qc": [
+    "Can the viewer identify the brand or show within the intro?",
+    "Is the authority proof truthful, relevant, and externally supported?",
+    "Does the intro state or imply the viewer outcome before the body starts?",
+    "Does each beat have one primary visual focus?",
+    "Does the proof quote remain audible/readable under music and SFX?"
+  ]
+}
+

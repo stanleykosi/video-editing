@@ -1,0 +1,64 @@
+{
+  "id": "compositing_capcut_green_screen_vfx_insert_001",
+  "name": "CapCut Green-Screen VFX Insert Behind Subject",
+  "category": "compositing",
+  "source_tutorial": "knowledge/research/transcripts/make pro media.txt",
+  "use_when": [
+    "An explosion, smoke, meme effect, screen element, or stylized VFX should be inserted into a shot.",
+    "The VFX asset can be chroma-keyed or has a clean background that can be removed.",
+    "The effect should sit behind the subject, requiring a duplicated foreground cutout layer."
+  ],
+  "avoid_when": [
+    "The VFX asset is copyrighted, unclear, watermarked, or not safe for the intended platform.",
+    "The chroma key leaves obvious green edges or removes desired VFX detail.",
+    "The effect does not match the camera perspective, scale, light, or tone of the shot.",
+    "The foreground subject cutout cannot be made clean enough to sell the behind-subject layer."
+  ],
+  "timeline_pattern": {
+    "pattern": "base_clip -> vfx_overlay -> crop_to_effect -> chroma_key_green -> scale_position_match -> optional_brightness_match -> duplicate_base_above -> remove_background_subject -> cinematic_filter_or_grade -> sound_sync_qc",
+    "rights_rule": "Treat downloaded or screen-recorded green-screen assets as temp until rights or platform safety are confirmed.",
+    "placement_rule": "Align the VFX as if it exists in the scene before putting the subject cutout above it.",
+    "sandwich_rule": "Use a bottom base clip, middle keyed VFX, and top foreground subject cutout when the effect should appear behind the person.",
+    "match_rule": "Adjust brightness, contrast, blur, and grade so the keyed VFX does not look pasted on."
+  },
+  "motion": {
+    "rule": "The VFX peak should land on the action beat, reaction, or music cue that motivates the insert.",
+    "keyframe_values": {
+      "trim": "Trim the VFX to the active effect range before keying.",
+      "crop": "Crop away unused green-screen area before scaling when possible.",
+      "scale_position": "Match the implied depth and location before applying the foreground sandwich.",
+      "foreground_alignment": "The duplicated top subject layer must stay frame-aligned with the base clip."
+    }
+  },
+  "sound": {
+    "rule": "Add VFX sound only after the visual impact frame is locked; keep it below dialogue and license-safe."
+  },
+  "captions": {
+    "rule": "Captions should avoid the VFX impact and foreground cutout edge; suppress or move them during the effect if needed."
+  },
+  "color": {
+    "rule": "Keyed VFX may need brightness reduction, contrast control, blur, or shared grade so it fits the plate."
+  },
+  "implementation": {
+    "ffmpeg": "Use chromakey/colorkey to remove green, crop and scale the VFX, overlay it between base and foreground alpha layers, and align SFX to the VFX peak frame.",
+    "remotion": "Model VfxInsert with assetRef, licenseStatus, chromaColor, tolerance, crop, transform, impactFrame, foregroundMaskRef, and soundCueFrame.",
+    "blender": "Use keying/compositor nodes for the VFX, place it between background and subject matte layers, and match color/blur in the compositor.",
+    "capcut_equivalent": "Add the green-screen VFX as overlay, trim/crop it, use Cutout/Chroma Key and tune intensity, scale/position it, duplicate the base clip above the VFX, use Remove Background on the top layer, then add grade/filter and synced SFX.",
+    "premiere_equivalent": "Use Ultra Key on the VFX layer, crop/position/grade it, duplicate/rotoscope the subject above it or use After Effects Roto Brush, then align SFX with markers."
+  },
+  "common_mistakes": [
+    "Using a green-screen asset from the web without license or platform-safety review.",
+    "Leaving green spill or keyed holes in the VFX.",
+    "Placing the VFX on top of the subject when it should sit behind them.",
+    "Forgetting to duplicate and align the foreground subject layer.",
+    "Adding an explosion or impact that does not match the shot's scale, lighting, or tone."
+  ],
+  "qc": [
+    "Is the VFX asset source/license/platform status documented?",
+    "Does the chroma key remove green without damaging the VFX?",
+    "Does the VFX sit at a plausible scale and position in the shot?",
+    "Is the top foreground subject layer frame-aligned and edge-clean?",
+    "Does the SFX land on the VFX impact frame and stay below speech?",
+    "Do captions avoid the impact and cutout edges?"
+  ]
+}

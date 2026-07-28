@@ -1,0 +1,64 @@
+{
+  "id": "programmatic_ffmpeg_alphamerge_alpha_mask_pipeline_001",
+  "name": "FFmpeg Alphamerge Alpha Mask Pipeline",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/source_notes/hhsprings_ffmpeg_alphamerge_alphaextract_source_notes.md",
+  "additional_sources": [
+    "knowledge/research/source_notes/ffmpeg_filters_alpha_masking_official_source_notes.md",
+    "knowledge/research/source_notes/curio_ffmpeg_alpha_masking_source_notes.md"
+  ],
+  "use_when": [
+    "A rendered text, glow, lower-third, or graphic foreground needs to be revealed through a grayscale mask.",
+    "The agent needs a reusable transparent foreground before final overlay.",
+    "A CapCut-style split mask, shine sweep, or highlight wipe must be reproduced in FFmpeg."
+  ],
+  "avoid_when": [
+    "The goal is direct weighted blending between two opaque sources; use maskedmerge instead.",
+    "The foreground and mask dimensions, fps, or duration are not aligned.",
+    "A simple NLE mask or Remotion CSS mask would be clearer and easier to debug.",
+    "The final output format will strip alpha before the overlay is used."
+  ],
+  "timeline_pattern": {
+    "pattern": "foreground_render -> grayscale_mask -> format_alignment -> alphamerge -> overlay_or_alpha_export -> contact_sheet_qc",
+    "polarity_rule": "White/high mask values reveal the foreground; black/low values hide it.",
+    "format_rule": "Use explicit format steps when necessary so alpha is preserved and interpreted correctly."
+  },
+  "motion": {
+    "rule": "Animated masks must be generated with the same resolution, fps, duration, and intended timing as the foreground.",
+    "keyframe_values": {
+      "short_text_wipe": "6-15 frames at 30 fps for fast text reveals.",
+      "lower_third_wipe": "12-24 frames at 30 fps for calmer overlay reveals.",
+      "mask_preview": "Preview at least reveal start, midpoint, final visible hold, and clear frames."
+    }
+  },
+  "sound": {
+    "rule": "If used, SFX should land on the visible reveal frame, not the start of the mask file, and remain below dialogue."
+  },
+  "captions": {
+    "rule": "Keep captions away from the masked overlay region unless the overlay replaces those captions."
+  },
+  "color": {
+    "rule": "Inspect semi-transparent mask edges over contrasting backgrounds for dark halos, premultiply issues, or muddy glow."
+  },
+  "implementation": {
+    "ffmpeg": "Use [foreground][mask]alphamerge[foreground_alpha]; then [background][foreground_alpha]overlay=format=auto[final], or export foreground_alpha to an alpha-capable format.",
+    "remotion": "Equivalent logic is duplicate/styled layers revealed by CSS masks; export the result as transparent overlay if FFmpeg will composite later.",
+    "blender": "Use grayscale masks as compositor alpha inputs for a foreground layer, then composite or export with alpha.",
+    "capcut_equivalent": "Use Split/Film Strip masks on duplicated/compounded foreground layers; verify start/end outside the word.",
+    "premiere_equivalent": "Use track mattes or masked nested graphics to reveal a foreground layer above the base."
+  },
+  "common_mistakes": [
+    "Expecting overlay alone to create a mask reveal.",
+    "Using a mask with the wrong polarity.",
+    "Letting mask and foreground frame properties mismatch.",
+    "Converting to a non-alpha pixel format before alpha is needed.",
+    "Reusing graph labels ambiguously and merging the wrong stream."
+  ],
+  "qc": [
+    "Mask preview shows correct polarity and edge softness.",
+    "Foreground and mask match width, height, fps, duration, and timing.",
+    "Alpha survives until the intended final overlay or alpha export step.",
+    "Start/mid/hold/clear contact frames show no black rectangle or sliver.",
+    "Final render has no unintended caption, face, proof, UI, product, or action overlap."
+  ]
+}

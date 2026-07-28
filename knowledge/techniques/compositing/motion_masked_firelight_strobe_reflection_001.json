@@ -1,0 +1,63 @@
+{
+  "id": "motion_masked_firelight_strobe_reflection_001",
+  "name": "Masked Firelight Strobe Reflection",
+  "category": "compositing",
+  "source_tutorial": "knowledge/research/transcripts/still image to media.txt",
+  "use_when": [
+    "A visible fire, screen, neon sign, explosion, or bright practical source should appear to affect nearby surfaces.",
+    "A still image composite needs local light movement so the inserted fire or glow feels integrated.",
+    "A full-frame flicker would be too fake, but a small reflected region would sell the effect."
+  ],
+  "avoid_when": [
+    "There is no visible or implied light source causing the flicker.",
+    "The flicker would cover faces, captions, proof, product detail, or the main action.",
+    "The project tone needs restrained realism and the strobe reads as a gimmick.",
+    "The mask cannot be feathered enough to hide its boundary."
+  ],
+  "timeline_pattern": {
+    "pattern": "base_still_or_duplicate -> strobe_or_flicker_effect -> local_mask -> high_feather -> blend_or_opacity_adjust -> align_to_light_source -> preview_loop",
+    "locality_rule": "Apply flicker only to surfaces close enough to the light source to plausibly receive reflected light.",
+    "mask_rule": "Use a simple circle/ellipse or custom mask, then increase feather until the edge is not visible.",
+    "blend_rule": "Use Screen/Add/opacity as needed so the reflection lifts light without painting an obvious patch.",
+    "preview_rule": "Preview at full speed because a mask that looks acceptable on a still frame can pulse visibly during flicker."
+  },
+  "motion": {
+    "rule": "The flicker should feel irregular or source-motivated rather than a full-frame blinking effect.",
+    "keyframe_values": {
+      "mask_size": "Keep the masked area as small as the reflected surface allows.",
+      "feather": "Use high or near-maximum feather when the reflected area has no hard physical boundary.",
+      "intensity": "Start subtle, then raise only until the reflection is felt next to the source.",
+      "timing": "The reflection should start with the light source and run only while the source is visible."
+    }
+  },
+  "sound": {
+    "rule": "If paired with sound, use subtle fire crackle, electrical buzz, or room tone; do not add a hit to every flicker pulse."
+  },
+  "captions": {
+    "rule": "Do not place captions over the reflected flicker area when the flicker changes contrast frame to frame."
+  },
+  "color": {
+    "rule": "Tint the reflection toward the source color and preserve surrounding shadow detail so the mask does not look pasted on."
+  },
+  "implementation": {
+    "ffmpeg": "Create a masked duplicate or colored light layer, animate opacity/noise for flicker, blur the alpha mask heavily, and composite with screen/add/lighten over the base image.",
+    "remotion": "Use a masked light layer with animated opacity or noise-driven intensity, soft-edge mask metadata, sourceColor, and collision zones.",
+    "blender": "Use a soft mask in the compositor or a light/glow plane over the reflected surface, animate emission or opacity, and color-match to the source.",
+    "capcut_equivalent": "Duplicate the base or add a light/effect layer, apply Strobe/Flicker only to that layer, use Mask with a circle/ellipse, raise Feather strongly, then set blend/opacity so only the local reflection remains.",
+    "premiere_equivalent": "Duplicate the clip or add a solid/adjustment layer, mask the reflected area with high feather, keyframe opacity or add a flicker effect, use blend modes, and nest if several reflection regions are needed."
+  },
+  "common_mistakes": [
+    "Applying the strobe to the entire frame instead of the reflected surface.",
+    "Leaving the mask circle visible because feathering is too low.",
+    "Making the reflection brighter than the source light.",
+    "Letting flicker cover captions or facial detail.",
+    "Running the reflection after the light source has disappeared."
+  ],
+  "qc": [
+    "Is the flicker tied to a visible or implied light source?",
+    "Is the mask edge invisible while the flicker plays?",
+    "Does the reflected light stay weaker than or consistent with the source?",
+    "Do faces, captions, proof, UI, and products remain readable?",
+    "Does the flicker stop or change when the source light is no longer present?"
+  ]
+}

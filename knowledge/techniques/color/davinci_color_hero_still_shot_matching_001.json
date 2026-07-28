@@ -1,0 +1,59 @@
+{
+  "id": "davinci_color_hero_still_shot_matching_001",
+  "name": "DaVinci Hero Still Shot Matching",
+  "category": "color",
+  "source_tutorial": "knowledge/research/transcripts/davinci resolve full tutorial.txt",
+  "use_when": [
+    "Multiple shots in a scene need consistent exposure, contrast, color, and saturation.",
+    "A creative look makes shot differences more obvious.",
+    "The editor is second-guessing matches by comparing only adjacent shots."
+  ],
+  "avoid_when": [
+    "The scene intentionally uses different color worlds or source types.",
+    "A shot is meant to feel disconnected, archival, fantasy, or phone-recorded.",
+    "The reference still is not representative of the intended scene look."
+  ],
+  "timeline_pattern": {
+    "pattern": "choose_hero_shot -> grab_still -> split_screen_compare -> match_clip_nodes -> apply_or_copy_grade -> review_scene",
+    "hero_rule": "Choose a strong representative shot as the reference, then compare every related shot to it.",
+    "copy_rule": "Copy grades only as a starting point; adjust each shot if exposure, camera, or lighting differs.",
+    "look_order_rule": "If the creative look is extreme, build the look first, then match clip nodes under it."
+  },
+  "motion": {
+    "rule": "No direct motion rule, but shot matching should preserve focal emphasis after zooms or reframes."
+  },
+  "sound": {
+    "rule": "No direct sound rule."
+  },
+  "captions": {
+    "rule": "Do not let shot matching darken or saturate frames until captions lose contrast."
+  },
+  "color": {
+    "rule": "Use stills, scopes, and clip nodes to match shots to a constant reference instead of drifting across the scene.",
+    "keyframe_values": {
+      "review_rule": "Look away or switch shots periodically because visual adaptation can hide color drift.",
+      "good_enough_rule": "If the match reads consistently in motion and protects faces/proof, move on instead of chasing invisible perfection."
+    }
+  },
+  "implementation": {
+    "ffmpeg": "Render contact sheets against a chosen hero frame and compare histograms/scopes before applying per-clip filters.",
+    "remotion": "Store heroFrameId and perClipCorrection deltas for scene matching.",
+    "blender": "Use reference stills or compositor viewer comparisons when matching rendered and live-action plates.",
+    "capcut_equivalent": "Use a representative frame as visual reference, copy adjustments, then refine each clip by eye and scopes if available.",
+    "premiere_equivalent": "Use Comparison View, Lumetri scopes, copy/paste Lumetri, and per-clip refinement."
+  },
+  "common_mistakes": [
+    "Matching each shot to the previous one and drifting away from the intended look.",
+    "Choosing a weak or unusual hero still as the reference.",
+    "Copying grades without checking each shot's lighting and camera differences.",
+    "Continuing to tweak after the scene already reads consistently."
+  ],
+  "qc": [
+    "Is there a named hero still or reference shot?",
+    "Do all scene shots match that reference closely enough in motion?",
+    "Does the creative look amplify any remaining mismatch?",
+    "Are skin/proof/caption details protected in every matched shot?",
+    "Was the scene reviewed after looking away or switching context?"
+  ]
+}
+

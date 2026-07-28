@@ -1,0 +1,64 @@
+{
+  "id": "programmatic_remotion_css_mask_text_reveal_001",
+  "name": "Remotion CSS Mask Text Reveal",
+  "category": "typography",
+  "source_tutorial": "knowledge/research/source_notes/mdn_css_masking_source_notes.md",
+  "additional_sources": [
+    "knowledge/research/source_notes/remotion_lab_kinetic_typography_presets_source_notes.md",
+    "knowledge/research/source_notes/remotion_transparent_videos_source_notes.md"
+  ],
+  "use_when": [
+    "A text highlight, split-color fill, glow reveal, or soft wipe should be generated in Remotion.",
+    "The text needs responsive layout, exact duplicate-layer alignment, and soft alpha control.",
+    "A CSS gradient, raster mask, or SVG mask can express the reveal cleanly."
+  ],
+  "avoid_when": [
+    "A hard rectangular reveal with no softness can be handled with simpler clip-path.",
+    "The text is dense accessibility captions that should remain stable.",
+    "The mask mode or duplicate layer alignment cannot be tested.",
+    "The final compositor is already FFmpeg and the text is pre-rendered."
+  ],
+  "timeline_pattern": {
+    "pattern": "base_text -> duplicate_styled_text -> css_mask_or_svg_mask -> optional_masked_glow_duplicate -> local_frame_progress -> transparent_export_or_final_composite",
+    "alpha_rule": "Use alpha masks when opacity should control visibility; use luminance masks only when grayscale brightness should drive opacity.",
+    "layer_rule": "Base text, styled duplicate, and glow duplicate must share font metrics and positioning."
+  },
+  "motion": {
+    "rule": "Animate mask position, size, or gradient stops from off-word to off-word using local frame progress.",
+    "keyframe_values": {
+      "short_form_reveal": "Use 6-15 frames for fast highlight wipes when readability holds.",
+      "title_reveal": "Use 12-24 frames for calmer title/lower-third reveals.",
+      "soft_edge": "Keep gradient feather narrow enough to read as a reveal edge rather than blurry text."
+    }
+  },
+  "sound": {
+    "rule": "Use no sound or one trimmed shimmer/tick only when the reveal has a real beat job."
+  },
+  "captions": {
+    "rule": "Suppress or reposition ordinary captions if the masked text carries the spoken words or occupies the caption region."
+  },
+  "color": {
+    "rule": "Both base and masked states must preserve contrast; test alpha and luminance modes before changing colors."
+  },
+  "implementation": {
+    "ffmpeg": "If exporting from Remotion, composite the transparent overlay later; if rebuilding in FFmpeg, use a grayscale mask plus alphamerge instead of CSS.",
+    "remotion": "Use CSS mask-image, mask-size, mask-position, SVG masks, or clip-path; drive progress with interpolate/useCurrentFrame and render transparent ProRes/PNG sequence when needed.",
+    "blender": "Use compositor masks or material alpha to reveal duplicate text objects with soft edges.",
+    "capcut_equivalent": "Duplicate text, compound the styled layer, and keyframe Split/Film Strip masks with feather for equivalent reveals.",
+    "premiere_equivalent": "Duplicate text graphics, apply Linear Wipe/track matte/mask to the styled layer, and keep the base text stable underneath."
+  },
+  "common_mistakes": [
+    "Using clip-path when a soft opacity gradient is required.",
+    "Using luminance mode accidentally and getting reversed or unexpected visibility.",
+    "Letting duplicate text drift by one pixel during the reveal.",
+    "Masking the solid text and glow together when the glow needs separate edge control.",
+    "Using the effect on important captions without a stable accessible text layer."
+  ],
+  "qc": [
+    "Mask mode is explicitly chosen when alpha/luminance behavior matters.",
+    "Base and duplicate text layers align at start, midpoint, and hold frames.",
+    "Mask starts and ends outside the word with no slivers.",
+    "Glow/highlight does not appear before the letters it reveals.",
+    "Text remains readable over bright, dark, and busy backgrounds."
+  ]
+}

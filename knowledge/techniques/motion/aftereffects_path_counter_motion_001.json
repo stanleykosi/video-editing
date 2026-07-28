@@ -1,0 +1,62 @@
+{
+  "id": "aftereffects_path_counter_motion_001",
+  "name": "After Effects Path And Counter Motion",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/edit high quality reel.txt",
+  "additional_sources": [],
+  "use_when": [
+    "A Reel needs to show progress, growth, process steps, experience gain, or a path through a system.",
+    "An icon should move along a drawn line or route.",
+    "A number should count up or down as part of a proof or progress visual."
+  ],
+  "avoid_when": [
+    "The number or path is decorative and does not clarify the spoken point.",
+    "The viewer cannot understand what the counter represents.",
+    "The path motion would distract from the speaker or proof."
+  ],
+  "timeline_pattern": {
+    "pattern": "draw_path_at_final_size -> copy_shape_path -> paste_to_icon_position -> ease_path_keyframes -> add_trim_paths_to_line -> add_slider_counter -> sync_to_spoken_progress",
+    "path_rule": "Draw the final path at the actual size before copying it into Position; resizing the path afterward can create wrong motion.",
+    "counter_rule": "Use Slider Control linked to Source Text for animated numbers, then ease the slider speed for readability.",
+    "sync_rule": "Path, counter, and spoken concept should reach their key points together."
+  },
+  "motion": {
+    "rule": "Animate path drawing and object movement together so the route feels intentional.",
+    "keyframe_values": {
+      "trim_path": "Use End 0 to 100 for line drawing and ease the keyframes.",
+      "counter_start": "Start from 0 or a nearby value when a full 0-to-target count is too fast.",
+      "counter_ease": "Slow the counter near the final number so the value can be read.",
+      "path_copy": "Copy the shape path after final sizing/positioning, then paste it into the object's Position."
+    }
+  },
+  "sound": {
+    "rule": "Small ticks or count sounds can support numbers only if they do not clutter speech."
+  },
+  "captions": {
+    "rule": "Avoid placing captions over the path or final counter value."
+  },
+  "color": {
+    "rule": "Path, icon, and counter colors should match the scene palette and remain readable over the background."
+  },
+  "implementation": {
+    "ffmpeg": "Use pre-rendered path/counter animation from AE/Remotion for best quality; simple counters can be approximated with drawtext expressions.",
+    "remotion": "Represent path as points, iconPosition as interpolated path progress, trimPathProgress, and counterValue interpolated with easing.",
+    "blender": "Use curve paths with follow-path constraints and animated text values when 3D depth is needed.",
+    "capcut_equivalent": "Use manual keyframes along a route and animated number templates if available, then preview for readability.",
+    "premiere_equivalent": "Use After Effects for shape paths, Trim Paths, pasted path Position keyframes, Slider Control counters, and Source Text expressions."
+  },
+  "common_mistakes": [
+    "Copying a path before resizing it and getting unexpected icon movement.",
+    "Counting too fast for the viewer to read the final value.",
+    "Letting a route line draw after the icon has already arrived.",
+    "Using a counter without explaining what it measures.",
+    "Covering the counter with captions or other text."
+  ],
+  "qc": [
+    "The path motion clarifies a process, growth, or relationship.",
+    "The icon follows the intended visible line.",
+    "The line draw and icon movement are synchronized.",
+    "The counter final value is readable before the scene changes.",
+    "Captions and other overlays do not cover the path or counter."
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "id": "motion_still_image_environment_composite_001",
+  "name": "Still Image Environment Composite",
+  "category": "compositing",
+  "source_tutorial": "knowledge/research/transcripts/still image to media.txt",
+  "use_when": [
+    "A still image should feel like a cinematic moving scene without fully animating every object.",
+    "The base image already implies environmental motion such as fire, sky, smoke, rain, light, or atmosphere.",
+    "A video needs a richer establishing shot, mood beat, thumbnail-to-motion moment, or visual bridge from a static asset."
+  ],
+  "avoid_when": [
+    "The image is evidence, archival proof, or documentary material that should remain clearly still unless the treatment is disclosed.",
+    "No overlay matches the still image's perspective, scale, light direction, or tone.",
+    "The moving overlay would hide the subject, captions, product, UI, or proof.",
+    "The external overlay asset has unclear rights for the intended release."
+  ],
+  "timeline_pattern": {
+    "pattern": "base_still -> motivated_moving_overlay -> blend_or_mask -> resize_position -> local_light_match -> global_adjustment -> preview_edges -> export",
+    "layer_order_rule": "Keep the still image as the base layer, then place environmental motion above it only where the still implies that motion exists.",
+    "asset_match_rule": "Choose overlays by visual fit, not keyword alone: perspective, brightness, color temperature, edge shape, and motion direction must belong to the base image.",
+    "integration_rule": "Use blend modes, masks, feathering, and local color correction before global filters so the scene does not look like stacked stickers.",
+    "rights_rule": "Stock, library, generated, or downloaded overlays need source and license notes before publishable delivery."
+  },
+  "motion": {
+    "rule": "Environmental motion should be subtle enough to make the still feel alive while preserving the original focal point.",
+    "keyframe_values": {
+      "overlay_duration": "Trim or loop overlays to cover the full still-image beat without visible start/end pops.",
+      "mask_feather": "Use enough feather that sky, smoke, light, or atmosphere edges disappear into the base image.",
+      "position_scale": "Resize and position the overlay against real objects in the still, then preview at delivery size.",
+      "motion_density": "Use one or two motivated moving regions before adding more environmental layers."
+    }
+  },
+  "sound": {
+    "rule": "Add ambience only when the scene needs to feel present; fire, wind, rain, or room tone should be subtle and stay below dialogue or narration."
+  },
+  "captions": {
+    "rule": "Captions should avoid the moving area if it carries the scene effect, and remain readable over both the static base and moving overlay."
+  },
+  "color": {
+    "rule": "Unify the still and moving overlays with exposure, contrast, temperature, tint, and highlight checks after individual layers are aligned."
+  },
+  "implementation": {
+    "ffmpeg": "Loop the still image for the target duration, overlay moving assets with blend=screen/lighten or alpha-preprocessed clips, use masked overlays where needed, then apply eq/curves/colorbalance as a final unifying pass.",
+    "remotion": "Create a StillImageComposite component with baseImage, overlayVideos, blendMode, transform, mask, feather, durationFrames, and grade tokens.",
+    "blender": "Use image/video planes or compositor inputs, mask moving regions with soft alpha, match color per layer, then add final compositor grade/glow.",
+    "capcut_equivalent": "Add the still image to the timeline, place matching moving clips above it, set black-background overlays to Screen, resize/position them, mask and feather partial replacements, then add an Adjustment layer or filter for the final look.",
+    "premiere_equivalent": "Place the still on V1, overlays on higher tracks, use Screen/Lighten blend or opacity masks with feather, nest complex composites, and finish with Lumetri adjustment layers."
+  },
+  "common_mistakes": [
+    "Choosing an overlay because the keyword matches while the perspective, brightness, or motion direction does not.",
+    "Leaving hard mask boundaries around sky or atmosphere replacements.",
+    "Adding too many moving regions so the still image becomes visually noisy.",
+    "Forgetting source/license notes for stock overlays.",
+    "Applying a global filter before fixing layer-specific mismatch."
+  ],
+  "qc": [
+    "Can every moving overlay's purpose be named?",
+    "Does each overlay align with a plausible source or region in the still image?",
+    "Are mask edges invisible at delivery size?",
+    "Do the still image and overlays match enough in exposure, temperature, and contrast?",
+    "Do captions, faces, products, UI, and proof remain readable?",
+    "Are all external overlay assets manifest-ready for source and license?"
+  ]
+}

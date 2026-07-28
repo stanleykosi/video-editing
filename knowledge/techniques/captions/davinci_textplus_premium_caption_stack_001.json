@@ -1,0 +1,69 @@
+{
+  "id": "davinci_textplus_premium_caption_stack_001",
+  "name": "DaVinci Text+ Premium Caption Stack",
+  "category": "captions",
+  "source_tutorial": "knowledge/research/transcripts/davinci resolve short form editing.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/typography.txt"
+  ],
+  "use_when": [
+    "A Resolve short needs premium animated captions or emphasis text beyond basic auto captions.",
+    "B-roll or hook moments need large text stacks, gradient text, glow, blur, or glitch emphasis.",
+    "The agent wants reusable Text+ caption presets."
+  ],
+  "avoid_when": [
+    "Simple auto captions are enough for the project style.",
+    "The screen already contains too much text or important face/action detail.",
+    "The subject is serious and premium social text would feel inappropriate."
+  ],
+  "timeline_pattern": {
+    "pattern": "Text+ -> Fusion -> GaussianBlur_optional -> Transform -> keyframed_scale_position -> Spline_out_cubic -> shading_gradient_or_glow -> staggered_stack -> caption_qc",
+    "textplus_rule": "Use Text+ for custom Resolve caption/text animation, not basic Text, when Fusion control is needed.",
+    "stack_rule": "Build short staggered text layers for emphasis; keep each layer short enough to read.",
+    "auto_caption_rule": "Use Resolve auto captions for simple style, then replace or supplement key B-roll moments with Text+ premium captions.",
+    "typography_rule": "Use weight, hue, case, and size contrast to create hierarchy before adding gradient, glow, blur, or glitch."
+  },
+  "motion": {
+    "rule": "Use Transform keyframes for caption entrance and Spline easing for crisp motion.",
+    "keyframe_values": {
+      "text_start_size": "Use a smaller start scale such as 0.3 for a dramatic pop, or 0.1 for a larger slide-up feel, then animate toward the final size.",
+      "animation_length": "Around 50 frames can work for slower premium text moves; shorten for dense hook stacks.",
+      "staggered_stack_clip_length": "Short text-stack layers can be trimmed to about 4 frames each for fast stacked emphasis.",
+      "glitch_opacity": "Alternate opacity up/down every 2-3 frames for a quick glitch/flicker effect.",
+      "stop_motion": "A Stop Motion value around 3 can add choppy glitch texture when the style calls for it.",
+      "tracking": "Only tighten tracking on large emphasis words after checking readability; keep subtitle-sized text near normal spacing."
+    }
+  },
+  "sound": {
+    "rule": "Text pops and glitches can receive small SFX, but speech must stay dominant."
+  },
+  "captions": {
+    "rule": "Premium Text+ captions should not duplicate auto captions unless the duplicate is the intended emphasis.",
+    "style_rule": "Use gradient, glow, blur, or opacity only where it improves emphasis and remains readable."
+  },
+  "color": {
+    "rule": "Gradient text should preserve contrast; choose colors that match the short's visual style and do not disappear into the background. Avoid heavy default shadows when text already has enough contrast."
+  },
+  "implementation": {
+    "ffmpeg": "Approximate with drawtext, alpha/opacity envelopes, glow-like layered text, and contact-sheet review for readability.",
+    "remotion": "Represent Text+ stacks as animated text components with gradient, glow, blur, opacityFlickerFrames, easing, and layerDuration fields.",
+    "blender": "Use text objects, emission/glow materials, opacity keyframes, and eased transforms for custom rendered caption stacks.",
+    "capcut_equivalent": "Use text templates, glow, gradient-like styles, and short staggered text clips, then review for caption collisions.",
+    "premiere_equivalent": "Use Essential Graphics, text gradients where available, blur/glow effects, opacity keyframes, and Motion presets."
+  },
+  "common_mistakes": [
+    "Using Text+ stacks everywhere instead of on the moments that need emphasis.",
+    "Duplicating auto captions and premium text until the screen becomes unreadable.",
+    "Using gradient or glow that lowers readability at phone size.",
+    "Forgetting to save a checked caption animation as a reusable preset.",
+    "Adding premium effects before the word hierarchy is clear."
+  ],
+  "qc": [
+    "Is the premium Text+ moment attached to a key line or B-roll beat?",
+    "Is the text readable at phone size over the actual background?",
+    "Do auto captions and Text+ captions avoid duplicate clutter?",
+    "Do gradient, glow, blur, or glitch effects preserve legibility?",
+    "Can the Text+ effect be reused from a preset without rebuilding it?",
+    "Does the premium treatment emphasize the line's impact word or phrase?"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "compositing_capcut_pip_border_chroma_shape_001",
+  "name": "CapCut Picture-In-Picture Border With Chroma Shape",
+  "category": "compositing",
+  "source_tutorial": "knowledge/research/transcripts/make pro media.txt",
+  "use_when": [
+    "A reaction, gaming, tutorial, or commentary layout needs a clean circular or shaped picture-in-picture frame.",
+    "CapCut's built-in mask gives the video shape but not the desired border styling.",
+    "A simple external shape matte can create the border faster than building a custom graphic in the NLE."
+  ],
+  "avoid_when": [
+    "The border covers gameplay, UI, captions, product information, or proof.",
+    "The chroma-keyed border has jagged edges or green spill.",
+    "The PiP camera feed is too small to read the face or reaction.",
+    "The border style clashes with the project tone."
+  ],
+  "timeline_pattern": {
+    "pattern": "create_border_shape_on_key_color -> import_border_overlay -> chroma_key_key_color -> add_pip_video_overlay -> apply_matching_mask -> scale_inside_border -> position_safe -> qc_edges",
+    "shape_rule": "Make the border shape cleaner and slightly larger than the PiP video mask.",
+    "key_rule": "Use a key color that is absent from the border and video region, then tune intensity to remove only the background.",
+    "alignment_rule": "Adjust PiP mask and scale after the border is in place so the border thickness is even.",
+    "safe_area_rule": "Place PiP where it supports context without blocking UI, captions, or proof."
+  },
+  "motion": {
+    "rule": "PiP and border should move together if animated; otherwise keep them stable so reactions remain readable.",
+    "keyframe_values": {
+      "border_size": "Create the border large enough to allow minor mask adjustment without exposing the keyed background.",
+      "pip_scale": "Scale the video slightly inside the border so the white/ring edge stays visible.",
+      "corner_position": "Use corners or planned negative space rather than the active action center."
+    }
+  },
+  "sound": {
+    "rule": "PiP border graphics usually need no SFX; prioritize speaker/game/tutorial audio."
+  },
+  "captions": {
+    "rule": "Keep captions away from the PiP region or move PiP above/beside the caption safe zone."
+  },
+  "color": {
+    "rule": "Border color should contrast with the background while fitting the style; white is useful only when it remains visible on bright footage."
+  },
+  "implementation": {
+    "ffmpeg": "Use an alpha border asset or key out a generated chroma background, overlay the PiP video clipped with an alpha/circle mask, and render edge-check frames.",
+    "remotion": "Model PiP as video source, maskShape, borderAsset, borderColor, position, safeRegion, and chromaKey fields.",
+    "blender": "Use a circular plane/alpha matte and border ring shape, then place the camera/video plane inside it.",
+    "capcut_equivalent": "Create a border shape on a green/key-colored background, import it as overlay, use Chroma Key to remove the key color, add the PiP video overlay, apply a matching Circle mask, scale it inside the border, and adjust position.",
+    "premiere_equivalent": "Use Essential Graphics shape layers or an alpha PNG border, crop/mask the PiP video, nest the pair, and keep the nested PiP caption-safe."
+  },
+  "common_mistakes": [
+    "Making the border and video mask different shapes so the edge looks uneven.",
+    "Leaving green spill or jagged chroma-key edges.",
+    "Placing PiP over gameplay UI, captions, or product proof.",
+    "Making the face too small to read.",
+    "Animating the border separately from the PiP video."
+  ],
+  "qc": [
+    "Is the PiP face/reaction readable at delivery size?",
+    "Is the border edge clean with no key color spill?",
+    "Does the video mask align evenly inside the border?",
+    "Does the PiP avoid captions, UI, products, proof, and active action?",
+    "Do PiP and border stay synced if animated?"
+  ]
+}

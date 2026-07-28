@@ -1,0 +1,61 @@
+{
+  "id": "motion_word_focus_screenshot_sequence_001",
+  "name": "Word Focus Screenshot Sequence",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/vox style documentary.txt",
+  "use_when": [
+    "Several screenshots, article clips, search results, or source excerpts share the same key word or phrase.",
+    "The edit needs to show repetition, pattern, trend, or emphasis across sources.",
+    "A highlighted word should pull the viewer through multiple pieces of evidence before revealing full context."
+  ],
+  "avoid_when": [
+    "The screenshots do not actually support the same claim.",
+    "The repeated word is misleading when separated from its full sentence.",
+    "The sequence would use copyrighted, private, or uncredited screenshots without approval."
+  ],
+  "timeline_pattern": {
+    "pattern": "screenshot_1_word_aligned -> highlight_mask -> screenshot_2_word_aligned -> shorter_duration -> screenshot_3_word_aligned -> shortest_duration -> zoom_out_to_full_context",
+    "alignment_rule": "Scale and position each screenshot so the repeated word lands in the same highlight zone.",
+    "duration_rule": "Each successive screenshot can shorten to create momentum, but the final context must restore meaning.",
+    "context_rule": "End by zooming out or holding wider enough for the viewer to understand the source context."
+  },
+  "motion": {
+    "rule": "Use a fixed highlight strip and scale/position each screenshot underneath it, then ease into a final zoom-out.",
+    "keyframe_values": {
+      "duration_curve": "Use progressively shorter screenshot durations; for example, move from about 1-1.5 seconds toward shorter sub-second beats when readability holds.",
+      "highlight_mask": "Keep the highlight mask wide enough for the word and allow a small margin for different screenshot fonts.",
+      "final_zoom_out": "Animate scale down and mask width out together so the highlighted word becomes full-line context.",
+      "easing": "Use cubic/eased curves for the final zoom-out and mask expansion."
+    }
+  },
+  "sound": {
+    "rule": "Use small shutter, tick, or paper cues on screenshot changes only when they help the pattern read."
+  },
+  "captions": {
+    "rule": "Avoid captions over the highlighted word; if narration needs captions, place them away from the evidence strip."
+  },
+  "color": {
+    "rule": "Use highlight color that is visible across all screenshots without hiding source text."
+  },
+  "implementation": {
+    "ffmpeg": "Pre-align screenshots via scale/crop metadata, overlay a highlight rectangle or mask strip, sequence durations with concat, then animate final zoom-out if needed.",
+    "remotion": "Create a WordFocusSequence component with screenshotAssets, wordBoxes, durations, highlightMask, finalContextFrame, and sourceRights fields.",
+    "blender": "Use planes for screenshots, a highlight plane/mask, and orthographic camera keyframes for final context reveal.",
+    "capcut_equivalent": "Stack screenshots sequentially, scale each one so the repeated word sits in the masked highlight strip, shorten each clip progressively, then keyframe screenshot scale and highlight mask width for the final reveal.",
+    "premiere_equivalent": "Use nested screenshot sequence, Motion scale/position per screenshot, a matte/highlight layer, duration trimming, and a final nested zoom-out with eased keyframes."
+  },
+  "common_mistakes": [
+    "Aligning screenshots loosely so the word jumps around the frame.",
+    "Shortening clips until the repeated word cannot be read.",
+    "Never revealing enough context to avoid cherry-picking.",
+    "Letting the highlight cover source text.",
+    "Using screenshots without rights, attribution, or privacy review."
+  ],
+  "qc": [
+    "Does the repeated word or phrase stay in a stable focus zone?",
+    "Can the viewer read every screenshot beat at normal speed?",
+    "Does the final reveal provide enough source context?",
+    "Do captions avoid the highlighted evidence area?",
+    "Are screenshots sourced, approved, and privacy-safe?"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "id": "motion_capcut_chapter_card_slide_interrupt_001",
+  "name": "CapCut Chapter Card Slide Interrupt",
+  "category": "retention",
+  "source_tutorial": "knowledge/research/transcripts/make pro media.txt",
+  "use_when": [
+    "A tutorial, essay, countdown, or tips video needs a clean section reset.",
+    "The viewer benefits from a full-screen pattern interrupt instead of another small text overlay.",
+    "The background and title can be designed consistently enough to become a reusable series style."
+  ],
+  "avoid_when": [
+    "The segment is too short for a full-screen card and the card would slow pacing.",
+    "The card repeats captions or says something the speaker already made clear.",
+    "The background has low contrast, dated styling, or mismatched brand colors.",
+    "The transition would hide the first useful words of the next section."
+  ],
+  "timeline_pattern": {
+    "pattern": "end_of_spoken_section -> background_card_overlay_slide_in -> title_text_entrance -> brief_read_hold -> text_out -> card_slide_out -> return_to_footage",
+    "pattern_interrupt_rule": "Use the card as a scene change, not merely extra text on top of stale footage.",
+    "background_rule": "Use a project-owned color, gradient, or simple designed background that keeps text high contrast.",
+    "text_rule": "Keep the card copy short, such as tip number, chapter name, or outcome phrase.",
+    "exit_rule": "Animate both text and background out before the body footage resumes."
+  },
+  "motion": {
+    "rule": "Background and text motion should feel deliberate and simple: slide, zoom, or fade, then settle quickly for reading.",
+    "keyframe_values": {
+      "canvas_size": "Design source backgrounds at the project delivery ratio, such as 1920x1080 for horizontal or 1080x1920 for vertical.",
+      "background_in": "Slide in from the side or use a clean wipe only when it fits the style.",
+      "text_in": "Use a restrained zoom or fade; avoid delaying the title.",
+      "read_hold": "Hold long enough to read the chapter label before returning to footage."
+    }
+  },
+  "sound": {
+    "rule": "A small whoosh, tick, or hit can mark the card entrance if it does not cover the speaker's next line."
+  },
+  "captions": {
+    "rule": "Suppress ordinary captions during the card if the card text carries the spoken words; restore captions when talking-head footage returns."
+  },
+  "color": {
+    "rule": "Use background colors or gradients that fit the series palette and keep the title readable at phone size."
+  },
+  "implementation": {
+    "ffmpeg": "Use a generated color/gradient or imported background, draw short title text, animate overlay x/y or alpha, and trim tightly to the section reset.",
+    "remotion": "Create a ChapterCard component with backgroundAsset, title, subtitle, inAnimation, outAnimation, durationFrames, and captionSuppression fields.",
+    "blender": "Use a 2D card plane, text objects, and simple camera/opacity motion for more stylized section cards.",
+    "capcut_equivalent": "Create or import a designed background, add it as an overlay, fit full screen, add a simple slide-in animation, add short title text with a restrained zoom/fade, then animate both out before returning to footage.",
+    "premiere_equivalent": "Use Color Matte/gradient/image background plus Essential Graphics text, Motion keyframes or presets, and caption suppression during the card."
+  },
+  "common_mistakes": [
+    "Using a full-screen card when a small label would be faster.",
+    "Choosing a low-contrast or dated background that makes the edit feel less premium.",
+    "Leaving captions duplicated under the chapter card text.",
+    "Letting the card animation cover the next spoken section.",
+    "Changing card colors/fonts randomly instead of building a reusable series grammar."
+  ],
+  "qc": [
+    "Does the card mark a real section reset or pattern interrupt?",
+    "Is the chapter/title readable at phone size?",
+    "Do text and background animate out before the next body beat?",
+    "Are duplicate captions suppressed during the card?",
+    "Does the card style match the project's reusable visual identity?"
+  ]
+}

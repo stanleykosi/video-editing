@@ -1,0 +1,61 @@
+{
+  "id": "sound_diegetic_music_bridge_001",
+  "name": "Diegetic To Non-Diegetic Music Bridge",
+  "category": "sound_design",
+  "source_tutorial": "knowledge/research/transcripts/Saving-Bad-Videos-With-Only-Music_Media.txt",
+  "use_when": [
+    "A scene has a plausible in-world source for music, such as a car, room, phone, venue, radio, or speaker.",
+    "The editor wants the track to feel motivated before it becomes full cinematic score.",
+    "A music drop would otherwise feel pasted onto the scene."
+  ],
+  "avoid_when": [
+    "There is no plausible source for the track in the scene.",
+    "The source-filtered sound would confuse the viewer or distract from dialogue.",
+    "The transition to full mix would misrepresent the reality of documentary footage.",
+    "The track is unlicensed or only temp-safe."
+  ],
+  "timeline_pattern": {
+    "pattern": "source_context -> filtered_music -> visual_or_camera_expansion -> full_mix_drop -> controlled_duck_or_exit",
+    "source_rule": "Establish or imply the source before applying a radio, speaker, or room filter.",
+    "opening_rule": "Open the track into full bandwidth on a meaningful action, wide shot, reveal, or section shift.",
+    "duck_rule": "Duck or filter the track again before important dialogue."
+  },
+  "motion": {
+    "rule": "Use the visual expansion or action turn as the moment the music expands from source sound to full score."
+  },
+  "sound": {
+    "rule": "Use EQ, gain, stereo width, and ambience to make the first version feel diegetic, then automate toward full-range non-diegetic music.",
+    "filter_values": {
+      "radio_start": "Start narrower and quieter than the full mix; reduce lows and highs, narrow stereo, and add light room/source texture.",
+      "full_mix": "Restore bandwidth, stereo width, and level at the drop while keeping dialogue ducked.",
+      "transition": "Crossfade or automate filter removal over the action turn unless a hard stylized switch is intentional."
+    }
+  },
+  "captions": {
+    "rule": "Captions should not cover the action or source cue that motivates the music bridge."
+  },
+  "color": {
+    "rule": "No direct color rule; keep the source context visually readable if it motivates the bridge."
+  },
+  "implementation": {
+    "ffmpeg": "Use highpass, lowpass, equalizer, volume, pan, afade, and optional aecho/reverb-style processing to create a source-filtered pre-cue before opening to full mix.",
+    "remotion": "Represent the bridge with sourceStartFrame, filterEndFrame, dropFrame, fullMixGain, and duckFrames.",
+    "blender": "Use audio markers to synchronize the camera or scene expansion with filter removal.",
+    "capcut_equivalent": "Apply a radio/speaker filter at the start, then keyframe it off and raise volume/stereo feel at the drop.",
+    "premiere_equivalent": "Automate EQ, gain, and reverb/room tone; mark source, filter release, drop, duck, and exit."
+  },
+  "common_mistakes": [
+    "Using a radio filter without establishing why the music is in the scene.",
+    "Switching to full mix on a weak visual beat.",
+    "Leaving the filtered track too quiet or muddy to recognize the cue.",
+    "Opening to full mix and burying dialogue.",
+    "Using diegetic treatment in documentary where it falsely implies music was present."
+  ],
+  "qc": [
+    "Is the in-world music source established or strongly implied?",
+    "Does the full mix open on a meaningful visual or story turn?",
+    "Does the filtered section sound intentionally sourced rather than broken?",
+    "Is dialogue clear before and after the bridge?",
+    "Is the bridge truthful for documentary footage?"
+  ]
+}

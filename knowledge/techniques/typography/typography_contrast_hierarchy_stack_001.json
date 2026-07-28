@@ -1,0 +1,62 @@
+{
+  "id": "typography_contrast_hierarchy_stack_001",
+  "name": "Typography Contrast Hierarchy Stack",
+  "category": "typography",
+  "source_tutorial": "knowledge/research/transcripts/typography.txt",
+  "use_when": [
+    "A hook, title, caption, or graphic needs one word to carry the viewer's attention.",
+    "Text looks flat because every word has the same visual priority.",
+    "The agent needs to build hierarchy without adding more footage or effects."
+  ],
+  "avoid_when": [
+    "Every word is being emphasized because the editor has not chosen the actual point.",
+    "The line is serious testimony where dramatic visual emphasis would feel manipulative.",
+    "The visual background already carries the idea more clearly than text styling."
+  ],
+  "timeline_pattern": {
+    "pattern": "line_or_claim -> choose_impact_word -> base_style -> weight_contrast -> optional_hue -> optional_case_change -> optional_size_change -> mix_only_needed_rules -> qc",
+    "impact_word_rule": "Highlight the word that creates the meaning, result, contrast, or emotional punch in the line.",
+    "weight_rule": "Use a noticeable weight jump, such as regular to bold or bold to extra-bold, instead of tiny adjacent changes.",
+    "color_rule": "Use color to mark meaning, contrast, or category; avoid random color changes.",
+    "case_rule": "Use mixed case or all caps only when it improves hierarchy and does not reduce readability.",
+    "size_rule": "Make the most important word visibly larger only when the layout still reads as one sentence."
+  },
+  "motion": {
+    "rule": "Animate the hierarchy so the viewer sees support words first or together, then the impact word lands clearly.",
+    "keyframe_values": {
+      "impact_limit": "Prefer one primary impact word or phrase per text moment.",
+      "accent_color_limit": "Use no more than two accent colors in one text system; neutral white/black/gray can support the layout.",
+      "entrance": "For short-form hooks, establish the hierarchy inside the first 1-5 seconds."
+    }
+  },
+  "sound": {
+    "rule": "Use a subtle hit only on the impact word if the motion and spoken emphasis also land there."
+  },
+  "captions": {
+    "rule": "Caption emphasis should follow the spoken meaning; avoid highlighting filler words or every adjective."
+  },
+  "color": {
+    "rule": "Accent color should increase meaning and contrast. Gradients are allowed only when edge readability remains better than plain text would be."
+  },
+  "implementation": {
+    "ffmpeg": "Use separate drawtext layers for support text and impact text so size, color, weight, and timing can differ.",
+    "remotion": "Store impactWords with hierarchyLevel, fontWeight, fontSizeScale, caseMode, accentColor, and timing fields.",
+    "blender": "Use separate text objects for hierarchy words and test readability from the final camera.",
+    "capcut_equivalent": "Split the text into layers, use bold/size/color on the impact word, and check the full phone-size layout.",
+    "premiere_equivalent": "Use Essential Graphics text layers or upgraded captions, then style only the impact word or phrase with weight, color, case, or size."
+  },
+  "common_mistakes": [
+    "Making every word bold, big, colored, or uppercase.",
+    "Highlighting filler words instead of the word that changes impact.",
+    "Using adjacent font weights that do not create visible contrast.",
+    "Adding gradients, glow, or shadow before the hierarchy is clear.",
+    "Using too many accent colors in one text moment."
+  ],
+  "qc": [
+    "Can the viewer identify the impact word immediately?",
+    "Does the emphasis match the spoken meaning?",
+    "Are support words still readable but lower priority?",
+    "Do weight, hue, case, and size choices work together instead of competing?",
+    "Does the hierarchy remain readable at phone size?"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "davinci_bins_keywords_smart_bins_001",
+  "name": "DaVinci Bins Keywords And Smart Bins",
+  "category": "nle_workflow",
+  "source_tutorial": "knowledge/research/transcripts/davinci resolve full tutorial.txt",
+  "use_when": [
+    "A project has enough footage that manual browsing slows editing.",
+    "Documentary, event, tutorial, or multi-location footage needs searchable categories.",
+    "The agent needs reusable selects by topic, person, audio type, camera, or content."
+  ],
+  "avoid_when": [
+    "The project has only a few clips and metadata work would slow the task.",
+    "The categories are speculative and will not affect edit decisions.",
+    "The footage is already organized by a reliable external logging system."
+  ],
+  "timeline_pattern": {
+    "pattern": "bins -> metadata_fields -> keywords -> smart_bin_filters -> selects_timeline",
+    "keyword_rule": "Use keywords for categories the editor will search repeatedly.",
+    "smart_bin_rule": "Smart bins should be live filters, not manual duplicate folders.",
+    "metadata_rule": "Use list and metadata views when clip names alone are not enough.",
+    "fallback_rule": "If Studio AI audio classification is unavailable, use manual keywords and smart bins."
+  },
+  "motion": {
+    "rule": "Tag motion type or camera movement when movement continuity will matter later."
+  },
+  "sound": {
+    "rule": "Tag clips by usable dialogue, ambience, music, SFX, noisy audio, or sync-needed status."
+  },
+  "captions": {
+    "rule": "Tag clips that contain speech worth transcribing or captioning."
+  },
+  "color": {
+    "rule": "Tag camera, scene, lighting condition, and log/profile when color matching will depend on source type."
+  },
+  "implementation": {
+    "ffmpeg": "Use sidecar JSON/CSV metadata with clipId, keywords, camera, scene, audioQuality, transcriptStatus, and selected ranges.",
+    "remotion": "Represent smart bins as filtered arrays over asset metadata.",
+    "blender": "Use collection names and custom properties for footage categories when assembling mixed media scenes.",
+    "capcut_equivalent": "Use folders/albums/favorites and filename prefixes when full metadata filters are unavailable.",
+    "premiere_equivalent": "Use bins, labels, markers, metadata columns, search bins, and string-out selects."
+  },
+  "common_mistakes": [
+    "Logging everything with vague keywords that do not help edit decisions.",
+    "Creating manual duplicate bins when a live smart bin would stay current.",
+    "Relying on AI classification without checking whether it identified the useful content.",
+    "Waiting until the timeline is already crowded before tagging key footage."
+  ],
+  "qc": [
+    "Can the editor find important people, scenes, audio, or topics without scrubbing every clip?",
+    "Do smart bins update when new matching media is tagged?",
+    "Are keyword names specific enough to drive edit choices?",
+    "Are AI-generated classifications checked before use?",
+    "Do metadata fields support audio sync, color matching, and story selects?"
+  ]
+}
+

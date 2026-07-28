@@ -1,0 +1,87 @@
+{
+  "id": "eye_trace_continuity_cut",
+  "name": "Eye Trace Continuity Cut",
+  "category": "transition",
+  "source_tutorial": "knowledge/research/transcripts/editing secrets.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/what not to do in editing.txt",
+    "knowledge/research/transcripts/Editing-That-Makes-Your-Story-10x.txt",
+    "knowledge/research/transcripts/editing full course.txt",
+    "knowledge/research/transcripts/slow editing.txt"
+  ],
+  "use_when": [
+    "The edit should feel smooth and easy to follow.",
+    "A cut moves between shots with important visual information.",
+    "The viewer might otherwise need to search the frame after the cut.",
+    "A montage, city-entering sequence, or walk-and-talk uses many shots and needs smooth orientation.",
+    "The edit feels rushed because the focal point changes before the viewer can scan it.",
+    "The subject action should stay center-frame so the viewer can follow it without re-searching.",
+    "A talking-head punch-in or crop is used to hide a jump cut without making the eyes teleport.",
+    "A short-form opener uses centered face guides or a match cut so an angle change feels smooth."
+  ],
+  "avoid_when": [
+    "The desired effect is shock, confusion, or visual rupture.",
+    "A composition intentionally hides information for suspense.",
+    "The next shot's key information must be discovered slowly.",
+    "A jarring cut or visual rupture is emotionally intentional."
+  ],
+  "timeline_pattern": {
+    "pattern": "last_key_info_position -> cut -> next_key_info_near_same_position_or_guided_path",
+    "position_rule": "Track where the viewer's eye is likely to be at the cut and place or guide the next key information accordingly.",
+    "review_rule": "Review the cut at phone size and normal speed to ensure the eye does not have to hunt.",
+    "movement_rule": "For smooth B-roll strings, keep camera or subject movement direction consistent unless a direction change has story purpose.",
+    "focal_point_rule": "Each shot should have an obvious focal point before the cut occurs.",
+    "action_center_rule": "For small objects, hand actions, or demonstrations, keep the action center-frame unless off-center framing has a purpose.",
+    "face_center_rule": "When a face carries the hook or emotional continuity, align the face to center or a stable guide across cuts."
+  },
+  "motion": {
+    "rule": "Use pan, zoom, scale, crop, or object motion to guide attention from the old eye position to the new one.",
+    "keyframe_values": {
+      "subtle_reframe_duration": "6-12 frames for fast social edits, 12-24 frames for calmer edits",
+      "scale_change": "Typically 3-8% when used only to guide attention",
+      "talking_head_punch_in": "Use a subtle 105-115% scale change when hiding a jump cut; align eyes and mouth as closely as possible.",
+      "centered_face_match": "For early short-form angle changes, keep the face near the same center/eyeline guide before and after the cut.",
+      "easing": "Ease out into the key information rather than snapping unless a jolt is intended",
+      "direction_match": "Prefer same-direction movement across adjacent shots; horizontal flips are acceptable only when they do not misrepresent text, geography, or truth."
+    }
+  },
+  "sound": {
+    "rule": "Keep audio smooth so the visual continuity is not undermined by an accidental audio jump."
+  },
+  "captions": {
+    "rule": "Place captions so they do not pull the eye away from the next key visual point.",
+    "use": "Caption position can guide the eye when the caption is the key information."
+  },
+  "color": {
+    "rule": "Use contrast and brightness to make the next key information easy to find.",
+    "avoid": "Grade jumps that force the viewer to re-orient."
+  },
+  "implementation": {
+    "ffmpeg": "Use crop, scale, overlay guides, or contact sheets to compare final eye position before the cut and first key information after the cut. Render small A/B tests for timing. Use hflip only when reversing direction does not falsify readable signs, maps, or geography.",
+    "remotion": "Store key visual regions as x/y metadata and animate crop or overlay placement to maintain continuity.",
+    "blender": "Use camera framing and motion paths to move attention predictably between compositions.",
+    "capcut_equivalent": "Use crop/position keyframes or choose a different shot where the subject appears near the previous focal area.",
+    "premiere_equivalent": "Use safe guides, comparison view, and motion keyframes to align focal points across cuts."
+  },
+  "common_mistakes": [
+    "Ignoring where the viewer was looking before the cut.",
+    "Cutting before the viewer has time to scan the focal point.",
+    "Mixing left-to-right and right-to-left motion randomly in a sequence meant to feel smooth.",
+    "Putting captions over the visual path the viewer needs to follow.",
+    "Using flashy transitions when simple spatial continuity would be smoother.",
+    "Reviewing only on a large monitor and missing phone-size search time.",
+    "Using a punch-in that makes the speaker's eyes jump to a new screen position without motivation.",
+    "Ignoring face-center guides during the first hook cuts of a short."
+  ],
+  "qc": [
+    "Can the viewer find the next key information immediately?",
+    "Does the cut feel smooth at normal speed?",
+    "Do captions or graphics compete with the intended focal point?",
+    "Does color or contrast help the eye land in the right place?",
+    "Does every shot have a clear focal point before the cut?",
+    "Does small-object action stay centered or deliberately guided?",
+    "Are movement directions consistent or intentionally contrasted?",
+    "If a punch-in hides a cut, do the eyes and mouth remain close enough that the cut feels natural?",
+    "During early hook cuts, does the face stay aligned enough that the angle change feels smooth?"
+  ]
+}

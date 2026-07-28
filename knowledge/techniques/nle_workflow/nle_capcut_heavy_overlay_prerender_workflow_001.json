@@ -1,0 +1,67 @@
+{
+  "id": "nle_capcut_heavy_overlay_prerender_workflow_001",
+  "name": "CapCut Heavy Overlay Pre-render Workflow",
+  "category": "nle_workflow",
+  "source_tutorial": "knowledge/research/transcripts/editing tricks.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/powerful capcut edits.txt",
+    "knowledge/research/transcripts/capcut text effects.txt"
+  ],
+  "use_when": [
+    "CapCut or another NLE lags because a short edit contains many overlays, masks, effects, and duplicates.",
+    "Each clip can be designed separately before final transitions are built.",
+    "The main timeline needs to stay responsive for timing, transitions, sound, and QC."
+  ],
+  "avoid_when": [
+    "The clip timing is still changing heavily and pre-rendered replacements would create churn.",
+    "The project needs all layers exposed in the top-level timeline for handoff.",
+    "The editor would lose necessary handles by overtrimming the isolated clip."
+  ],
+  "timeline_pattern": {
+    "pattern": "main_timeline_placeholder -> open_clip_subproject -> keep_full_length_or_handles -> add_overlays_masks_effects -> export_or_render -> replace_placeholder -> final_transition_pass",
+    "handle_rule": "Keep the full source clip or enough handles in the subproject; trim only enough to isolate the clip safely.",
+    "main_timeline_rule": "The main project should contain lighter rendered or nested clips so timing, transitions, and sound remain reviewable.",
+    "spacer_rule": "When deleting temporary overlay layers after export, keep a black screen, placeholder, or spacer in the gap until the rendered replacement is aligned so the project duration does not shift.",
+    "replacement_rule": "Replace the original clip only after the subproject result matches the intended duration and visual beat."
+  },
+  "motion": {
+    "rule": "Design dense per-clip overlays before the transition pass, but postpone transition-specific shakes until adjacent clips are visible together.",
+    "keyframe_values": {
+      "handle_buffer": "Keep extra frames before and after the visible action when transitions or speed changes may still need room.",
+      "duration_spacer": "A temporary black spacer is acceptable only as a timing placeholder; remove or replace it before final export.",
+      "review_range": "Review the rendered replacement against at least one previous and one next clip before deleting or hiding the placeholder."
+    }
+  },
+  "sound": {
+    "rule": "Keep final SFX and mix decisions in the main project unless the sound is permanently married to the pre-rendered visual."
+  },
+  "captions": {
+    "rule": "Keep captions outside pre-rendered effect clips unless they are part of the designed visual layer."
+  },
+  "color": {
+    "rule": "If the subproject bakes color or glow, check that the rendered clip still matches the main timeline before transitions are added."
+  },
+  "implementation": {
+    "ffmpeg": "Pre-render dense effect segments as intermediates after timing lock, keep source metadata and handles, then replace the segment in the final assembly.",
+    "remotion": "Render heavy per-clip compositions separately or memoize them, but keep final timing, captions, and SFX in the top-level composition.",
+    "blender": "Use separate scenes or strips for heavy composites, render intermediates, and assemble final timing in the VSE.",
+    "capcut_equivalent": "Open each heavy clip as its own project, keep enough length, add overlays and polish, export or bring it back, then replace the original clip in the main project.",
+    "premiere_equivalent": "Use nested sequences, Render and Replace, or After Effects pre-renders while keeping final captions, SFX, and transition timing in the main sequence."
+  },
+  "common_mistakes": [
+    "Overtrimming the subproject so transitions no longer have handles.",
+    "Deleting temporary overlay layers without preserving duration, causing the main timeline to shift.",
+    "Baking captions into a clip that later needs repositioning.",
+    "Replacing the main clip before checking duration and beat alignment.",
+    "Adding final mix decisions inside a pre-render where they cannot be balanced later.",
+    "Forgetting to keep the original source or placeholder for revisions."
+  ],
+  "qc": [
+    "Does the pre-rendered clip match the intended source duration or replacement range?",
+    "Was any temporary spacer removed or replaced before final export?",
+    "Are enough handles preserved for transitions?",
+    "Do captions and final SFX remain editable in the main timeline?",
+    "Does the main timeline play smoothly enough for timing review?",
+    "Is the original source or placeholder retained for revisions?"
+  ]
+}

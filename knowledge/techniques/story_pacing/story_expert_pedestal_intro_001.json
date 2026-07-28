@@ -1,0 +1,61 @@
+{
+  "id": "story_expert_pedestal_intro_001",
+  "name": "Expert Pedestal Intro",
+  "category": "story_pacing",
+  "source_tutorial": "knowledge/research/transcripts/Editing-That-Makes-Your-Story-10x.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/killer intros.txt"
+  ],
+  "use_when": [
+    "A mentor, expert, guide, judge, competitor, or authority enters the story.",
+    "The protagonist needs to be humbled or challenged by someone with superior skill.",
+    "The audience does not yet know why the new person matters.",
+    "A brand or show intro needs credible third-party authority instead of self-praise."
+  ],
+  "avoid_when": [
+    "The expert's authority is already obvious from context.",
+    "The scene needs casual intimacy rather than intimidation or admiration.",
+    "Showing off the expert would distract from the protagonist's current emotional beat.",
+    "The authority proof is irrelevant to the target viewer or would make the intro feel like ego packaging."
+  ],
+  "timeline_pattern": {
+    "pattern": "expert_skill_context -> protagonist_meets_expert -> expert_feedback_or_reaction -> protagonist_status_change",
+    "setup_rule": "Show 2-3 contextual skill shots before the meeting when the audience needs to understand status.",
+    "humbling_rule": "Use expert reactions, sighs, laughs, or demonstrations to make the protagonist's gap visible.",
+    "authority_intro_rule": "For brand intros, prefer recognizable external proof, audience/community evidence, or a credible quote over the creator claiming authority directly."
+  },
+  "motion": {
+    "rule": "Use confident, clean framing for expert skill shots; avoid gimmicks that make expertise feel fake."
+  },
+  "sound": {
+    "rule": "Let expert demonstrations, impacts, or natural reactions sell credibility before adding music hype.",
+    "avoid": "Overblown SFX that turn real expertise into parody."
+  },
+  "captions": {
+    "rule": "Use labels only after the edit has shown why the person matters, when possible."
+  },
+  "color": {
+    "rule": "Keep expert skill shots clear and readable."
+  },
+  "implementation": {
+    "ffmpeg": "Build an intro stringout of expert demonstration clips before the meeting. Keep the sequence short and purposeful.",
+    "remotion": "Use a simple lower-third after the demonstration beats, not before the audience understands credibility.",
+    "blender": "Only use animated stats or diagrams if they clarify expertise.",
+    "capcut_equivalent": "Show quick examples of the expert doing impressive work before the protagonist greets them.",
+    "premiere_equivalent": "Create expert-proof selects and place them before the meeting scene."
+  },
+  "common_mistakes": [
+    "Introducing an expert with a handshake before showing why they matter.",
+    "Telling the audience someone is skilled instead of showing proof.",
+    "Letting the creator claim expertise when an external proof beat would feel more credible.",
+    "Making the expert look cool without connecting their status to protagonist conflict.",
+    "Overlong expert intros that stall the story."
+  ],
+  "qc": [
+    "Does the audience understand the expert's credibility before the meeting?",
+    "Does the expert's presence change the protagonist's status or confidence?",
+    "If authority is used in a brand intro, is it external, truthful, and relevant to the target niche?",
+    "Are the proof shots short, clear, and relevant?",
+    "Does the intro avoid becoming a separate montage with no story effect?"
+  ]
+}

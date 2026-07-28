@@ -1,0 +1,54 @@
+{
+  "id": "justified_jarring_cut",
+  "name": "Justified Jarring Cut",
+  "category": "story_pacing",
+  "source_tutorial": "knowledge/research/transcripts/how an editor think.txt",
+  "use_when": [
+    "The desired viewer reaction is discomfort, agitation, unease, interruption, or emotional friction.",
+    "A character is in a bad mood, unstable, pressured, or out of sync with the scene.",
+    "Invisible editing would make the moment feel too comfortable."
+  ],
+  "avoid_when": [
+    "The scene needs clarity, trust, warmth, or seamless emotional connection.",
+    "The cut is unusual only because the timing is careless.",
+    "The viewer would read the cut as a mistake rather than intentional discomfort."
+  ],
+  "timeline_pattern": {
+    "pattern": "hold_slightly_past_expected_rhythm -> sharp_cut_or_unusual_angle",
+    "hold_rule": "Hold just long enough for the viewer to feel the delay.",
+    "justification": "The awkwardness must match the scene's emotional intent."
+  },
+  "motion": {
+    "rule": "Optional abrupt motion can support agitation, but timing is more important than effect intensity.",
+    "avoid": "Random shake or flash without emotional cause."
+  },
+  "sound": {
+    "rule": "A dry cut, sudden ambience change, or restrained hit can support discomfort.",
+    "avoid": "Over-designed sound that turns psychological unease into a gimmick."
+  },
+  "captions": {
+    "rule": "Caption timing may hold or pause with the awkward beat, but should remain legible."
+  },
+  "color": {
+    "rule": "Subtle contrast or color tension can support the mood, but should not distract from performance."
+  },
+  "implementation": {
+    "ffmpeg": "Create A/B versions with normal rhythm and delayed cut. Compare whether the delay creates intended tension or just sluggishness.",
+    "remotion": "Add a named `jarring_hold` segment with explicit extra frames so the choice is inspectable.",
+    "blender": "Use abrupt camera or graphic changes only when they support the emotional break.",
+    "capcut_equivalent": "Hold a reaction longer than expected, then use a hard cut or simple abrupt transition.",
+    "premiere_equivalent": "Use markers for expected rhythm and actual cut point; review the offset intentionally."
+  },
+  "common_mistakes": [
+    "Confusing bad timing with intentional discomfort.",
+    "Using jarring cuts too often until they lose meaning.",
+    "Adding effects instead of shaping the hold.",
+    "Breaking rhythm where the viewer needs emotional connection."
+  ],
+  "qc": [
+    "Can the editor name the intended viewer reaction?",
+    "Does the cut feel uncomfortable in the right way?",
+    "Would a normal rhythm cut weaken the scene?",
+    "Is the unusual cut rare enough to retain force?"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "motion_document_highlight_focus_pan_001",
+  "name": "Document Highlight Focus Pan",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/vox style documentary.txt",
+  "use_when": [
+    "A document, article, screenshot, transcript, or paper image contains key text that supports the narration.",
+    "The viewer needs to see specific lines without reading the whole source.",
+    "A source image should feel editorial and tactile rather than like a raw screenshot."
+  ],
+  "avoid_when": [
+    "The highlighted text is not legible at delivery size.",
+    "The highlight would hide the wording or imply a meaning not present in the source.",
+    "The document contains private, sensitive, or uncleared information that should not be shown."
+  ],
+  "timeline_pattern": {
+    "pattern": "source_document -> warm_or_match_adjustment -> highlight_bar_behind_text -> wipe_reveal -> compound -> pan_zoom_to_highlight -> second_highlight_or_exit",
+    "truth_rule": "Highlight only text that is actually present and relevant to the claim.",
+    "blend_rule": "Place the highlight visually behind the text using darken/multiply-style blending when possible.",
+    "focus_rule": "Pan or zoom only enough to direct attention; maintain enough context to avoid misleading the quote."
+  },
+  "motion": {
+    "rule": "Reveal highlights in reading order and ease camera moves between lines.",
+    "keyframe_values": {
+      "highlight_wipe_duration": "Use a wipe long enough to read as a highlight, commonly 8-24 frames for short phrases and longer for full lines.",
+      "focus_zoom": "Use modest scale increases that keep surrounding context visible unless the line is the only required detail.",
+      "pan_hold": "Hold after the pan/zoom until the highlighted words can be read.",
+      "easing": "Use cubic/eased movement for document pans so the motion feels editorial, not mechanical."
+    }
+  },
+  "sound": {
+    "rule": "Use a soft marker, pencil, camera, or paper cue on important highlights only; speech remains dominant."
+  },
+  "captions": {
+    "rule": "Captions should not cover the source wording; suppress or reposition captions during document inspection."
+  },
+  "color": {
+    "rule": "Warm or match document color only enough to fit the scene while preserving text contrast and source integrity."
+  },
+  "implementation": {
+    "ffmpeg": "Overlay a semi-transparent highlight rectangle behind text, animate width/crop for wipe, and apply crop/scale/pan to the document segment.",
+    "remotion": "Create a DocumentHighlight component with documentAsset, highlightRects, revealFrames, focusKeyframes, sourceContext, and privacyReview flags.",
+    "blender": "Use document planes, colored highlight strips, and orthographic camera pans for rendered editorial document scenes.",
+    "capcut_equivalent": "Use an image layer, text underscore/shape highlight layers, Wipe Right animation, Darken blend, compound clips, transform keyframes, and cubic ease.",
+    "premiere_equivalent": "Use Essential Graphics rectangles with Multiply/Darken-like blend or opacity, Linear Wipe, nested sequence, Motion keyframes, and captions moved off the document area."
+  },
+  "common_mistakes": [
+    "Highlighting text too quickly for the viewer to read.",
+    "Covering the source words with an opaque highlight.",
+    "Zooming so far into a document that context disappears.",
+    "Showing private or uncleared document details.",
+    "Using a fake highlight that changes the apparent source meaning."
+  ],
+  "qc": [
+    "Is the highlighted wording legible at delivery size?",
+    "Does the highlight sit behind or around text without hiding it?",
+    "Is enough surrounding context visible to avoid misleading the viewer?",
+    "Are private, sensitive, or uncleared details removed or approved?",
+    "Do captions and graphics avoid the highlighted source text?"
+  ]
+}

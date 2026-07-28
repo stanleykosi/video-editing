@@ -1,0 +1,62 @@
+{
+  "id": "davinci_fusion_node_compositing_basics_001",
+  "name": "DaVinci Fusion Node Compositing Basics",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/davinci resolve full tutorial.txt",
+  "use_when": [
+    "A Resolve effect needs node-based compositing, masks, procedural texture, or layer order control.",
+    "A shot needs fog, smoke, window light, object insertion, screen treatment, or stylized composite work.",
+    "The agent needs a reusable Fusion graph pattern instead of one-off inspector keyframes."
+  ],
+  "avoid_when": [
+    "The effect is a simple title, crop, opacity, or position keyframe.",
+    "The rough cut timing is not stable enough for compositing polish.",
+    "The editor cannot inspect the final effect in the timeline context."
+  ],
+  "timeline_pattern": {
+    "pattern": "clip_or_fusion_clip -> MediaIn -> source_adjustment -> mask_or_generator -> Merge -> MediaOut -> timeline_review",
+    "node_order_rule": "Nodes before a Merge affect that source branch; nodes after a Merge affect the combined result.",
+    "merge_rule": "Use Merge to combine foreground and background sources, then inspect which input is foreground, background, or mask.",
+    "mask_rule": "Use Polygon or Ellipse masks with feather/refinement to localize effects.",
+    "generator_rule": "Fast Noise or similar generators can create smoke, fog, texture, or procedural atmosphere when blended subtly."
+  },
+  "motion": {
+    "rule": "Animate generator center, seed rate, mask shape, blend, transform, and merge settings only when the scene needs motion.",
+    "keyframe_values": {
+      "fog_blend_start": "Start subtle, often around 0.2-0.5 blend depending on plate brightness and story need.",
+      "mask_points": "Use as few polygon points as needed for stable edges; click-drag bezier handles only where curves are needed.",
+      "node_labeling": "Rename meaningful nodes once the graph has several branches."
+    }
+  },
+  "sound": {
+    "rule": "Atmospheric composites may need matching ambience or subtle SFX only if the visual change should be felt."
+  },
+  "captions": {
+    "rule": "Do not let composite overlays reduce caption readability or hide the subject region that captions refer to."
+  },
+  "color": {
+    "rule": "Match inserted elements with brightness, contrast, temperature, saturation, and shadow before judging the composite done."
+  },
+  "implementation": {
+    "ffmpeg": "Approximate with overlay, blend, alpha masks, noise sources, curves, and color filters; store filter graph order explicitly.",
+    "remotion": "Represent a Fusion-like graph as ordered layers with masks, blend modes, transforms, and per-layer color adjustments.",
+    "blender": "Use compositor nodes or 3D planes with masks, alpha, transforms, and color correction.",
+    "capcut_equivalent": "Use overlays, masks, blend modes, keyframes, and adjustment filters for simplified composites.",
+    "premiere_equivalent": "Use masks, track mattes, blend modes, opacity, Lumetri, and nested sequences; use After Effects for complex node-like composites."
+  },
+  "common_mistakes": [
+    "Adding Fusion complexity before the edit needs it.",
+    "Forgetting that node order changes what is affected.",
+    "Using hard mask edges that reveal the composite.",
+    "Making fog, glow, or texture strong enough to hide action or captions.",
+    "Not reviewing the Fusion result back in the timeline."
+  ],
+  "qc": [
+    "Is Fusion needed for this effect rather than Edit page keyframes?",
+    "Does node order affect only the intended branch or final composite?",
+    "Are masks feathered and stable across the shot?",
+    "Do inserted elements match plate brightness, color, and shadow?",
+    "Does the final timeline view preserve faces, action, captions, and proof?"
+  ]
+}
+

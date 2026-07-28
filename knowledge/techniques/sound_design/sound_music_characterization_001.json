@@ -1,0 +1,70 @@
+{
+  "id": "sound_music_characterization_001",
+  "name": "Music Characterization",
+  "category": "sound_design",
+  "source_tutorial": "knowledge/research/transcripts/Editing-That-Makes-Your-Story-10x.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/The-5-Second-Intro-Is-Dead-Here-s-Why_Media.txt",
+    "knowledge/research/transcripts/Saving-Bad-Videos-With-Only-Music_Media.txt"
+  ],
+  "use_when": [
+    "Music can define how the audience should read a character's confidence, arrogance, failure, mastery, or transformation.",
+    "The same action could feel elite, comic, dramatic, or absurd depending on music tone.",
+    "A story phase needs emotional characterization without extra explanation.",
+    "A place, material, or world needs a musical identity before the VO explains it.",
+    "A scene needs to shift genre read, such as becoming more intimate, stylized, premium, playful, or haunting."
+  ],
+  "avoid_when": [
+    "The music tells the audience to feel something contradicted by the actual footage.",
+    "Dialogue or natural sound is more important than musical tone.",
+    "The track is unlicensed or unsafe for the platform.",
+    "The genre shift makes the scene more interesting but less truthful or less appropriate."
+  ],
+  "timeline_pattern": {
+    "pattern": "character_state -> music_tone_choice -> action_or_reaction -> state_shift",
+    "contrast_rule": "Change musical tone when the character moves from overconfidence to humbling or from learning to competence.",
+    "world_rule": "Use a restrained tonal bed or musical swell to characterize a place, scale, or hidden tension before the story promise arrives.",
+    "genre_rule": "A track can change the perceived genre of a scene; use this deliberately and compare variants.",
+    "restraint_rule": "Do not over-score every state change if performance already communicates it."
+  },
+  "motion": {
+    "rule": "Sync visual emphasis to music only where the music is actively characterizing the moment."
+  },
+  "sound": {
+    "rule": "Choose music for character meaning, not just energy.",
+    "quality_rule": "For premium documentary or anti-slop positioning, prefer intentional, high-quality music that feels curated rather than generic filler.",
+    "audition_rule": "Compare candidate tracks by what they make the viewer believe about the scene, not only by whether they sound good.",
+    "mix": "Keep dialogue, attempts, and reactions audible under the music.",
+    "rights": "Check licensing/platform safety before final delivery."
+  },
+  "captions": {
+    "rule": "Captions should not fight a music-led character moment; use them sparingly when the image and track carry the point."
+  },
+  "color": {
+    "rule": "Color can support music tone, but should not overstate a joke or transformation."
+  },
+  "implementation": {
+    "ffmpeg": "Use volume automation and short A/B renders with different tracks to compare character, world, and genre read.",
+    "remotion": "Represent music cues with character_state, world_state, or genre_read metadata and align section starts to narrative phase changes.",
+    "blender": "Use music markers for motion accents only where the character tone needs emphasis.",
+    "capcut_equivalent": "Try contrasting music options for the same action to test whether the character read changes.",
+    "premiere_equivalent": "Use sequence markers for character state and audition music cues against the same cut."
+  },
+  "common_mistakes": [
+    "Choosing music only because it sounds cool.",
+    "Using the same tone through confidence, failure, and growth.",
+    "Letting music overpower dialogue or useful natural sound.",
+    "Using unlicensed music in a deliverable edit.",
+    "Using generic filler music where the sequence needs a specific world or material identity.",
+    "Keeping a track that is fun as an experiment but wrong for the final story."
+  ],
+  "qc": [
+    "Can the editor state what the music says about the character?",
+    "Can the editor state what the music says about the world or place, if used for worldbuilding?",
+    "Does the music tone match the intended story phase?",
+    "Is dialogue/natural sound still intelligible where needed?",
+    "Is the music licensed or platform-safe?",
+    "Does the track feel curated rather than generic filler for premium documentary work?",
+    "Does the track change the scene's genre read in the intended direction?"
+  ]
+}

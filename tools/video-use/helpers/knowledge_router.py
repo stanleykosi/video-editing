@@ -19,40 +19,40 @@ from typing import Any
 
 
 SCAN_ROOTS = (
-    "content_creation",
-    "sources",
-    "extracted_lessons",
-    "style_packs",
-    "skills",
-    "technique_cards",
-    "presets",
-    "qc_checklists",
+    "knowledge/workflows/content_creation",
+    "knowledge/research/catalogs",
+    "knowledge/research/lessons",
+    "knowledge/styles",
+    "knowledge/playbooks",
+    "knowledge/techniques",
+    "knowledge/presets",
+    "knowledge/quality/editorial_checklists",
 )
 
 UNIVERSAL_CONTENT = (
-    "content_creation/knowledge_router.md",
-    "content_creation/faceless_video_workflow.md",
-    "content_creation/scriptwriter.md",
-    "content_creation/visual_planner.md",
-    "content_creation/asset_planner.md",
-    "content_creation/voiceover_planner.md",
-    "content_creation/subagent_modules.md",
+    "knowledge/workflows/content_creation/knowledge_router.md",
+    "knowledge/workflows/content_creation/faceless_video_workflow.md",
+    "knowledge/workflows/content_creation/scriptwriter.md",
+    "knowledge/workflows/content_creation/visual_planner.md",
+    "knowledge/workflows/content_creation/asset_planner.md",
+    "knowledge/workflows/content_creation/voiceover_planner.md",
+    "knowledge/workflows/content_creation/subagent_modules.md",
 )
 
 CORE_SKILLS = (
-    "skills/editing_taste_story_pacing.md",
-    "skills/short_form_retention.md",
-    "skills/kinetic_captions.md",
-    "skills/video_typography.md",
-    "skills/sound_design.md",
-    "skills/beat_sync.md",
-    "skills/motion_graphics.md",
-    "skills/color_grading.md",
-    "skills/editor_qc.md",
+    "knowledge/playbooks/editing_taste_story_pacing.md",
+    "knowledge/playbooks/short_form_retention.md",
+    "knowledge/playbooks/kinetic_captions.md",
+    "knowledge/playbooks/video_typography.md",
+    "knowledge/playbooks/sound_design.md",
+    "knowledge/playbooks/beat_sync.md",
+    "knowledge/playbooks/motion_graphics.md",
+    "knowledge/playbooks/color_grading.md",
+    "knowledge/playbooks/editor_qc.md",
 )
 
 ALWAYS_SOURCE_DOCS = (
-    "sources/asset_resource_platforms.md",
+    "knowledge/research/catalogs/asset_resource_platforms.md",
 )
 
 RESEARCH_TERMS = {
@@ -297,27 +297,26 @@ def flatten_json_strings(value: Any) -> list[str]:
 
 
 def item_kind_and_category(rel: str, data: dict[str, Any] | None) -> tuple[str, str]:
-    parts = rel.split("/")
-    top = parts[0]
-    if top == "content_creation":
-        return "content_creation", parts[1] if len(parts) > 2 else "workflow"
-    if top == "sources":
+    parts = Path(rel).parts
+    if parts[:3] == ("knowledge", "workflows", "content_creation"):
+        return "content_creation", parts[3] if len(parts) > 4 else "workflow"
+    if parts[:3] == ("knowledge", "research", "catalogs"):
         return "source_doc", "source"
-    if top == "extracted_lessons":
+    if parts[:3] == ("knowledge", "research", "lessons"):
         return "extracted_lesson", "lesson"
-    if top == "style_packs":
+    if parts[:2] == ("knowledge", "styles"):
         suffix = Path(rel).suffix.lower()
         return "style_pack", "json" if suffix == ".json" else "style_reference"
-    if top == "skills":
+    if parts[:2] == ("knowledge", "playbooks"):
         return "skill", "skill"
-    if top == "technique_cards":
+    if parts[:2] == ("knowledge", "techniques"):
         category = str((data or {}).get("category") or Path(rel).stem.split("_", 1)[0])
         return "technique_card", category
-    if top == "presets":
-        return "preset", parts[1] if len(parts) > 1 else "preset"
-    if top == "qc_checklists":
+    if parts[:2] == ("knowledge", "presets"):
+        return "preset", parts[2] if len(parts) > 2 else "preset"
+    if parts[:3] == ("knowledge", "quality", "editorial_checklists"):
         return "qc_checklist", "qc"
-    return "other", top
+    return "other", parts[0]
 
 
 def load_item(path: Path, root: Path) -> KnowledgeItem:
@@ -364,7 +363,10 @@ def scan_knowledge(root: Path) -> list[KnowledgeItem]:
         for path in sorted(base.rglob("*")):
             if not path.is_file():
                 continue
-            if any(part.startswith(".") for part in path.relative_to(base).parts):
+            relative_parts = path.relative_to(base).parts
+            if any(part.startswith(".") for part in relative_parts):
+                continue
+            if folder == "knowledge/techniques" and len(relative_parts) == 1:
                 continue
             if path.suffix.lower() not in {".md", ".json", ".txt"}:
                 continue
@@ -397,7 +399,7 @@ def style_pack_data(path: Path | None) -> dict[str, Any]:
 
 
 def resolve_style_pack(root: Path, requested: str, video_type: str, brief: str) -> Path | None:
-    style_dir = root / "style_packs"
+    style_dir = root / "knowledge" / "styles"
     candidates = sorted(style_dir.glob("*.json")) if style_dir.exists() else []
 
     def matches(path: Path, needle: str) -> bool:
@@ -593,14 +595,14 @@ def build_plan(
     if brief_tokens & RESEARCH_TERMS:
         select_required(
             items_by_path,
-            "content_creation/research_to_script.md",
+            "knowledge/workflows/content_creation/research_to_script.md",
             "factual or research-led topic detected",
             selected,
         )
     if brief_tokens & YOUTUBE_STORY_TERMS:
         select_required(
             items_by_path,
-            "content_creation/youtube_storytelling_workflow.md",
+            "knowledge/workflows/content_creation/youtube_storytelling_workflow.md",
             "story-led or retention-led format detected",
             selected,
         )

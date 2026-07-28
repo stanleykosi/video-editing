@@ -1,0 +1,80 @@
+{
+  "id": "retention_hook_text_design_sequence_001",
+  "name": "Hook Text Design Sequence",
+  "category": "retention",
+  "source_tutorial": "knowledge/research/transcripts/ultimate guide to shortform.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/edit high quality reel.txt",
+    "knowledge/research/transcripts/typography.txt",
+    "knowledge/research/transcripts/killer intros.txt"
+  ],
+  "use_when": [
+    "The opening hook contains a short phrase that can become a scroll-stopping visual layout.",
+    "One keyword in the hook carries the main curiosity, result, identity, or contrast.",
+    "The edit needs a stronger first impression than ordinary captions provide.",
+    "The hook phrase can be reduced to a short problem/result statement that is easy to read while scrolling.",
+    "One word in the hook carries the emotional impact, result, or contrast and needs typographic hierarchy.",
+    "A branded intro needs short designed text for brand, proof, and outcome instead of ordinary subtitles."
+  ],
+  "avoid_when": [
+    "The hook is already visually obvious from the footage or proof frame.",
+    "The hook phrase is too long to become a clean phone-size text design.",
+    "The design would hide the speaker's expression, product, proof, or key action."
+  ],
+  "timeline_pattern": {
+    "pattern": "hook_words -> select_key_phrase -> stack_text_layers -> balance_layout -> emphasize_keyword -> clear_or_transition_to_body",
+    "layer_rule": "Use only the necessary hook words and extend those layers long enough to stack as a designed composition.",
+    "hierarchy_rule": "One word or phrase should dominate; supporting words should frame it rather than compete.",
+    "impact_word_rule": "Choose the word that changes the viewer's understanding or desire, not a filler word, as the strongest typographic element.",
+    "balance_rule": "Check horizontal and vertical balance at phone size, not only in the desktop program monitor.",
+    "attachment_rule": "In After Effects, parent hook text to the talking-head video only when it should scale with the zoom as if attached to the frame.",
+    "intro_text_rule": "For branded intros, assign text roles to brand/show name, proof or authority quote, outcome phrase, and accent underline before animating."
+  },
+  "motion": {
+    "rule": "Use restrained entrance motion or caption stack timing so the layout builds quickly without delaying the hook.",
+    "keyframe_values": {
+      "hook_duration": "Keep the designed hook inside the first 1-5 seconds for feed-first shorts.",
+      "keyword_glow": "Use glow or accent color only on the meaning-changing word; start with moderate threshold, radius around 90-100, and brightness around 125-135 if the glow remains readable.",
+      "stack_timing": "Layer words quickly enough to preserve spoken rhythm; avoid text still building after the viewer needs the claim.",
+      "highlight_motion": "Use Trim Paths 0 to 100 for underline/highlight strokes and ease the motion so the highlight lands with the word.",
+      "typographic_contrast": "Use weight, hue, case, or size contrast only where it clarifies the hook priority; avoid making all words equally loud.",
+      "intro_flicker": "Keep intro flicker or font-change accents to very short 3-9 frame bursts and only when the final word remains readable."
+    }
+  },
+  "sound": {
+    "rule": "Use a subtle hit or whoosh only if it supports a real text entrance or keyword emphasis; keep speech dominant."
+  },
+  "captions": {
+    "rule": "Remove or disable ordinary captions during the hook if the designed text already carries the same words."
+  },
+  "color": {
+    "rule": "Use accent color to identify the keyword, but preserve contrast and avoid glow that blooms over nearby text."
+  },
+  "implementation": {
+    "ffmpeg": "Use drawtext layers with timed enable expressions and optional glow via pre-rendered text assets; review phone-size contact sheets.",
+    "remotion": "Represent hookText layers with text, hierarchy, x/y, startFrame, endFrame, emphasisStyle, and safeRegion fields.",
+    "blender": "Use text objects in a 9:16 camera with simple scale/opacity keyframes and a single emphasized material.",
+    "capcut_equivalent": "Split the hook words into separate text layers, stack them in a balanced phone-safe layout, and emphasize the keyword with bold/color/glow.",
+    "premiere_equivalent": "Convert selected caption or text layers to graphics, stack them on separate tracks, arrange in Essential Graphics, and apply bold/color/glow to the keyword. In After Effects, animate hook text with slide/typewriter/highlight presets and parent text to the video when the zoom should carry it."
+  },
+  "common_mistakes": [
+    "Designing every hook word with equal weight.",
+    "Letting ordinary captions duplicate the designed hook text.",
+    "Making the layout pretty but too slow to read in the first seconds.",
+    "Using glow on the whole phrase instead of the keyword.",
+    "Covering the subject or proof that should support the hook.",
+    "Choosing a hook phrase that is too clever or long to read during the first scroll beat.",
+    "Emphasizing a visually convenient word instead of the impact word.",
+    "Letting brand, proof, outcome, and ordinary captions all compete in the same intro frame."
+  ],
+  "qc": [
+    "The designed hook is understandable within the first five seconds.",
+    "One keyword or phrase has clear visual priority.",
+    "The layout does not duplicate ordinary captions unnecessarily.",
+    "Glow or accent color remains readable at phone size.",
+    "The hook text does not hide the face, product, proof, or key action.",
+    "Any parented hook text remains readable through the zoom.",
+    "The strongest typographic emphasis sits on the word that changes meaning or desire.",
+    "Intro text has clear brand, proof, outcome, and accent roles without duplicate captions."
+  ]
+}

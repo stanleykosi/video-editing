@@ -1,0 +1,111 @@
+{
+  "id": "sound_sfx_variation_exaggeration_001",
+  "name": "SFX Variation And Exaggeration",
+  "category": "sound_design",
+  "source_tutorial": "knowledge/research/transcripts/editing full course.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/short-form editing.txt",
+    "knowledge/research/transcripts/edit high quality reel.txt",
+    "knowledge/research/transcripts/editing viral videos.txt",
+    "knowledge/research/transcripts/slow editing.txt",
+    "knowledge/research/transcripts/vox style documentary.txt",
+    "knowledge/research/transcripts/killer intros.txt",
+    "knowledge/research/transcripts/editing tricks.txt",
+    "knowledge/research/transcripts/viral text effects.txt",
+    "knowledge/research/transcripts/premium capcut text effect.txt"
+  ],
+  "use_when": [
+    "A transition, punch-in, shake, meme beat, physical action, or reveal needs extra impact.",
+    "The edit feels visually active but sonically flat.",
+    "A repeated motion needs a family of related SFX instead of one identical whoosh.",
+    "Text, icon, zoom, or transition movements need short-form whooshes, hits, or reverse hits.",
+    "An AE-animated Reel needs SFX after the animation render is aligned in Premiere.",
+    "A visually polished YouTube edit feels flat and needs a focused SFX spotting pass.",
+    "A human cutaway needs subtle physical texture such as footsteps, cloth, object, or surface sound.",
+    "An infographic sequence needs soft cues for title entrances, route traces, highlights, chart bars, or screenshot swaps.",
+    "A premium brand intro needs hits, pops, ticks, or drum accents locked to logo, text, flicker, underline, or camera events.",
+    "A text flicker, font-shift, number counter, outline reveal, highlight wipe, glow sweep, or staggered reveal needs a tiny tick, click, shimmer, or glitch cue that makes the change feel intentional.",
+    "An anime/action edit needs clip-specific whooshes, impacts, textures, or short identity voice lines to make motion and character moments land."
+  ],
+  "avoid_when": [
+    "The subject tone is serious and SFX would cheapen it.",
+    "The effect competes with dialogue or testimony.",
+    "The visual action is already clear and the sound would become clutter."
+  ],
+  "timeline_pattern": {
+    "pattern": "visual_action_or_motion -> matched_sfx -> short_tail_or_fade -> return_to_dialogue_or_music",
+    "variation_rule": "Rotate similar SFX variations for repeated movements so the edit does not sound copied and pasted.",
+    "exaggeration_rule": "Use oversized sounds for comedy or emphasis only when the tone supports it.",
+    "library_rule": "Build reusable SFX folders by job: whoosh, hit, pop, riser, ambience, meme, texture, and transition.",
+    "foley_rule": "For organic social moments, context-specific foley should be subtle enough to sell realism without calling attention to itself.",
+    "finishing_rule": "Add SFX as a dedicated finishing pass after visual motion is locked enough to place cues frame-accurately.",
+    "anticipation_rule": "Use a reversed hit before a question, reveal, or transition when the edit needs anticipation.",
+    "isolation_rule": "Temporarily muting dialogue and music can help spot SFX opportunities, but the full mix must be restored and checked afterward.",
+    "infographic_rule": "For documentary graphics, prioritize major reveal/highlight cues over constant whooshes on every layer.",
+    "intro_frame_lock_rule": "For premium intros, remove any cue that does not land on a visible logo, text, flicker, underline, camera, cut, or transition event.",
+    "voice_line_rule": "Use short identity voice lines only when they clarify character, emotion, or impact; do not place them on every clip by habit.",
+    "text_tick_rule": "For flicker, font-shift, highlight, glow, or staggered reveal text, cut and retime the cue so it ends with the visual change instead of continuing under the next line."
+  },
+  "motion": {
+    "rule": "SFX should land on the actual motion start, impact, or reveal frame, not randomly near it."
+  },
+  "sound": {
+    "rule": "Layer SFX under speech conservatively and fade tails that distract from the next line.",
+    "keyframe_values": {
+      "sync_tolerance": "Aim to land hits within 1-2 frames of the visual impact for energetic edits.",
+      "variation_count": "Keep at least 3-5 variants for common whooshes or hits in a reusable library.",
+      "whoosh_start_level": "Start whooshes around -10 dB below dialogue, then adjust by ear and context.",
+      "dialogue_priority": "Lower, shorten, or remove SFX when they mask story-critical words.",
+      "isolated_pass": "After solo SFX spotting, lower cues in the restored full mix until they support motion without becoming annoying.",
+      "foley_level": "For subtle foley under dialogue, start 12-18 dB below speech and raise only until the movement feels believable.",
+      "infographic_level": "Start infographic ticks, whooshes, and shutter cues around -12 dB below narration, then lower if the section feels busy.",
+      "premium_intro_sync": "For precision intro hits, aim for 0-1 frame sync on the visible event and use a 4-12 frame duck or fade into body speech.",
+      "text_flicker_tick": "For very fast text flickers, align ticks to opacity or font-change frames and shorten/speed the cue so the tail clears with the flicker.",
+      "staggered_glitch_reveal": "For staggered text reveals, align the glitch cue to the first visible word change and trim it at the final word's reveal frame.",
+      "amv_voice_line": "Start identity voice lines at or just before the clip's opening beat when they are used as a character anchor."
+    }
+  },
+  "captions": {
+    "rule": "Do not combine loud SFX with busy caption animation unless the moment is intentionally high-energy."
+  },
+  "color": {
+    "rule": "No direct color rule; flashes or shakes paired with SFX must preserve action readability."
+  },
+  "implementation": {
+    "ffmpeg": "Align SFX clips by frame in the EDL, apply afade at starts/ends, and use volume filters to keep dialogue clear.",
+    "remotion": "Trigger SFX from the same frame constants that drive punch-ins, shakes, reveals, or caption pops.",
+    "blender": "Use audio markers for camera shakes, object impacts, and reveal timing.",
+    "capcut_equivalent": "Use separate SFX tracks, rotate effect variants, and manually align hits to motion frames. For text flickers, font shifts, highlight wipes, glow sweeps, or staggered reveals, cut the tick/click/glitch cue and use blade/speed controls so it ends with the text animation. Import local cues through Sounds > Device when needed and review them with the full song restored.",
+    "premiere_equivalent": "Use SFX bins by job, markers for impact frames, clip gain, and short fades on every effect. For a focused pass, temporarily mute dialogue/music while spotting, then unmute and rebalance. For AE roundtrips, import the animation render first, then place whooshes, hits, typewriter cues, camera sounds, and reward sounds against visible motion."
+  },
+  "common_mistakes": [
+    "Using the same whoosh on every transition.",
+    "Using generic foley that does not match the visible surface or movement.",
+    "Adding an SFX cue to every small infographic layer until the documentary tone feels cheap.",
+    "Adding SFX because the effect exists rather than because the beat needs sound.",
+    "Letting meme sounds overpower the story or date the edit.",
+    "Leaving hard SFX edges without fades.",
+    "Letting whooshes sit at the same level as dialogue in a dense short-form edit.",
+    "Adding SFX before the animation timing is locked and then leaving cues out of sync.",
+    "Placing SFX while other tracks are muted and forgetting to re-check dialogue/music masking.",
+    "Adding intro SFX because they sound premium even though no visible event justifies them.",
+    "Leaving a ticking, shimmer, or glitch cue running after the text visual has ended.",
+    "Adding character voice lines or intense impacts to every clip until the edit loses contrast."
+  ],
+  "qc": [
+    "Does every SFX cue have a named visual or story job?",
+    "Does any foley cue match a visible or strongly implied movement and stay below dialogue?",
+    "Do infographic cues map to major visible reveals and stay below narration?",
+    "Do repeated movements use variation instead of the exact same file every time?",
+    "Do SFX peaks stay below dialogue?",
+    "Do hits land within 1-2 frames of the intended impact when sync matters?",
+    "Are serious sections free from tone-breaking default whooshes?",
+    "Are whooshes low enough that speech stays dominant?",
+    "Does any reversed hit build into a real question, reveal, or transition?",
+    "Were SFX placed against the final visible animation render?",
+    "After any isolated SFX pass, was the full mix restored and checked?",
+    "In a premium intro, does every cue land on a visible event and preserve proof or body speech?",
+    "For flicker, font-shift, highlight, glow, or staggered text, does the cue end with the visual change and stay below speech?",
+    "In an anime/action edit, do voice lines and SFX clarify the clip rather than clutter every beat?"
+  ]
+}

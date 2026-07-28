@@ -1,0 +1,57 @@
+{
+  "id": "premiere_aftereffects_render_finish_roundtrip_001",
+  "name": "Premiere To After Effects Render And Finish Roundtrip",
+  "category": "nle_workflow",
+  "source_tutorial": "knowledge/research/transcripts/edit high quality reel.txt",
+  "additional_sources": [],
+  "use_when": [
+    "A Reel is prepared in Premiere, animated in After Effects, then finished back in Premiere.",
+    "The edit needs separate passes for animation, overlays, SFX, music, captions, and export.",
+    "The agent needs to preserve audio and caption control after AE animation is rendered."
+  ],
+  "avoid_when": [
+    "The entire edit can be finished in one tool without quality or workflow loss.",
+    "The animation is still changing too often for a rendered intermediate to be useful.",
+    "The user needs a fully editable Dynamic Link workflow rather than rendered intermediates."
+  ],
+  "timeline_pattern": {
+    "pattern": "Premiere_prepared_render -> After_Effects_animation_render -> import_AE_render_to_Premiere -> remove_AE_audio_if_duplicate -> add_overlays -> add_SFX -> add_music -> create_captions -> suppress_caption_collisions -> final_export",
+    "audio_rule": "If the AE render includes duplicate audio, unlink and remove it while preserving the intended Premiere dialogue track.",
+    "finishing_rule": "Do overlays, SFX, music, and captions after the animation render is in context with the original audio.",
+    "export_rule": "Before final export, confirm no required track is muted and the selected sequence/range is correct."
+  },
+  "motion": {
+    "rule": "Overlays should cover or motivate hard animation transitions, but do not overuse overlays when an out animation would be cleaner."
+  },
+  "sound": {
+    "rule": "Add SFX in a dedicated pass after visual motion is locked; music should be aligned to the final edit, then ducked or cut where speech needs room."
+  },
+  "captions": {
+    "rule": "Generate captions near the end, style one track, convert to graphics only if needed, and disable/fade captions over animation-heavy sections."
+  },
+  "color": {
+    "rule": "Check that AE render color matches the prepared Premiere cut and does not introduce unexpected gamma or compression shifts."
+  },
+  "implementation": {
+    "ffmpeg": "Use ffprobe and decode checks on intermediate and final renders; compare duration, frame rate, audio streams, and resolution before final assembly.",
+    "remotion": "Represent the roundtrip as stages: preparedVideo, animationRender, overlayPass, soundPass, captionPass, exportPass, each with checked status.",
+    "blender": "Render animation overlays or full scenes as intermediates, then finish sound/captions in the main NLE if that preserves control.",
+    "capcut_equivalent": "Import rendered animation, keep original dialogue separate, then add overlays, SFX, music, and captions as final passes.",
+    "premiere_equivalent": "Import the AE H.264 or QuickTime render, align it with the prepared timeline, unlink/delete duplicate render audio, add overlay and SFX tracks from template bins, add music and captions, then export the selected final sequence."
+  },
+  "common_mistakes": [
+    "Keeping duplicate AE render audio under the original dialogue.",
+    "Forgetting to unmute music or SFX before final export.",
+    "Adding captions before the animation render is in place and then fighting collisions.",
+    "Using too many overlays instead of proper out animations.",
+    "Exporting the wrong sequence, selected range, or muted-track version."
+  ],
+  "qc": [
+    "AE render duration and frame rate match the prepared Premiere timeline.",
+    "Duplicate render audio is removed or intentionally muted.",
+    "Overlays, SFX, music, and captions are on controllable tracks.",
+    "No required dialogue, music, or SFX track is muted before export.",
+    "Caption suppression or fades are applied over dense animation sections.",
+    "Final export comes from the intended sequence and range."
+  ]
+}

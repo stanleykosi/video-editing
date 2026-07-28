@@ -1,0 +1,90 @@
+{
+  "id": "motion_show_dont_tell_visual_stack_001",
+  "name": "Show-Don't-Tell Visual Stack",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/short-form editing.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/davinci resolve short form editing.txt",
+    "knowledge/research/transcripts/ultimate guide to shortform.txt",
+    "knowledge/research/transcripts/edit high quality reel.txt",
+    "knowledge/research/transcripts/editing viral videos.txt",
+    "knowledge/research/transcripts/slow editing.txt"
+  ],
+  "use_when": [
+    "A short-form explanation mentions an abstract idea, question, result, platform, object, or action that can be shown visually.",
+    "The video needs to keep viewers engaged without relying only on a talking head.",
+    "Text, icons, stock footage, GIFs, masks, glows, and backgrounds can make the spoken point faster to understand.",
+    "A short-form body section needs filler cards, B-roll text, or a full-screen object animation to show the idea.",
+    "A polished Reel needs a segment-by-segment visual plan before After Effects animation begins.",
+    "Resolve overlays, generators, Text+, gradients, and Fusion effects can add a reusable short-form style.",
+    "A scripted YouTube edit uses sentence-level tags to decide whether each beat needs screen recording, image, video, text, overlay, or animation.",
+    "A personal short-form story names a real obstacle, result, place, object, or memory that can be shown with a proof artifact."
+  ],
+  "avoid_when": [
+    "The visual would distract from a strong face, reaction, or proof moment.",
+    "The screen already has captions, title text, and overlays competing for attention.",
+    "The stock or icon asset would imply something untrue or off-brand."
+  ],
+  "timeline_pattern": {
+    "pattern": "spoken_concept -> timed_word_or_icon -> supporting_visual -> masked_or_textured_background -> transition_to_next_concept",
+    "show_rule": "If the point can be shown faster than explained, use a visual representation instead of extra narration.",
+    "proof_artifact_rule": "When the story mentions a concrete obstacle, result, object, or place, bring the viewer onto the journey with a truthful image or artifact close to the line.",
+    "body_visual_options": "Use the lightest useful body visual: captions only, speaker plus text, filler background text, B-roll/image, icon/proof, full-screen object animation, or camera scene.",
+    "ideation_rule": "Before animating, write or sketch the visual support for each trimmed spoken segment.",
+    "script_tag_rule": "Color-code or tag script beats by visual need before collecting assets and layering the timeline.",
+    "sync_rule": "Time words, icons, and stock inserts to the exact spoken concept they represent.",
+    "stack_rule": "Layer visuals by hierarchy: primary idea first, support asset second, texture/background last.",
+    "resolve_overlay_rule": "When adding overlay assets in Resolve, rotate/scale/blend them intentionally and check for edges or accidental obstruction."
+  },
+  "motion": {
+    "rule": "Use pop-ins, move-from-bottom, masks, glows, feathered stock footage, and small rotations only when they clarify or energize the spoken concept.",
+    "keyframe_values": {
+      "text_pop": "Use 4-8 frames for high-energy text/icon entrance.",
+      "mask_feather": "Use enough feather to blend stock footage without hiding its subject; start around 10-40 px depending on resolution.",
+      "glow_emphasis": "Use glow only on the word or icon carrying the meaning, not the whole text stack.",
+      "object_animation": "For full-screen object beats, try a scale/rotation entrance and support shapes scaling from 0 only when the concept deserves a full-screen reset.",
+      "transition_scale_pop": "Use a fast scale-up/down on a symbol or question mark when it becomes the transition object."
+    }
+  },
+  "sound": {
+    "rule": "Pair pop-ins, glows, and transitions with subtle hits or whooshes only when they mark a real visual change.",
+    "organic_note": "In human slow-edit sections, proof visuals may need natural ambience or no SFX rather than loud template hits."
+  },
+  "captions": {
+    "rule": "If text overlays are already carrying the spoken concept, remove or simplify captions that duplicate the same words."
+  },
+  "color": {
+    "rule": "Use highlight color for the meaning-changing word; keep background texture readable and subordinate."
+  },
+  "implementation": {
+    "ffmpeg": "Use overlay, drawtext, alpha masks, fade, chromakey when needed, and color/glow approximations through layered assets. Generate contact sheets to verify hierarchy.",
+    "remotion": "Represent visualStack items with type, text, asset, startFrame, duration, hierarchy, emphasisColor, mask, and sfxFrame fields.",
+    "blender": "Use text objects, icon planes, masks, and camera/keyframe animation for complex visual stacks.",
+    "capcut_equivalent": "Use text templates, stickers/icons, stock overlays, masks, feather, glow, and pop animations, then manually check layer timing.",
+    "premiere_equivalent": "Use Essential Graphics, nested sequences, masks with feather, VR Glow or equivalent glow, Transform pop animation, and stock footage layers. For scripted YouTube edits, layer assets from script tags after the voiceover/music rough assembly. For AE workflows, send a prepared render after segment ideation, then build each visual stack as a trimmed scene. In Resolve, use Text+, Fusion nodes, generators, overlays, Add/blend modes, and Power Bin presets after QC."
+  },
+  "common_mistakes": [
+    "Writing every spoken word onscreen instead of visualizing the idea.",
+    "Stacking text, icons, stock footage, and captions with no hierarchy.",
+    "Using stock footage that is related by keyword but not by meaning.",
+    "Explaining a concrete story beat with captions when a truthful proof artifact would make the journey clearer.",
+    "Leaving visual stack elements onscreen after the spoken concept has passed.",
+    "Adding Resolve overlays without checking rotation, scale, blend mode, and crop edges.",
+    "Letting glow or texture make the text harder to read.",
+    "Using a full-screen animation for a line that only needed a simple B-roll or text card.",
+    "Opening After Effects before deciding what each segment needs to show.",
+    "Gathering assets mid-edit without knowing which script beat they serve."
+  ],
+  "qc": [
+    "Can the viewer understand the spoken concept faster because of the visual?",
+    "Does any proof artifact appear close enough to the line it supports?",
+    "Is there a clear hierarchy between text, icon, stock footage, captions, and background?",
+    "Do visual elements appear and clear in sync with the spoken idea?",
+    "Does any asset imply something unsupported or off-brand?",
+    "Is highlighted text readable at phone size?",
+    "Do Resolve overlay assets avoid unintended edges and preserve captions/faces?",
+    "Is the chosen body visual the simplest one that still communicates the spoken idea?",
+    "Does every trimmed segment have a visual-support decision before animation?",
+    "Does each asset or animation map to a tagged script beat?"
+  ]
+}

@@ -1,22 +1,37 @@
 {
-  "name": "video-editing-workstation",
-  "version": "0.1.0",
+  "name": "video-editing-engine",
+  "version": "0.2.0",
   "private": true,
   "description": "Local motion-graphics packages for agent-driven video editing.",
   "scripts": {
     "remotion": "remotion",
-    "remotion:version": "remotion --version",
-    "hyperframes:version": "npx --yes hyperframes --version"
+    "remotion:version": "remotion versions",
+    "remotion:bundle": "remotion bundle src/video_engine/graphics/remotion/entry.tsx",
+    "remotion:browser": "remotion browser ensure",
+    "graphics:typecheck": "tsc --project tsconfig.graphics.json"
   },
   "dependencies": {
-    "@remotion/captions": "latest",
-    "@remotion/cli": "latest",
-    "@remotion/media-utils": "latest",
-    "@remotion/shapes": "latest",
-    "@remotion/transitions": "latest",
-    "gsap": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "remotion": "latest"
+    "@fontsource/inter": "5.3.0",
+    "@remotion/bundler": "4.0.481",
+    "@remotion/captions": "4.0.481",
+    "@remotion/cli": "4.0.481",
+    "@remotion/media-utils": "4.0.481",
+    "@remotion/renderer": "4.0.481",
+    "@remotion/shapes": "4.0.481",
+    "@remotion/transitions": "4.0.481",
+    "gsap": "3.15.0",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "remotion": "4.0.481",
+    "zod": "4.3.6"
+  },
+  "overrides": {
+    "fast-uri": "3.1.4",
+    "postcss": "8.5.23"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.14",
+    "typescript": "5.9.3"
   }
 }

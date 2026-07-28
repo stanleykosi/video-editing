@@ -1,0 +1,69 @@
+{
+  "id": "sound_anime_edit_sfx_voice_line_spotting_001",
+  "name": "Anime Edit SFX And Voice Line Spotting",
+  "category": "sound_design",
+  "source_tutorial": "knowledge/research/transcripts/editing tricks.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/powerful capcut edits.txt",
+    "knowledge/research/transcripts/capcut text effects.txt"
+  ],
+  "use_when": [
+    "An anime-style, AMV, game, sports, or action edit needs whooshes, impacts, elemental textures, glitches, risers, or identity voice lines.",
+    "A visually polished edit feels flat because motion, impacts, and character moments have no matching sound.",
+    "A voice line can identify the character, raise intensity, or set up the clip's emotional beat."
+  ],
+  "avoid_when": [
+    "The voice line or SFX source is unlicensed, unclear, or unsafe for the release.",
+    "The cue competes with dialogue, narration, or the song's key moment.",
+    "The edit already has too many impacts and needs space rather than more sound."
+  ],
+  "timeline_pattern": {
+    "pattern": "locked_visual_hit -> import_licensed_sfx -> place_whoosh_hit_or_texture -> place_identity_voice_line_if_needed -> trim_fade_tail -> full_mix_review",
+    "spotting_rule": "Spot SFX after the visual timing is locked enough that hits can be placed on real motion frames.",
+    "event_match_rule": "Choose cue families by visible job: clip starts, lightning entrances, glass-break overlays, eye transformations, and character voice moments should not share one generic hit.",
+    "voice_rule": "Place identity voice lines at the beginning of the relevant clip only when they make the moment clearer or more intense.",
+    "library_rule": "Tag reusable SFX by job, such as whoosh, hit, impact, texture, glitch, riser, transition, or character voice."
+  },
+  "motion": {
+    "rule": "Each SFX cue should correspond to a visible motion, impact, reveal, transformation, or transition."
+  },
+  "sound": {
+    "rule": "Layer cues so they support the music rather than fighting it.",
+    "keyframe_values": {
+      "sync_tolerance": "For hard impacts or transition hits, aim to land within 1-2 frames of the visual peak.",
+      "clip_start_cue": "When the cue sells a clip entrance, align it to the first readable frame of the character or effect, not to the nearest music beat by habit.",
+      "voice_line_start": "Start short identity voice lines at or just before the clip's opening beat when they are used as an anchor.",
+      "tail_fade": "Use short fades on SFX tails so the next clip or voice line is not masked.",
+      "mix_review": "Review SFX with the full song and any dialogue restored, not only while soloed."
+    }
+  },
+  "captions": {
+    "rule": "Caption voice lines only when they are story-critical or hard to understand, and keep them away from the action focus."
+  },
+  "color": {
+    "rule": "No direct color rule; audio cues paired with flashes or glow must not hide action readability."
+  },
+  "implementation": {
+    "ffmpeg": "Align SFX with adelay/amix, add afade on starts or tails, and track cue frames in an EDL or JSON timeline.",
+    "remotion": "Trigger Audio clips from the same frame constants used for visual impacts, transition peaks, and voice-line starts.",
+    "blender": "Use timeline audio markers for whoosh, impact, texture, and voice-line placement.",
+    "capcut_equivalent": "Import files through Sounds > Device > Select from device, place each cue under the matching clip or transition, and adjust timing/tails by preview.",
+    "premiere_equivalent": "Use SFX bins by job, sequence markers at impact frames, clip gain, short fades, and full-mix review before export."
+  },
+  "common_mistakes": [
+    "Using random SFX because they sound intense rather than because they match the clip.",
+    "Using one cue family for unrelated events such as lightning, glass break, eye transformation, and voice identity.",
+    "Placing voice lines over every clip instead of only identity or impact moments.",
+    "Leaving SFX tails to cover the next transition or line.",
+    "Ignoring music rights or assuming downloaded SFX are automatically cleared.",
+    "Judging SFX while soloed and then burying the song or dialogue in the full mix."
+  ],
+  "qc": [
+    "Does every SFX cue have a visible motion, impact, reveal, or character job?",
+    "Do cue families match the visible event rather than only the edit's general intensity?",
+    "Do hard hits land within the intended sync tolerance?",
+    "Do voice lines clarify identity or emotion instead of adding clutter?",
+    "Are cue sources licensed, platform-safe, or marked temp-only?",
+    "Does the full mix preserve music, dialogue, and SFX clarity without clipping?"
+  ]
+}

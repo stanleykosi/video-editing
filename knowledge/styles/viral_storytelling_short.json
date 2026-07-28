@@ -1,0 +1,77 @@
+{
+  "id": "viral_storytelling_short",
+  "name": "Viral Storytelling Short",
+  "version": 1,
+  "best_for": [
+    "short narrative explainers",
+    "creator-style story shorts",
+    "high-retention social videos",
+    "topic-to-payoff videos"
+  ],
+  "default_platform": {
+    "aspect_ratio": "9:16",
+    "resolution": "1080x1920",
+    "fps": 30,
+    "target_duration_seconds": 45
+  },
+  "story_structure": [
+    "high-curiosity first line",
+    "quick stakes",
+    "unexpected turn",
+    "compressed evidence/example",
+    "payoff or reversal",
+    "soft CTA if needed"
+  ],
+  "voiceover": {
+    "tone": "urgent but not fake, punchy, story-first",
+    "wpm_range": [145, 175],
+    "delivery_notes": [
+      "front-load curiosity",
+      "cut setup aggressively",
+      "preserve a rest beat after dense hooks"
+    ]
+  },
+  "visual_language": {
+    "primary_visuals": [
+      "fast b-roll",
+      "center text",
+      "proof screenshots",
+      "punch zooms",
+      "animated arrows",
+      "meme-adjacent pattern interrupts when appropriate"
+    ],
+    "motion": "medium-to-high; effects return on important statements, not every word",
+    "typography": "bold readable social text with one impact phrase",
+    "captions": "one- or two-word chunks only when they improve pace",
+    "color": "high contrast with controlled accent color"
+  },
+  "asset_strategy": {
+    "preferred_sources": [
+      "user-provided proof first",
+      "Pexels/Pixabay/Openverse for support visuals",
+      "generated concept plates for non-evidence scenes",
+      "Iconify/Lucide for quick visual symbols"
+    ],
+    "must_manifest": true,
+    "generated_visual_policy": "Allowed for metaphors and pattern interrupts; factual claims still need sources."
+  },
+  "sound": {
+    "music": "energetic but speech-safe",
+    "sfx": "whooshes, hits, ticks, reverses, risers used only on real visual events",
+    "mix_rule": "SFX land within 1-2 frames of visible motion and stay below voice"
+  },
+  "knowledge_files": [
+    "knowledge/playbooks/short_form_retention.md",
+    "knowledge/playbooks/viral_youtube_editing_workflow.md",
+    "knowledge/playbooks/kinetic_captions.md",
+    "knowledge/playbooks/beat_sync.md",
+    "knowledge/playbooks/editor_qc.md"
+  ],
+  "qc": [
+    "first five seconds contain a clear supported claim or question",
+    "visual density drops when the hook is overloaded",
+    "captions/proof/CTA do not collide",
+    "SFX sync to actual rendered motion",
+    "ending resolves the hook"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "aftereffects_track_matte_texture_cutout_001",
+  "name": "After Effects Track-Matte Texture Cutout",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/edit high quality reel.txt",
+  "additional_sources": [],
+  "use_when": [
+    "A portrait, icon, product, or cutout image needs a premium texture without losing its visible silhouette.",
+    "Dots, grids, noise, or texture should apply only inside an image/cutout.",
+    "The animation needs a stylized expert/asset intro while preserving the original image."
+  ],
+  "avoid_when": [
+    "The texture makes the face, logo, product, or proof harder to recognize.",
+    "The asset has weak edges and the matte would reveal artifacts.",
+    "A simple drop shadow or color correction would be clearer."
+  ],
+  "timeline_pattern": {
+    "pattern": "import_cutout -> duplicate_cutout -> place_texture_above_duplicate -> track_matte_texture_to_duplicate -> keep_original_visible -> parent_duplicate_if_needed -> trim_to_segment",
+    "duplicate_rule": "Duplicate the cutout before matting so the original image remains visible under the texture.",
+    "parenting_rule": "If the cutout slides or scales, ensure texture and duplicate follow the intended parent without creating offset drift.",
+    "trim_rule": "Trim texture, duplicate, and source layer to the same segment range."
+  },
+  "motion": {
+    "rule": "Texture should follow the asset motion when the asset moves, unless a stationary texture is intentionally used."
+  },
+  "sound": {
+    "rule": "No required SFX; add sound only if the textured asset entrance is a clear visual beat."
+  },
+  "captions": {
+    "rule": "Textured cutouts should not sit behind or under captions in a way that reduces caption contrast."
+  },
+  "color": {
+    "rule": "Texture color and opacity should support the brand palette and preserve recognition of the underlying subject."
+  },
+  "implementation": {
+    "ffmpeg": "Use alpha masks or overlay textures clipped by a matte; preview edges carefully because ffmpeg matte setup is less interactive.",
+    "remotion": "Layer the original image, then a duplicate masked texture layer using CSS masks/canvas alpha or preprocessed alpha assets.",
+    "blender": "Use image texture masks or alpha planes to apply texture only inside the cutout silhouette.",
+    "capcut_equivalent": "Duplicate the cutout, use mask/blend/overlay texture if available, and keep a clean original layer visible underneath.",
+    "premiere_equivalent": "Use After Effects track matte workflow or Premiere track matte/keying for simple cases: original image below, duplicate/matte layer, texture clipped to duplicate."
+  },
+  "common_mistakes": [
+    "Track-matting the only copy of the cutout and making the subject transparent.",
+    "Parenting the texture incorrectly so it slides away from the asset.",
+    "Using a texture that fights the brand style.",
+    "Letting texture hide facial features, logos, or proof.",
+    "Leaving texture layers longer than the asset segment."
+  ],
+  "qc": [
+    "The original cutout remains recognizable under the texture.",
+    "Texture stays aligned with the intended asset motion.",
+    "Edges do not show obvious matte artifacts.",
+    "Captions and text remain readable over or near the textured asset.",
+    "Texture, duplicate, and original layers start and end on the intended segment."
+  ]
+}

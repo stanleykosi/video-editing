@@ -1,0 +1,63 @@
+{
+  "id": "color_low_key_firelight_scene_unification_001",
+  "name": "Low-Key Firelight Scene Unification",
+  "category": "color",
+  "source_tutorial": "knowledge/research/transcripts/still image to media.txt",
+  "use_when": [
+    "A still-image composite needs fire, glow, sky, and base-image layers to feel like one night scene.",
+    "A bright overlay should stand out against a darker base without looking pasted on.",
+    "A cinematic night look needs warmth near the practical light source and controlled shadows elsewhere."
+  ],
+  "avoid_when": [
+    "The scene needs neutral factual color, product accuracy, or clean evidence review.",
+    "Darkening the base hides faces, architecture, captions, UI, or proof.",
+    "A warm/glow filter makes the composite look muddy, orange, or low-resolution."
+  ],
+  "timeline_pattern": {
+    "pattern": "base_correction -> lower_exposure_or_shadows -> overlay_match -> warm_tint_near_light -> contrast_highlight_check -> optional_glow_filter -> final_readability_qc",
+    "base_rule": "Darken the base only enough for the fire or glow source to feel motivated.",
+    "match_rule": "Adjust overlay brightness and temperature before relying on a global filter.",
+    "filter_rule": "Use glow or warm filters as scene unifiers, not as fixes for mismatched layer edges.",
+    "detail_rule": "Check the darkest and brightest regions after the grade so useful detail is still available."
+  },
+  "motion": {
+    "rule": "Color adjustments should stay stable unless a local light source intentionally flickers."
+  },
+  "sound": {
+    "rule": "No direct sound rule; if ambience is added, it should support the low-key night environment rather than call attention to the grade."
+  },
+  "captions": {
+    "rule": "Caption fill, stroke, and shadow must remain readable over the darkest base frame and the brightest glow frame."
+  },
+  "color": {
+    "rule": "Use exposure, contrast, tint/temperature, highlights, and optional glow to create a unified low-key look while preserving readable detail.",
+    "keyframe_values": {
+      "exposure": "Lower cautiously until the bright practical source stands out without crushing important shadows.",
+      "contrast": "Raise only enough to add night-scene depth and separation.",
+      "tint_temperature": "Warm the scene toward the practical light source, then compare against neutral areas for unwanted orange cast.",
+      "highlights": "Control bright overlays so fire or sky motion does not clip or smear.",
+      "glow_filter": "Use a subtle warm/glow filter only after masks and layer matches already work."
+    }
+  },
+  "implementation": {
+    "ffmpeg": "Use eq, curves, colorbalance, selective masked overlays, and optional glow-like blurred highlights; render stills around brightest and darkest frames.",
+    "remotion": "Store baseCorrection, overlayCorrection, warmth, contrast, glowOpacity, and readabilityCheckFrames separately from motion layer metadata.",
+    "blender": "Use compositor color balance, curves, glare/glow, and masks to warm practical light while protecting shadow detail.",
+    "capcut_equivalent": "Use Adjustment/Basic controls for exposure, contrast, highlights, saturation, tint/temperature, then optionally add a warm glow-style filter and preview the whole composite.",
+    "premiere_equivalent": "Use Lumetri on clip layers for matching, then an adjustment layer for final contrast/warmth/glow; compare against the base still and delivery-size preview."
+  },
+  "common_mistakes": [
+    "Crushing the base still until useful shadow detail disappears.",
+    "Using a glow filter to hide bad overlay matching.",
+    "Making the firelight grade so warm that faces or neutral surfaces turn orange.",
+    "Letting bright overlays clip after contrast or highlight changes.",
+    "Checking the grade on one frame instead of the brightest and darkest moments."
+  ],
+  "qc": [
+    "Does the grade make the layers feel unified without hiding important detail?",
+    "Do fire, sky, and reflection layers match the base image's brightness and temperature?",
+    "Are shadows deep but not crushed where the viewer needs detail?",
+    "Are highlights controlled on the brightest overlay frames?",
+    "Do captions and important subjects remain readable at delivery size?"
+  ]
+}

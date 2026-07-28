@@ -1,0 +1,71 @@
+{
+  "id": "typography_capcut_color_change_highlight_wipe_001",
+  "name": "CapCut Color-Change Highlight Wipe",
+  "category": "typography",
+  "source_tutorial": "knowledge/research/transcripts/premium capcut text effect.txt",
+  "additional_sources": [
+    "knowledge/research/source_notes/remotion_lab_kinetic_typography_presets_source_notes.md",
+    "knowledge/research/source_notes/brayden_ffmpeg_drawtext_animations_source_notes.md",
+    "knowledge/research/source_notes/mdn_css_masking_source_notes.md",
+    "knowledge/research/source_notes/hhsprings_ffmpeg_alphamerge_alphaextract_source_notes.md",
+    "knowledge/research/source_notes/remotion_transparent_videos_source_notes.md"
+  ],
+  "use_when": [
+    "A short title, quote, claim, or documentary-style statement needs a premium highlight pass.",
+    "The editor wants the highlighted area to invert or change the text color as it travels across the words.",
+    "The text can sit on a controlled background or card where a rectangular highlight feels intentional."
+  ],
+  "avoid_when": [
+    "The phrase is long or dense enough that the wipe delays comprehension.",
+    "The highlight bar covers faces, proof, UI, or product details.",
+    "The color change lowers contrast in either the highlighted or non-highlighted state.",
+    "The line needs plain captions rather than designed emphasis text."
+  ],
+  "timeline_pattern": {
+    "pattern": "base_background -> base_text -> duplicate_text_above_highlight_bar -> inverted_text_color -> compound_top_text_and_bar -> Split_mask_90deg -> start_keyframe_off_left -> end_keyframe_off_right -> ease_keyframes -> qc",
+    "layer_rule": "The base and inverted text layers must match position, font, size, tracking, and line breaks so the color change feels like one text object.",
+    "highlight_rule": "Resize the highlight background to the phrase instead of using a full-screen block.",
+    "hold_rule": "Let the phrase establish before the wipe starts when the highlight is a reveal rather than an instant emphasis."
+  },
+  "motion": {
+    "rule": "The split mask should travel smoothly across the highlight bar and clear before the next reading task begins.",
+    "keyframe_values": {
+      "mask_rotation": "Set the Split mask around 90 degrees for a horizontal left-to-right highlight wipe.",
+      "start_position": "Start the split mask fully off the left side of the highlight area.",
+      "end_position": "End the split mask fully off the right side of the highlight area.",
+      "easing": "Apply easing to both mask keyframes so the highlight feels deliberate rather than mechanical.",
+      "delay": "A short pre-wipe hold, such as about 1 second in a calm title, can let the statement register before the highlight moves."
+    }
+  },
+  "sound": {
+    "rule": "Use no sound or one soft tick/brush cue on the highlight start only if it does not compete with speech."
+  },
+  "captions": {
+    "rule": "Suppress ordinary captions in the same region if the highlight text already carries the spoken words."
+  },
+  "color": {
+    "rule": "The base and highlighted states both need strong contrast; black/white inversion works only when it matches the design tone."
+  },
+  "implementation": {
+    "ffmpeg": "Create base text with drawtext or a pre-rendered layer, composite a duplicate inverted/highlighted text group through an animated grayscale alpha mask using alphamerge, then inspect start/mid/hold/clear frames for alignment drift and alpha leakage.",
+    "remotion": "Build a HighlightWipeText component with absolute base/styled text layers, CSS mask-image or clip-path progress from off-left to off-right, highlightRect, easing, captionSuppression metadata, and optional transparent ProRes export.",
+    "blender": "Use duplicate text objects and an animated rectangular mask or wipe plane to reveal the inverted/highlighted text layer.",
+    "capcut_equivalent": "Place base text, duplicate the text above a custom-sized highlight background, invert the top text color, compound the top text plus highlight, add Video > Mask > Split, rotate to 90 degrees, keyframe the mask from left to right, and ease both keyframes.",
+    "premiere_equivalent": "Use Essential Graphics duplicate text over a shape layer, nest the highlighted version, animate a linear wipe or mask, and verify text layer alignment."
+  },
+  "common_mistakes": [
+    "Misaligning the base and highlighted text layers so the letters jump during the wipe.",
+    "Using a highlight bar that is too large and covers unrelated visual information.",
+    "Choosing highlight colors that look premium but reduce edge contrast.",
+    "Letting the wipe start before the viewer can read the phrase.",
+    "Leaving duplicate captions underneath the highlighted text."
+  ],
+  "qc": [
+    "Do the base and highlighted text layers align perfectly?",
+    "Does the highlight preserve readable contrast during the entire wipe?",
+    "Does the mask start and end outside the highlighted phrase?",
+    "Is the phrase readable before and after the wipe?",
+    "Do captions, faces, proof, UI, products, and action remain safe?",
+    "If exported as an overlay, does the file preserve alpha instead of rendering a black box?"
+  ]
+}

@@ -1,10 +1,10 @@
-"""Generate polished motion-card image assets for from-scratch timelines.
+"""Generate planning cards and non-typographic placeholder plates.
 
-The cards are still local Pillow renders, but they follow the same placement
-rules as the rest of the video system: clear visual hierarchy, protected center
-space for proof/diagrams, safe lower-caption area, and no generic placeholder
-labels in finished projects. Complex animation should still be delegated to
-Remotion, HyperFrames, Manim, or a dedicated motion sub-agent.
+These local Pillow renders are diagnostics or temporary planning assets. They
+follow the same safe-area conventions as the production system, but they must
+not be used as final title, caption, hook-card, chapter-card, or lower-third
+typography. Final designed graphics belong in Remotion, HyperFrames, Manim, or a
+dedicated motion component.
 """
 
 from __future__ import annotations

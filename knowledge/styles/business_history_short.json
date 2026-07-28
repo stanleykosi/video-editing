@@ -1,0 +1,79 @@
+{
+  "id": "business_history_short",
+  "name": "Business History Short",
+  "version": 1,
+  "best_for": [
+    "company history shorts",
+    "founder decision stories",
+    "market shift explainers",
+    "product/business lessons"
+  ],
+  "default_platform": {
+    "aspect_ratio": "9:16",
+    "resolution": "1080x1920",
+    "fps": 30,
+    "target_duration_seconds": 60
+  },
+  "story_structure": [
+    "surprising business outcome",
+    "context and pressure",
+    "key decision",
+    "consequence",
+    "lesson or current relevance"
+  ],
+  "voiceover": {
+    "tone": "smart, concise, strategic, slightly dramatic",
+    "wpm_range": [125, 155],
+    "delivery_notes": [
+      "make incentives clear",
+      "avoid unsupported financial claims",
+      "pronounce company/person names carefully"
+    ]
+  },
+  "visual_language": {
+    "primary_visuals": [
+      "company/product images",
+      "timeline cards",
+      "newspaper/document screenshots",
+      "stock business b-roll",
+      "charts",
+      "maps",
+      "simple icons"
+    ],
+    "motion": "clean editorial motion with punchy transitions on decision beats",
+    "typography": "business-news sans with restrained accent",
+    "captions": "single-line when possible; support numbers and names",
+    "color": "neutral editorial palette with brand-aware accents"
+  },
+  "asset_strategy": {
+    "preferred_sources": [
+      "official company pages for logos/product references",
+      "Wikimedia Commons",
+      "Library of Congress for older context",
+      "Openverse",
+      "public datasets for charts",
+      "Pexels/Pixabay for generic business b-roll"
+    ],
+    "must_manifest": true,
+    "generated_visual_policy": "Use for abstract market scenes only; avoid fake product or founder evidence."
+  },
+  "sound": {
+    "music": "subtle tension or momentum bed",
+    "sfx": "small ticks, paper, camera, notification, and chart cues",
+    "mix_rule": "numbers and names must stay intelligible"
+  },
+  "knowledge_files": [
+    "knowledge/playbooks/editing_taste_story_pacing.md",
+    "knowledge/playbooks/short_form_retention.md",
+    "knowledge/playbooks/motion_graphics.md",
+    "knowledge/playbooks/video_typography.md",
+    "knowledge/playbooks/editor_qc.md"
+  ],
+  "qc": [
+    "claims about revenue, market share, dates, and people are sourced",
+    "logos/trademarks are used only where allowed or replaced with neutral text",
+    "charts cite data source",
+    "brand colors do not override readability",
+    "ending states the decision consequence clearly"
+  ]
+}

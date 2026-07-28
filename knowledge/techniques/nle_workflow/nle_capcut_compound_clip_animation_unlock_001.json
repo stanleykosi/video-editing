@@ -1,0 +1,73 @@
+{
+  "id": "nle_capcut_compound_clip_animation_unlock_001",
+  "name": "CapCut Compound Clip Animation Unlock",
+  "category": "nle_workflow",
+  "source_tutorial": "knowledge/research/transcripts/keyframe pro edits.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/viral text effects.txt",
+    "knowledge/research/transcripts/premium capcut text effect.txt"
+  ],
+  "use_when": [
+    "A CapCut sticker, text layer, or graphic layer does not expose the animation controls needed for the edit.",
+    "A simple overlay should use video-clip-style animation after its size, rotation, or placement is already set.",
+    "The agent needs a mobile-friendly equivalent of nesting or precomposing a graphic so it can be animated as one clip.",
+    "A reusable CapCut text animation template should be duplicated while keeping the words editable inside each compound.",
+    "Caption or title groups need video effects, such as Player 3 or Blur, applied consistently to grouped text."
+  ],
+  "avoid_when": [
+    "A manual position, scale, rotation, opacity, or volume keyframe gives cleaner control.",
+    "The original sticker/text needs frequent wording, timing, or layout revisions and compounding would slow iteration.",
+    "The compound is being used only to add a flashy preset that does not improve focus, explanation, or tone."
+  ],
+  "timeline_pattern": {
+    "pattern": "create_or_place_graphic -> set_size_rotation_position -> remove_unneeded_in_out_animation -> create_compound_clip -> apply_video_style_animation -> adjust_duration -> reopen_compound_if_source_changes",
+    "source_editability_rule": "Keep the original layer editable inside the compound so later wording, asset, or timing changes are still possible.",
+    "template_rule": "For repeated animated text lines, build one clean compound, duplicate the compound, then edit words and positions inside each copy instead of rebuilding the animation from scratch.",
+    "effect_attributes_rule": "Apply the effect to one approved compound first, then paste attributes only to matching compounds and review each one against its background.",
+    "animation_gate_rule": "Only compound when the layer type blocks a needed video-clip animation or scene-level transform.",
+    "qc_rule": "Preview the compound at phone size because preset animations can crop, cover captions, or land late after the wrapper is created."
+  },
+  "motion": {
+    "rule": "Apply the unlocked animation to the compound only after the graphic's base placement is approved.",
+    "keyframe_values": {
+      "base_setup": "Set size, flip, rotation, and starting position before making the compound.",
+      "duration": "Short social graphic animations should usually finish before the viewer needs to read the next word or object.",
+      "template_offset": "After duplicating compounds, reposition and resize each word so the stack has one primary reading path rather than identical layers fighting for focus.",
+      "cleanup": "Remove preset in/out animations from the source layer when the compound animation is meant to own the motion."
+    }
+  },
+  "sound": {
+    "rule": "Add a pop or whoosh only if the compound animation creates a meaningful entrance, reveal, or exit; keep speech dominant."
+  },
+  "captions": {
+    "rule": "Keep ordinary captions outside the compound unless they are intentionally part of the designed graphic."
+  },
+  "color": {
+    "rule": "Compound animation should not add blur, glow, or color treatment that makes the graphic slower to read."
+  },
+  "implementation": {
+    "ffmpeg": "Model the graphic as a pre-rendered or grouped overlay layer, then animate the wrapper's x/y/scale/opacity while preserving source metadata for revisions.",
+    "remotion": "Wrap the sticker/text element in a named Sequence or component, animate the wrapper, and keep the child element editable through props.",
+    "blender": "Group the graphic object or use a collection/empty parent so the wrapper can receive animation while the child object stays editable.",
+    "capcut_equivalent": "Place the sticker/text, set its base look, create a compound clip from it, then apply video-style animation or effect controls to the compound. For repeated animated words, Option-drag or duplicate the compound, double-click to edit the internal text, and reposition each wrapper on the main timeline. For caption compounds, approve one Player 3/Blur/effect treatment first, then paste attributes and QC every phrase.",
+    "premiere_equivalent": "Nest the graphic or use an After Effects precomp, animate the nest/precomp in Effect Controls, and preserve the source graphic for edits."
+  },
+  "common_mistakes": [
+    "Compounding before the base graphic is placed, which makes later sizing and timing harder.",
+    "Forgetting that the compound wrapper can hide the original layer timing unless it is reopened.",
+    "Duplicating a compound template but leaving every copy in the same position or with the same word.",
+    "Using an unlocked preset animation when manual keyframes would land more accurately.",
+    "Pasting compound effects across captions or words without checking each background and phrase length.",
+    "Leaving duplicate source animations inside the compound so the graphic moves twice.",
+    "Putting captions inside the compound and losing easy caption-safe repositioning."
+  ],
+  "qc": [
+    "Was compounding necessary to unlock a needed animation or scene-level transform?",
+    "Is the original sticker/text still editable inside the compound?",
+    "If the compound is a text template, do duplicated copies have updated words, positions, and hierarchy?",
+    "Are duplicate source animations removed or intentionally retained?",
+    "Does the compound animation finish before the graphic needs to be read?",
+    "If effects were pasted to multiple compounds, did each compound pass readability and contrast review?",
+    "Do captions, faces, proof, UI, products, and action remain safe through the compound animation?"
+  ]
+}

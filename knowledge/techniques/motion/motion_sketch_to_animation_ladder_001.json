@@ -1,0 +1,55 @@
+{
+  "id": "motion_sketch_to_animation_ladder_001",
+  "name": "Sketch To Animation Ladder",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/editing viral videos.txt",
+  "additional_sources": [],
+  "use_when": [
+    "A scripted beat needs a diagram, flowchart, process animation, or visual explanation.",
+    "The editor must decide whether a simple design tool is enough or whether After Effects/Remotion is justified.",
+    "A complex animation risks being built before the idea is clear."
+  ],
+  "avoid_when": [
+    "A real clip, screenshot, or simple text card communicates the beat faster.",
+    "The animation would consume more time than the line's importance justifies.",
+    "The user needs editable native NLE graphics only."
+  ],
+  "timeline_pattern": {
+    "pattern": "spoken_concept -> paper_sketch -> simple_or_advanced_tool_choice -> build_base_shapes_text_paths -> sync_to_voiceover -> add_motion_glow_texture -> export_or_render -> timeline_align",
+    "sketch_rule": "Sketch the animation before opening the motion tool so the agent knows the boxes, arrows, text, reveal order, and focus path.",
+    "tool_ladder_rule": "Use a simple tool for simple text/shape animations; use After Effects or Remotion when path motion, detailed reveals, or reusable animation systems are needed.",
+    "resolution_rule": "Export simple-tool animations at higher resolution when the edit will zoom into them later."
+  },
+  "motion": {
+    "rule": "Build the base design first, then animate reveals, zooms, typewriter text, Trim Paths, and glow in sync with the voiceover."
+  },
+  "sound": {
+    "rule": "Add SFX after the animation timing is known; do not let whooshes distract from the diagram's explanation."
+  },
+  "captions": {
+    "rule": "Suppress captions if the animation text already carries the spoken idea and screen space is limited."
+  },
+  "color": {
+    "rule": "Use the same palette and contrast rules as the rest of the video so the animation feels native."
+  },
+  "implementation": {
+    "ffmpeg": "Composite exported animation renders over the timeline and use scale/crop tests to verify zoom readability.",
+    "remotion": "Create a data-driven diagram component with nodes, arrows, revealOrder, focusZoomFrames, textBlurState, and captionSuppression.",
+    "blender": "Use curves, text objects, and camera moves for spatial diagrams only when 3D depth helps understanding.",
+    "capcut_equivalent": "Build simple boxes/text/arrows in a design tool, export high resolution, then add keyframed zooms and captions in the edit app.",
+    "premiere_equivalent": "Use simple graphics for low-complexity beats; send advanced sketches to After Effects for text, shape, pen, typewriter, Trim Paths, glow, and easing."
+  },
+  "common_mistakes": [
+    "Opening After Effects with no sketch and inventing the animation while keyframing.",
+    "Using an advanced animation tool for a beat that needed only a clean text card.",
+    "Exporting a simple animation too low-resolution and then zooming into a soft render.",
+    "Letting the animation reveal order lag behind the voiceover."
+  ],
+  "qc": [
+    "Is there a sketch or written plan before animation begins?",
+    "Is the chosen tool complexity justified by the line's importance?",
+    "Does the reveal order match the voiceover?",
+    "Is the exported animation sharp after any timeline zoom?",
+    "Does the animation explain the concept faster than extra narration would?"
+  ]
+}

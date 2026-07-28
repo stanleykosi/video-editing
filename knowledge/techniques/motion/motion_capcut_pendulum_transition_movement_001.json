@@ -1,0 +1,72 @@
+{
+  "id": "motion_capcut_pendulum_transition_movement_001",
+  "name": "CapCut Pendulum Transition Movement",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/powerful capcut edits.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/capcut text effects.txt",
+    "knowledge/research/transcripts/documentary edits.txt"
+  ],
+  "use_when": [
+    "A high-energy CapCut, AMV, game, sports, or action clip feels too static before a transition.",
+    "The editor wants a strong swing or wobble layer after the clip timing is already beat-matched.",
+    "The next transition pass needs more physical movement without rebuilding the whole shot.",
+    "A stylized documentary cutout collage needs very subtle ambient drift after all text, cutouts, and evidence are already readable."
+  ],
+  "avoid_when": [
+    "The pendulum movement makes the action pose, face, caption, product, or proof unreadable.",
+    "The clip already has enough shake, turbulence, wide-angle distortion, or graph zoom motion.",
+    "The project tone is calm, documentary, premium brand, or speech-led and swing motion would feel cheap."
+    ,
+    "The documentary scene contains dense evidence, source text, maps, or captions that would become harder to inspect."
+  ],
+  "timeline_pattern": {
+    "pattern": "locked_clip -> apply_pendulum -> preview_readability -> optional_second_pendulum -> optional_third_only_if_readable -> export_or_reimport -> transition_pass -> sfx_on_motion_peak",
+    "order_rule": "Apply pendulum only after the clip is speed-matched and before the final transition/SFX review.",
+    "intensity_rule": "One pendulum layer adds movement, two creates strong movement, and a third should be treated as an extreme style choice.",
+    "transition_rule": "Judge pendulum strength together with the later transition effect because swing plus turbulence can quickly become unreadable."
+    ,
+    "documentary_texture_rule": "For documentary collage use, treat Pendulum as low-strength texture rather than transition impact, and remove it if it competes with proof or typography."
+  },
+  "motion": {
+    "rule": "Pendulum movement should add energy while the subject remains identifiable and the next cut remains readable.",
+    "keyframe_values": {
+      "default_layers": "Start with one pendulum pass; use two only when the style needs obvious swing.",
+      "extreme_layers": "Use three pendulum passes only after phone-size readability passes.",
+      "sync_tolerance": "The strongest swing, shake, or transition peak should land within 1-2 frames of the intended beat when sync matters.",
+      "subtle_documentary_start": "For subtle CapCut documentary texture, test Play Pendulum around speed 2, strength 3, twist 0, sharpen 0 after the scene already reads."
+    }
+  },
+  "sound": {
+    "rule": "Use a whoosh, hit, or low swing accent only on the strongest visible motion peak, not on every wobble."
+  },
+  "captions": {
+    "rule": "Move or suppress captions during the strongest swing if the movement makes text harder to read."
+  },
+  "color": {
+    "rule": "No direct color rule; check that motion blur, glow, or compression from stacked movement does not muddy the frame."
+  },
+  "implementation": {
+    "ffmpeg": "Approximate with short rotate/translate oscillation curves, optional motion blur, and contact-sheet checks around the swing peak.",
+    "remotion": "Represent pendulum as a damped rotation/translation function with layerCount, peakFrame, amplitude, decay, and readability flags.",
+    "blender": "Use a short camera or plane rotation/translation oscillation around the cut, then review motion blur and framing.",
+    "capcut_equivalent": "Apply the Pendulum effect to the locked clip, preview it, add a second Pendulum only if more movement is needed, and reserve a third for extreme edits that still read clearly.",
+    "premiere_equivalent": "Use Transform rotation/position keyframes or a preset wobble on an adjustment layer, then tune intensity after viewing it with adjacent clips."
+  },
+  "common_mistakes": [
+    "Adding pendulum before the clip is beat-matched.",
+    "Stacking multiple pendulums because the preset is available rather than because the transition needs it.",
+    "Letting swing motion hide the action pose or character face.",
+    "Forgetting to recheck captions and SFX after the movement changes perceived timing.",
+    "Using the same pendulum intensity on every clip until the edit feels mechanical.",
+    "Using documentary Pendulum drift on evidence-heavy screens where the viewer needs stillness."
+  ],
+  "qc": [
+    "Does the pendulum movement have a named energy or transition job?",
+    "Is the action still readable at phone size after all pendulum layers?",
+    "Does the strongest swing land on the intended beat or transition peak?",
+    "Are captions clear or suppressed during the most unstable frames?",
+    "Does the motion still work when viewed with the following transition and SFX?",
+    "If used as documentary texture, does it remain subtle enough that titles, captions, cutouts, and proof stay readable?"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "davinci_power_bins_preset_workflow_001",
+  "name": "DaVinci Power Bins Preset Workflow",
+  "category": "nle_workflow",
+  "source_tutorial": "knowledge/research/transcripts/davinci resolve short form editing.txt",
+  "use_when": [
+    "A Resolve editor repeats zooms, text animations, flashes, overlays, or adjustment-clip effects across projects.",
+    "The agent needs a reusable style system for short-form editing speed.",
+    "A custom effect has been tested and should become part of the editor's workflow."
+  ],
+  "avoid_when": [
+    "The effect has not been checked for readability, crop safety, or timing.",
+    "The preset is project-specific and would mislead future edits.",
+    "Power Bins are already cluttered with unclear names or duplicate versions."
+  ],
+  "timeline_pattern": {
+    "pattern": "build_effect -> verify_phone_preview -> show_power_bins -> new_named_bin -> drag_effect_or_adjustment_clip -> rename_by_job -> reuse_in_new_project -> customize_text_color_timing",
+    "naming_rule": "Name presets by job and motion, not vague hype.",
+    "business_rule": "Presets increase speed and consistency, but they do not replace story, hook, or judgment.",
+    "reuse_rule": "Any repeated text, zoom, flash, overlay, or LUT/style treatment should be considered for a reusable bin only after QC."
+  },
+  "motion": {
+    "rule": "Save motion presets only after confirming they preserve vertical crop, captions, and focus."
+  },
+  "sound": {
+    "rule": "If a preset includes SFX, keep the audio editable and low enough for dialogue-first use."
+  },
+  "captions": {
+    "rule": "Caption presets should include safe-area and readability assumptions in the name or notes."
+  },
+  "color": {
+    "rule": "Color or LUT presets should preserve skin tone and caption contrast before they enter the reusable workflow."
+  },
+  "implementation": {
+    "ffmpeg": "Store reusable typed effect presets with required inputs, safe regions, and QC notes; generate backend filter graphs only during canonical lowering.",
+    "remotion": "Create reusable components or preset objects with typed props for text, color, timing, and safe areas.",
+    "blender": "Store reusable node groups, text rigs, and camera moves in asset libraries with descriptive names.",
+    "capcut_equivalent": "Use saved templates, favorite effects, brand kits, and copied projects as reusable style systems.",
+    "premiere_equivalent": "Use presets, Essential Graphics templates, adjustment-layer presets, bins, and project templates."
+  },
+  "common_mistakes": [
+    "Saving an effect as a preset before it is actually good.",
+    "Naming presets so vaguely that future agents cannot choose correctly.",
+    "Letting preset speed create repetitive, cookie-cutter edits.",
+    "Believing more effects or more hours automatically means more professional work."
+  ],
+  "qc": [
+    "Was the preset checked at phone size before saving?",
+    "Does the preset name describe the job and motion clearly?",
+    "Can the preset be reused without hidden project-specific assumptions?",
+    "Does the preset preserve captions, faces, and proof in vertical layout?",
+    "Does preset use make the edit faster without making it generic?"
+  ]
+}

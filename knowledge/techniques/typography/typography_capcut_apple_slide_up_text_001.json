@@ -1,0 +1,63 @@
+{
+  "id": "typography_capcut_apple_slide_up_text_001",
+  "name": "CapCut Apple-Style Slide-Up Text Stack",
+  "category": "typography",
+  "source_tutorial": "knowledge/research/transcripts/viral text effects.txt",
+  "use_when": [
+    "A social edit needs clean premium title text, caption-like emphasis, or presentation-style text movement.",
+    "Multiple short words should appear with the same smooth slide-up behavior but different positions.",
+    "The project tone supports restrained modern sans typography rather than loud meme text."
+  ],
+  "avoid_when": [
+    "The message needs plain accessibility captions more than designed text.",
+    "The text is long enough that a 22-frame slide delays comprehension.",
+    "The frame has no negative space and the slide-up text would cover faces, proof, UI, or products."
+  ],
+  "timeline_pattern": {
+    "pattern": "add_text -> choose_modern_sans -> set_color_spacing_shadow -> first_transform_blend_keyframe -> 22_frame_later_keyframe -> start_opacity_0_y_offset_down -> cubic_ease_y_curve -> compound_template -> duplicate_compounds -> edit_words_and_positions",
+    "template_rule": "Create one clean animated text compound, then duplicate and edit the internal words instead of rebuilding the animation for each word.",
+    "hierarchy_rule": "Reposition and resize duplicated words so the eye has a clear reading order.",
+    "curve_rule": "Use a cubic ease on Y movement so the text enters smoothly rather than linearly."
+  },
+  "motion": {
+    "rule": "The slide should feel smooth and restrained, with the final text settled before reading becomes necessary.",
+    "keyframe_values": {
+      "duration": "About 22 frames between start and end keyframes is a useful CapCut starting point for premium slide-up text.",
+      "start_opacity": "0 opacity at the start keyframe.",
+      "end_opacity": "100 opacity at the landing keyframe.",
+      "start_y_offset": "Move the starting text down, such as around -160 in CapCut's Y/value system from the tutorial context, then tune visually.",
+      "easing": "Use Cubic Ease on the Y curve and keep the bottom curve line mostly horizontal for a smooth professional settle.",
+      "shadow": "A very low-opacity shadow, around 7, can add separation without looking heavy."
+    }
+  },
+  "sound": {
+    "rule": "Use no SFX or a very soft tick/whoosh only when the slide is a meaningful reveal; keep speech dominant."
+  },
+  "captions": {
+    "rule": "Treat this as designed text. Suppress ordinary captions if they duplicate the same words, unless accessibility requires both."
+  },
+  "color": {
+    "rule": "Use neutral off-white or off-gray text only where contrast remains strong over the footage."
+  },
+  "implementation": {
+    "ffmpeg": "Animate drawtext y position and alpha over roughly 22 frames with an easing expression; use a subtle shadow and render a contact sheet for placement.",
+    "remotion": "Create an AppleSlideText component with text, x/y, startFrame, durationFrames, opacity interpolation, translateY interpolation, cubic easing, and optional shadowOpacity.",
+    "blender": "Animate text object location and material alpha with Bezier interpolation, then duplicate the animated object or parent to preserve timing.",
+    "capcut_equivalent": "Add a text layer, choose a clean bold sans font, tighten Character slightly if needed, set off-gray color, keyframe Transform and Blend, move about 22 frames, add landing keyframes, return to the first keyframe, set Opacity 0 and move the text downward, apply Cubic Ease to Y, add a low-opacity shadow, create a compound clip, duplicate it, and edit internal words/positions.",
+    "premiere_equivalent": "Use Essential Graphics text with Position and Opacity keyframes, Ease Out/Ease In or temporal Bezier, a subtle shadow, and nested/duplicated graphics for repeated words."
+  },
+  "common_mistakes": [
+    "Using the smooth slide on long phrases that should be read immediately.",
+    "Leaving duplicated compound words stacked on top of each other.",
+    "Using heavy shadow or pure white text where a neutral off-white would feel cleaner.",
+    "Forgetting to edit the internal text in duplicated compounds.",
+    "Letting ordinary captions duplicate the designed slide-up text."
+  ],
+  "qc": [
+    "Does the text settle before the phrase needs to be read?",
+    "Do duplicated compound words have updated text, position, and hierarchy?",
+    "Does the cubic ease feel smooth rather than robotic or floaty?",
+    "Does the text avoid faces, proof, UI, products, and captions?",
+    "Does the subtle shadow improve separation without becoming visible styling?"
+  ]
+}

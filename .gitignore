@@ -5,15 +5,25 @@
 # Never commit anything under source video: footage, scripts, renders, notes, or project files
 /source video/
 
-# Keep transcripts out of this repo
-/transcripts/
+# Keep local raw ASR transcripts and curated source notes out of this repo.
+# Their canonical locations remain stable even though their contents are private.
+/knowledge/research/source_notes/
+/knowledge/research/transcripts/
 
 # Python caches
 __pycache__/
 *.py[cod]
 *.egg-info/
+/build/
+/dist/
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
+.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
 .whisper-models/
 
 # Node caches
@@ -22,10 +32,10 @@ node_modules/
 .asset-cache/
 
 # Generated video workspaces
-edit/
-raw/
-audio/
-references/
+/edit/
+/raw/
+/audio/
+/references/
 *.mp4
 *.mov
 *.mkv
@@ -38,11 +48,17 @@ references/
 *.log
 *.tmp
 *.cache
-frames/
-clips/
-renders/
-previews/
-finals/
+/frames/
+/clips/
+/renders/
+/previews/
+/finals/
+
+# Engine evidence is committed under testdata/engine as deterministic baseline
+# and test-suite archives plus one golden expectation manifest.
+
+# Test sources are retained locally but intentionally excluded from commits for now.
+/tests/
 
 # OS/editor noise
 .DS_Store

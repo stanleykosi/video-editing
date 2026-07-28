@@ -17,20 +17,24 @@ description: Edit existing footage or create faceless videos from scratch by con
 8. **Two production modes are supported.**
    - **Mode 1: Edit existing footage.** Transcribe source footage, build an EDL, render an edited video.
    - **Mode 2: Create from scratch.** Start from a topic or brief, research if needed, write the script, plan voiceover, plan/source/generate assets, build the timeline, animate, caption, sound-design, render, QC, and final.
-9. **Root knowledge must guide the edit.** Use the repo root knowledge base, not only this skill. For existing-footage clipping, load the relevant root `skills/`, `technique_cards/`, `presets/`, `style_packs/`, and `qc_checklists/` before proposing the edit strategy. For from-scratch work, use root `style_packs/*.json` and `content_creation/*.md`, then apply the editing knowledge in root `skills/`, `technique_cards/`, `presets/`, and `qc_checklists/`.
+9. **Root knowledge must guide the edit.** Use the canonical `knowledge/`
+   namespace, not only this skill. Select relevant playbooks, categorized
+   techniques, presets, styles, and editorial checklists before proposing the
+   edit strategy. For from-scratch work, also load the matching documents under
+   `knowledge/workflows/content_creation/`.
 10. **Knowledge must compile into the edit.** For from-scratch videos, routed knowledge is not enough. Every relevant selected skill, technique card, preset, and QC rule must be converted into `creative_directive.json`, then into concrete timeline layers, caption metadata, sound cues, color rules, transitions, and render/QC checks. If a selected technique is not applicable, record why instead of silently ignoring it.
 
 ## Hard Rules (production correctness — non-negotiable)
 
 These are the things where deviation produces silent failures or broken output. They are not taste, they are correctness. Memorize them.
 
-1. **Subtitles are applied LAST in the filter chain**, after every overlay. Otherwise overlays hide captions. Silent failure.
-2. **Per-segment extract → lossless `-c copy` concat**, not single-pass filtergraph. Otherwise you double-encode every segment when overlays are added.
-3. **30ms audio fades at every segment boundary** (`afade=t=in:st=0:d=0.03,afade=t=out:st={dur-0.03}:d=0.03`). Otherwise audible pops at every cut.
-4. **Overlays use `setpts=PTS-STARTPTS+T/TB`** to shift the overlay's frame 0 to its window start. Otherwise you see the middle of the animation during the overlay window.
-5. **Master SRT uses output-timeline offsets**: `output_time = word.start - segment_start + segment_offset`. Otherwise captions misalign after segment concat.
-6. **Never cut inside a word.** Snap every cut edge to a word boundary from the Scribe transcript.
-7. **Pad every cut edge.** Working window: 30–200ms. Scribe timestamps drift 50–100ms — padding absorbs the drift. Tighter for fast-paced, looser for cinematic.
+1. **Subtitles composite last.** Represent captions as canonical caption tracks so the render compiler places them after overlays and graphics.
+2. **The canonical project is the only executable timeline.** Import a workflow EDL once, then render through `video-engine`; do not assemble production output with helper-owned FFmpeg commands.
+3. **Prevent boundary pops.** Preserve the adapter's 30 ms compatibility policy or author typed fades/crossfades on the sample clock; do not paste backend filter strings into project data.
+4. **Place overlays with typed timeline ranges.** Their first frame and animation clock begin at the authored range start; backend timestamp expressions are compiler-owned.
+5. **Captions use canonical timeline time.** Import word/phrase cues into a caption track and let range rendering rebase them; do not manually offset a master SRT after cuts.
+6. **Never cut inside a word.** Snap every cut edge to a word boundary from the word-timed transcript.
+7. **Pad every cut edge.** Working window: 30–200ms. ASR timestamps can drift 50–100ms, so padding absorbs the drift. Tighter for fast-paced, looser for cinematic.
 8. **Word-level verbatim ASR only.** Never SRT/phrase mode (loses sub-second gap data). Never normalized fillers (loses editorial signal).
 9. **Cache transcripts per source.** Never re-transcribe unless the source file itself changed.
 10. **Parallel sub-agents for multiple animations.** Never sequential. Spawn N at once via the `Agent` tool; total wall time ≈ slowest one.
@@ -42,15 +46,15 @@ These are the things where deviation produces silent failures or broken output. 
 16. **Every external, generated, rendered, map, chart, music, SFX, font, or template asset used in a from-scratch project must be logged in `asset_manifest.json`.** Do not use watermarked previews in final exports.
 17. **No thin from-scratch renders.** A create-from-scratch project must include `knowledge_plan.json`, `creative_directive.json`, rich `captions/captions.json`, and a timeline where every beat has compiled `camera_motion`, `caption_kinetic`, `emphasis_text`, `visual_motion_overlay`, `color_grade`, and `sound_cue` layers. QC fails if the output is only stitched clips plus plain subtitles.
 18. **Rich layers must still be controlled.** Caption and emphasis text must be semantic phrase chunks, fitted to vertical safe-width boxes, and repositioned when scene text competes with them. Never ship giant cropped text, dangling two-word fragments, or effect layers that obscure the proof/diagram/product.
-19. **Existing-footage final renders require visual QC.** For clipping/edited-source work, render a preview, run `visual_qc.py --video <edit>/preview.mp4 --edl <edit>/edl.json`, view every generated contact sheet, fix/reclip/reframe/mask any visual blockers, then mark the report with `visual_qc.py --mark-reviewed ... --status pass`. `render.py` blocks normal final renders until `<edit>/visual_qc/visual_qc_report.json` is agent-reviewed and passed. Use `--skip-visual-qc` only for diagnostics, never for delivery.
+19. **Final renders require reviewed QC.** Render a canonical preview, run `video-engine qc` with a report directory, view every generated contact sheet, fix/reclip/reframe/mask blockers, and record approval with `--approve-by` and `--approval-output`. `video-engine render final` requires that hash-bound approval artifact and rejects stale project revisions or changed preview/QC evidence.
 20. **ASS captions are mandatory for captioned final renders.** Build captions through the ASS caption system and caption presets, not image-text overlays. Do not hardcode one font or one style; choose or adapt a style from the repo's caption presets and the active creative brief. ASS text escaping is part of caption correctness: a hard line break in the written `.ass` file is a single `\N` control sequence. If the file contains double-escaped `\\N` in Dialogue text, or if the burned video shows slash/backslash artifacts, fix captions and rerender before delivery.
 21. **HyperFrames and Remotion are the default title/motion tools.** Use HyperFrames for title cards, hook cards, chapter cards, stat cards, and lower thirds. Use Remotion for polished motion graphics, animated typography, reusable components, and graphics that need precise timing. Do not use Pillow/PIL for final title or caption design.
 22. **Title designs require approval before final compositing.** For any newly designed or materially changed title card, hook card, chapter card, stat card, lower third, or major motion graphic, render still approval frames/contact sheets first and get the user's approval before continuing to final render.
 23. **Do not blanket-suppress captions under titles.** Captions should continue through title overlays by default, repositioning or restyling when needed. Only suppress captions for a title section when the user approves it and the title itself preserves the spoken meaning clearly.
 24. **Existing-footage clipping requires a root-knowledge pass.** Before strategy for a nontrivial clip, read or route the relevant root knowledge layers: editing taste, short-form retention, typography/captions, motion graphics, sound design, color, platform QC, caption presets, motion/transition presets, and applicable technique cards. Record what was used in `<edit>/project.md` or `<edit>/knowledge_notes.md`.
 25. **Narration-to-visual alignment is mandatory for recap/commentary edits.** When narration names a person, character, place, object, product, UI element, proof point, or scene event, the matching visual must already be visible at the viewer-facing timestamp. Do not rely only on exact sub-second EDL boundaries; if a player shows `0:42`, inspect what the viewer sees at `0:42`, not only what starts at `42.765s`. Use a small early visual handoff buffer for important named entities, and prove the result with timestamped contact sheets from the rendered preview/final.
-26. **Movie recap requests must load the movie recap workflow.** For any movie recap, movie explainer, anime recap, episode recap, or narration-over-movie-source edit, read `skills/movie_recap_workflow.md`, `extracted_lessons/movie_recap_short_transformed_scene_workflow.md`, `technique_cards/movie_recap_paragraph_scene_workflow_001.json`, `technique_cards/movie_recap_chop_delete_flip_speed_transform_001.json`, and `qc_checklists/movie_recap_qc.md` before planning. Default to paragraph-sized narration-led shorts with muted source audio, visually verified scene ranges, transformed short fragments, and rendered-output spot checks.
-27. **Scripts require independent writer/critic subagents.** For any new or substantially rewritten script, narration, recap paragraph, hook, ad read, explainer, or storyboard script, run `content_creation/script_subagent_review_loop.md`: spawn a dedicated scriptwriter subagent and a separate harsh critic subagent. The script is not accepted until the critic returns `PASS`; writer revises on `FAIL`.
+26. **Movie recap requests must load the movie recap workflow.** For any movie recap, movie explainer, anime recap, episode recap, or narration-over-movie-source edit, read `knowledge/playbooks/movie_recap_workflow.md`, `knowledge/research/lessons/movie_recap_short_transformed_scene_workflow.md`, `knowledge/techniques/genre_workflow/movie_recap_paragraph_scene_workflow_001.json`, `knowledge/techniques/nle_workflow/movie_recap_chop_delete_flip_speed_transform_001.json`, and `knowledge/quality/editorial_checklists/movie_recap_qc.md` before planning. Default to paragraph-sized narration-led shorts with muted source audio, visually verified scene ranges, transformed short fragments, and rendered-output spot checks.
+27. **Scripts require independent writer/critic subagents.** For any new or substantially rewritten script, narration, recap paragraph, hook, ad read, explainer, or storyboard script, run `knowledge/workflows/content_creation/script_subagent_review_loop.md`: spawn a dedicated scriptwriter subagent and a separate harsh critic subagent. The script is not accepted until the critic returns `PASS`; writer revises on `FAIL`.
 
 Everything else in this document is a worked example. Deviate whenever the material calls for it.
 
@@ -66,7 +70,7 @@ Existing-footage outputs go into `<videos_dir>/edit/`.
     ├── project.md               ← memory; appended every session
     ├── takes_packed.md          ← phrase-level transcripts, the LLM's primary reading view
     ├── edl.json                 ← cut decisions
-    ├── transcripts/<name>.json  ← cached raw Scribe JSON
+    ├── transcripts/<name>.json  ← cached hosted-ASR response
     ├── animations/slot_<id>/    ← per-animation source + render + reasoning
     ├── clips_graded/            ← per-segment extracts with grade + fades
     ├── master.srt               ← output-timeline subtitles
@@ -119,22 +123,37 @@ First-time install lives in `install.md` (clone, deps, ffmpeg, skill registratio
 - `tesseract-ocr` on PATH for OCR-assisted visual QC; Python deps include `pytesseract`.
 - `yt-dlp` for source ingestion. Prefer the root env package via `uv run yt-dlp` or `.venv/bin/yt-dlp` when the system CLI is older.
 - HyperFrames, Remotion, Manim installed only on first use.
-- First-use animation setup happens inside the slot directory, never at the video-use repo root. HyperFrames can be invoked with `npx --yes hyperframes ...`; Remotion can be scaffolded with `npx create-video@latest` or installed as a project-local dependency before using its `remotion render` command.
+- Canonical Remotion graphics use the repository's exact `package-lock.json`,
+  registered components, and `video-engine` bridge. Optional external animation
+  tools must use an explicit recorded version; never invoke an unversioned `npx`
+  package or scaffold a second Remotion project.
 - Before designing title cards or polished motion graphics, verify HyperFrames and/or Remotion are available. If they are missing, install or request installation instead of falling back to Pillow/PIL for final design.
-- This skill vendors `skills/manim-video/`. Read its SKILL.md when building a Manim slot.
+- This skill vendors `vendor/manim-video/`. Read its SKILL.md when building a Manim slot.
 
-Helpers (`helpers/transcribe.py`, `helpers/render.py`, etc.) live alongside this SKILL.md. Resolve their paths relative to the directory containing this file — the skill is typically symlinked at `~/.claude/skills/video-use/` or `~/.codex/skills/video-use/`.
+Preparation helpers (`helpers/transcribe_deepgram.py`,
+`helpers/timeline_builder.py`, etc.) live alongside this SKILL.md. Execute
+timelines through the installed `video-engine` CLI;
+`helpers/video_engine.py` is the location-independent launcher when the console
+command is not on PATH.
 
 ## Helpers
 
-- **`transcribe.py <video>`** — single-file Scribe call. `--num-speakers N` optional. Cached.
-- **`transcribe_batch.py <videos_dir>`** — 4-worker parallel transcription. Use for multi-take.
+- **`transcribe_deepgram.py <video>`** — preferred hosted transcription with
+  cached transcript and timestamp outputs. Run independent sources in parallel
+  for multi-take projects.
+- **`transcribe.py` / `transcribe_batch.py`** — retained ElevenLabs Scribe
+  compatibility commands; use only for projects that already depend on that
+  provider and output shape.
 - **`pack_transcripts.py --edit-dir <dir>`** — `transcripts/*.json` → `takes_packed.md` (phrase-level, break on silence ≥ 0.5s).
-- **`timeline_view.py <video> <start> <end>`** — filmstrip + waveform PNG. On-demand visual drill-down. **Not a scan tool** — use it at decision points, not constantly.
+- **`timeline_view.py <video> <start> <end>`** — compatibility delegate for canonical `video-engine inspect range`; publishes the hashed filmstrip/waveform contact sheet and reports. **Not a scan tool** — use it at decision points, not constantly.
 - **`visual_qc.py --edl <edit>/edl.json --source-preflight`** — scan proposed EDL source ranges, generate contact sheets/OCR flags, run lightweight OpenCV face/safe-area checks, and write `source_visual_qc_report.md/json` plus `source_blocked_ranges.json` when source overlays, banners, caption-zone face collisions, or crop-edge risks are detected.
 - **`visual_qc.py --video <edit>/preview.mp4 --edl <edit>/edl.json`** — pre-final visual QC gate for rendered previews. The contact sheets draw a caption safe zone and detected face boxes. The agent/LLM must view every contact sheet, then mark the report with `--mark-reviewed <edit>/visual_qc/visual_qc_report.json --status pass|needs_reclip|needs_reframe|needs_mask|blocked`.
-- **`render.py <edl.json> -o <out>`** — per-segment extract → concat → overlays (PTS-shifted) → subtitles LAST. Final renders default to the highest source resolution used by the EDL, with anything below 1080p upscaled to a 1080-pixel short edge; `--resolution 3840x2160` can force a delivery target, while `--preview`/`--draft` intentionally render lighter QC copies. `--build-subtitles` generates styled `master.ass` captions inline from `presets/captions/ass_caption_styles.json`; use this ASS path for all captioned final renders.
-- **`grade.py <in> -o <out>`** — ffmpeg filter chain grade. Presets + `--filter '<raw>'` for custom.
+- **`video-engine migrate legacy-edl <edl.json> --output <project.json>`** — import an existing-footage range EDL into the strict canonical timeline while preserving source extraction, crop/focus/fit, overlays, SFX, captions, grade, and delivery settings.
+- **`video-engine render draft|preview|range|final <project.json> <out>`** — compile the canonical timeline to an optimized render DAG and execute it with FFmpeg/Remotion. Captions composite last; final mode requires a reviewed QC approval artifact.
+- **`video-engine` typed color effects** — use `VideoEngine.color()` for measured
+  correction or authored interpretation/normalization/grade/LUT stages.
+  `grade.py` is a non-rendering compatibility utility that reports measured
+  decisions and translates historical preset names to typed effects.
 - **`find_assets.py <query>`** — search/download rights-trackable assets from agent-friendly sources. Use `--project-dir <project_dir>` so downloads enter the project manifest.
 - **`freesound_oauth.py auth-url|exchange|refresh`** — create Freesound OAuth access/refresh tokens for original-quality Freesound downloads. Freesound's client secret is also the token-auth API key.
 - **`asset_manifest.py init|add|list|check <project_dir>`** — create, update, inspect, and validate `asset_manifest.json`.
@@ -150,20 +169,23 @@ Helpers (`helpers/transcribe.py`, `helpers/render.py`, etc.) live alongside this
 - **`timeline_builder.py --project-dir <project_dir>`** — build `edit_decision_list.json` from script, visual plan, style pack, and manifest assets.
 - **`sound_design_engine.py --project-dir <project_dir>`** — create `sound_design_plan.md/json` from the timeline.
 - **`motion_graphics_generator.py --project-dir <project_dir>`** — legacy/simple local motion-card PNG helper for non-final placeholders or non-typographic plates. Do not use it for final title, caption, hook-card, chapter-card, or lower-third typography; use HyperFrames, Remotion, and ASS instead.
-- **`faceless_renderer.py --project-dir <project_dir> --preview`** — render a knowledge-driven from-scratch preview/final from `edit_decision_list.json`, including compiled motion/color treatment and a final rich overlay pass for kinetic captions, emphasis text, glow/highlight effects, progress accents, and diagram callouts.
+- **`video-engine migrate faceless <project_dir> --output <project.json>`** — import a knowledge-driven from-scratch timeline, including voice-over, captions, motion/color treatment, kinetic emphasis, glow/highlight, progress, and diagram layers, into the canonical model.
 - **`qc_check.py --project-dir <project_dir>`** — run artifact, timeline, manifest, and media probe checks into `qc_report.md/json`.
 
 For animations, create `<edit>/animations/slot_<id>/` with `Bash` and spawn a sub-agent via the `Agent` tool.
 
 ## Mode 1: Edit Existing Footage
 
-1. **Inventory.** `ffprobe` every source. `transcribe_batch.py` on the directory. `pack_transcripts.py` to produce `takes_packed.md`. Sample one or two `timeline_view`s for a visual first impression.
+1. **Inventory.** `ffprobe` every source. Transcribe each source with
+   `transcribe_deepgram.py` (parallel processes are suitable for a multi-take
+   directory). Run `pack_transcripts.py` to produce `takes_packed.md`. Sample
+   one or two `timeline_view`s for a visual first impression.
 2. **Pre-scan for problems.** One pass over `takes_packed.md` to note verbal slips, obvious mis-speaks, or phrasings to avoid. Plain list, feed into the editor brief.
-3. **Root knowledge pass.** Before strategy, search and read the relevant root knowledge layers for the actual job. For short-form clips, this usually includes `skills/editing_taste_story_pacing.md`, `skills/short_form_retention.md`, `skills/kinetic_captions.md`, `skills/video_typography.md`, `skills/professional_title_graphics_pipeline.md`, `skills/motion_graphics.md`, `skills/sound_design.md`, `skills/beat_sync.md`, `skills/color_grading.md`, `skills/editor_qc.md`, caption/motion/transition presets, matching technique cards, and relevant QC checklists. For movie recap/explainer work, also load `skills/movie_recap_workflow.md`, `qc_checklists/movie_recap_qc.md`, and the movie recap technique cards before strategy. Use `knowledge_router.py --project-dir <edit> --brief "<clip brief>" --video-type existing-footage-short` when practical; otherwise create a concise `<edit>/knowledge_notes.md` listing selected root skills/cards/presets/QC and how they will affect the edit.
+3. **Root knowledge pass.** Before strategy, search and read the relevant root knowledge layers for the actual job. For short-form clips, this usually includes `knowledge/playbooks/editing_taste_story_pacing.md`, `knowledge/playbooks/short_form_retention.md`, `knowledge/playbooks/kinetic_captions.md`, `knowledge/playbooks/video_typography.md`, `knowledge/playbooks/professional_title_graphics_pipeline.md`, `knowledge/playbooks/motion_graphics.md`, `knowledge/playbooks/sound_design.md`, `knowledge/playbooks/beat_sync.md`, `knowledge/playbooks/color_grading.md`, `knowledge/playbooks/editor_qc.md`, caption/motion/transition presets, matching technique cards, and relevant QC checklists. For movie recap/explainer work, also load `knowledge/playbooks/movie_recap_workflow.md`, `knowledge/quality/editorial_checklists/movie_recap_qc.md`, and the movie recap technique cards before strategy. Use `knowledge_router.py --project-dir <edit> --brief "<clip brief>" --video-type existing-footage-short` when practical; otherwise create a concise `<edit>/knowledge_notes.md` listing selected root skills/cards/knowledge/presets/QC and how they will affect the edit.
 4. **Converse.** Describe what you see in plain English. Ask questions *shaped by the material*. Collect: content type, target length/aspect, aesthetic/brand direction, pacing feel, must-preserve moments, must-cut moments, animation and grade preferences, subtitle needs. Do not use a fixed checklist — the right questions are different every time.
 5. **Propose strategy.** 4–8 sentences: shape, take choices, cut direction, root knowledge/preset choices, animation plan, title/motion graphics tool path, grade direction, ASS caption style, length estimate. **Wait for confirmation.**
-6. **Execute.** Produce `edl.json` via the editor sub-agent brief. Drill into `timeline_view` at ambiguous moments. For recap/commentary edits, label named-entity narration beats in the EDL `reason` or `voiceover_window` fields and verify source ranges visually before assigning them. Important named-character/person/object handoffs should start slightly before the viewer-facing timestamp so a rounded player time does not show the previous subject. Run `visual_qc.py --edl <edit>/edl.json --source-preflight`, view the generated contact sheets, and remove/reclip/reframe any source ranges with description overlays, lower-thirds, social UI, watermarks, wrong-character/wrong-subject carryover, or other visual blockers before rendering. Build title cards and lower thirds with HyperFrames, polished motion graphics with Remotion, and captions with ASS. Render title/motion approval frames before compositing; wait for user approval when designs are new or materially changed. Apply grade per-segment. Compose via `render.py`.
-7. **Preview.** `render.py --preview`.
+6. **Execute.** Produce `edl.json` via the editor sub-agent brief. Drill into `timeline_view` at ambiguous moments. For recap/commentary edits, label named-entity narration beats in the EDL `reason` or `voiceover_window` fields and verify source ranges visually before assigning them. Important named-character/person/object handoffs should start slightly before the viewer-facing timestamp so a rounded player time does not show the previous subject. Run `visual_qc.py --edl <edit>/edl.json --source-preflight`, view the generated contact sheets, and remove/reclip/reframe any source ranges with description overlays, lower-thirds, social UI, watermarks, wrong-character/wrong-subject carryover, or other visual blockers before rendering. Build title cards and lower thirds with HyperFrames, polished motion graphics with Remotion, and captions with ASS. Render title/motion approval frames before compositing; wait for user approval when designs are new or materially changed. Author typed per-clip or adjustment-track color decisions, then migrate the EDL with `video-engine migrate legacy-edl`.
+7. **Preview.** `video-engine render preview <project.json> <preview.mp4>`.
 8. **Visual QC gate (before showing the user or rendering final).** Run `visual_qc.py --video <edit>/preview.mp4 --edl <edit>/edl.json`. By default it uses CPU-only OpenCV Haar detection to draw face boxes and flag lower-caption safe-zone collisions or crop-edge faces; use `--caption-zone center` for centered caption designs or `--caption-zone none` only when a user-approved no-caption/suppression window exists. The agent/LLM must view every PNG listed under `<edit>/visual_qc/contact_sheets/` and check for source overlays, description text, caption collisions, bad crops, blocked faces/products/proof, jump frames, flashes, unreadable cut moments, unapproved title frames, caption/title conflicts, and narration/visual mismatches. For recap/commentary edits, create or inspect timestamped spot sheets around each sensitive named-entity handoff and around any user-reported timestamp; include at least 0.5s before through 1.0s after the window so rounded playback seconds are checked. If anything fails: fix the EDL/crop/captions/overlays → re-render preview → rerun visual QC. After a clean review, mark the report:
 
    ```
@@ -181,7 +203,7 @@ For animations, create `<edit>/animations/slot_<id>/` with `Bash` and spawn a su
    For narration-driven recap/commentary edits, add a dedicated **character/narration alignment pass**: list every named person, character, place, object, product, UI element, or proof point; sample the rendered output at the spoken-name timestamp and the rounded viewer-facing second; confirm the correct visual is already present. If the user reports `0:42-0:51`, inspect at least `0:41.5-0:52` and verify the promoted `final.mp4`, not only the preview.
 
    If anything fails: fix → re-render → re-eval. **Cap at 3 self-eval passes** — if issues remain after 3, flag them to the user rather than looping forever. Only present the preview once the self-eval passes.
-10. **Iterate + persist.** Natural-language feedback, re-plan, re-render. Never re-transcribe. Final render only after `visual_qc_report.json` is passed. Append selected root knowledge, technique cards, presets, QC outcomes, and final decisions to `project.md`.
+10. **Iterate + persist.** Natural-language feedback, re-plan, re-render. Never re-transcribe. After the legacy visual spot-check passes, run canonical `video-engine qc` against the preview, review its contact sheet/report, create the approval artifact with reviewer notes, and pass it to `video-engine render final`. Append selected root knowledge, technique cards, presets, QC outcomes, and final decisions to `project.md`.
 
 ## Mode 2: Create From Scratch
 
@@ -195,18 +217,18 @@ The agent owns the full production path from topic to final render.
 
 Before planning, read the relevant root knowledge:
 
-- `content_creation/knowledge_router.md`, then create or refresh
+- `knowledge/workflows/content_creation/knowledge_router.md`, then create or refresh
   `<project_dir>/knowledge_plan.md` with `knowledge_router.py`
-- `content_creation/faceless_video_workflow.md`
-- `content_creation/scriptwriter.md`
-- `content_creation/script_subagent_review_loop.md`
-- `content_creation/research_to_script.md` when facts are needed
-- `content_creation/visual_planner.md`
-- `content_creation/asset_planner.md`
-- `content_creation/voiceover_planner.md`
-- `content_creation/youtube_storytelling_workflow.md` for story-led formats
-- `sources/asset_resource_platforms.md`
-- Relevant style pack from root `style_packs/*.json`
+- `knowledge/workflows/content_creation/faceless_video_workflow.md`
+- `knowledge/workflows/content_creation/scriptwriter.md`
+- `knowledge/workflows/content_creation/script_subagent_review_loop.md`
+- `knowledge/workflows/content_creation/research_to_script.md` when facts are needed
+- `knowledge/workflows/content_creation/visual_planner.md`
+- `knowledge/workflows/content_creation/asset_planner.md`
+- `knowledge/workflows/content_creation/voiceover_planner.md`
+- `knowledge/workflows/content_creation/youtube_storytelling_workflow.md` for story-led formats
+- `knowledge/research/catalogs/asset_resource_platforms.md`
+- Relevant style pack from root `knowledge/styles/*.json`
 - Relevant skills, extracted lessons, technique cards, presets, and QC
   checklists selected by `knowledge_plan.md`, especially:
   - `editing_taste_story_pacing.md`
@@ -242,19 +264,19 @@ Before planning, read the relevant root knowledge:
    claims and source URLs, avoid unsupported certainty, then run
    `research_checker.py --project-dir <project_dir>`.
 6. **Write script through writer/critic subagents.** Follow
-   `content_creation/script_subagent_review_loop.md`. Create `script_brief.md`,
+   `knowledge/workflows/content_creation/script_subagent_review_loop.md`. Create `script_brief.md`,
    spawn a dedicated writer subagent for drafts, spawn a separate harsh critic
    subagent for pass/fail review, iterate until critic `PASS`, then copy only
    the approved script into `script.md` from
-   `content_creation/templates/script_template.md`. The final script must be
+   `knowledge/workflows/content_creation/templates/script_template.md`. The final script must be
    voiceover-ready and beat-tagged.
 7. **Voiceover plan.** Create `voiceover_plan.md` or a voiceover section in
    `visual_plan.md`: tone, WPM, emphasis, pauses, pronunciation, and cue words.
 8. **Visual plan.** Create `visual_plan.md` from
-   `content_creation/templates/visual_plan_template.md`. Every script beat gets
+   `knowledge/workflows/content_creation/templates/visual_plan_template.md`. Every script beat gets
    a visual job, primary visual, motion treatment, caption treatment, and QC risk.
 9. **Asset plan.** Create `asset_list.md` from
-   `content_creation/templates/asset_list_template.md`. Decide what to source,
+   `knowledge/workflows/content_creation/templates/asset_list_template.md`. Decide what to source,
    generate, render, or request from the user. Run
    `stock_footage_planner.py --project-dir <project_dir>` when stock footage or
    public media is needed.
@@ -278,12 +300,18 @@ Before planning, read the relevant root knowledge:
     title or caption typography. Render approval frames/contact sheets for new
     title cards, hook cards, chapter cards, lower thirds, and major motion
     graphics before final compositing.
-14. **Render preview.** Build `preview.mp4` with `faceless_renderer.py`,
-    ffmpeg/Remotion/Manim/HyperFrames as appropriate. ASS subtitles still apply
-    last.
-15. **Self-QC.** Run `qc_check.py`; check story, facts, assets/rights, captions,
-    visual collisions, sound mix, motion timing, and technical export.
-16. **Fix and final.** Correct failures, then render `final.mp4`.
+14. **Render preview.** Migrate once with `video-engine migrate faceless
+    <project_dir> --output <project_dir>/project.json`, then build `preview.mp4`
+    with `video-engine render preview`. The engine invokes FFmpeg and structured
+    Remotion components as required; ASS subtitles still apply last.
+15. **Self-QC.** Run `video-engine qc <project.json> --output <preview.mp4>
+    --report-dir <project_dir>/qc --approve-by <reviewer> --approval-notes
+    "reviewed contact sheet and reports" --approval-output
+    <project_dir>/qc/approval.json`; inspect its contact sheet and reports along
+    with story, facts, assets/rights, captions, mix, and motion timing.
+16. **Fix and final.** Correct failures, rerender/reapprove when evidence changes,
+    then run `video-engine render final <project.json> <final.mp4> --approval
+    <project_dir>/qc/approval.json`.
 
 ### Required Artifact Contract
 
@@ -300,9 +328,11 @@ Do not call a from-scratch project complete unless these exist:
 
 ### From-Scratch EDL Rules
 
-`edit_decision_list.json` is the creation timeline. It may later be translated
-into helper-specific EDLs, Remotion compositions, ffmpeg filter graphs, Manim
-scenes, or HyperFrames projects. It must include:
+`edit_decision_list.json` is the legacy creation-timeline interchange artifact.
+Import it once with `video-engine migrate faceless`; the resulting canonical
+project is the sole executable timeline. Backends derive Remotion jobs, FFmpeg
+graphs, and optional Manim/HyperFrames assets from typed project state. The
+legacy artifact must include:
 
 - Project settings: resolution, fps, duration, aspect ratio.
 - Beat IDs matching `script.md` and `visual_plan.md`.
@@ -316,7 +346,7 @@ scenes, or HyperFrames projects. It must include:
 
 ### Asset Rules For From-Scratch Work
 
-- Read `sources/asset_resource_platforms.md` before searching, downloading,
+- Read `knowledge/research/catalogs/asset_resource_platforms.md` before searching, downloading,
   generating, or rendering assets.
 - Prefer no-key/direct public and user-provided assets first.
 - Use API-key sources only if credentials exist in root `.env` or the user
@@ -411,27 +441,35 @@ Your job is to **reason about the image**, not apply a preset. Look at a frame (
 
 Mental model is ASC CDL. Per channel: `out = (in * slope + offset) ** power`, then global saturation. `slope` → highlights, `offset` → shadows, `power` → midtones.
 
-**Example filter chains** (`grade.py` has `--list-presets`; use them as starting points or mix your own):
+Canonical color decisions are typed `ColorPipeline` stages or measured
+`ColorService.auto_grade(...)` results. Preset names remain accepted by the
+legacy-EDL adapter:
 
 - **`warm_cinematic`** — retro/technical, subtle teal/orange split, desaturated. Shipped in a real launch video. Safe for talking heads.
 - **`neutral_punch`** — minimal corrective: contrast bump + gentle S-curve. No hue shifts.
 - **`none`** — straight copy. Default when the user hasn't asked.
 
-For anything else — portraiture, nature, product, music video, documentary — invent your own chain. `grade.py --filter '<raw ffmpeg>'` accepts any filter string.
+For anything else — portraiture, nature, product, music video, documentary —
+author explicit typed grade values after inspecting representative frames.
+Unknown or raw legacy filter syntax is preserved in migration evidence and
+extension metadata but is never executed. It is not portable canonical project
+state.
 
-Hard rules: apply **per-segment during extraction** (not post-concat, which re-encodes twice). Never go aggressive without testing skin tones.
+Hard rules: attach the grade to the intended clip, range, or adjustment track and
+verify decoded output. The canonical compiler owns extraction and encoding.
+Never go aggressive without testing skin tones.
 
 ## Subtitles (when requested)
 
 Subtitles have three dimensions worth reasoning about: **chunking** (1/2/3/sentence per line), **case** (UPPER/Title/Natural), and **placement** (margin from bottom). The right combo depends on content.
 
-For any captioned final render, captions must be ASS captions generated through the repo's caption style system. Do not burn final captions as Pillow/PIL image text or as a hardcoded single-font overlay. Choose, adapt, or create an ASS style from `presets/captions/ass_caption_styles.json`, the active style pack, and the creative brief.
+For any captioned final render, captions must be ASS captions generated through the repo's caption style system. Do not burn final captions as Pillow/PIL image text or as a hardcoded single-font overlay. Choose, adapt, or create an ASS style from `knowledge/presets/captions/ass_caption_styles.json`, the active style pack, and the creative brief.
 
 When writing ASS dialogue text, escape only what ASS requires. Use `\N` in the final `.ass` file for an intentional hard line break; do not accidentally write `\\N`, because that can burn visible slash/backslash markers instead of a clean line break. Before final render, inspect the `.ass` Dialogue lines for literal escape artifacts and verify at least one caption contact sheet after burn-in.
 
 **Worked styles** — pick, adapt, or invent:
 
-**`bold-overlay`** — short-form tech launch, fast-paced social. 2-word chunks, UPPERCASE, break on punctuation, bold sans, white-on-outline, low safe margin. `render.py --build-subtitles` now resolves dynamic ASS caption styles from `presets/captions/ass_caption_styles.json`.
+**`bold-overlay`** — short-form tech launch, fast-paced social. 2-word chunks, UPPERCASE, break on punctuation, bold sans, white-on-outline, low safe margin. The caption preparation helper resolves dynamic ASS caption styles from `knowledge/presets/captions/ass_caption_styles.json`; import the resulting ASS/caption track into the canonical project.
 
 ```
 FontName=<resolved font role from ass_caption_styles.json>,FontSize=<style size>,Bold=1,
@@ -456,12 +494,21 @@ Pick the engine per animation slot, but keep the professional default: HyperFram
 
 - **HyperFrames** — default for title cards, hook cards, chapter cards, stat cards, lower thirds, typographic layouts, browser-native HTML/CSS/GSAP video compositions, product UI motion, website-to-video or mockup-to-video captures, kinetic typography, landing-page/storyboard promos, data-driven UI states, transparent WebM overlays, and clips that need deterministic frame capture plus HyperFrames lint/validate/render checks. Best when the animation should be authored and verified like a web composition instead of a React component tree.
 - **Remotion** — default for polished social motion graphics, animated typography, reusable React primitives, component state, data viz, or an existing Remotion brand system. Best when reusable component logic or React composition is the simpler authoring model.
-- **Manim** — formal diagrams, state machines, equation derivations, graph morphs. Read `skills/manim-video/SKILL.md` and its references for depth.
+- **Manim** — formal diagrams, state machines, equation derivations, graph morphs. Read `vendor/manim-video/SKILL.md` and its references for depth.
 - **Pillow/PIL** — diagnostics, rough placeholders, masks, contact-sheet utilities, or non-final helper assets only. Do not use it for final title cards, captions, lower thirds, hook cards, chapter cards, or designed typography.
 
-For HyperFrames slots, scaffold the slot inside `edit/animations/slot_<id>/` with `npx --yes hyperframes init . --example blank --non-interactive --skip-skills`, build the HTML composition there, run the HyperFrames checks that fit the slot (`lint`, `validate`, and a draft render when practical), then produce the final overlay video with `npx --yes hyperframes render . -o render.mp4` or `--format webm -o render.webm` when alpha is required. Point the EDL overlay `file` at the actual rendered path.
+For HyperFrames slots, select and record an explicit approved HyperFrames
+version, install it with `npm install --save-exact hyperframes@<version>` inside
+`edit/animations/slot_<id>/`, and invoke it only with `npx --no-install
+hyperframes`. Run the checks that fit the slot (`lint`, `validate`, and a draft
+render when practical), produce `render.mp4` or an alpha WebM, and point the EDL
+overlay `file` at the verified rendered path.
 
-For Remotion slots, keep the Remotion project isolated inside the same slot directory, scaffold with `npx create-video@latest` or install Remotion locally there, render the composition to `render.mp4` with the project-local `remotion render` command, and verify duration and dimensions with `ffprobe`.
+For Remotion slots, express the graphic as a registered `GeneratorClip` with
+strict structured props and render it through the canonical engine. Use an
+external Remotion project only as an explicitly versioned optional backend
+asset, record its tool identity, and verify duration, dimensions, alpha, and
+content bounds before composition.
 
 For title cards, hook cards, chapter cards, lower thirds, stat cards, and major motion graphics, render still approval frames/contact sheets before compositing. Get user approval before continuing to final render.
 
@@ -517,7 +564,7 @@ One sub-agent = one file (unique filenames, parallel agents don't overwrite each
 
 ## Output spec
 
-Match the source unless the user asked for something specific. Common targets: `1920×1080@24` cinematic, `1920×1080@30` screen content, `1080×1920@30` vertical social, `3840×2160@24` 4K cinema, `1080×1080@30` square. `render.py` final exports default to the highest-resolution source used by the EDL, but sources below 1080p are upscaled to a 1080-pixel short edge, so 720p landscape becomes `1920×1080`, 720×1280 vertical becomes `1080×1920`, and 4K stays 4K. Use `--resolution <WxH>` or EDL fields like `"resolution": "3840x2160"` only when a specific delivery target is needed. Worth asking the user which delivery format matters.
+Match the source unless the user asked for something specific. Common targets: `1920×1080@24` cinematic, `1920×1080@30` screen content, `1080×1920@30` vertical social, `3840×2160@24` 4K cinema, `1080×1080@30` square. Canonical `DeliveryProfile` objects control resolution, fit, codecs, loudness, preview quality, and output colour. Legacy imports retain their historical highest-source-resolution behavior; set an explicit delivery profile when a specific target is required.
 
 ## EDL format
 
@@ -540,7 +587,9 @@ Match the source unless the user asked for something specific. Common targets: `
 }
 ```
 
-`grade` is a preset name or raw ffmpeg filter. `overlays` are rendered animation clips. `subtitles` is optional and applied LAST.
+`grade` is a legacy preset name. A raw FFmpeg filter is accepted only as a
+reported compatibility escape hatch; new projects use typed color effects.
+`overlays` are rendered animation clips. `subtitles` is optional and applied LAST.
 
 ## Memory — `project.md`
 
@@ -564,7 +613,8 @@ Things that consistently fail regardless of style:
 - **Hierarchical pre-computed codec formats** with USABILITY / tone tags / shot layers. Over-engineering. Derive from the transcript at decision time.
 - **Hand-tuned moment-scoring functions.** The LLM picks better than any heuristic you'll write.
 - **Whisper SRT / phrase-level output.** Loses sub-second gap data. Always word-level verbatim.
-- **Running Whisper locally on CPU.** Slow and it normalizes fillers. Use hosted Scribe.
+- **Running Whisper locally on CPU.** Slow and it normalizes fillers. Prefer
+  hosted Deepgram unless the user explicitly requests the local fallback.
 - **Burning subtitles into base before compositing overlays.** Overlays hide them. (Hard Rule 1.)
 - **Double-escaping ASS line breaks.** A final `.ass` file should use `\N` for a hard line break, not `\\N`; visible slash/backslash caption artifacts require caption regeneration and rerender.
 - **Single-pass filtergraph when you have overlays.** Double re-encodes. Use per-segment extract → concat.

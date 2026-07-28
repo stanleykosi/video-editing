@@ -1,0 +1,61 @@
+{
+  "id": "motion_capcut_cutout_character_walk_001",
+  "name": "CapCut Cutout Character Walk",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/capcut keyframes.txt",
+  "use_when": [
+    "A playful short, meme, explainer, or travel/social segment needs a simple cutout character or object walking/moving across the frame.",
+    "The editor has a clean cutout, PNG, sticker, or composited character that can carry a quick visual joke or explanation.",
+    "A custom animated path is useful but a full animation tool would be overkill."
+  ],
+  "avoid_when": [
+    "The scene requires realistic character animation, professional lip sync, or emotional sincerity.",
+    "The cutout edge quality is too rough for the project tone.",
+    "The asset source, likeness, or rights are unclear.",
+    "The walking motion would distract from the actual message or make the edit feel cheap."
+  ],
+  "timeline_pattern": {
+    "pattern": "clean_cutout -> first_pose_keyframe -> small_step_position_keyframes -> optional_bob_or_scale -> hold_or_exit",
+    "cutout_rule": "Use clean background removal or custom erasing before animating.",
+    "step_rule": "Create movement with small position changes rather than one long slide when a walking illusion is desired.",
+    "comedy_rule": "Simple cutout walking works best when the crudeness is intentional, funny, or clearly stylized."
+  },
+  "motion": {
+    "rule": "Use small position steps, optional tiny vertical bobs, and a clear path across the screen.",
+    "keyframe_values": {
+      "step_spacing": "Use short, regular spacing for playful walk steps; widen spacing for slower drift.",
+      "vertical_bob": "Small up/down movement can imply steps if it does not make the cutout jitter unreadably.",
+      "scale": "Keep scale consistent unless the character is intentionally moving toward or away from camera."
+    }
+  },
+  "sound": {
+    "rule": "Add tiny footsteps, pops, or character voice only when they support the joke and stay below dialogue."
+  },
+  "captions": {
+    "rule": "Keep captions away from the cutout path or suppress captions when the cutout carries the visual gag."
+  },
+  "color": {
+    "rule": "Match cutout brightness and contrast roughly to the background unless the collage style intentionally looks pasted."
+  },
+  "implementation": {
+    "ffmpeg": "Use transparent PNG overlays with x/y keyframes or easing expressions; render a preview to catch edge and path issues.",
+    "remotion": "Create a CutoutCharacter component with asset, path keyframes, bob amplitude, scale, startFrame, endFrame, and captionCollision zones.",
+    "blender": "Animate a cutout plane across a 2D scene with optional bobbing and shadow plane.",
+    "capcut_equivalent": "Use Cutout/Remove Background or a prepared PNG, place the cutout as an overlay, add repeated position keyframes in small steps, and preview at phone size.",
+    "premiere_equivalent": "Use an alpha PNG or masked layer, keyframe Position with small step movement, and add a subtle shadow or color match if needed."
+  },
+  "common_mistakes": [
+    "Using a rough cutout in a serious or premium section.",
+    "Moving the cutout in one smooth slide when a walk illusion needs stepped movement.",
+    "Forgetting rights or likeness checks for stock people, maps, icons, or faces.",
+    "Letting the cutout cover captions, proof, product, or the main subject.",
+    "Adding voice or footsteps that overpower the main line."
+  ],
+  "qc": [
+    "Is the cutout style appropriate for the tone?",
+    "Are cutout edges clean enough at delivery size?",
+    "Does the path avoid captions, faces, proof, products, and UI?",
+    "Do movement steps read as intentional rather than accidental jitter?",
+    "Are asset rights, likeness, and attribution ready for real projects?"
+  ]
+}

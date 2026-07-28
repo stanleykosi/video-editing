@@ -1,0 +1,69 @@
+{
+  "id": "typography_tracking_kerning_line_spacing_qc_001",
+  "name": "Tracking Kerning And Line Spacing QC",
+  "category": "typography",
+  "source_tutorial": "knowledge/research/transcripts/typography.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/viral text effects.txt",
+    "knowledge/research/transcripts/premium capcut text effect.txt"
+  ],
+  "use_when": [
+    "A title, caption, or graphic feels cheap despite using an appropriate font.",
+    "Letters or lines feel too loose, too tight, or uneven at final size.",
+    "The agent is finishing a reusable text preset.",
+    "A CapCut social title, caption, or video-in-text word needs a premium tight-letter look."
+  ],
+  "avoid_when": [
+    "The text has not yet been corrected for wording, hierarchy, or placement.",
+    "The typography will be read at very small size where tight spacing harms accessibility.",
+    "The platform or font renderer creates shimmer or aliasing with tight tracking."
+  ],
+  "timeline_pattern": {
+    "pattern": "lock_text_and_font -> check_line_breaks -> tune_tracking -> inspect_kerning_pairs -> tune_line_spacing -> preview_bright_and_dark_frames -> save_preset",
+    "tracking_rule": "Slightly tightened tracking can feel more premium on large titles, but readability is the floor.",
+    "kerning_rule": "Inspect large words for awkward gaps or collisions between specific letter pairs.",
+    "line_spacing_rule": "Line spacing should group related lines without making them touch or feel disconnected.",
+    "preset_rule": "Save spacing as a preset only after testing short, long, bright-background, and dark-background phrases."
+  },
+  "motion": {
+    "rule": "Spacing must be checked again after scale, pop, typewriter, tracking, or camera motion.",
+    "keyframe_values": {
+      "tracking_start": "For display titles, start with very small tightening, around 1-4% or the nearest tool equivalent, then preview at final size.",
+      "capcut_large_text": "For large social title text in CapCut, values around -1 or -2 character spacing can work as a starting point when letters do not collide or shimmer.",
+      "capcut_premium_text": "Clean bold title fonts such as Fig Tree Bold can start around Character -1 in CapCut, then must be checked after compounding, masking, glow, or perspective effects.",
+      "caption_tracking": "Keep continuous captions near normal tracking unless a brand style has passed readability QC.",
+      "line_height": "Use compact but breathable line spacing; avoid stacked lines touching during pop or bounce motion."
+    }
+  },
+  "sound": {
+    "rule": "No direct sound rule."
+  },
+  "captions": {
+    "rule": "Caption spacing should make the line easier to read; do not chase premium title spacing on subtitles."
+  },
+  "color": {
+    "rule": "Tight spacing needs stronger contrast because thin gaps can disappear over busy backgrounds."
+  },
+  "implementation": {
+    "ffmpeg": "Use drawtext line_spacing and font options where available; use ASS subtitles for more precise spacing and style control.",
+    "remotion": "Store tracking, letterSpacing, lineHeight, maxLineWidth, and spacingQcStatus on text components.",
+    "blender": "Use text object character spacing and line spacing controls, then inspect from the final camera distance.",
+    "capcut_equivalent": "Adjust Character spacing lightly, such as -1 for polished captions or -2 for large video-in-text words, then check large words manually and avoid over-tight continuous subtitles.",
+    "premiere_equivalent": "Use Essential Graphics tracking, leading, and manual kerning where needed; recheck after scale or transform presets."
+  },
+  "common_mistakes": [
+    "Tightening tracking until letters touch.",
+    "Ignoring awkward gaps in big title words.",
+    "Using loose line spacing that breaks phrase unity.",
+    "Testing spacing only on one short word before saving a preset.",
+    "Copying -1 or -2 character spacing to small captions where it reduces accessibility.",
+    "Letting motion scale make clean spacing collide."
+  ],
+  "qc": [
+    "Do letters avoid collisions at final size?",
+    "Do large title words have no obvious awkward gaps?",
+    "Do multi-line captions read as grouped phrases?",
+    "Does spacing survive the animation at its largest and smallest scale?",
+    "Has the spacing preset been tested on multiple phrase lengths?"
+  ]
+}

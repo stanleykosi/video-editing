@@ -1,0 +1,61 @@
+{
+  "id": "motion_documentary_research_overlay_timelapse_001",
+  "name": "Documentary Research Overlay Timelapse",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/documentary edits.txt",
+  "use_when": [
+    "A documentary or explainer needs to show research, investigation, editing, browsing, document review, practice, or discovery.",
+    "Raw screen recording would feel flat, slow, or too literal.",
+    "Documents, screenshots, or search results can be layered over a process recording to make the research feel active."
+  ],
+  "avoid_when": [
+    "The documents contain private, sensitive, or uncleared information.",
+    "The overlays imply evidence that the narration has not actually verified.",
+    "The speed-up makes the source context impossible to understand when context matters."
+  ],
+  "timeline_pattern": {
+    "pattern": "record_process -> choose_documents_or_screens -> overlay_above_process -> blend_or_key_background -> optional_speedup -> riser_or_tension_bed -> hold_context_frame -> transition_to_claim",
+    "process_rule": "Record the real process when possible: researching, editing, practicing, collecting sources, or reviewing evidence.",
+    "overlay_rule": "Layer documents or screenshots only when they support the current story beat.",
+    "speed_rule": "Use speed-up for energy, but pause or hold on any frame that must function as evidence.",
+    "context_rule": "End the sequence with enough context for the viewer to understand what the research discovered."
+  },
+  "motion": {
+    "rule": "Make research feel active with layered documents, blend modes, and time compression while preserving source context.",
+    "keyframe_values": {
+      "timelapse": "Speed up process footage only until motion feels active; reduce speed or add holds when text must be read.",
+      "overlay_opacity": "Use blend/opacity only as far as needed to remove flat backgrounds without losing document text.",
+      "hold_frame": "Hold the final proof or discovery frame long enough for a first-time viewer to understand the takeaway."
+    }
+  },
+  "sound": {
+    "rule": "A restrained riser or low anticipation bed can add intrigue during the research build, but it must stay below narration and resolve before the next spoken claim."
+  },
+  "captions": {
+    "rule": "Captions should avoid layered documents and should be simplified or suppressed if the screen text is the primary reading path."
+  },
+  "color": {
+    "rule": "Do not grade or blend research overlays so heavily that source text, UI, or privacy redactions become unclear."
+  },
+  "implementation": {
+    "ffmpeg": "Use setpts for speed-up, overlay and blend filters for documents/screens, opacity fades for entrances, and audio fades for a riser or tension bed.",
+    "remotion": "Build a ResearchOverlayTimelapse component with processVideo, overlayAssets, blendMode, speedMultiplier, holdFrames, redactionRegions, and sfxCue frames.",
+    "blender": "Use video planes for process footage and document planes with alpha/blend materials; animate opacity and camera/crop for focus.",
+    "capcut_equivalent": "Record the process, place documents or screen captures above it, choose a blend mode that removes unwanted background, speed up the section when appropriate, then add a restrained riser.",
+    "premiere_equivalent": "Use nested screen recordings, document overlays with blend modes/opacity, Speed/Duration or time remapping, and a low riser on a separate audio track."
+  },
+  "common_mistakes": [
+    "Using fake or unrelated research visuals as wallpaper.",
+    "Showing private tabs, emails, account names, or source details without redaction.",
+    "Speeding the sequence until no evidence can be inspected.",
+    "Letting overlays and captions compete for the same text-reading area.",
+    "Adding a loud riser that makes the section feel like a trailer instead of research."
+  ],
+  "qc": [
+    "Does every visible document or screen support the claim being made?",
+    "Are private, sensitive, or uncleared details removed or approved?",
+    "Can the viewer understand the research takeaway before the sequence exits?",
+    "Do captions avoid the document or UI text being inspected?",
+    "Does the riser stay below narration and resolve cleanly into the next beat?"
+  ]
+}

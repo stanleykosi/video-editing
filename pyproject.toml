@@ -1,57 +1,94 @@
+[build-system]
+requires = ["setuptools==81.0.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "video-editing-workstation"
-version = "0.1.0"
-description = "Local AI video-editing workstation dependencies for agent-driven editing."
+name = "video-editing-engine"
+version = "0.2.0"
+description = "Typed programmable nonlinear video editing engine."
+readme = "README.md"
 requires-python = ">=3.11,<3.12"
+license = "LicenseRef-Proprietary"
 dependencies = [
-    "requests",
-    "librosa",
-    "matplotlib",
-    "pillow",
-    "numpy>=1.26,<2.0",
-    "python-dotenv",
-    "pyyaml",
-    "pydantic",
-    "rich",
-    "tqdm",
-    "opencv-python",
-    "scenedetect",
-    "imageio",
-    "imageio-ffmpeg",
-    "moviepy",
-    "ffmpeg-python",
-    "decord",
-    "soundfile",
-    "scipy",
-    "pyloudnorm",
-    "pydub",
-    "noisereduce",
-    "pedalboard",
-    "pysubs2",
-    "srt",
-    "webvtt-py",
-    "elevenlabs",
-    "faster-whisper",
-    "manim",
-    "pytest",
-    "black",
-    "ruff",
-    "pytesseract>=0.3.13",
-    "yt-dlp>=2026.6.9",
+    "defusedxml==0.7.1",
+    "numpy==1.26.4",
+    "pillow==11.3.0",
+    "pydantic==2.13.4",
+    "pyloudnorm==0.2.0",
+    "pysubs2==1.8.1",
+    "python-dotenv==1.2.2",
+    "pyyaml==6.0.3",
+    "rich==14.3.4",
+    "soundfile==0.13.1",
+    "srt==3.5.3",
+    "webvtt-py==0.5.1",
 ]
 
 [project.optional-dependencies]
+legacy = [
+    "decord==0.6.0",
+    "elevenlabs==2.47.0",
+    "faster-whisper==1.1.0",
+    "ffmpeg-python==0.2.0",
+    "imageio==2.37.3",
+    "imageio-ffmpeg==0.6.0",
+    "librosa==0.11.0",
+    "manim==0.18.1",
+    "matplotlib==3.10.9",
+    "moviepy==2.2.1",
+    "noisereduce==3.0.3",
+    "opencv-python==4.11.0.86",
+    "pedalboard==0.9.23",
+    "pydub==0.25.1",
+    "pytesseract==0.3.13",
+    "requests==2.34.2",
+    "scenedetect==0.7",
+    "scipy==1.17.1",
+    "tqdm==4.67.3",
+    "yt-dlp==2026.6.9",
+]
 ml-heavy = [
-    "demucs",
-    "whisperx",
-    "torch",
-    "torchvision",
-    "torchaudio",
-    "ultralytics",
-    "supervision",
-    "mediapipe",
-    "lapx",
-    "norfair",
+    "demucs==4.0.1",
+    "lapx==0.9.4",
+    "mediapipe==0.10.35",
+    "norfair==2.3.0",
+    "supervision==0.28.0",
+    "torch==2.12.0",
+    "torchaudio==2.11.0",
+    "torchvision==0.27.0",
+    "ultralytics==8.4.51",
+    "whisperx==3.3.1",
+]
+interchange = ["opentimelineio==0.18.1"]
+
+[project.scripts]
+video-engine = "video_engine.cli.main:main"
+
+[dependency-groups]
+dev = [
+    "black==26.3.1",
+    "build==1.3.0",
+    "coverage[toml]==7.10.7",
+    "hypothesis==6.140.2",
+    "mypy==1.18.2",
+    "pre-commit==4.3.0",
+    "pytest==9.0.3",
+    "pytest-cov==7.0.0",
+    "ruff==0.15.13",
+]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+video_engine = [
+    "py.typed",
+    "graphics/remotion/*.mjs",
+    "graphics/remotion/*.ts",
+    "graphics/remotion/*.tsx",
 ]
 
 [[tool.uv.index]]
@@ -63,3 +100,46 @@ explicit = true
 torch = { index = "pytorch-cpu" }
 torchvision = { index = "pytorch-cpu" }
 torchaudio = { index = "pytorch-cpu" }
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+extend-exclude = "tools/video-use/helpers"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["tools/video-use/helpers"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["video_engine"]
+mypy_path = "src"
+warn_unreachable = true
+show_error_codes = true
+
+[tool.pytest.ini_options]
+addopts = "--strict-config --strict-markers"
+testpaths = ["tests"]
+pythonpath = ["src", "."]
+markers = [
+    "integration: invokes external render/media tools",
+    "golden: compares rendered essence or metadata",
+    "performance: resource and scaling test",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["video_engine"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 80

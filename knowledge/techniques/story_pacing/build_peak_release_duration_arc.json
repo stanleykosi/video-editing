@@ -1,0 +1,64 @@
+{
+  "id": "build_peak_release_duration_arc",
+  "name": "Build Peak Release Duration Arc",
+  "category": "story_pacing",
+  "source_tutorial": "knowledge/research/transcripts/how an editor think.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/slow editing.txt"
+  ],
+  "use_when": [
+    "A scene builds toward a climax, reveal, success, failure, or emotional impact.",
+    "The edit needs momentum without losing the consequence after the peak.",
+    "A montage or sequence feels like it ends too abruptly after the strongest beat.",
+    "A short-form section needs a sound/cut intensity build followed by a clear drop or open-space reset."
+  ],
+  "avoid_when": [
+    "The sequence is purely informational and does not need an emotional peak.",
+    "The story point is meant to feel sudden, clipped, or unresolved.",
+    "The source material lacks enough reaction or aftermath footage."
+  ],
+  "timeline_pattern": {
+    "pattern": "setup -> shortening_shots -> peak -> lengthening_release",
+    "build": "Shot durations gradually compress toward the peak.",
+    "peak": "The strongest action or emotional beat gets clear emphasis.",
+    "release": "After the peak, shots lengthen so the viewer can feel consequence.",
+    "ratio": "Release can be equal to or longer than the build when the emotion is failure, loss, awe, or disappointment.",
+    "contrast_drop_rule": "For short-form contrast drops, the release can be a very brief black/open-space reset when it follows a real build and re-enters cleanly."
+  },
+  "motion": {
+    "rule": "Motion intensity may rise during the build and settle during release.",
+    "avoid": "Continuing high-energy motion after a beat that needs emotional aftermath."
+  },
+  "sound": {
+    "rule": "Build sound energy toward the peak, then leave space or soften the mix for release.",
+    "contrast_stack": "Risers, whooshes, denser cuts, ambience, or impacts can build contrast before the drop; the next line must remain intelligible.",
+    "avoid": "Cutting music/effects so abruptly that the emotional aftermath disappears."
+  },
+  "captions": {
+    "rule": "Keep captions efficient during the build and sparse during the release if faces carry the feeling."
+  },
+  "color": {
+    "rule": "Keep grade consistent through the arc; do not let peak effects make release shots feel unrelated."
+  },
+  "implementation": {
+    "ffmpeg": "Assemble segment durations in a JSON or EDL and inspect the duration curve. Render a short sequence to test whether the release has enough time.",
+    "remotion": "Store shot durations as an array and verify the build compresses and the release expands after the peak.",
+    "blender": "Use animation intensity curves that rise to the peak and ease down during release.",
+    "capcut_equivalent": "Manually shorten clips into the climax, then extend reaction/aftermath clips after it.",
+    "premiere_equivalent": "Use markers for setup, peak, and release. Compare sequence versions with different post-peak durations."
+  },
+  "common_mistakes": [
+    "Ending immediately after the peak.",
+    "Dropping to silence or black without enough buildup for the release to read as intentional.",
+    "Compressing the emotional consequence more than the buildup.",
+    "Making every shot shorter without shaping a release.",
+    "Letting effects continue at peak intensity after the story needs aftermath."
+  ],
+  "qc": [
+    "Is there a clear build, peak, and release?",
+    "Does the post-peak section give enough time to feel consequence?",
+    "Do shot durations support the emotion rather than only the beat?",
+    "Does the sequence still work without explaining the intended arc?",
+    "If using a contrast drop, does it follow a visible/audible build and re-enter cleanly?"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "id": "nle_script_color_code_asset_map_001",
+  "name": "Script Color-Code Asset Map",
+  "category": "nle_workflow",
+  "source_tutorial": "knowledge/research/transcripts/editing viral videos.txt",
+  "additional_sources": [],
+  "use_when": [
+    "A scripted video needs many screen recordings, images, videos, overlays, animations, or text beats.",
+    "The editor wants to reduce timeline searching by collecting assets before the edit.",
+    "A long voiceover script needs sentence-level visual planning."
+  ],
+  "avoid_when": [
+    "The edit is unscripted and discovery-based.",
+    "The video is a quick trim or talking-head clip that does not need many assets.",
+    "The color categories are so vague that they do not change asset decisions."
+  ],
+  "timeline_pattern": {
+    "pattern": "script -> sentence_tags -> asset_type -> collect_assets -> import_bins -> timeline_layering",
+    "tag_rule": "Assign each sentence or beat a practical visual category before collecting assets.",
+    "asset_rule": "Gather screen recordings, images, video clips, text cards, overlay needs, and animation placeholders based on the tags.",
+    "bin_rule": "Organize collected assets by category and script beat so the timeline pass is fast."
+  },
+  "motion": {
+    "rule": "Mark animation placeholders before building them; do not leave complex animation decisions hidden inside the edit pass."
+  },
+  "sound": {
+    "rule": "Mark SFX and music needs during script tagging, then place final cues after visual timing is known."
+  },
+  "captions": {
+    "rule": "Mark where captions are enough versus where center text or scene-attached text is needed."
+  },
+  "color": {
+    "rule": "Use the tag map to keep asset style and color coherent across clips, images, overlays, and animations."
+  },
+  "implementation": {
+    "ffmpeg": "Represent the plan as CSV/JSON with beatStart, beatEnd, sentenceSummary, assetType, assetPath, and visualJob fields.",
+    "remotion": "Store scriptBeats with colorTag, assetRefs, visualComponent, captionMode, and sfxNeed before rendering.",
+    "blender": "Use the map to decide which beats need separate animated inserts before building scenes.",
+    "capcut_equivalent": "Color-label script lines externally, gather media into folders, then import and place by tag.",
+    "premiere_equivalent": "Use bins and markers for script categories such as screen record, image, video, text, overlay, animation, and SFX."
+  },
+  "common_mistakes": [
+    "Opening the NLE with no asset plan and searching for every visual mid-edit.",
+    "Using broad categories that do not tell the editor what to collect.",
+    "Collecting assets that are keyword-related but do not serve the script beat.",
+    "Forgetting animation placeholders until the timeline feels empty."
+  ],
+  "qc": [
+    "Does every scripted sentence or beat have a visual category or a deliberate no-visual decision?",
+    "Are required assets collected before the heavy timeline pass?",
+    "Do asset bins match the script categories?",
+    "Does each placed asset map to a script beat?",
+    "Are animation placeholders listed before animation work begins?"
+  ]
+}

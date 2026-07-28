@@ -1,0 +1,62 @@
+{
+  "id": "davinci_timeline_shortcuts_efficiency_001",
+  "name": "DaVinci Timeline Shortcuts Efficiency",
+  "category": "nle_workflow",
+  "source_tutorial": "knowledge/research/transcripts/davinci resolve short form editing.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/davinci resolve full tutorial.txt"
+  ],
+  "use_when": [
+    "A Resolve short-form workflow needs faster cutting, duplicating, moving, and Fusion access.",
+    "The editor is repeatedly doing slow manual timeline operations.",
+    "A high-volume shorts workflow needs consistent speed.",
+    "A full Resolve edit needs faster split, ripple trim, source In/Out, J/K/L playback, and page navigation habits."
+  ],
+  "avoid_when": [
+    "The operator does not know the current keyboard mapping and shortcuts may trigger the wrong action.",
+    "A client project requires a locked keyboard preset or shared workstation mapping.",
+    "Speed would risk destructive edits without versioning or undo safety."
+  ],
+  "timeline_pattern": {
+    "pattern": "source_in_out -> jkl_review -> split_or_blade -> ripple_trim -> cut_silence -> option_drag_duplicate -> open_target_in_fusion -> select_left_or_right -> swap_clip_left_right -> record_voiceover_if_needed",
+    "custom_mapping_rule": "Set split and ripple delete shortcuts only when the editor can confirm the current keyboard customization.",
+    "ripple_mapping_rule": "Map frequent ripple-start/ripple-end actions to fast local keys only after confirming they will not conflict with shared keyboard presets.",
+    "playback_rule": "Use J/K/L and source In/Out points to choose footage before dragging whole clips into the timeline.",
+    "selection_rule": "Use select-left/select-right shortcuts to make space instead of manually lassoing clips.",
+    "swap_rule": "Use clip swap shortcuts for reordering instead of dragging and rebuilding gaps."
+  },
+  "motion": {
+    "rule": "Use shortcut speed to support clean timing; do not rush past motion/caption QC."
+  },
+  "sound": {
+    "rule": "Resolve can record voiceover inside the app; still check levels and noise before using the recording. Waveform-based trimming is fast, but do not remove meaningful pauses."
+  },
+  "captions": {
+    "rule": "Fast editing shortcuts should not skip caption collision checks after layout changes."
+  },
+  "color": {
+    "rule": "Use viewer background color changes to inspect black edges or black elements against black backgrounds."
+  },
+  "implementation": {
+    "ffmpeg": "Map repeated timeline operations to scripts or edit-decision transforms; keep dry-run previews before overwriting.",
+    "remotion": "Represent repeated move/swap/select operations as data transforms on timeline arrays.",
+    "blender": "Use shortcut-driven timeline and graph-editor workflows only after keyframes are named and organized.",
+    "capcut_equivalent": "Use duplicate, split, ripple delete, and batch selection shortcuts where available; verify mappings.",
+    "premiere_equivalent": "Use keyboard shortcuts for Add Edit, Ripple Delete, select clips forward/backward, duplicate, swap/reorder, and direct sequence navigation."
+  },
+  "common_mistakes": [
+    "Assuming another editor's shortcut map matches the local system.",
+    "Customizing shortcuts without documenting the mapping for the project or workstation.",
+    "Moving clips quickly without checking captions, SFX, or B-roll sync afterward.",
+    "Opening Fusion on the wrong visible layer because upper clips were selected or active.",
+    "Forgetting to inspect black-on-black edges or elements in the viewer."
+  ],
+  "qc": [
+    "Are custom shortcut mappings documented for the project or workstation?",
+    "Were waveform-based trims reviewed so meaningful pauses were not removed?",
+    "After shortcut-based moves, are captions, SFX, and B-roll still synced?",
+    "Did the intended clip open in Fusion rather than an upper overlay?",
+    "Does the viewer background reveal any black edges or hidden black elements?",
+    "Was any in-app voiceover checked for level, noise, and timing?"
+  ]
+}

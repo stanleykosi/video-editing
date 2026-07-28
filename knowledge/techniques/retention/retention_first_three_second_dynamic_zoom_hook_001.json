@@ -1,0 +1,64 @@
+{
+  "id": "retention_first_three_second_dynamic_zoom_hook_001",
+  "name": "First 3-Second Dynamic Zoom Hook",
+  "category": "retention",
+  "source_tutorial": "knowledge/research/transcripts/slow editing.txt",
+  "use_when": [
+    "A feed-first short needs immediate motion, proof, face, or curiosity before the viewer swipes.",
+    "The opener has a speaker, proof artifact, image stack, or emotional subject that can receive a simple zoom.",
+    "The first line is strong but the opening frame feels static."
+  ],
+  "avoid_when": [
+    "The zoom would crop the face, proof, product, captions, or action that makes the hook understandable.",
+    "The hook claim is unsupported by the rest of the short.",
+    "The format intentionally starts with a still, meditative, or long-form invitation beat."
+  ],
+  "timeline_pattern": {
+    "pattern": "first_frame -> dynamic_zoom_or_zoom_out -> proof_or_image_stack -> centered_cut_or_match -> story_continues",
+    "first_seconds_rule": "In feed-first shorts, the first 3-5 seconds should contain a visual reason to keep watching.",
+    "proof_rule": "Pair the motion with a concrete image, proof frame, or face whenever possible so the zoom is not empty motion.",
+    "focus_rule": "Name the viewer's first focal point before choosing zoom direction.",
+    "support_rule": "The dynamic hook improves chances of attention only when the content, story, and payoff can support the opening."
+  },
+  "motion": {
+    "rule": "Use a simple scale/position move that lands quickly and holds the focal point.",
+    "keyframe_values": {
+      "hook_window": "Place the main motion or proof entry inside the first 3-5 seconds.",
+      "subtle_talking_head_scale": "Start around 103-112% or end there for a gentle push/pull when the face must stay natural.",
+      "stronger_proof_scale": "Use roughly 115-130% only when the source resolution, crop, and proof visibility remain safe.",
+      "move_duration": "Try 12-30 frames for crisp social motion; use a slower 1-3 second move when the story wants calm.",
+      "hold_after_move": "Hold at least 8-18 frames after the move lands so the viewer can read the face or proof."
+    }
+  },
+  "sound": {
+    "rule": "Use no SFX, a low whoosh, or a tiny hit depending on tone; the first words must stay clear."
+  },
+  "captions": {
+    "rule": "Opening captions should not cover the zoom target or proof frame.",
+    "avoid": "Do not stack hook text, captions, and proof images so densely that the focal point disappears."
+  },
+  "color": {
+    "rule": "The first frame should reveal the subject or proof clearly; avoid dark or muddy frames unless mystery is intentional."
+  },
+  "implementation": {
+    "ffmpeg": "Use zoompan or crop/scale expressions for the first 3-5 seconds, then render a phone-size contact sheet to check proof and caption safety.",
+    "remotion": "Create a hook sequence with startScale, endScale, focusBox, proofLayerFrame, and holdFrames fields.",
+    "blender": "Use camera scale/position keyframes aimed at a face or proof plane; ease into a short hold.",
+    "capcut_equivalent": "Apply keyframes or Dynamic Zoom to the first clip and add the proof/image layer before the spoken hook finishes.",
+    "premiere_equivalent": "Use Motion or Transform keyframes on the first shot or adjustment layer, align to safe guides, and check that the proof frame remains visible."
+  },
+  "common_mistakes": [
+    "Adding a dynamic zoom to a weak or unsupported hook.",
+    "Cropping away the proof or face that should carry attention.",
+    "Letting ordinary captions cover the first proof frame.",
+    "Using so much motion in the opener that the viewer cannot parse the premise.",
+    "Repeating the same zoom direction in every short until it feels automatic."
+  ],
+  "qc": [
+    "Does the first 3-5 seconds give a clear visual reason to keep watching?",
+    "Can the viewer identify the first focal point immediately?",
+    "Does the zoom preserve faces, captions, proof, products, and action?",
+    "Does opening audio stay intelligible during the motion?",
+    "Is the hook supported by later proof, story, or payoff?"
+  ]
+}

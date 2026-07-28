@@ -1,0 +1,59 @@
+{
+  "id": "davinci_edit_page_keyframe_easing_titles_001",
+  "name": "DaVinci Edit Page Keyframe Easing For Titles",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/davinci resolve full tutorial.txt",
+  "use_when": [
+    "A simple title, graphic, crop, opacity, or position move can be done in the Edit page inspector.",
+    "The motion does not require Fusion nodes, masks, or tracking.",
+    "The agent needs a quick title or object move that still lands smoothly."
+  ],
+  "avoid_when": [
+    "The effect needs compositing, tracking, masks, or reusable node logic.",
+    "The graphic must interact with multiple layers in a complex way.",
+    "The rough cut is still changing so motion timing would churn."
+  ],
+  "timeline_pattern": {
+    "pattern": "title_or_clip -> inspector_keyframe_start -> inspector_keyframe_end -> adjust_curve/ease -> hold_or_clear",
+    "speed_rule": "Closer keyframes create faster moves; farther keyframes create calmer moves.",
+    "easing_rule": "Ease the landing keyframe so the title resolves instead of stopping mechanically.",
+    "hold_rule": "Add a hold after landing if the viewer needs to read text or inspect the target."
+  },
+  "motion": {
+    "rule": "Animate only the property needed for the job, then check the curve and final hold.",
+    "keyframe_values": {
+      "social_pop_window": "Fast social title moves can start around 4-8 frames if readability holds.",
+      "calmer_title_window": "Calmer title moves often need 8-16 frames plus a readable hold.",
+      "read_hold": "Hold until the phrase or object is understood before clearing or cutting."
+    }
+  },
+  "sound": {
+    "rule": "Add a small pop, hit, or whoosh only when the title entrance is an intended emphasis beat."
+  },
+  "captions": {
+    "rule": "Title motion should not duplicate or cover captions unless it intentionally replaces them for that moment."
+  },
+  "color": {
+    "rule": "Title color, shadow, stroke, or backing must remain readable over the graded footage."
+  },
+  "implementation": {
+    "ffmpeg": "Use drawtext with x/y/alpha expressions and easing curves; render contact sheets around title entry and hold.",
+    "remotion": "Use interpolated translate/opacity/scale values with easing and explicit hold frames.",
+    "blender": "Animate text/object transform keyframes and set interpolation to eased curves.",
+    "capcut_equivalent": "Use text keyframes or preset entrance animations, then manually review readability and collisions.",
+    "premiere_equivalent": "Use Essential Graphics or Effect Controls keyframes with Ease In/Ease Out and safe-area review."
+  },
+  "common_mistakes": [
+    "Opening Fusion for a basic title move that the Edit page can handle.",
+    "Leaving title motion linear or abrupt.",
+    "Animating text before checking line breaks and readability.",
+    "Letting the title land on top of captions, faces, UI, or proof."
+  ],
+  "qc": [
+    "Does the title motion land smoothly and intentionally?",
+    "Is the phrase readable after the move?",
+    "Do title and captions avoid collision or unnecessary duplication?",
+    "Does the graphic clear before competing with the next beat?",
+    "Is a Fusion effect actually needed, or is Edit page keyframing sufficient?"
+  ]
+}

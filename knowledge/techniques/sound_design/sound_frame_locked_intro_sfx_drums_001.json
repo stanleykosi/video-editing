@@ -1,0 +1,63 @@
+{
+  "id": "sound_frame_locked_intro_sfx_drums_001",
+  "name": "Frame Locked Intro SFX And Drums",
+  "category": "sound_design",
+  "source_tutorial": "knowledge/research/transcripts/killer intros.txt",
+  "use_when": [
+    "A premium intro uses fast text, logo, flicker, underline, or camera movement that needs sonic weight.",
+    "The intro should feel high-energy without burying the proof quote or body handoff.",
+    "A reusable brand or series bumper needs consistent sound grammar."
+  ],
+  "avoid_when": [
+    "The intro is serious, quiet, or trust-led and SFX would make it feel cheap.",
+    "The sound cue does not match an actual visible event.",
+    "Dialogue, quote proof, or the first body line becomes harder to understand.",
+    "The intro already has enough motion and sound would add clutter."
+  ],
+  "timeline_pattern": {
+    "pattern": "music_pulse -> logo_hit -> text_flicker_pops -> underline_or_keyword_hit -> short_tail_or_fade -> body_audio",
+    "sync_rule": "Place every SFX exactly on the visible frame it sells: logo reveal, text pop, flicker, cut, beat drop, underline, or transition.",
+    "music_rule": "A fast drum or 120 BPM-style pulse can support intro pace, but it should not dictate unrelated cuts.",
+    "handoff_rule": "Fade, duck, or cut the intro bed so the first body line starts cleanly.",
+    "silence_rule": "Remove any SFX cue that does not align to screen action."
+  },
+  "motion": {
+    "rule": "Sound accents should be driven by visible motion markers, not by decoration."
+  },
+  "sound": {
+    "rule": "Use short, varied, frame-accurate hits/pops/whooshes and keep speech or proof audio dominant.",
+    "keyframe_values": {
+      "sync_tolerance": "Land intro hits within 0-1 frames of the visible event for a premium feel.",
+      "bpm_start": "Try music around 120 BPM for fast intro packaging, then adjust to the brand and speaker pace.",
+      "handoff_fade": "Use a quick fade or duck over the final 4-12 frames when the body speech starts immediately."
+    }
+  },
+  "captions": {
+    "rule": "Do not pair loud hits with dense caption motion unless the intro is intentionally high-energy and speech stays clear."
+  },
+  "color": {
+    "rule": "No direct color rule; avoid flash/SFX combinations that hide brand or proof text."
+  },
+  "implementation": {
+    "ffmpeg": "Place SFX with sample/frame-accurate offsets, use atrim/adelay/amix/volume/afade, and render a short waveform review around the intro handoff.",
+    "remotion": "Trigger SFX from the same frame constants as logo, flicker, underline, and camera moves; store bpm, eventFrame, gain, and fadeOutFrames.",
+    "blender": "Use timeline markers for logo/text/camera events and align audio strips to those markers.",
+    "capcut_equivalent": "Add beat markers, place short SFX on visible text/logo events, trim tails, and preview on phone speakers.",
+    "premiere_equivalent": "Use markers for every visible intro event, place SFX clips on separate tracks, adjust clip gain, and duck/fade the intro bed before body dialogue."
+  },
+  "common_mistakes": [
+    "Adding SFX that do not match what happens onscreen.",
+    "Letting the intro beat overpower the social proof quote.",
+    "Using a beat grid to force cuts that do not support brand, proof, or outcome.",
+    "Leaving the intro bed too loud under the first body line.",
+    "Using the same hit on every text flicker until the intro sounds pasted together."
+  ],
+  "qc": [
+    "Does every SFX cue land on a visible intro event?",
+    "Do logo, text, flicker, underline, and transition hits land within 0-1 frames when precision matters?",
+    "Is the proof quote or body speech intelligible under the intro bed?",
+    "Does the intro music hand off cleanly to the main content?",
+    "Are repeated hits varied or low enough that they do not feel mechanical?"
+  ]
+}
+

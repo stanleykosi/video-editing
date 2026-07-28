@@ -1,0 +1,63 @@
+{
+  "id": "davinci_deliver_codec_render_queue_archive_001",
+  "name": "DaVinci Deliver Codec Render Queue And Archive",
+  "category": "nle_workflow",
+  "source_tutorial": "knowledge/research/transcripts/davinci resolve full tutorial.txt",
+  "use_when": [
+    "A Resolve timeline needs final export, web upload, client review, archive, or editing handoff settings.",
+    "The agent must choose between H.264, H.265, ProRes, DNxHR, uncompressed, single clip, or individual clips.",
+    "The project needs both compact delivery and high-quality archive variants."
+  ],
+  "avoid_when": [
+    "The user supplied exact delivery specs that must be followed instead.",
+    "The timeline still has offline media, wrong range, unmixed audio, or unresolved QC failures.",
+    "The export codec is unavailable on the current Resolve edition or operating system."
+  ],
+  "timeline_pattern": {
+    "pattern": "choose_timeline_range -> video_tab_container_codec -> audio_tab -> file_name_location -> add_to_render_queue -> render -> watch_output",
+    "single_clip_rule": "Use Single Clip for a finished movie export.",
+    "individual_clip_rule": "Use Individual Clips for conversion, roundtrip, or per-shot handoff.",
+    "container_rule": "Container/format is the box; codec is the compression method.",
+    "web_rule": "H.264/H.265 are compact web options; test playback and platform compatibility.",
+    "archive_rule": "ProRes 422 HQ or DNxHR-style mezzanine exports are better for handoff/archive than tiny web codecs.",
+    "audio_archive_rule": "For archive/handoff, preserve separate timeline audio tracks when future remix or replacement is likely."
+  },
+  "motion": {
+    "rule": "Render motion-heavy sections and watch the file for dropped frames, compression artifacts, or wrong range."
+  },
+  "sound": {
+    "rule": "Export audio settings should match the delivery: final stereo mix for upload, separate tracks or high-quality PCM for archive/handoff."
+  },
+  "captions": {
+    "rule": "Check whether captions are burned in, sidecar, or excluded based on delivery target."
+  },
+  "color": {
+    "rule": "Check exported file color/gamma and compression, not only Resolve viewer appearance.",
+    "keyframe_values": {
+      "youtube_upres_note": "Upscaling 1080p to UHD for upload can sometimes trigger better platform compression, but test before adopting it as a default.",
+      "avoid_uncompressed": "Avoid uncompressed video unless a workflow explicitly requires huge files."
+    }
+  },
+  "implementation": {
+    "ffmpeg": "Use explicit format/codec/audio settings such as mp4+h264/h265 for web, mov+prores/dnxhr for handoff, PCM audio for archive, and checksum/watch pass after render.",
+    "remotion": "Store delivery profiles with container, codec, bitrate/quality, audio format, captions mode, output path, and archive flag.",
+    "blender": "Render image sequence or mezzanine video for archive, then encode distribution copies separately.",
+    "capcut_equivalent": "Export separate versions for platform upload and archive when quality/handoff matters; verify final file after export.",
+    "premiere_equivalent": "Use Export/Media Encoder presets with explicit range, codec, audio tracks, filename suffix, and watchback QC."
+  },
+  "common_mistakes": [
+    "Exporting a selected range or wrong timeline by accident.",
+    "Choosing H.264/H.265 for an edit handoff that needs a higher-quality mezzanine file.",
+    "Using uncompressed video and creating impractical file sizes.",
+    "Forgetting that codec availability can vary by Resolve edition or operating system.",
+    "Adding jobs to the render queue without checking filenames, range, and destination.",
+    "Calling the project finished before watching the exported file."
+  ],
+  "qc": [
+    "Does the render range/timeline match the intended final version?",
+    "Do container, codec, resolution, frame rate, audio, filename, and destination match the delivery purpose?",
+    "Is the export compact enough for upload or high-quality enough for archive/handoff as required?",
+    "Are captions included or excluded in the intended mode?",
+    "Was the final exported file watched for playback, color, audio, black frames, and wrong range?"
+  ]
+}

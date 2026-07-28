@@ -32,58 +32,58 @@ CATEGORY_TERMS: dict[str, tuple[str, ...]] = {
 
 FALLBACK_TECHNIQUES: dict[str, list[str]] = {
     "retention": [
-        "technique_cards/retention_first_three_second_dynamic_zoom_hook_001.json",
-        "technique_cards/retention_shortform_claim_hook_001.json",
-        "technique_cards/build_peak_release_duration_arc.json",
+        "knowledge/techniques/retention/retention_first_three_second_dynamic_zoom_hook_001.json",
+        "knowledge/techniques/retention/retention_shortform_claim_hook_001.json",
+        "knowledge/techniques/story_pacing/build_peak_release_duration_arc.json",
     ],
     "captions": [
-        "technique_cards/captions_two_word_social_subtitles_001.json",
-        "technique_cards/typography_programmatic_text_mask_highlight_glow_001.json",
-        "technique_cards/typography_sentence_structure_line_breaks_001.json",
+        "knowledge/techniques/captions/captions_two_word_social_subtitles_001.json",
+        "knowledge/techniques/typography/typography_programmatic_text_mask_highlight_glow_001.json",
+        "knowledge/techniques/typography/typography_sentence_structure_line_breaks_001.json",
     ],
     "motion": [
-        "technique_cards/motion_show_dont_tell_visual_stack_001.json",
-        "technique_cards/motion_overlay_readability_focus_stack_001.json",
-        "technique_cards/motion_keyframe_focus_zoom_hold_001.json",
+        "knowledge/techniques/motion/motion_show_dont_tell_visual_stack_001.json",
+        "knowledge/techniques/motion/motion_overlay_readability_focus_stack_001.json",
+        "knowledge/techniques/motion/motion_keyframe_focus_zoom_hold_001.json",
     ],
     "sound": [
-        "technique_cards/sound_infographic_motion_sfx_sync_001.json",
-        "technique_cards/sound_music_ducking_volume_keyframes_001.json",
-        "technique_cards/sound_isolated_sfx_design_pass_001.json",
+        "knowledge/techniques/sound_design/sound_infographic_motion_sfx_sync_001.json",
+        "knowledge/techniques/sound_design/sound_music_ducking_volume_keyframes_001.json",
+        "knowledge/techniques/sound_design/sound_isolated_sfx_design_pass_001.json",
     ],
     "color": [
-        "technique_cards/davinci_color_management_primary_look_001.json",
-        "technique_cards/color_keyframed_saturation_shift_001.json",
-        "technique_cards/color_filter_strength_music_reveal_001.json",
+        "knowledge/techniques/color/davinci_color_management_primary_look_001.json",
+        "knowledge/techniques/color/color_keyframed_saturation_shift_001.json",
+        "knowledge/techniques/color/color_filter_strength_music_reveal_001.json",
     ],
     "qc": [
-        "technique_cards/qc_publish_threshold_creative_iteration_001.json",
+        "knowledge/techniques/qc/qc_publish_threshold_creative_iteration_001.json",
     ],
 }
 
 FALLBACK_PRESETS: dict[str, list[str]] = {
     "captions": [
-        "presets/captions/two_word_social_subtitles.md",
-        "presets/captions/shorts_readable_contrast.md",
-        "presets/captions/typographic_hierarchy_caption_system.md",
+        "knowledge/presets/captions/two_word_social_subtitles.md",
+        "knowledge/presets/captions/shorts_readable_contrast.md",
+        "knowledge/presets/captions/typographic_hierarchy_caption_system.md",
     ],
     "motion": [
-        "presets/motion/first_three_second_dynamic_zoom_hook.md",
-        "presets/motion/remotion_text_mask_highlight_glow.md",
-        "presets/motion/overlay_readability_focus_stack.md",
+        "knowledge/presets/motion/first_three_second_dynamic_zoom_hook.md",
+        "knowledge/presets/motion/remotion_text_mask_highlight_glow.md",
+        "knowledge/presets/motion/overlay_readability_focus_stack.md",
     ],
     "sound": [
-        "presets/sound/infographic_motion_sfx_sync.md",
-        "presets/sound/music_ducking_volume_keyframes.md",
-        "presets/sound/reverse_hit_whoosh_motion_sync.md",
+        "knowledge/presets/sound/infographic_motion_sfx_sync.md",
+        "knowledge/presets/sound/music_ducking_volume_keyframes.md",
+        "knowledge/presets/sound/reverse_hit_whoosh_motion_sync.md",
     ],
     "color": [
-        "presets/color/subtle_lumetri_adjustment_layer.md",
-        "presets/color/typography_contrast_palette.md",
+        "knowledge/presets/color/subtle_lumetri_adjustment_layer.md",
+        "knowledge/presets/color/typography_contrast_palette.md",
     ],
     "transitions": [
-        "presets/transitions/short_form_micro_black_drop.md",
-        "presets/transitions/davinci_white_flash.md",
+        "knowledge/presets/transitions/short_form_micro_black_drop.md",
+        "knowledge/presets/transitions/davinci_white_flash.md",
     ],
 }
 
@@ -92,10 +92,10 @@ RENDERABLE_EFFECT_OPTIONS: list[dict[str, Any]] = [
         "effect_id": "capcut_highlight_wipe",
         "layer_type": "emphasis_text",
         "source_paths": [
-            "technique_cards/typography_capcut_color_change_highlight_wipe_001.json",
-            "technique_cards/typography_programmatic_text_mask_highlight_glow_001.json",
-            "presets/motion/capcut_color_change_highlight_wipe.md",
-            "presets/motion/remotion_text_mask_highlight_glow.md",
+            "knowledge/techniques/typography/typography_capcut_color_change_highlight_wipe_001.json",
+            "knowledge/techniques/typography/typography_programmatic_text_mask_highlight_glow_001.json",
+            "knowledge/presets/motion/capcut_color_change_highlight_wipe.md",
+            "knowledge/presets/motion/remotion_text_mask_highlight_glow.md",
         ],
         "use_when": ["claim", "keyword", "payoff", "premium title", "short quote"],
         "avoid_when": ["long subtitle", "busy proof frame", "text-heavy scene"],
@@ -105,10 +105,10 @@ RENDERABLE_EFFECT_OPTIONS: list[dict[str, Any]] = [
         "effect_id": "capcut_staggered_blur_glitch_reveal",
         "layer_type": "emphasis_text",
         "source_paths": [
-            "technique_cards/typography_capcut_staggered_blur_glitch_reveal_001.json",
-            "technique_cards/typography_remotion_seeded_scramble_glitch_001.json",
-            "presets/motion/capcut_staggered_blur_glitch_reveal.md",
-            "presets/motion/remotion_seeded_glitch_scramble_text.md",
+            "knowledge/techniques/typography/typography_capcut_staggered_blur_glitch_reveal_001.json",
+            "knowledge/techniques/typography/typography_remotion_seeded_scramble_glitch_001.json",
+            "knowledge/presets/motion/capcut_staggered_blur_glitch_reveal.md",
+            "knowledge/presets/motion/remotion_seeded_glitch_scramble_text.md",
         ],
         "use_when": ["hook", "first beat", "surprise claim", "fast social title"],
         "avoid_when": ["serious body explanation", "dense sentence", "accessibility caption"],
@@ -118,8 +118,8 @@ RENDERABLE_EFFECT_OPTIONS: list[dict[str, Any]] = [
         "effect_id": "capcut_axis_stretch_word",
         "layer_type": "word_emphasis",
         "source_paths": [
-            "technique_cards/typography_capcut_axis_stretch_emphasis_001.json",
-            "presets/motion/capcut_axis_stretch_word.md",
+            "knowledge/techniques/typography/typography_capcut_axis_stretch_emphasis_001.json",
+            "knowledge/presets/motion/capcut_axis_stretch_word.md",
         ],
         "use_when": ["single impact word", "hook word", "payoff word"],
         "avoid_when": ["long phrase", "brand font must stay undistorted"],
@@ -129,8 +129,8 @@ RENDERABLE_EFFECT_OPTIONS: list[dict[str, Any]] = [
         "effect_id": "capcut_font_shift_loop",
         "layer_type": "word_emphasis",
         "source_paths": [
-            "technique_cards/typography_capcut_font_shift_loop_001.json",
-            "presets/motion/capcut_font_shift_loop.md",
+            "knowledge/techniques/typography/typography_capcut_font_shift_loop_001.json",
+            "knowledge/presets/motion/capcut_font_shift_loop.md",
         ],
         "use_when": ["unstable idea", "myth vs truth", "style beat", "social hook"],
         "avoid_when": ["serious factual proof", "continuous captions"],
@@ -140,8 +140,8 @@ RENDERABLE_EFFECT_OPTIONS: list[dict[str, Any]] = [
         "effect_id": "player3_smooth_caption_compound",
         "layer_type": "caption_kinetic",
         "source_paths": [
-            "technique_cards/captions_capcut_player3_smooth_caption_compounds_001.json",
-            "presets/captions/capcut_player3_smooth_captions.md",
+            "knowledge/techniques/captions/captions_capcut_player3_smooth_caption_compounds_001.json",
+            "knowledge/presets/captions/capcut_player3_smooth_captions.md",
         ],
         "use_when": ["caption support", "premium social caption", "clean phrase group"],
         "avoid_when": ["text-heavy scene", "proof/UI/faces in lower safe region"],
@@ -151,8 +151,8 @@ RENDERABLE_EFFECT_OPTIONS: list[dict[str, Any]] = [
         "effect_id": "capcut_adaptive_texture_caption",
         "layer_type": "caption_kinetic",
         "source_paths": [
-            "technique_cards/captions_capcut_adaptive_texture_animation_001.json",
-            "presets/captions/capcut_adaptive_texture_captions.md",
+            "knowledge/techniques/captions/captions_capcut_adaptive_texture_animation_001.json",
+            "knowledge/presets/captions/capcut_adaptive_texture_captions.md",
         ],
         "use_when": ["stock footage background", "simple social caption pass"],
         "avoid_when": ["busy background", "accessibility-critical line"],
@@ -162,8 +162,8 @@ RENDERABLE_EFFECT_OPTIONS: list[dict[str, Any]] = [
         "effect_id": "capcut_apple_slide_up_text",
         "layer_type": "emphasis_text",
         "source_paths": [
-            "technique_cards/typography_capcut_apple_slide_up_text_001.json",
-            "presets/motion/capcut_apple_slide_up_text.md",
+            "knowledge/techniques/typography/typography_capcut_apple_slide_up_text_001.json",
+            "knowledge/presets/motion/capcut_apple_slide_up_text.md",
         ],
         "use_when": ["calm premium explainer", "body section label", "takeaway"],
         "avoid_when": ["chaotic/high-energy beat"],
@@ -173,8 +173,8 @@ RENDERABLE_EFFECT_OPTIONS: list[dict[str, Any]] = [
         "effect_id": "capcut_perspective_freeze_text",
         "layer_type": "emphasis_text",
         "source_paths": [
-            "technique_cards/typography_capcut_perspective_freeze_text_001.json",
-            "presets/motion/capcut_perspective_freeze_text.md",
+            "knowledge/techniques/typography/typography_capcut_perspective_freeze_text_001.json",
+            "knowledge/presets/motion/capcut_perspective_freeze_text.md",
         ],
         "use_when": ["scene-attached word", "diagram label", "environment text"],
         "avoid_when": ["flat subtitle", "tiny unreadable text"],
@@ -184,10 +184,10 @@ RENDERABLE_EFFECT_OPTIONS: list[dict[str, Any]] = [
         "effect_id": "capcut_graph_zoom_stack",
         "layer_type": "camera_motion",
         "source_paths": [
-            "technique_cards/motion_capcut_graph_zoom_stack_001.json",
-            "technique_cards/motion_keyframe_focus_zoom_hold_001.json",
-            "presets/motion/capcut_graph_zoom_stack.md",
-            "presets/motion/focus_zoom_hold_keyframes.md",
+            "knowledge/techniques/motion/motion_capcut_graph_zoom_stack_001.json",
+            "knowledge/techniques/motion/motion_keyframe_focus_zoom_hold_001.json",
+            "knowledge/presets/motion/capcut_graph_zoom_stack.md",
+            "knowledge/presets/motion/focus_zoom_hold_keyframes.md",
         ],
         "use_when": ["hook jolt", "focus target", "payoff reveal"],
         "avoid_when": ["proof would crop", "caption would become unreadable"],
@@ -197,10 +197,10 @@ RENDERABLE_EFFECT_OPTIONS: list[dict[str, Any]] = [
         "effect_id": "infographic_sfx_sync",
         "layer_type": "sound_cue",
         "source_paths": [
-            "technique_cards/sound_infographic_motion_sfx_sync_001.json",
-            "technique_cards/sound_sfx_variation_exaggeration_001.json",
-            "presets/sound/infographic_motion_sfx_sync.md",
-            "presets/sound/reverse_hit_whoosh_motion_sync.md",
+            "knowledge/techniques/sound_design/sound_infographic_motion_sfx_sync_001.json",
+            "knowledge/techniques/sound_design/sound_sfx_variation_exaggeration_001.json",
+            "knowledge/presets/sound/infographic_motion_sfx_sync.md",
+            "knowledge/presets/sound/reverse_hit_whoosh_motion_sync.md",
         ],
         "use_when": ["arrow", "chart", "highlight", "diagram", "text reveal"],
         "avoid_when": ["no visible event", "speech would be masked"],
@@ -314,8 +314,10 @@ def build_option_bank(
     technique_groups: dict[str, list[str]],
     preset_groups: dict[str, list[str]],
 ) -> dict[str, Any]:
-    option_techniques = expand_with_repo_options(technique_groups, "technique_cards", ".json")
-    option_presets = expand_with_repo_options(preset_groups, "presets", ".md")
+    option_techniques = expand_with_repo_options(
+        technique_groups, "knowledge/techniques", ".json"
+    )
+    option_presets = expand_with_repo_options(preset_groups, "knowledge/presets", ".md")
     return {
         "selection_policy": {
             "compiler_role": "surface options and constraints, not force one global style",

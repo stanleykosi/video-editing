@@ -1,0 +1,65 @@
+{
+  "id": "typography_ffmpeg_fade_pop_envelope_001",
+  "name": "FFmpeg Fade And Fontsize Pop Envelope",
+  "category": "typography",
+  "source_tutorial": "knowledge/research/source_notes/brayden_ffmpeg_drawtext_animations_source_notes.md",
+  "additional_sources": [
+    "knowledge/research/source_notes/remotion_lab_kinetic_typography_presets_source_notes.md"
+  ],
+  "use_when": [
+    "A simple FFmpeg title or keyword needs a fade-in, fade-out, pop, or small bounce.",
+    "The effect can be expressed through opacity and font-size changes.",
+    "The agent needs a lightweight approximation of a CapCut/Premiere text pop."
+  ],
+  "avoid_when": [
+    "The text needs exact transform scale, non-uniform stretch, masks, or spring physics.",
+    "Changing font size would cause line wrapping, cropping, or layout drift.",
+    "The project tone would be better served by stable text."
+  ],
+  "timeline_pattern": {
+    "pattern": "drawtext_layer -> start_time -> fade_in_or_pop_duration -> hold -> optional_fade_out -> clear",
+    "fade_rule": "Divide alpha into hidden, fade-in, hold, fade-out, and hidden phases.",
+    "pop_rule": "Normalize time over the entrance window and map progress into font size.",
+    "center_rule": "Recompute centered x/y from text dimensions so animated size does not drift."
+  },
+  "motion": {
+    "rule": "Use short envelopes that land before the viewer needs to read the word.",
+    "keyframe_values": {
+      "fade_duration": "About 0.3 seconds works as a calm title starting point; shorten for fast shorts.",
+      "pop_start": "A pop can begin around 70 percent of final font size.",
+      "pop_peak": "A bounce can peak around 110 percent before settling to final size.",
+      "sync_tolerance": "For emphasis beats, the pop should land within about 2 frames of the intended audio or visual cue."
+    }
+  },
+  "sound": {
+    "rule": "Use a small pop/click only when the text is a real emphasis beat and speech remains dominant."
+  },
+  "captions": {
+    "rule": "Do not use font-size pop on accessibility-first subtitles unless it has passed readability and timing QC."
+  },
+  "color": {
+    "rule": "Maintain enough contrast through the smallest and largest font-size states."
+  },
+  "implementation": {
+    "ffmpeg": "Animate drawtext alpha for fade envelopes and fontsize for pop/bounce; keep x/y tied to text dimensions during animated size changes.",
+    "remotion": "Prefer transform scale and spring/interpolate progress for reusable versions; use the FFmpeg values as approximation references.",
+    "blender": "Animate text object opacity and scale with eased curves.",
+    "capcut_equivalent": "Use opacity keyframes for fade and scale keyframes or a pop preset for size entrance.",
+    "premiere_equivalent": "Use Transform scale and opacity keyframes or a saved text pop preset."
+  },
+  "common_mistakes": [
+    "Letting a fade begin too late so the viewer cannot read the word in time.",
+    "Using animated font size on multi-line text that rewraps or drifts.",
+    "Overshooting until text collides with safe margins.",
+    "Adding pop motion to every caption line.",
+    "Testing only the hold frame and missing the smallest or largest state."
+  ],
+  "qc": [
+    "Text remains centered through the size animation.",
+    "The entrance finishes before the word needs to be read.",
+    "Overshoot does not crop or collide with faces/proof/UI/captions.",
+    "The smallest and largest states preserve contrast.",
+    "Any pop/click cue stays below speech and lands on the visual."
+  ]
+}
+

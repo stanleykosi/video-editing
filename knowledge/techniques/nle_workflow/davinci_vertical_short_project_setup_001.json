@@ -1,0 +1,54 @@
+{
+  "id": "davinci_vertical_short_project_setup_001",
+  "name": "DaVinci Vertical Short Project Setup",
+  "category": "nle_workflow",
+  "source_tutorial": "knowledge/research/transcripts/davinci resolve short form editing.txt",
+  "use_when": [
+    "A short-form edit is being built in DaVinci Resolve for Reels, TikTok, or YouTube Shorts.",
+    "The agent needs a simple postable vertical talking-head edit before Fusion polish.",
+    "A-roll and B-roll need to be assembled quickly in Resolve."
+  ],
+  "avoid_when": [
+    "The delivery is horizontal long-form or square.",
+    "The project settings are already locked by a client or previous edit.",
+    "The source layout requires custom crop/pad decisions before project settings are changed."
+  ],
+  "timeline_pattern": {
+    "pattern": "new_project -> shift_9_project_settings -> use_vertical_resolution -> import_a_roll_b_roll -> clean_cuts -> motivated_broll -> remove_broll_audio -> auto_captions",
+    "page_rule": "Use Edit page for assembly and Fusion page for custom motion/text work.",
+    "effects_rule": "Keep Effects Library and Inspector open while building short-form edits.",
+    "broll_rule": "Collect roughly 3-4 B-roll shots for a simple short and place them only on key lines."
+  },
+  "motion": {
+    "rule": "Start with clean vertical framing before adding zooms, overlays, or Fusion effects."
+  },
+  "sound": {
+    "rule": "Delete or mute B-roll source audio unless it is intentionally part of the design."
+  },
+  "captions": {
+    "rule": "Auto captions can create a simple postable reel; style and position them before export."
+  },
+  "color": {
+    "rule": "Do not apply LUTs or style looks until vertical crop, B-roll, and captions are readable."
+  },
+  "implementation": {
+    "ffmpeg": "Use scale/crop/pad to create a 9:16 canvas, then layer A-roll, B-roll, and captions after timing is locked.",
+    "remotion": "Set composition dimensions to vertical and represent A-roll, B-roll, subtitle, and polish layers as named sequences.",
+    "blender": "Use vertical camera resolution and safe areas if rendering custom inserts.",
+    "capcut_equivalent": "Set project aspect to 9:16, cut A-roll, add motivated B-roll, mute B-roll audio, then add auto captions.",
+    "premiere_equivalent": "Create a vertical sequence, assemble A-roll/B-roll, unlink or mute B-roll audio, and create captions from transcript."
+  },
+  "common_mistakes": [
+    "Forgetting to enable vertical resolution before placing captions and overlays.",
+    "Keeping B-roll audio that clashes with the talking head.",
+    "Putting B-roll in random places instead of on important statements.",
+    "Jumping into Fusion before the simple cut is clean."
+  ],
+  "qc": [
+    "Is the project or composition set to vertical delivery?",
+    "Are A-roll cuts tight with no accidental dead air over 300 ms?",
+    "Is B-roll placed on key lines and not random filler?",
+    "Is unwanted B-roll audio removed or muted?",
+    "Are simple captions readable and centered/safe before polish begins?"
+  ]
+}

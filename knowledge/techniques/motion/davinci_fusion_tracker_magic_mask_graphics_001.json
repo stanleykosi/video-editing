@@ -1,0 +1,60 @@
+{
+  "id": "davinci_fusion_tracker_magic_mask_graphics_001",
+  "name": "DaVinci Fusion Tracker And Magic Mask Graphics",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/davinci resolve full tutorial.txt",
+  "use_when": [
+    "Text, graphics, rectangles, heat signatures, or masks must follow camera or subject motion.",
+    "A graphic needs to sit behind or attach to a moving subject.",
+    "Resolve Studio Magic Mask is available and subject isolation is worth the review time."
+  ],
+  "avoid_when": [
+    "The object does not move enough to justify tracking.",
+    "A static mask or simple keyframe would be clearer and faster.",
+    "Magic Mask edges are too unstable for the delivery size or subject importance."
+  ],
+  "timeline_pattern": {
+    "pattern": "Fusion -> Tracker_or_MagicMask -> track_forward_backward -> attach_graphic_or_mask -> refine_edges -> review_full_range",
+    "tracker_rule": "Use Tracker Match Move when a graphic should follow a tracked feature.",
+    "foreground_rule": "A tracked graphic can be generated foreground-only and merged later for cleaner control.",
+    "mask_reuse_rule": "One tracked mask can drive multiple nodes through mask inputs when the same region controls several effects.",
+    "studio_rule": "Magic Mask is Studio-only; keep a manual mask or simpler design fallback."
+  },
+  "motion": {
+    "rule": "Track the most stable high-contrast feature available and check the attachment across the whole range.",
+    "keyframe_values": {
+      "review_interval": "Inspect at motion changes, occlusions, and the first/last frame of the affected range.",
+      "edge_refinement": "Use blur/erode/dilate only enough to hide edge chatter without shrinking important subject detail."
+    }
+  },
+  "sound": {
+    "rule": "Only add tracking or reveal SFX when the attached graphic is an intentional emphasis beat."
+  },
+  "captions": {
+    "rule": "Tracked graphics should not drag the viewer's eye away from required captions or cover the speaker's face."
+  },
+  "color": {
+    "rule": "Tracked effects should match the grade and should not create halo edges after final color."
+  },
+  "implementation": {
+    "ffmpeg": "Use external tracking/mask data when available; otherwise approximate with manually keyframed overlay positions and alpha masks.",
+    "remotion": "Store tracked points or subject masks as frame-indexed metadata and drive overlay transforms from them.",
+    "blender": "Use motion tracking, object tracking, masks, and compositor nodes for attached graphics or subject separation.",
+    "capcut_equivalent": "Use motion tracking or keyframes for attached text; use cutout tools only after checking edges.",
+    "premiere_equivalent": "Use mask tracking, position keyframes, or After Effects tracking/rotoscoping for more complex attachments."
+  },
+  "common_mistakes": [
+    "Tracking a weak feature that drifts as soon as the subject turns.",
+    "Trusting Magic Mask without edge and occlusion review.",
+    "Attaching graphics that cover the face, action, or captions.",
+    "Using a tracked effect where a static title would be calmer and clearer."
+  ],
+  "qc": [
+    "Does the graphic or mask stay attached through the whole affected range?",
+    "Were occlusions, motion changes, and edge chatter reviewed?",
+    "Is there a non-Studio fallback if Magic Mask is unavailable?",
+    "Does the effect preserve faces, captions, proof, and action?",
+    "Does final color reveal any halos or rough mask edges?"
+  ]
+}
+

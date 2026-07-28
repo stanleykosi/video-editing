@@ -1,0 +1,55 @@
+{
+  "id": "sound_isolated_sfx_design_pass_001",
+  "name": "Isolated SFX Design Pass",
+  "category": "sound_design",
+  "source_tutorial": "knowledge/research/transcripts/editing viral videos.txt",
+  "additional_sources": [],
+  "use_when": [
+    "The edit feels visually polished but sonically flat.",
+    "A dense motion edit needs whooshes, risers, impacts, clicks, typing, texture, or comedy sounds.",
+    "The editor needs to focus on SFX placement without being distracted by voiceover and music."
+  ],
+  "avoid_when": [
+    "Dialogue timing or visual motion is not locked enough for SFX placement.",
+    "Muting other tracks would cause the editor to ignore dialogue masking risk and skip the full-mix check.",
+    "The project tone requires sparse natural sound rather than designed SFX."
+  ],
+  "timeline_pattern": {
+    "pattern": "lock_visible_motion -> mute_dialogue_music_temporarily -> watch_for_sfx_moments -> place_whoosh_riser_impact_texture -> unmute_full_mix -> lower_and_fade_sfx -> final_loudness_qc",
+    "isolation_rule": "Temporarily muting other tracks can help identify visual moments that need sound, but the full mix must be checked afterward.",
+    "basic_family_rule": "Start from whoosh, riser, and impact families, then add context-specific sounds only when they fit the beat.",
+    "level_rule": "Lower SFX after placement so they support the edit without becoming annoying."
+  },
+  "motion": {
+    "rule": "SFX should match visible motion starts, impacts, transitions, text pops, or texture beats."
+  },
+  "sound": {
+    "rule": "Layer and vary SFX deliberately, then use gain and fades to keep dialogue and music pleasant."
+  },
+  "captions": {
+    "rule": "Do not let SFX masking force captions to carry normally intelligible dialogue."
+  },
+  "color": {
+    "rule": "No direct color rule; bright flash overlays with SFX still need readability checks."
+  },
+  "implementation": {
+    "ffmpeg": "Use separate SFX tracks in an EDL, apply afade and volume filters, then run loudness/waveform checks after reintroducing dialogue and music.",
+    "remotion": "Trigger SFX from motion event frames and store fullMixChecked after dialogue/music are restored.",
+    "blender": "Use audio markers for visual impacts, then export stems or markers for final mix.",
+    "capcut_equivalent": "Temporarily mute voice/music, place SFX, unmute, lower volumes, and add short fades.",
+    "premiere_equivalent": "Mute dialogue/music only for SFX spotting, place SFX on separate tracks, then unmute all tracks, lower clip gain, fade edges, and check speech clarity."
+  },
+  "common_mistakes": [
+    "Doing the isolated pass and forgetting to re-check the full mix.",
+    "Leaving SFX too loud because they sounded exciting when soloed.",
+    "Adding SFX to every small movement until the edit becomes tiring.",
+    "Using the same whoosh, riser, or hit repeatedly with no variation."
+  ],
+  "qc": [
+    "Were dialogue and music restored after the isolated SFX pass?",
+    "Does each SFX cue match a visible motion, impact, reveal, or story beat?",
+    "Do SFX peaks stay below dialogue?",
+    "Do repeated SFX use variation?",
+    "Do all SFX edges have fades or clean cuts?"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "id": "nle_stacked_timeline_versioning_001",
+  "name": "Stacked Timeline Versioning",
+  "category": "nle_workflow",
+  "source_tutorial": "knowledge/research/transcripts/slow editing.txt",
+  "use_when": [
+    "A short or reel has many source clips and multiple possible durations.",
+    "The editor needs to compare an original, shorter, and balanced version without losing work.",
+    "The cut needs pacing judgment before effects, captions, or color are finalized."
+  ],
+  "avoid_when": [
+    "The task is a tiny trim or one-off export.",
+    "The software setup makes stacked timelines slow or confusing and duplicate sequences would be clearer.",
+    "The editor has not named versions clearly enough to avoid exporting the wrong one."
+  ],
+  "timeline_pattern": {
+    "pattern": "original_assembly -> duplicate_shorter_version -> duplicate_balanced_version -> compare_stacked_or_side_by_side -> choose_lock -> polish",
+    "version_rule": "Keep every major pacing experiment in a named version instead of destructively trimming the only timeline.",
+    "balance_rule": "The best short is not always the shortest; choose the version with the strongest story, connection, and retention balance.",
+    "lock_rule": "Do not spend major polish on a version until the chosen duration and order are clear."
+  },
+  "motion": {
+    "rule": "Do not judge motion polish until the version's cut order and duration are stable."
+  },
+  "sound": {
+    "rule": "When comparing versions, check that dialogue, music, foley, and SFX still sync after ripple trims."
+  },
+  "captions": {
+    "rule": "Caption timing belongs on the chosen or near-chosen version so repeated versioning does not create caption churn."
+  },
+  "color": {
+    "rule": "Save heavy look work for the selected version; basic correction can be copied after lock."
+  },
+  "implementation": {
+    "ffmpeg": "Represent each version as a separate EDL or concat list and render short comparison previews before applying final filters.",
+    "remotion": "Store candidate cuts as named timeline arrays such as original, short, and balanced, then choose one as activeComposition.",
+    "blender": "Duplicate timeline scenes or strips for major timing variants and lock the chosen scene before compositing.",
+    "capcut_equivalent": "Duplicate the project or timeline before major trimming and label versions by duration/purpose.",
+    "premiere_equivalent": "Duplicate sequences for original, short, and balanced versions; use markers and sequence names to prevent wrong-version export."
+  },
+  "common_mistakes": [
+    "Destroying the original cut before knowing whether the shorter version works.",
+    "Choosing the shortest version even when it removes the human or emotional reason to keep watching.",
+    "Polishing captions, effects, or color on a version that is still structurally uncertain.",
+    "Exporting the wrong sequence because versions are not clearly named.",
+    "Failing to re-check audio and captions after moving clips between versions."
+  ],
+  "qc": [
+    "Are original, shorter, and balanced versions named and recoverable?",
+    "Was the final version chosen for story and retention rather than shortest duration alone?",
+    "Are captions, SFX, music, and B-roll still synced after version changes?",
+    "Is heavy polish applied only to the chosen or near-locked version?",
+    "Does the export come from the intended named version?"
+  ]
+}

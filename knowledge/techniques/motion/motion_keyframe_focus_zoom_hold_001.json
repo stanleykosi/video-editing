@@ -1,0 +1,116 @@
+{
+  "id": "motion_keyframe_focus_zoom_hold_001",
+  "name": "Keyframed Focus Zoom With Hold",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/editing full course.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/short-form editing.txt",
+    "knowledge/research/transcripts/ultimate guide to shortform.txt",
+    "knowledge/research/transcripts/edit high quality reel.txt",
+    "knowledge/research/transcripts/editing viral videos.txt",
+    "knowledge/research/transcripts/slow editing.txt",
+    "knowledge/research/transcripts/davinci resolve full tutorial.txt",
+    "knowledge/research/transcripts/capcut keyframes.txt",
+    "knowledge/research/transcripts/keyframe graph tutorial.txt",
+    "knowledge/research/transcripts/keyframe pro edits.txt"
+  ],
+  "use_when": [
+    "The viewer needs to notice a small action, object, UI detail, face, or proof element.",
+    "A punch-in can hide a talking-head jump cut without breaking meaning.",
+    "A static image, screenshot, logo, or slide needs simple movement.",
+    "A short-form edit needs zoom-ins or zoom-outs to emphasize important statements.",
+    "An adjustment layer zoom can add flow to a hook, filler card, B-roll section, or full-screen animation.",
+    "An After Effects talking-head zoom needs the speaker's eyes to stay stable.",
+    "A long-form or YouTube edit needs focal continuity between zooms and cuts so the viewer's eye does not wander.",
+    "A feed-first short needs a simple dynamic zoom or proof-focused move in the first 3-5 seconds.",
+    "A slower emotional short-form section can use one long simple dynamic zoom instead of constant new effects.",
+    "A Resolve Edit page title, position, or crop move needs simple keyframes and easing without Fusion.",
+    "A CapCut talking-head or stale clip needs a slow zoom-in/out or dramatic jolt controlled by keyframe spacing.",
+    "A stylized CapCut zoom needs graph-shaped easing, subject centering, and optional motion blur after timing lock."
+  ],
+  "avoid_when": [
+    "The frame already has one clear focal point.",
+    "The zoom would crop out evidence, faces, subtitles, or action.",
+    "The motion is being added only because the timeline feels empty."
+  ],
+  "timeline_pattern": {
+    "pattern": "full_context -> zoom_or_pan_to_focus -> hold_focus -> cut_or_return",
+    "hold_rule": "Add hold keyframes after the move if the focus should remain steady instead of drifting.",
+    "speed_rule": "Keyframes closer together create faster motion; farther apart create calmer motion.",
+    "purpose_rule": "Name the focus target before animating.",
+    "statement_rule": "Use zooms for important statements; use tracking or reframing for subject movement.",
+    "eye_line_rule": "When zooming a talking head, keep the eyes aligned to a guide so scale changes do not create a distracting subject jump.",
+    "rule_of_thirds_rule": "For focal continuity across cuts, keep the main subject or proof near the same guide, center point, eyeline, or rule-of-thirds target.",
+    "first_seconds_rule": "For feed-first shorts, the initial zoom should clarify the first face, proof frame, or curiosity object inside the first 3-5 seconds.",
+    "resolve_edit_page_rule": "For simple Resolve inspector moves, adjust keyframe spacing for speed and ease the landing keyframe before opening Fusion.",
+    "capcut_auto_keyframe_rule": "In CapCut, after the first keyframe exists, changing crop/scale/position later in the timeline can create the next keyframe automatically.",
+    "capcut_graph_rule": "Use Graphs after setting scale and position so the zoom accelerates and settles intentionally instead of moving at constant speed.",
+    "stacked_zoom_rule": "For stylized AMV/social zooms, export/re-import stacks can add intensity, but only when crop, source quality, and caption safety survive."
+  },
+  "motion": {
+    "rule": "Animate scale and position together so the important detail remains readable.",
+    "keyframe_values": {
+      "punch_in_scale": "Use 105-115% for subtle talking-head emphasis; use 108-125% for higher-energy short-form statement emphasis when the crop remains safe.",
+      "adjustment_zoom_out": "For section polish, 130% to 100% with blur 3 to 0 can create a quick zoom-out reveal when crop remains safe.",
+      "after_effects_hook_zoom": "A dramatic AE hook zoom-out can start around 185-190% and settle over about 1.0-1.5 seconds if resolution and crop remain safe.",
+      "focus_move_duration": "Use 6-12 frames for fast social emphasis, 12-24 frames for calmer tutorials, and longer for documentary evidence.",
+      "hold_after_move": "Hold at least 12-24 frames or until the spoken reference is understood.",
+      "slow_section_dynamic_zoom": "A gentle zoom can run across a longer emotional passage when it stays crop-safe and does not distract from the face/story.",
+      "resolve_simple_title_move": "Use roughly 8-16 frames for calmer title movement, 4-8 frames for fast social motion, then hold until readable.",
+      "capcut_spacing": "In CapCut, use close keyframes for dramatic zooms and farther keyframes for slow engagement movement; preview because the same scale change can feel completely different.",
+      "capcut_slow_zoom": "For a slow push on a face, set scale and position at the first frame, move later in the clip, increase scale modestly, and lower or offset position so the eyes stay in the same screen area.",
+      "capcut_quick_zoom": "For a quick attention jolt, set the first scale/position keyframe, move about 4 frames forward, then adjust scale and position; use only on important moments.",
+      "capcut_graph_zoom": "For an intense CapCut graph zoom, a first pass can end around 300% scale, then a second re-imported pass can end around 150% if source quality remains acceptable.",
+      "capcut_motion_blur": "After zoom timing is locked, CapCut Motion Blur around Blur 10 and Blend 10 can be a starting point; reduce if faces, captions, proof, or action smear.",
+      "easing": "Ease into the focus unless a snap zoom is intentionally comedic or aggressive."
+    }
+  },
+  "sound": {
+    "rule": "Add a small hit or whoosh only if the motion itself is meant to be felt; many instructional zooms need no SFX."
+  },
+  "captions": {
+    "rule": "Move or shorten captions if the zoom target would be covered."
+  },
+  "color": {
+    "rule": "Preserve detail and contrast in the zoomed area; do not enlarge noisy or unreadable footage beyond usefulness."
+  },
+  "implementation": {
+    "ffmpeg": "Use zoompan, crop/scale, or overlay with calculated x/y positions. Render a short focus test to confirm the target stays in frame.",
+    "remotion": "Animate scale, translateX, and translateY from a focusBox. Add explicit hold frames after the eased movement.",
+    "blender": "Use camera keyframes aimed at an empty or tracked object; set interpolation to ease when appropriate.",
+    "capcut_equivalent": "Use keyframes on scale and position, pinch to set crop/scale, adjust keyframe spacing and Graphs for speed/flow, add a hold if needed, delete accidental keyframes, and preview at phone size. For stylized zoom stacks, export/re-import between passes and apply motion blur only after timing is locked.",
+    "premiere_equivalent": "Use Effect Controls or Transform for Scale and Position, add hold keyframes, smooth curves, and check Program Monitor safe margins. Keep the focus point consistent with guides, center, eyeline, or rule-of-thirds targets. For section zooms, place Transform and Gaussian Blur on an adjustment layer only over the intended range. In After Effects, use a guide on the eyes, Easy Ease plus speed graph shaping, and duplicate the motion onto any rotoscope/cutout layer."
+  },
+  "common_mistakes": [
+    "Forgetting hold keyframes so the image drifts while the viewer is trying to read it.",
+    "Zooming into a detail after the spoken reference has already passed.",
+    "Using zooms on filler lines until important statements stop feeling important.",
+    "Forcing extra zooms into a long section that already works with one simple dynamic move.",
+    "Cropping captions, faces, UI, or proof while emphasizing another detail.",
+    "Using a punch-in that makes eye position jump unnaturally across a talking-head cut.",
+    "Letting adjustment-layer zooms affect clips outside the intended section.",
+    "Applying a zoom to the original video but not the rotoscoped duplicate.",
+    "Changing the focus point between cuts so the viewer has to search the frame again.",
+    "Opening Fusion for a basic keyframe move that the Resolve Edit page inspector can handle.",
+    "In CapCut, adding a second zoom keyframe too close to the first and creating an unintended snap.",
+    "Zooming without lowering or offsetting position, causing the eyes or focus object to slide out of the intended screen area.",
+    "Scaling to 300% or stacking export passes when the source cannot survive the crop.",
+    "Adding motion blur before checking the actual graph timing and subject centering."
+  ],
+  "qc": [
+    "Can the viewer identify the focus target immediately?",
+    "Does the zoom land before or within 2 frames of the spoken reference or beat?",
+    "If used as the opening hook, does the zoom give a clear first 3-5 second focus point?",
+    "Is the zoom reserved for an important statement or focus target?",
+    "Does the frame hold long enough to read the target?",
+    "Are captions, faces, UI, and evidence still visible where needed?",
+    "Does any adjustment-layer zoom affect only the intended clips?",
+    "Do the speaker's eyes stay stable through the zoom?",
+    "Does the main focus stay on a consistent guide/third/center target across adjacent cuts?",
+    "If this is a simple Resolve inspector move, are keyframe spacing and easing intentional?",
+    "If this is a CapCut zoom, does the keyframe spacing create the intended slow or dramatic speed?",
+    "Do scale and position changes keep the eyes or named focus target stable through the move?",
+    "If a graph curve is used, does the zoom start, accelerate, and settle intentionally?",
+    "If motion blur is used, do faces, captions, proof, UI, products, and action remain readable?"
+  ]
+}

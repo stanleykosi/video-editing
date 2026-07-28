@@ -1,0 +1,64 @@
+{
+  "id": "typography_capcut_opacity_flicker_tick_001",
+  "name": "CapCut Opacity Flicker Text With Tick SFX",
+  "category": "typography",
+  "source_tutorial": "knowledge/research/transcripts/viral text effects.txt",
+  "use_when": [
+    "A short text layer needs a quick electric, digital, or attention-grabbing flicker.",
+    "A hook word, title accent, or transition word should feel rhythmic with a tick/click sound.",
+    "The project tone supports a flashy social text accent."
+  ],
+  "avoid_when": [
+    "The text is story-critical and must remain stable for accessibility.",
+    "The background already flickers or changes contrast heavily.",
+    "The subject is serious, emotional, or documentary-sensitive and the flicker would cheapen it."
+  ],
+  "timeline_pattern": {
+    "pattern": "text_layer -> six_blend_keyframes_one_frame_apart -> opacity_variation -> optional_keyframe_spacing_slowdown -> tick_sfx_cut_retime -> full_mix_qc",
+    "speed_rule": "Keyframes one frame apart create a fast flicker; spacing them farther apart creates a slower flicker.",
+    "sfx_rule": "Cut and retime tick/click SFX so it ends when the flicker ends.",
+    "readability_rule": "The first and last frames should be readable so the viewer is not left with a half-visible word."
+  },
+  "motion": {
+    "rule": "Animate opacity only unless the text also has a separate named motion job.",
+    "keyframe_values": {
+      "keyframes": "Six opacity keyframes can create the effect.",
+      "spacing": "Start with each keyframe 1 frame apart for a fast flicker; widen spacing for slower readability.",
+      "opacity_sequence": "Start 100, then 25, 50, 25, 67, end 100 as a tested CapCut pattern."
+    }
+  },
+  "sound": {
+    "rule": "Use tiny ticks/clicks only under speech-safe levels, and clear the SFX tail when the flicker ends.",
+    "keyframe_values": {
+      "sync": "Ticks should land on or within 1-2 frames of the flicker pulses.",
+      "tail": "Trim, speed up, or fade the cue so it does not continue into the next word."
+    }
+  },
+  "captions": {
+    "rule": "Do not flicker continuous subtitles; use it for designed emphasis text only."
+  },
+  "color": {
+    "rule": "Avoid high-contrast color changes during the flicker unless the text remains readable in every opacity state."
+  },
+  "implementation": {
+    "ffmpeg": "Animate text alpha with enable/opacity expressions or overlay a pre-rendered text layer with alpha values; align tick SFX with atrim/asetpts and afade.",
+    "remotion": "Drive opacity from frame-indexed values like [100, 25, 50, 25, 67, 100] and trigger tick audio from the same frame list.",
+    "blender": "Keyframe material alpha on text and align a short audio strip to the keyframes.",
+    "capcut_equivalent": "On the text layer, add six Blend opacity keyframes, one frame apart for the fast version. Set opacity to 100, 25, 50, 25, 67, 100. Add a ticking SFX, cut it, and use speed controls so it ends with the flicker.",
+    "premiere_equivalent": "Use Opacity keyframes on an Essential Graphics layer, duplicate or place tick SFX on each flicker pulse, and add short fades."
+  },
+  "common_mistakes": [
+    "Flickering text that needs to be read as accessibility captions.",
+    "Leaving the last frame semi-transparent instead of returning to readable opacity.",
+    "Letting ticking SFX continue after the visual flicker has ended.",
+    "Stacking flicker with shake, zoom, glow, and busy captions at the same moment.",
+    "Using the effect so often that it becomes visual noise."
+  ],
+  "qc": [
+    "Does the final flicker frame return to full readable opacity?",
+    "Can the word be read at phone size through the flicker?",
+    "Does the tick/click end with the visual change and stay below dialogue?",
+    "Are captions, faces, proof, UI, products, and action safe?",
+    "Is the flicker reserved for a word that deserves extra attention?"
+  ]
+}

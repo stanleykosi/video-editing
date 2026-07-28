@@ -1,0 +1,55 @@
+{
+  "id": "nle_music_first_voiceover_assembly_001",
+  "name": "Music-First Voiceover Assembly",
+  "category": "nle_workflow",
+  "source_tutorial": "knowledge/research/transcripts/editing viral videos.txt",
+  "additional_sources": [],
+  "use_when": [
+    "A voiceover-led video needs a clear vibe before the visual pass is complete.",
+    "The editor wants to cut some visuals or transitions to music beats.",
+    "Music choice will shape pacing, humor, momentum, or production value."
+  ],
+  "avoid_when": [
+    "Dialogue timing and story structure are still too unstable.",
+    "The project is sensitive, testimony-heavy, or realism-focused and music should be chosen later with restraint.",
+    "No licensed or platform-safe track options are available."
+  ],
+  "timeline_pattern": {
+    "pattern": "voiceover_import -> script_based_trim -> early_music_bed -> volume_under_vo -> asset_layering -> beat_cut_experiments -> later_mix_qc",
+    "voiceover_rule": "Trim the voiceover for flow before letting music dictate timing.",
+    "music_rule": "Add music early only when it clarifies the intended vibe and helps beat-aware decisions.",
+    "mix_rule": "Early music is provisional until the final dialogue clarity and license check pass."
+  },
+  "motion": {
+    "rule": "Use beat cuts, zooms, and transition accents only where the music supports the visual or story beat."
+  },
+  "sound": {
+    "rule": "Keep music low enough under voiceover during assembly and re-check full mix after SFX and visuals are added."
+  },
+  "captions": {
+    "rule": "Do not let music force caption timing that no longer follows the spoken line."
+  },
+  "color": {
+    "rule": "Music may influence the visual vibe, but color should still preserve readability and subject detail."
+  },
+  "implementation": {
+    "ffmpeg": "Generate rough exports with music bed and voiceover levels for review; use volume automation and loudness checks later.",
+    "remotion": "Store voiceoverCut, musicCandidate, cueFrames, beatCutCandidates, and mixStatus separately so the track can change safely.",
+    "blender": "Use the early music bed for temporary animation timing only if the track is likely to remain licensed/approved.",
+    "capcut_equivalent": "Place VO first, add a low music bed, mark beats, and keep track replacement possible.",
+    "premiere_equivalent": "Import voiceover, trim by script, place licensed/platform-safe music early for vibe, add beat markers, then layer assets and revisit the mix."
+  },
+  "common_mistakes": [
+    "Letting music hide weak voiceover pacing instead of trimming the script.",
+    "Cutting to a temp track that cannot be licensed later.",
+    "Leaving early music too loud after visual and SFX passes are added.",
+    "Forcing every visual cut to the beat when the story needs space."
+  ],
+  "qc": [
+    "Is the voiceover understandable before music is added?",
+    "Is the early music licensed, platform-safe, or marked temp-only?",
+    "Does the music clarify the intended vibe?",
+    "Do beat cuts land on meaningful visual or story moments?",
+    "Was the final dialogue/music/SFX mix rechecked after the early assembly?"
+  ]
+}

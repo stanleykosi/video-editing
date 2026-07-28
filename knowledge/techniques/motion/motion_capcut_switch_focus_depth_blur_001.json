@@ -1,0 +1,64 @@
+{
+  "id": "motion_capcut_switch_focus_depth_blur_001",
+  "name": "CapCut Switch Focus Depth Blur",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/documentary edits.txt",
+  "use_when": [
+    "A documentary, explainer, historical comparison, or character contrast scene needs to move attention from one cutout subject to another.",
+    "Two images or source elements can be separated into foreground layers over a background.",
+    "The editor wants a rack-focus style handoff using scale, position, blur, and subtle background motion inside CapCut."
+  ],
+  "avoid_when": [
+    "Both subjects need to be read at the same time.",
+    "The cutout edges are too rough to survive blur, scale, or phone-size review.",
+    "The scene is evidence-critical and artificial depth would make source material feel less trustworthy."
+  ],
+  "timeline_pattern": {
+    "pattern": "background -> cutout_left -> cutout_right -> remove_background -> feather_masks -> enhance_if_needed -> compound_cutouts -> scale_position_keyframes -> cross_blur_layers -> background_countermove -> optional_fps_lag_pendulum -> qc",
+    "layer_rule": "Use at least three elements: background, first cutout subject, and second cutout subject.",
+    "compound_rule": "Compound only the foreground image layers before the main move so their shared pan/scale can be controlled cleanly.",
+    "focus_rule": "One subject should sharpen as the other softens; avoid a middle section where both are unreadable.",
+    "background_rule": "Move the background more subtly than the foreground so the scene gains depth instead of sliding as one flat image."
+  },
+  "motion": {
+    "rule": "Use eased scale and X/Y motion to hand off attention, then use opposite blur ramps to simulate focus depth.",
+    "keyframe_values": {
+      "foreground_move_window": "A usable starting range is roughly 1s to 3s for the main focus handoff.",
+      "scale_start_end": "Foreground compound can start around 125% scale and end around 135% when the crop remains safe.",
+      "blur_handoff": "Outgoing subject can ramp blur from 0 to 50 while incoming subject ramps from 50 to 0.",
+      "background_scale": "Background can move more gently, such as about 120% to 125%, with smaller position drift than the foreground.",
+      "easing": "Apply Ease or Cubic Ease to scale, X, and Y curves after keyframes are placed.",
+      "texture_optional": "For subtle documentary texture, FPS Lag around 14 and Play Pendulum around speed 2, strength 3, twist 0, sharpen 0 can be tested after readability passes."
+    }
+  },
+  "sound": {
+    "rule": "Usually no hit is needed; use a soft riser or low whoosh only if the focus handoff is a real story beat and speech stays clear."
+  },
+  "captions": {
+    "rule": "Keep captions away from the subject receiving focus and suppress them during the blur handoff if they compete with the comparison."
+  },
+  "color": {
+    "rule": "Match cutouts to the background before adding texture; blur and scale should not hide edge mismatch or source quality problems."
+  },
+  "implementation": {
+    "ffmpeg": "Use alpha cutouts, scale/crop/overlay keyframes, boxblur or gblur ramps per subject, and a separate slower background transform; render focus-handoff contact sheets.",
+    "remotion": "Create a SwitchFocusDepthBlur component with foreground assets, background asset, focusStartFrame, focusEndFrame, scale/position values, blur ramps, and caption-safe regions.",
+    "blender": "Use image planes or cards at different depths with camera or object motion and depth-of-field blur, then render with safe framing.",
+    "capcut_equivalent": "Place background plus two images, use Remove Background and feathered rectangle masks, enhance low-quality cutouts if needed, compound the cutouts, keyframe scale/position from the first subject to the second, apply eased graphs, then use duplicated blur effect layers inside each subject compound with opposite 0/50 blur ramps.",
+    "premiere_equivalent": "Use nested foreground cutouts, Motion keyframes with Ease In/Out, Gaussian Blur keyframes per nested subject, and a subtler background scale/position move."
+  },
+  "common_mistakes": [
+    "Compounding the background with the cutouts so no parallax depth remains.",
+    "Leaving harsh rectangular mask edges around cutouts.",
+    "Using blur so heavily that neither subject is readable during the transition.",
+    "Moving foreground and background by the same amount, which makes the scene feel flat.",
+    "Adding FPS lag or pendulum before the focus handoff is readable."
+  ],
+  "qc": [
+    "Does the viewer know which subject is primary before, during, and after the focus switch?",
+    "Do cutout edges remain clean after Remove Background, feathering, scale, and blur?",
+    "Is at least one subject readable throughout the handoff?",
+    "Does background motion stay subtler than foreground motion?",
+    "Do captions and source labels avoid the focused subject and remain readable at delivery size?"
+  ]
+}

@@ -1,0 +1,101 @@
+name: Engine CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python-engine:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install system media dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ffmpeg fontconfig
+      - name: Install locked Python environment
+        run: |
+          python -m pip install uv==0.10.9
+          uv sync --frozen --extra legacy --extra interchange --group dev
+      - name: Materialize review-collapsed test suite
+        run: uv run python scripts/materialize_tests.py
+      - name: Verify lock and build package
+        run: |
+          uv lock --check
+          uv run python -m build
+      - name: Static quality gates
+        run: |
+          uv run ruff check src tests scripts tools/video-use/compat
+          uv run black --check src tests scripts tools/video-use/compat
+          uv run mypy src/video_engine
+      - name: Full non-browser suite and coverage
+        run: >-
+          uv run pytest
+          -m "not performance"
+          --cov=video_engine
+          --cov-report=term-missing
+          --cov-report=xml
+      - name: Long-form performance gate
+        run: uv run pytest -q -m performance
+      - name: Validate immutable render evidence
+        run: |
+          uv run python scripts/validate_knowledge.py
+          uv run python scripts/validate_engine_baselines.py
+          uv run python scripts/validate_engine_goldens.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: python-engine-reports
+          path: |
+            coverage.xml
+          if-no-files-found: ignore
+
+  remotion-bridge:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.18.0"
+          cache: npm
+      - name: Install exact Node dependencies
+        run: |
+          npm ci --ignore-scripts
+          npm audit --audit-level=high
+      - name: Install media and Python test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ffmpeg fontconfig
+          python -m pip install uv==0.10.9
+          uv sync --frozen --extra legacy --group dev
+      - name: Materialize review-collapsed test suite
+        run: uv run python scripts/materialize_tests.py
+      - name: Install exact Remotion browser
+        run: npm run remotion:browser
+      - name: Build trusted Remotion bridge
+        run: |
+          npm run remotion:version
+          npm run graphics:typecheck
+          npm run remotion:bundle
+      - name: Execute mixed-backend alpha range render
+        env:
+          VIDEO_ENGINE_RUN_REMOTION_INTEGRATION: "1"
+        run: |
+          uv run pytest -q tests/integration/test_remotion_graphics.py
+          uv run pytest -q tests/golden/test_legacy_parity.py::test_faceless_legacy_fixture_has_canonical_render_and_qc_parity
+          uv run pytest -q \
+            tests/golden/test_canonical_projects.py::test_canonical_golden_project[product_ad] \
+            tests/golden/test_canonical_projects.py::test_canonical_golden_project[motion_graphics_video]

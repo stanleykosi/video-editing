@@ -1,0 +1,70 @@
+{
+  "id": "aftereffects_branded_background_texture_system_001",
+  "name": "After Effects Branded Background Texture System",
+  "category": "motion",
+  "source_tutorial": "knowledge/research/transcripts/edit high quality reel.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/vox style documentary.txt"
+  ],
+  "use_when": [
+    "A high-quality Reel needs consistent branded backgrounds behind text, icons, or full-screen animations.",
+    "Flat color feels too plain but a busy background would reduce readability.",
+    "A client or creator wants a clean editing signature across multiple reels.",
+    "A documentary explainer needs a warm paper/grid background system behind maps, charts, documents, or title cards."
+  ],
+  "avoid_when": [
+    "Live footage or proof should remain visible and a full-screen background would hide it.",
+    "The texture makes text, icons, or captions harder to read.",
+    "The palette introduces random colors that do not match the brand/style."
+  ],
+  "timeline_pattern": {
+    "pattern": "choose_brand_color -> create_solid_or_gradient -> add_vignette_or_noise_or_grid -> tune_opacity -> trim_to_segment -> save_as_style_element",
+    "palette_rule": "Use a limited palette based on brand, topic, and emotion; avoid changing colors randomly between segments.",
+    "texture_rule": "Texture should add depth without becoming the main focus.",
+    "segment_rule": "Background layers and adjustment layers should be trimmed to the segment they support.",
+    "editorial_rule": "For editorial explainer graphics, use paper texture, low-opacity grid, and subtle edge/doodle texture only when foreground evidence remains readable."
+  },
+  "motion": {
+    "rule": "Background motion should be slower and lower priority than foreground text/icons unless the background is the transition."
+  },
+  "sound": {
+    "rule": "Background texture alone usually needs no SFX; save sounds for foreground motion or transitions."
+  },
+  "captions": {
+    "rule": "Background texture must preserve caption and title contrast."
+  },
+  "color": {
+    "rule": "Use subtle gradients, vignettes, noise alpha, grids, or Venetian Blinds while keeping the brand palette coherent.",
+    "key_values": {
+      "grid_opacity": "A low grid opacity around 20-30% can add structure without dominating.",
+      "venetian_completion": "A partial Venetian Blinds completion around 20% can create line texture when text remains readable.",
+      "noise_alpha": "Use noise alpha sparingly and mask/feather it so it reads as texture, not dirty compression.",
+      "vignette": "Use vignette to focus the frame, not to crush important edges.",
+      "paper_scale": "Scale paper backgrounds slightly above frame bounds, often 115-120% in 16:9 if edges show.",
+      "editorial_grid_opacity": "For Vox-inspired documentary graphics, start grid opacity around 10-20%."
+    }
+  },
+  "implementation": {
+    "ffmpeg": "Use color sources, gradients, noise overlays, vignette, grid assets, and alpha blending; inspect for banding/compression.",
+    "remotion": "Create background components with brandColor, gradientStops, vignette, noiseOpacity, gridOpacity, stripeCompletion, and segmentRange props.",
+    "blender": "Use planes/materials with subtle texture maps and keep text readability in the camera preview.",
+    "capcut_equivalent": "Use brand-colored backgrounds, gradients, paper textures, simple grid/texture overlays, chroma key or blend mode cleanup, and opacity controls with delivery-size checks.",
+    "premiere_equivalent": "Use After Effects solids, Gradient Ramp, CC Vignette, Noise Alpha, Grid, Venetian Blinds, masks, feathering, and trimmed adjustment layers."
+  },
+  "common_mistakes": [
+    "Using a different palette for every segment until the Reel loses its editing signature.",
+    "Making texture more visible than the foreground idea.",
+    "Leaving background layers untrimmed across unrelated scenes.",
+    "Adding noise that looks like compression damage.",
+    "Using dark vignettes that hide important text or icons.",
+    "Letting paper/grid texture reduce map, chart, document, or label readability."
+  ],
+  "qc": [
+    "Background colors match the intended brand/style palette.",
+    "Text, icons, and captions remain readable at phone size.",
+    "Texture is visible but subordinate to the foreground idea.",
+    "Background/texture layers are trimmed to the intended segment.",
+    "No banding, dirty noise, or crushed edges appear in the render.",
+    "For editorial explainers, paper/grid texture stays subordinate to maps, charts, documents, and text."
+  ]
+}

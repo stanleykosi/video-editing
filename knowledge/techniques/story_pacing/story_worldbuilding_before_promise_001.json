@@ -1,0 +1,56 @@
+{
+  "id": "story_worldbuilding_before_promise_001",
+  "name": "Worldbuilding Before Promise",
+  "category": "story_pacing",
+  "source_tutorial": "knowledge/research/transcripts/The-5-Second-Intro-Is-Dead-Here-s-Why_Media.txt",
+  "use_when": [
+    "The location, environment, institution, or cultural world is central to why the story matters.",
+    "The audience needs to feel tone, scale, isolation, conflict, or texture before the explicit premise lands.",
+    "The creator's perspective can ground high-production documentary footage in a human, YouTube-native way."
+  ],
+  "avoid_when": [
+    "The worldbuilding does not change the viewer's understanding of the later promise.",
+    "The topic is simple enough that extra atmosphere becomes delay.",
+    "The video has no strong visuals, sound, or protagonist presence to carry the delayed promise."
+  ],
+  "timeline_pattern": {
+    "pattern": "place_characterization -> human_grounding -> material_detail -> opposing_force -> central_question -> call_to_adventure -> promise",
+    "characterization_rule": "Treat the place or world as a character before reducing it to explanation.",
+    "grounding_rule": "Use small creator, setup, or self-filmed moments to keep polished documentary grounded in reality.",
+    "contrast_rule": "Build conflict through contrast between the world as felt and the force changing it.",
+    "promise_rule": "The explicit story promise can arrive late only after the audience understands why the world is worth entering."
+  },
+  "motion": {
+    "rule": "Use wide shots for scale, close-ups for texture, and movement direction to define whether the viewer is being pulled out of or invited into a world."
+  },
+  "sound": {
+    "rule": "Let music, ambience, and material SFX characterize the world before VO explains it."
+  },
+  "captions": {
+    "rule": "Keep captions away from faces, maps, body language, material details, and proof images that carry worldbuilding."
+  },
+  "color": {
+    "rule": "Preserve the world's texture and evidence; avoid grades that make documentary worldbuilding feel like generic beauty footage."
+  },
+  "implementation": {
+    "ffmpeg": "Make contact sheets for worldbuilding runs and verify there is a clear progression from place to detail to conflict. Use labels in an EDL for world, grounding, detail, contrast, question, and promise.",
+    "remotion": "Model the intro as beat data with fields for worldTrait, groundingMoment, sensoryDetail, conflictImage, and promiseText.",
+    "blender": "Use restrained map or environment moves to make geography and scale understandable before the promise.",
+    "capcut_equivalent": "Avoid starting with a generic promise montage; assemble place, detail, contrast, and human-grounding beats first.",
+    "premiere_equivalent": "Create bins or labels for environment scale, material close-up, creator grounding, opposing force, proof, and promise."
+  },
+  "common_mistakes": [
+    "Using pretty establishing shots that do not build a story question.",
+    "Delaying the promise without increasing trust or curiosity.",
+    "Making polished footage feel detached from the creator or protagonist.",
+    "Explaining the world in VO while the visuals only decorate.",
+    "Skipping contrast, leaving the worldbuilding atmospheric but inert."
+  ],
+  "qc": [
+    "Can the viewer describe the world before the promise arrives?",
+    "Does worldbuilding create a concrete question or conflict?",
+    "Is there at least one human-grounding moment in high-production creator documentary?",
+    "Do close-ups, wide shots, and proof images each serve different story jobs?",
+    "Does the explicit promise land stronger because of the worldbuilding?"
+  ]
+}

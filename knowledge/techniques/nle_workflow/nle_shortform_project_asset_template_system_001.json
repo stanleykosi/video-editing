@@ -1,0 +1,57 @@
+{
+  "id": "nle_shortform_project_asset_template_system_001",
+  "name": "Short-Form Project, Asset, And Template System",
+  "category": "nle_workflow",
+  "source_tutorial": "knowledge/research/transcripts/edit high quality reel.txt",
+  "additional_sources": [],
+  "use_when": [
+    "A creator, client, or agent will produce multiple Reels, Shorts, TikToks, ads, or YouTube clips over time.",
+    "The edit depends on reusable overlays, SFX, music, fonts, backgrounds, icons, and render versions.",
+    "The agent needs a clean handoff between raw media, assets, Premiere, After Effects, and final exports."
+  ],
+  "avoid_when": [
+    "The request is a one-off technical trim with no reusable style or client system.",
+    "The user has an existing folder/project convention that must be followed instead.",
+    "The setup work would delay an urgent small delivery more than it helps."
+  ],
+  "timeline_pattern": {
+    "pattern": "root_folders -> per_project_folder -> raw_media_images_renders -> nle_project_by_client_or_channel -> template_bins -> reusable_timeline_assets -> per_reel_sequence",
+    "root_rule": "Separate personal/channel projects, client projects, and shared editing assets.",
+    "per_reel_rule": "Create a folder per reel with raw clips/audio, images/assets, and renders/exports.",
+    "template_rule": "Keep reusable overlays, SFX, and music in template bins or template timelines so finishing passes are drag-and-drop rather than search-heavy.",
+    "naming_rule": "Name projects, bins, sequences, and renders by client/channel, output type, reel number, and short description."
+  },
+  "motion": {
+    "rule": "Store reusable motion assets by job, such as overlay, texture, hook text, background, or transition."
+  },
+  "sound": {
+    "rule": "Organize SFX by job, such as whoosh, hit, typewriter, camera, riser, reward, music, or ambience."
+  },
+  "captions": {
+    "rule": "Store caption styles by brand/client and do not mix caption presets across brands without review."
+  },
+  "color": {
+    "rule": "Store brand colors, gradient/background samples, and approved looks with the style/template files."
+  },
+  "implementation": {
+    "ffmpeg": "Store render names, source paths, output paths, and target specs in project metadata so ffmpeg conforms and QC scripts can find the right files.",
+    "remotion": "Create a project config with brandId, outputType, assetFolders, styleTokens, sequences, renderTargets, and reusable component IDs.",
+    "blender": "Keep reusable 3D assets, cameras, fonts, and renders in project folders separated from raw media.",
+    "capcut_equivalent": "Keep a folder of reusable brand overlays, SFX, fonts, captions, and exports; duplicate project templates for each new reel.",
+    "premiere_equivalent": "Use one Premiere project per client/channel and output type when batching; create bins for each reel plus template bins/timelines for overlays, SFX, music, and common assets."
+  },
+  "common_mistakes": [
+    "Creating a new NLE project for every reel when a client/channel template would speed repeated work.",
+    "Downloading huge asset packs all at once and losing the few assets needed for the current style.",
+    "Saving renders beside raw assets with vague names.",
+    "Mixing client assets, personal brand assets, and shared assets without clear folder boundaries.",
+    "Using a reusable preset without knowing which brand or project it belongs to."
+  ],
+  "qc": [
+    "Does the reel folder contain separate raw media, images/assets, and renders/exports?",
+    "Are reusable overlays, SFX, music, and caption styles in template bins or folders?",
+    "Can another agent identify the final sequence and latest render by filename?",
+    "Are client/channel style assets separated from generic shared assets?",
+    "Does every external asset have a source/license note when it is used in a project?"
+  ]
+}

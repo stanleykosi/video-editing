@@ -7,7 +7,8 @@ This file gives fresh agent instances the working context for `/home/stanley/vid
 This repo is a local AI video-editing agent system. It contains:
 
 - A structured knowledge base for editing taste, techniques, presets, and QC.
-- The local `video-use` editing engine in `tools/video-use/`.
+- The canonical `video_engine` package in `src/video_engine/` and the
+  `video-use` workflow/compatibility layer in `tools/video-use/`.
 - Root Python/Node tooling for agent-driven video editing work.
 
 The old `/home/stanley/Developer/video-use` path is kept as a symlink to
@@ -15,17 +16,20 @@ The old `/home/stanley/Developer/video-use` path is kept as a symlink to
 
 ## Knowledge Base Layout
 
-- `sources/` - source lists, official docs, and reference edits to study.
-- `transcripts/` - cleaned tutorial notes or transcripts with timestamps.
-- `extracted_lessons/` - distilled lessons from tutorials and projects.
-- `technique_cards/` - reusable JSON technique cards.
-- `skills/` - agent-readable editing skills grouped by domain.
-- `content_creation/` - from-scratch faceless video workflows and templates.
-- `style_packs/` - reusable style grammar and edit-language files.
-- `presets/` - caption, motion, transition, sound, and color preset suggestions.
-- `qc_checklists/` - checks the agent should run before calling an edit finished.
-- `test_projects/` - small test edits for validating techniques.
-- `tools/video-use/` - video editing engine, helpers, and its own skill docs.
+- `knowledge/README.md` - canonical knowledge map and routing index.
+- `knowledge/research/catalogs/` - source lists, official docs, and asset guidance.
+- `knowledge/research/transcripts/` - ignored local raw transcripts.
+- `knowledge/research/source_notes/` - ignored local curated source notes.
+- `knowledge/research/lessons/` - distilled lessons from tutorials and projects.
+- `knowledge/techniques/` - reusable JSON technique cards grouped by category.
+- `knowledge/playbooks/` - agent-readable editing playbooks grouped by domain.
+- `knowledge/workflows/content_creation/` - from-scratch faceless video workflows and templates.
+- `knowledge/styles/` - reusable style grammar and edit-language files.
+- `knowledge/presets/` - caption, motion, transition, sound, and color preset suggestions.
+- `knowledge/quality/editorial_checklists/` - checks the agent should run before calling an edit finished.
+- `testdata/engine/` - compact immutable engine baseline and golden evidence.
+- `src/video_engine/` - canonical editing engine, API, CLI, render backends, and QC.
+- `tools/video-use/` - workflow helpers, compatibility delegates, and skill docs.
 
 ## Purpose
 
@@ -41,21 +45,21 @@ Each tutorial should eventually become:
 5. QC checklist rules.
 
 For from-scratch video creation, use `tools/video-use/SKILL.md`,
-`content_creation/`, `style_packs/`, `sources/asset_resource_platforms.md`, and
+`knowledge/workflows/content_creation/`, `knowledge/styles/`, `knowledge/research/catalogs/asset_resource_platforms.md`, and
 the relevant editing skills together. A complete from-scratch project must
 produce `script.md`, `visual_plan.md`, `asset_list.md`,
 `edit_decision_list.json`, `preview.mp4`, `qc_report.md`, and `final.mp4`.
 The production helpers in `tools/video-use/helpers/` can be run by dedicated
 sub-agents as long as they communicate through those project artifacts.
 Run `tools/video-use/helpers/knowledge_router.py` early in from-scratch projects
-to create `knowledge_plan.md/json` from the repo's skills, extracted lessons,
-technique cards, presets, style packs, source docs, and QC checklists.
+to create `knowledge_plan.md/json` from the repository's playbooks, lessons,
+techniques, presets, styles, source catalogs, and editorial checklists.
 
 ## Asset Resource Guidance
 
 Asset sourcing guidance lives in:
 
-- `sources/asset_resource_platforms.md`
+- `knowledge/research/catalogs/asset_resource_platforms.md`
 
 Fresh agents must read that source file before searching, generating,
 downloading, or rendering stock footage/images, generated images, icons, maps,
@@ -64,7 +68,7 @@ or summarize the platform list here.
 
 API credentials, when available, live in the root `.env`. If a needed API key is
 missing or blank, fall back to the no-key/direct public options listed in
-`sources/asset_resource_platforms.md`. Every external/generated/data asset used
+`knowledge/research/catalogs/asset_resource_platforms.md`. Every external/generated/data asset used
 in a project still needs a manifest entry with source URL, rights/license,
 creator/attribution, download/generation date, and local path. Do not bypass
 paywalls, login walls, watermarks, rate limits, or license restrictions.
@@ -116,7 +120,7 @@ Local fallback:
 - For title cards, hook cards, chapter cards, stat cards, lower thirds, and major motion typography, use HyperFrames and/or Remotion. Do not use Pillow/PIL for final typography.
 - Before compositing new or materially changed title/motion graphics into a final render, create approval frames/contact sheets and get user approval.
 - Do not suppress captions under titles by default. Reposition or restyle captions first; suppression requires explicit user approval.
-- For any title-heavy or caption-heavy edit, read `skills/professional_title_graphics_pipeline.md`, `skills/video_typography.md`, `skills/kinetic_captions.md`, and `qc_checklists/video_typography_qc.md`.
+- For any title-heavy or caption-heavy edit, read `knowledge/playbooks/professional_title_graphics_pipeline.md`, `knowledge/playbooks/video_typography.md`, `knowledge/playbooks/kinetic_captions.md`, and `knowledge/quality/editorial_checklists/video_typography_qc.md`.
 
 ## Recap And Commentary Alignment Defaults
 
@@ -124,11 +128,11 @@ Local fallback:
 - Do not rely only on exact EDL boundaries. If a player shows `0:42`, inspect what the viewer sees at `0:42`, not only what starts at a later sub-second boundary such as `42.765s`.
 - Use a small early visual handoff buffer for important named subjects, verify source ranges by looking at frames, and create timestamped contact sheets from the rendered preview/final around sensitive handoffs.
 - If the user reports a timestamp, inspect at least 0.5s before through 1.0s after the reported window, then verify the promoted `final.mp4`, not only the preview.
-- Read `technique_cards/qc_narration_visual_character_alignment_001.json`, `skills/editor_qc.md`, and `qc_checklists/story_retention_accessibility_qc.md` for this failure mode.
+- Read `knowledge/techniques/qc/qc_narration_visual_character_alignment_001.json`, `knowledge/playbooks/editor_qc.md`, and `knowledge/quality/editorial_checklists/story_retention_accessibility_qc.md` for this failure mode.
 
 ## Movie Recap Defaults
 
-- Any request for a movie recap, movie explainer, anime recap, episode recap, or narration-over-movie-source edit must load `skills/movie_recap_workflow.md`, `qc_checklists/movie_recap_qc.md`, `extracted_lessons/movie_recap_short_transformed_scene_workflow.md`, and the movie recap technique cards before planning.
+- Any request for a movie recap, movie explainer, anime recap, episode recap, or narration-over-movie-source edit must load `knowledge/playbooks/movie_recap_workflow.md`, `knowledge/quality/editorial_checklists/movie_recap_qc.md`, `knowledge/research/lessons/movie_recap_short_transformed_scene_workflow.md`, and the movie recap technique cards before planning.
 - Default to narration-first, paragraph-sized recap shorts. Each paragraph gets a matching source scene hint, visually verified source range, muted movie audio, and its own export unless the user asks for a longer combined video.
 - Do not use long continuous movie excerpts by default. Transform verified scene ranges with short fragments, alternate deletion/compression, optional alternating mirror/flip where it stays readable, and speed changes only when needed to fit narration.
 - Treat generated scene timestamps as hints only. Find and verify the actual movie frames before cutting.
@@ -136,7 +140,7 @@ Local fallback:
 
 ## Scriptwriting Subagent Defaults
 
-- Any task that creates or substantially rewrites a script, voiceover, narration, recap paragraph, explainer, ad read, hook, or storyboard script must use `content_creation/script_subagent_review_loop.md`.
+- Any task that creates or substantially rewrites a script, voiceover, narration, recap paragraph, explainer, ad read, hook, or storyboard script must use `knowledge/workflows/content_creation/script_subagent_review_loop.md`.
 - Spawn an independent scriptwriter subagent and a separate harsh script critic subagent whenever subagents are available. The writer drafts from the task brief and relevant skills; the critic judges the draft independently against the task, source material, audience, platform, and human writing standards.
 - The script is not final until the critic returns `PASS`. If the critic returns `FAIL`, the writer revises from the critique and the loop repeats. If the same issue blocks three rounds, stop and ask the user instead of lowering the standard.
 - The critic must screen for weak hooks, generic summary, plot/source mismatch, lines that cannot be visualized, poor rhythm, and AI-sounding patterns such as "it's not X, it's Y", "if not X then Y", "what happens next changes everything", "this is where things get interesting", and similar model-script phrasing.
@@ -147,11 +151,11 @@ Local fallback:
 1. Read this `AGENTS.md`.
 2. Inspect the workspace with `rg --files -uu`, `find`, or `ls`.
 3. Determine whether the task is knowledge-base maintenance or actual video editing work.
-4. If the task is tutorial ingestion, follow `TUTORIAL_TO_SKILL_PIPELINE.md`.
+4. If the task is tutorial ingestion, follow `knowledge/CONTRIBUTING.md`.
 5. If the task is editing existing footage, use Mode 1 in `tools/video-use/SKILL.md`.
-6. If the task is creating a faceless video from a topic or brief, use Mode 2 in `tools/video-use/SKILL.md` and the docs in `content_creation/`.
-7. For from-scratch work, run or follow `content_creation/knowledge_router.md` before scriptwriting so the project has a current `knowledge_plan.md/json`.
-8. For any script creation/rewrite, run `content_creation/script_subagent_review_loop.md` before accepting `script.md`.
+6. If the task is creating a faceless video from a topic or brief, use Mode 2 in `tools/video-use/SKILL.md` and the docs in `knowledge/workflows/content_creation/`.
+7. For from-scratch work, run or follow `knowledge/workflows/content_creation/knowledge_router.md` before scriptwriting so the project has a current `knowledge_plan.md/json`.
+8. For any script creation/rewrite, run `knowledge/workflows/content_creation/script_subagent_review_loop.md` before accepting `script.md`.
 9. Keep outputs in a clearly named project folder.
 10. Verify changes before reporting completion.
 
@@ -164,27 +168,27 @@ Use skills when the task matches their purpose. Read the skill file before using
   Use for video editing, faceless video creation from scratch, transcription, script-to-timeline planning, asset sourcing/generation, cutting, montage building, grading, subtitles, overlays, preview/final rendering, QC, and project logs.
 
 - `still_image_cinematic_compositing`
-  Path: `/home/stanley/video-editing/skills/still_image_cinematic_compositing.md`
+  Path: `/home/stanley/video-editing/knowledge/playbooks/still_image_cinematic_compositing.md`
   Use for turning still images into cinematic moving scenes with motivated overlays, masks, local light, blend modes, and unified grading.
 
 - `capcut_pro_compositing_effects`
-  Path: `/home/stanley/video-editing/skills/capcut_pro_compositing_effects.md`
+  Path: `/home/stanley/video-editing/knowledge/playbooks/capcut_pro_compositing_effects.md`
   Use for CapCut subject sandwiches, chroma-key text portals, tracked stickers, slide-on photo stacks, chapter cards, PiP borders, split-mask illusions, clone effects, and green-screen VFX.
 
 - `movie_recap_workflow`
-  Path: `/home/stanley/video-editing/skills/movie_recap_workflow.md`
+  Path: `/home/stanley/video-editing/knowledge/playbooks/movie_recap_workflow.md`
   Use for movie recaps, movie explainers, anime recaps, episode recaps, narration-led scene summaries, paragraph-based recap shorts, muted-source movie edits, and transformed movie scene fragments.
 
 - `scriptwriting`
-  Path: `/home/stanley/video-editing/skills/scriptwriting.md`
+  Path: `/home/stanley/video-editing/knowledge/playbooks/scriptwriting.md`
   Use for improving scripts, voiceover narration, storyboards, hooks, structure, tone, visual notes, motion notes, and duration planning. For movie recaps, combine this with `movie_recap_workflow` and the repo storytelling knowledge; do not force product-video CTAs into recap scripts unless the user asks for them.
 
 - `professional_title_graphics_pipeline`
-  Path: `/home/stanley/video-editing/skills/professional_title_graphics_pipeline.md`
+  Path: `/home/stanley/video-editing/knowledge/playbooks/professional_title_graphics_pipeline.md`
   Use for title cards, hook cards, lower thirds, stat cards, motion-typography approval frames, ASS caption continuity, and enforcing HyperFrames/Remotion instead of Pillow/PIL for final typography.
 
 - `manim-video`
-  Path: `/home/stanley/video-editing/tools/video-use/skills/manim-video/SKILL.md`
+  Path: `/home/stanley/video-editing/tools/video-use/vendor/manim-video/SKILL.md`
   Use for mathematical or technical animations.
 
 - `imagegen`

@@ -1,0 +1,68 @@
+{
+  "id": "sound_music_ducking_volume_keyframes_001",
+  "name": "Music Ducking With Volume Keyframes",
+  "category": "sound_design",
+  "source_tutorial": "knowledge/research/transcripts/capcut keyframes.txt",
+  "additional_sources": [
+    "knowledge/research/transcripts/keyframe pro edits.txt"
+  ],
+  "use_when": [
+    "A single music bed should be louder under montage, product, travel, or B-roll sections and lower under speech.",
+    "The edit alternates between no-dialogue visual clips and talking sections.",
+    "The editor needs simple CapCut-style volume automation rather than a full audio mix."
+  ],
+  "avoid_when": [
+    "The music track is unlicensed, unsafe, or only a temporary reference.",
+    "The music tone fights the speaker, subject, or story.",
+    "Dialogue needs cleanup, gain repair, or a better source before music is added.",
+    "A hard music cut or different track would serve the section better than constant up/down automation."
+  ],
+  "timeline_pattern": {
+    "pattern": "music_full_under_montage -> pre_duck_keyframe -> low_under_speech -> restore_keyframe -> music_full_under_montage",
+    "pre_duck_rule": "Place the duck keyframe before speech starts so the first word is clear.",
+    "restore_rule": "Restore music only after the phrase, thought, or speech section clears.",
+    "section_rule": "Use louder music under visual-only sections and lower music under dialogue; do not automate constantly without a section reason.",
+    "license_rule": "Document whether the music is licensed, platform-safe, temp-only, or unsafe before delivery."
+  },
+  "motion": {
+    "rule": "Music rises can support visual montage or product clips, but should not force unrelated visual cuts."
+  },
+  "sound": {
+    "rule": "Speech remains dominant during talking sections.",
+    "keyframe_values": {
+      "capcut_duck_start": "In CapCut, dropping music volume near 1-2 can be an effective starting point under speech, then adjust by ear.",
+      "db_range": "As a starting range, music under speech often lands around -15 dB to -20 dB; a softer bed may work around -14 dB if every word remains clear.",
+      "restore_to_full": "When the talking section ends, return music toward full level or 0 dB over a few frames only after the phrase clears.",
+      "duck_timing": "Start ducking before the first spoken word and restore after the dialogue phrase ends.",
+      "preview": "Preview on phone speakers because music that sounds low in headphones may still mask speech on mobile."
+    }
+  },
+  "captions": {
+    "rule": "Captions can support speech but do not excuse music that masks normal dialogue."
+  },
+  "color": {
+    "rule": "No direct color rule."
+  },
+  "implementation": {
+    "ffmpeg": "Use volume envelopes, afade, sidechaincompress where appropriate, and waveform/loudness review around speech starts.",
+    "remotion": "Store audio gain keyframes for music with duckStartFrame, lowGain, restoreFrame, and dialogueRanges.",
+    "blender": "Use VSE audio-strip volume keyframes and preview speech sections after restoring music.",
+    "capcut_equivalent": "Select the music track, add full-volume keyframes for montage sections, add pre-duck and low-volume keyframes under speech, then restore to full volume after talking clears.",
+    "premiere_equivalent": "Use clip volume rubber-band keyframes or Essential Sound ducking; manually check that ducks begin before speech and restore after phrases."
+  },
+  "common_mistakes": [
+    "Starting the duck after the first spoken word has already been masked.",
+    "Restoring music too early under the end of a sentence.",
+    "Using one numeric duck value for every track instead of checking the actual song against the voice.",
+    "Using music that is unsafe or unlicensed because it was easy to import.",
+    "Leaving music loud enough that captions become necessary for normal speech.",
+    "Automating volume constantly without clear montage/speech sections."
+  ],
+  "qc": [
+    "Is the music licensed, platform-safe, or clearly marked temp-only?",
+    "Does music duck before the first spoken word?",
+    "Is dialogue intelligible without needing captions as rescue?",
+    "Does the music restore only after speech clears?",
+    "Are the loud montage sections energetic without clipping or overpowering SFX?"
+  ]
+}

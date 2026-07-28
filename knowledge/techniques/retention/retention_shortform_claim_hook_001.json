@@ -1,0 +1,54 @@
+{
+  "id": "retention_shortform_claim_hook_001",
+  "name": "Short-Form Claim Hook",
+  "category": "retention",
+  "source_tutorial": "knowledge/research/transcripts/short-form editing.txt",
+  "use_when": [
+    "A short-form video needs an immediate reason to stop scrolling.",
+    "The source idea can be framed as a strong desire, social proof, controversy, surprise, or disbelief.",
+    "The agent is planning the first five seconds before editing motion and captions."
+  ],
+  "avoid_when": [
+    "The claim cannot be supported by the video.",
+    "The topic is sensitive and controversy would cheapen or misrepresent it.",
+    "The user wants a calm brand-safe educational style where an aggressive claim would break trust."
+  ],
+  "timeline_pattern": {
+    "pattern": "niche_research -> attractive_claim -> five_second_hook -> fast_context -> proof_or_payoff",
+    "claim_types": "Use big desire, social proof, controversy, surprising result, or a question that makes viewers ask how it is possible.",
+    "research_rule": "Use trend research or niche-specific AI prompts; generic idea prompts usually produce weak hooks.",
+    "promise_rule": "The hook must set up a payoff the rest of the short actually delivers."
+  },
+  "motion": {
+    "rule": "Support the claim with a clear face, result, proof frame, or readable text; do not obscure the hook with random effects."
+  },
+  "sound": {
+    "rule": "Opening voice should start cleanly and energetically. Music or SFX can lift the hook but must not mask the claim."
+  },
+  "captions": {
+    "rule": "The first caption should clarify the claim at phone size and should not cover the face or proof."
+  },
+  "color": {
+    "rule": "The first frame should be bright and legible enough for the subject, result, or proof to register."
+  },
+  "implementation": {
+    "ffmpeg": "Render the first five seconds as a separate review clip. Use waveform inspection to remove pre-hook silence and contact sheets to check first-frame clarity.",
+    "remotion": "Represent hook data with claimType, claimText, proofFrame, hookEndFrame, and payoffFrame so the promise can be checked later.",
+    "blender": "Use animated claim text only when it makes the promise faster to understand than live footage alone.",
+    "capcut_equivalent": "Start with the strongest claim or proof, trim opening silence, add readable first-line captions, and preview at phone size.",
+    "premiere_equivalent": "Place markers for claim, proof, context, and payoff. Review the first five seconds before polishing the rest of the short."
+  },
+  "common_mistakes": [
+    "Using a generic idea prompt and ending with a weak claim.",
+    "Opening with setup before the attractive claim.",
+    "Making a controversial claim the video cannot support.",
+    "Using energy, captions, or effects to hide that the hook has no real payoff."
+  ],
+  "qc": [
+    "Can a cold viewer understand the claim within five seconds?",
+    "Is the claim supported by proof or payoff later in the short?",
+    "Does the hook avoid unsupported controversy or exaggeration?",
+    "Is the first caption or visual proof readable at phone size?",
+    "Does the opening audio start cleanly without masking the claim?"
+  ]
+}
