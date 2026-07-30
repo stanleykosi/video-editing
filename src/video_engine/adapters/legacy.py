@@ -851,7 +851,7 @@ class LegacyAdapterService:
             parameters = {"contrast": 1.06, "saturation": 1.0}
             disposition = MigrationDisposition.APPROXIMATED
             message = (
-                "neutral_punch was translated to typed controls; its custom curve is " "preserved"
+                "neutral_punch was translated to typed controls; its custom curve is preserved"
             )
         elif grade == "warm_cinematic":
             parameters = {

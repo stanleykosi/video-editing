@@ -25,6 +25,24 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+brain-analysis = [
+    "librosa==0.11.0",
+    "opencv-python==4.11.0.86",
+    "scenedetect==0.7",
+]
+brain-cloud = [
+    "httpx==0.28.1",
+]
+brain-ml = [
+    "scipy==1.17.1",
+]
+brain-all = [
+    "httpx==0.28.1",
+    "librosa==0.11.0",
+    "opencv-python==4.11.0.86",
+    "scenedetect==0.7",
+    "scipy==1.17.1",
+]
 legacy = [
     "decord==0.6.0",
     "elevenlabs==2.47.0",
@@ -61,6 +79,7 @@ ml-heavy = [
 interchange = ["opentimelineio==0.18.1"]
 
 [project.scripts]
+video-brain = "editorial_brain.cli.main:main"
 video-engine = "video_engine.cli.main:main"
 
 [dependency-groups]
@@ -83,6 +102,7 @@ package-dir = { "" = "src" }
 where = ["src"]
 
 [tool.setuptools.package-data]
+editorial_brain = ["py.typed"]
 video_engine = [
     "py.typed",
     "graphics/remotion/*.mjs",
@@ -120,7 +140,7 @@ select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
 [tool.mypy]
 python_version = "3.11"
 strict = true
-packages = ["video_engine"]
+packages = ["editorial_brain", "video_engine"]
 mypy_path = "src"
 warn_unreachable = true
 show_error_codes = true
@@ -133,11 +153,12 @@ markers = [
     "integration: invokes external render/media tools",
     "golden: compares rendered essence or metadata",
     "performance: resource and scaling test",
+    "provider_smoke: opt-in real cloud-provider smoke test",
 ]
 
 [tool.coverage.run]
 branch = true
-source = ["video_engine"]
+source = ["editorial_brain", "video_engine"]
 
 [tool.coverage.report]
 show_missing = true

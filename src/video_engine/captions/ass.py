@@ -228,8 +228,7 @@ def write_ass(node: CaptionNode, path: Path) -> None:
                     "custom caption position is incomplete",
                 )
             tags.append(
-                f"\\pos({round(cue.position_x * node.width)},"
-                f"{round(cue.position_y * node.height)})"
+                f"\\pos({round(cue.position_x * node.width)},{round(cue.position_y * node.height)})"
             )
         text = "{" + "".join(tags) + "}" + _override_tags(cue.style_overrides)
         text += _cue_text(cue, styles, node.width, node.height)

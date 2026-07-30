@@ -29,13 +29,22 @@ from video_engine.core.schema import (
     Sequence,
     StillImageClip,
     Timeline,
+    Track,
     Transition,
     VideoTrack,
 )
-from video_engine.core.time import AudioSampleTime, FrameRate, RationalTime, Timecode, TimeRange
+from video_engine.core.time import (
+    AudioSampleTime,
+    FrameRate,
+    RationalTime,
+    RoundingMode,
+    Timecode,
+    TimeRange,
+)
 from video_engine.inspection import InspectionRequest, InspectionResult
 from video_engine.media.models import DerivedAsset, MediaProbe, MediaRecord, SourceValidation
 from video_engine.operations import (
+    AddTrackOperation,
     AuditEntry,
     HistoryResult,
     OperationResult,
@@ -49,6 +58,7 @@ from video_engine.render import PartialRenderResult, RenderRequest, RenderResult
 
 __all__ = [
     "AdapterKind",
+    "AddTrackOperation",
     "AdjustmentTrack",
     "AudioBus",
     "AudioClip",
@@ -91,6 +101,7 @@ __all__ = [
     "RationalTime",
     "RenderRequest",
     "RenderResult",
+    "RoundingMode",
     "Sequence",
     "SourceValidation",
     "StillImageClip",
@@ -99,6 +110,7 @@ __all__ = [
     "Timeline",
     "TimelineOperation",
     "TimelinePatch",
+    "Track",
     "Transition",
     "VideoTrack",
 ]

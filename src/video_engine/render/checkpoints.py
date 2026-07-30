@@ -269,22 +269,30 @@ class RenderCheckpointStore:
                         video_status=(
                             video_record.status
                             if video_record is not None
-                            else previous.video_status if previous is not None else None
+                            else previous.video_status
+                            if previous is not None
+                            else None
                         ),
                         audio_status=(
                             audio_record.status
                             if audio_record is not None
-                            else previous.audio_status if previous is not None else None
+                            else previous.audio_status
+                            if previous is not None
+                            else None
                         ),
                         video_cache_key=(
                             video_record.cache_key
                             if video_record is not None
-                            else previous.video_cache_key if previous is not None else None
+                            else previous.video_cache_key
+                            if previous is not None
+                            else None
                         ),
                         audio_cache_key=(
                             audio_record.cache_key
                             if audio_record is not None
-                            else previous.audio_cache_key if previous is not None else None
+                            else previous.audio_cache_key
+                            if previous is not None
+                            else None
                         ),
                     )
                 )
@@ -302,7 +310,9 @@ class RenderCheckpointStore:
             overall_status: CheckpointStatus = (
                 "succeeded"
                 if status == "succeeded" or concurrent_success
-                else "running" if any_running else "failed"
+                else "running"
+                if any_running
+                else "failed"
             )
             result = current.model_copy(
                 update={
@@ -314,7 +324,9 @@ class RenderCheckpointStore:
                     "output_sha256": (
                         output_sha256
                         if status == "succeeded"
-                        else current.output_sha256 if concurrent_success else None
+                        else current.output_sha256
+                        if concurrent_success
+                        else None
                     ),
                 }
             )

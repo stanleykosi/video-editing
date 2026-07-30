@@ -115,6 +115,11 @@ multi-operation `apply_patch`, `undo`, and `redo`. Patches may carry an expected
 project revision for optimistic concurrency; public patch envelopes reject the
 engine-reserved `restore_project` inverse operation.
 
+`AddTrackOperation` is the general revision-checked primitive for adding a
+typed video, audio, caption, graphics, or adjustment track to an existing
+sequence. Duplicate IDs and invalid insertion positions fail transactionally.
+The operation carries no editorial lane-selection policy.
+
 `Clip`, `AudioClip`, and `NestedSequenceClip` expose a canonical `retime` with
 an exact rational rate, reverse flag, and audio-pitch policy. Visual `Effect`
 objects accept typed position, scale, rotation, anchor, opacity, crop, corner

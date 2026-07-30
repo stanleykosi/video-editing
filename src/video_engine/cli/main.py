@@ -99,7 +99,7 @@ def build_parser() -> argparse.ArgumentParser:
     doctor.add_argument(
         "--require-extended-graphics",
         action="store_true",
-        help="Treat Blender, Manim, and LaTeX as required release dependencies.",
+        help="Require the locked Manim and LaTeX release toolchain; Blender remains optional.",
     )
     _add_machine_flag(doctor)
 

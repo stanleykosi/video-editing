@@ -42,6 +42,7 @@ from video_engine.operations.models import (
     AddEffectOperation,
     AddKeyframeOperation,
     AddMarkerOperation,
+    AddTrackOperation,
     AddTransitionOperation,
     AppendOperation,
     AudioCrossfadeOperation,
@@ -575,7 +576,18 @@ class TimelineEditor:
     ) -> None:
         timeline = sequence.timeline
         frame_rate = sequence.settings_override.frame_rate or project.settings.frame_rate
-        if isinstance(operation, AppendOperation):
+        if isinstance(operation, AddTrackOperation):
+            if any(track.id == operation.track.id for track in timeline.tracks):
+                raise _invalid("track id already exists", track_id=operation.track.id)
+            if operation.index is not None and operation.index > len(timeline.tracks):
+                raise _invalid(
+                    "track index is outside the timeline",
+                    index=operation.index,
+                    track_count=len(timeline.tracks),
+                )
+            index = len(timeline.tracks) if operation.index is None else operation.index
+            timeline.tracks.insert(index, operation.track.model_copy(deep=True))
+        elif isinstance(operation, AppendOperation):
             track = _find_track(timeline, operation.track_id)
             _assert_unlocked(track)
             item = operation.item.model_copy(deep=True)

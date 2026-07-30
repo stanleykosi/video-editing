@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import tomllib
 from pathlib import Path
 from typing import Any, Literal
@@ -131,6 +132,21 @@ class EngineConfig(BaseModel):
         hyperframes_browser = values.get("hyperframes_browser_path")
         if hyperframes_browser is not None and not Path(hyperframes_browser).is_absolute():
             values["hyperframes_browser_path"] = project_root / Path(hyperframes_browser)
+        if values["manim_path"] == "manim":
+            bundled_manim = (
+                project_root
+                / "tools"
+                / "video-use"
+                / "vendor"
+                / "manim-video"
+                / ".venv"
+                / "bin"
+                / "manim"
+            )
+            if bundled_manim.is_file() and os.access(bundled_manim, os.X_OK):
+                values["manim_path"] = str(bundled_manim.resolve())
+            elif shutil.which("manim") is None:
+                values["manim_path"] = "manim"
         for field in ("manim_path", "blender_path"):
             executable = Path(str(values[field]))
             if not executable.is_absolute() and executable.parent != Path("."):

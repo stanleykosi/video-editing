@@ -16,6 +16,8 @@ Knowledge describes decisions and constraints but does not execute edits.
 - `presets/` - reusable parameter and style suggestions.
 - `styles/` - higher-level editorial grammars.
 - `quality/editorial_checklists/` - human-facing editorial and accessibility QC.
+- `editorial_base/v1/index.json` - checked source-neutral runtime compilation of
+  unique principles, technique recipes, contextual conflicts, and quality gates.
 - `CONTRIBUTING.md` - tutorial-to-knowledge ingestion process.
 
 ## Core Skills
@@ -60,6 +62,8 @@ Knowledge describes decisions and constraints but does not execute edits.
 7. Add reusable presets in `knowledge/presets/`.
 8. Add failure checks in `knowledge/quality/editorial_checklists/`.
 9. Validate important techniques with small projects in `test_projects/`.
+10. Rebuild the runtime base with `video-brain knowledge-build --json`; the
+    consolidation tests must pass before accepting it.
 
 ## From-Scratch Creation
 

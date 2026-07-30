@@ -16,12 +16,14 @@ from video_engine.core.schema import (
     Marker,
     Project,
     TimelineItem,
+    Track,
     Transition,
 )
 from video_engine.core.time import RationalTime, TimeRange
 
 
 class OperationKind(StrEnum):
+    ADD_TRACK = "add_track"
     APPEND = "append"
     INSERT = "insert"
     OVERWRITE = "overwrite"
@@ -64,6 +66,14 @@ class OperationKind(StrEnum):
 
 class OperationBase(BaseModel):
     model_config = ConfigDict(extra="forbid")
+
+
+class AddTrackOperation(OperationBase):
+    """Add one canonical track without embedding any editorial policy."""
+
+    operation: Literal[OperationKind.ADD_TRACK] = OperationKind.ADD_TRACK
+    track: Track
+    index: int | None = Field(default=None, ge=0)
 
 
 class AppendOperation(OperationBase):
@@ -332,7 +342,8 @@ class RestoreProjectOperation(OperationBase):
 
 
 TimelineOperation = Annotated[
-    AppendOperation
+    AddTrackOperation
+    | AppendOperation
     | InsertOperation
     | OverwriteOperation
     | ReplaceOperation

@@ -134,7 +134,7 @@ def generate_contact_sheet(
             "-i",
             output_path,
             "-vf",
-            (f"fps=1/{interval:.9f},scale=320:-2," "tile=4x3:padding=4:margin=4:color=black"),
+            (f"fps=1/{interval:.9f},scale=320:-2,tile=4x3:padding=4:margin=4:color=black"),
             "-frames:v",
             "1",
             destination,
@@ -159,6 +159,6 @@ def generate_contact_sheet(
         size_bytes=destination.stat().st_size,
         media_type="image/png",
         description=(
-            "Twelve-frame encoded-output contact sheet " f"({time.monotonic() - started:.3f}s)"
+            f"Twelve-frame encoded-output contact sheet ({time.monotonic() - started:.3f}s)"
         ),
     )

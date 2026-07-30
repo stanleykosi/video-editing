@@ -2,6 +2,7 @@
 
 from video_engine.operations.editor import TimelineEditor
 from video_engine.operations.models import (
+    AddTrackOperation,
     AuditEntry,
     HistoryResult,
     OperationKind,
@@ -13,6 +14,7 @@ from video_engine.operations.models import (
 )
 
 __all__ = [
+    "AddTrackOperation",
     "AuditEntry",
     "HistoryResult",
     "OperationKind",

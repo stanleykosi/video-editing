@@ -325,6 +325,27 @@ def _fonts_check(runner: CommandRunner) -> DoctorCheck:
     )
 
 
+def _manim_check(config: EngineConfig, *, required: bool, runner: CommandRunner) -> DoctorCheck:
+    check = _executable_check(
+        "Manim", config.manim_path, ["--version"], required=required, runner=runner
+    )
+    if check.status is not CheckStatus.PASS:
+        return check
+    if check.version is None or "v0.20.1" not in check.version:
+        return DoctorCheck(
+            name="Manim",
+            status=CheckStatus.FAIL if required else CheckStatus.WARNING,
+            required=required,
+            version=check.version,
+            detail=f"{check.detail}; expected locked Manim Community v0.20.1",
+            action=(
+                "Run uv sync --project tools/video-use/vendor/manim-video --frozen "
+                "or configure VIDEO_ENGINE_MANIM to that locked executable."
+            ),
+        )
+    return check
+
+
 def run_doctor(
     config: EngineConfig,
     project_root: Path,
@@ -359,16 +380,10 @@ def run_doctor(
             "Blender",
             config.blender_path,
             ["--version"],
-            required=require_extended_graphics,
+            required=False,
             runner=runner,
         ),
-        _executable_check(
-            "Manim",
-            config.manim_path,
-            ["--version"],
-            required=require_extended_graphics,
-            runner=runner,
-        ),
+        _manim_check(config, required=require_extended_graphics, runner=runner),
         _executable_check(
             "LaTeX",
             "latex",

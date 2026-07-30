@@ -391,3 +391,11 @@ into the DAG. Outputs normalize to ProRes 4444 alpha and then use the ordinary
 FFmpeg composite, cache, delivery, and QC path. Manim 0.20.1 is locked in an
 isolated uv project because its NumPy 2.1+ requirement conflicts with the core
 media stack's NumPy 1.26.4 contract.
+
+## D054: Track Creation Is A General Transactional Operation
+
+Revision-checked callers may need to add a typed lane before inserting media.
+`AddTrackOperation` adds exactly one canonical track at an explicit or trailing
+index, rejects duplicate IDs and invalid positions, and participates in normal
+validation, audit, inverse, undo and redo. It contains no editorial rule about
+when a lane should exist or what content belongs on it.

@@ -130,8 +130,9 @@ was attempted with checksum-verified Blender 4.5.12 inside and outside the
 sandbox; the process did not reach test execution and the unrestricted run was
 interrupted after 13 minutes.
 
-The local standard doctor passes 15 checks with the isolated Manim executable
-configured; only optional Blender warns. The real Manim `MathTex` smoke render
+The local standard doctor auto-discovers the isolated Manim executable and
+passes 15 checks; only optional Blender warns. The extended gate requires the
+locked Manim/LaTeX toolchain while Blender remains optional. The real Manim `MathTex` smoke render
 passes with the installed pdfTeX/dvisvgm toolchain. Hosted CI repeats that gate
 and owns the real distro-Blender lane.
 
